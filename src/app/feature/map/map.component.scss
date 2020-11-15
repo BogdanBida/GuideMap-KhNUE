@@ -1,0 +1,56 @@
+@import '../../../mixins.scss';
+
+.whereabouts {
+    position: fixed;
+    bottom: 64px;
+    right: 32px;
+    border-radius: 999px;
+    border: none;
+    width: 64px;
+    height: 64px;
+    background-color: #24C6FB;
+    @include shadow;
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+    img {
+        position: absolute;
+        top: calc(50% - 21px/2);
+        left: calc(50% - 21px/2);
+        filter: invert(0.3);
+    }
+}
+
+.goto {
+    position: fixed;
+    left: calc(50% - 32px);
+    bottom: 8px;
+    border: none;
+    width: 64px;
+    background: transparent;
+    svg {
+        width: 100%;
+        @include shadow;
+    }
+}
+
+.floor-switcher {
+    position: fixed;
+    left: 12px;
+    bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    svg {
+        margin-top: 8px;
+        width: 52px;
+        height: 52px;
+        @include shadow;
+        &:active {
+            @include click;
+        }
+    }
+}

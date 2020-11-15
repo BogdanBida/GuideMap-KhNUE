@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'mixins.scss';
+
+* {box-sizing: border-box;}
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0;
+    background: radial-gradient(circle at center, rgb(255, 255, 255), whitesmoke);
+    color: #000000;
+    overflow: hidden;
+}
+
+button {
+    border: none;
+    &:active {
+        @include click;
+    }
+}

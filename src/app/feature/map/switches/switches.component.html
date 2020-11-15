@@ -1,0 +1,41 @@
+<button class="settings-btn" (click)="isOpen = true" *ngIf="!isOpen">
+  <svg>
+    <image xlink:href="assets/icons.ui/settings.svg" 
+    src="assets/icons.ui/switches.svg" width="100%" height="100%"></image>
+  </svg>
+</button>
+<div class="modal" *ngIf="isOpen">
+  <div class="container">
+    <button>
+      <svg>
+        <image xlink:href="assets/icons.ui/exit.svg" 
+        src="assets/icons.ui/exit.svg" width="100%" height="100%"></image>
+      </svg>
+      Enter/Exit
+    </button>
+    <button>
+      <svg>
+        <image xlink:href="assets/icons.ui/wc.svg" 
+        src="assets/icons.ui/exit.svg" width="100%" height="100%"></image>
+      </svg>
+      WC
+    </button>
+    <button>
+      <svg>
+        <image xlink:href="assets/icons.ui/classroom.svg" 
+        src="assets/icons.ui/exit.svg" width="100%" height="100%"></image>
+      </svg>
+      Classroom
+    </button>
+    <button>
+      <svg>
+        <image xlink:href="assets/icons.ui/stairs.svg" 
+        src="assets/icons.ui/exit.svg" width="100%" height="100%"></image>
+      </svg>
+      Stairs
+    </button>
+  </div>
+  <button (click)="isOpen = false" class="close-btn">
+    &times;
+  </button>
+</div>
