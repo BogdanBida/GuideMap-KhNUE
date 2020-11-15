@@ -1,4 +1,5 @@
 @import '../../../../mixins.scss';
+@import '../../../../colors.scss';
 
 :host {
     display: flex;
@@ -44,7 +45,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #24C6FB;
+        background-color: $base-color;
     }
     .container {
         display: flex;

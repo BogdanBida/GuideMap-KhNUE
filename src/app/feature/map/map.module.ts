@@ -5,12 +5,14 @@ import { MapComponent } from './map.component';
 import { MapRoutingModule } from './map-routing.module';
 import { SwitchesComponent } from './switches/switches.component';
 import { CanvaComponent } from './canva/canva.component';
-import { BuildingService } from 'src/app/core/services/building.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MapRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [MapComponent, SearchComponent, SwitchesComponent, CanvaComponent]
 })

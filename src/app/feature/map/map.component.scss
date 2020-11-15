@@ -1,4 +1,5 @@
 @import '../../../mixins.scss';
+@import '../../../colors.scss';
 
 .whereabouts {
     position: fixed;
@@ -8,7 +9,7 @@
     border: none;
     width: 64px;
     height: 64px;
-    background-color: #24C6FB;
+    background-color: $base-color;
     @include shadow;
     svg {
         width: 100%;
@@ -52,5 +53,9 @@
         &:active {
             @include click;
         }
+    }
+    .disabled {
+        pointer-events: none;
+        opacity: 0.8;
     }
 }

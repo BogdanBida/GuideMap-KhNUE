@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Rect, SVG } from '@svgdotjs/svg.js';
-import { BuildingService } from 'src/app/core/services/building.service';
+import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Svg, SVG } from '@svgdotjs/svg.js';
 
 @Component({
   selector: 'app-canva',
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CanvaComponent implements OnInit {
+export class CanvaComponent implements OnChanges, OnInit {
   private strokeConfig = {
     width: 5,
     color: '#f06',
@@ -15,29 +15,30 @@ export class CanvaComponent implements OnInit {
     linejoin: 'round',
   };
   
-  private entities;
   private corpsName = 'mc_';
-  private floor: Number = 2;
-  private imgname: String = this.corpsName + this.floor + 'f.jpg';
+  @Input() floor: Number = 1;
+  private draw: Svg;
 
-  constructor(private buildingService: BuildingService) {}
+  constructor() { }
 
-  ngOnInit() {
-    var draw = SVG().addTo('#canv').size('1400', '1400');
-    draw.image('assets/floor-plans/' + this.imgname).size('100%', '100%');
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['floor'].currentValue != changes['floor'].previousValue) {
+      var imgname = this.corpsName + changes['floor'].currentValue + 'f.jpg';
+      this.drawBackground(imgname);
+    }
+  }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  ngOnInit() {                                
+    var imgname = this.corpsName + this.floor + 'f.jpg';
+    this.draw = SVG().addTo('#canv').size('1400', '1400');
+    this.drawBackground(imgname);
+  }
 
-    // this.buildingService.getEntitiesData().subscribe((response) => {
-    //   this.entities = response.data;
-    //   console.log(this.entities);
-
-    //   this.entities.forEach((element) => {
-    //     let [X0, Y0] = element.location;
-    //     draw
-    //       .polyline([...element.coordinates, element.coordinates[0]])
-    //       .move(X0, Y0)
-    //       .fill('#00000005')
-    //       .stroke(this.strokeConfig);
-    //   });
-    // });
+  private drawBackground(imgname) {
+    if (this.draw) {
+      this.draw.clear();
+      console.log(imgname);
+      this.draw.image('assets/floor-plans/' + imgname).size('100%', '100%');
+    }
   }
 }
