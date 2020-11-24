@@ -14,30 +14,30 @@ export class CanvaComponent implements OnChanges, OnInit {
     linecap: 'round',
     linejoin: 'round',
   };
-  
-  private corpsName = 'mc_';
-  @Input() floor: Number = 1;
+
+  @Input() floor;
   private draw: Svg;
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['floor'].currentValue != changes['floor'].previousValue) {
-      var imgname = this.corpsName + changes['floor'].currentValue + 'f.jpg';
-      this.drawBackground(imgname);
+    if (changes.floor.currentValue !== changes.floor.previousValue) {
+      this.drawBackground(this.getImgName(changes.floor.currentValue));
     }
   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-  ngOnInit() {                                
-    var imgname = this.corpsName + this.floor + 'f.jpg';
-    this.draw = SVG().addTo('#canv').size('1400', '1400');
-    this.drawBackground(imgname);
+
+  ngOnInit(): void {
+    this.draw = SVG().addTo('#canv').size('1400px', '1400px');
+    this.drawBackground(this.getImgName(this.floor));
   }
 
-  private drawBackground(imgname) {
+  private getImgName(floor: number): string {
+    return floor + '.svg';
+  }
+
+  private drawBackground(imgname): void {
     if (this.draw) {
       this.draw.clear();
-      console.log(imgname);
       this.draw.image('assets/floor-plans/' + imgname).size('100%', '100%');
     }
   }

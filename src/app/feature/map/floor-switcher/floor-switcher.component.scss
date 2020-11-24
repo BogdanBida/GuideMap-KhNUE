@@ -1,0 +1,26 @@
+@import '../../../../mixins';
+
+:host {
+  position: fixed;
+  left: 12px;
+  bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  svg {
+      margin-top: 8px;
+      width: 52px;
+      height: 52px;
+      @include shadow;
+      &:active {
+          @include click;
+      }
+  }
+  .disabled {
+      pointer-events: none;
+      filter: brightness(0.8);
+      opacity: 0.8;
+  }
+}

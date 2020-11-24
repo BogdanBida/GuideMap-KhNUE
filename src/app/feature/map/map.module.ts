@@ -1,3 +1,4 @@
+import { FloorSwitcherComponent } from './floor-switcher/floor-switcher.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search/search.component';
@@ -14,6 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [MapComponent, SearchComponent, SwitchesComponent, CanvaComponent]
+  declarations: [MapComponent, SearchComponent, SwitchesComponent, CanvaComponent, FloorSwitcherComponent]
 })
 export class MapModule { }
