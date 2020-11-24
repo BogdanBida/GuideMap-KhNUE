@@ -1,3 +1,4 @@
+import { LocationNode } from './../../shared/models/location-node';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
 export class MapComponent {
 
   public floor: number;
+  public userLocation: LocationNode;
+  public endpoint: LocationNode;
 
   constructor() { this.floor = 1; }
 }

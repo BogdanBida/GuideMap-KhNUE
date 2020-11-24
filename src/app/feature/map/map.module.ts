@@ -7,6 +7,7 @@ import { MapRoutingModule } from './map-routing.module';
 import { SwitchesComponent } from './switches/switches.component';
 import { CanvaComponent } from './canva/canva.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [MapComponent, SearchComponent, SwitchesComponent, CanvaComponent, FloorSwitcherComponent]
+  declarations: [
+    MapComponent,
+    SearchComponent,
+    SwitchesComponent,
+    CanvaComponent,
+    FloorSwitcherComponent,
+    WhereaboutsComponent
+  ]
 })
 export class MapModule { }

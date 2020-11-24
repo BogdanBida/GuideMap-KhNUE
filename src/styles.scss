@@ -1,20 +1,22 @@
-@import 'mixins.scss';
-@import 'colors.scss';
+@import 'mixins';
+@import 'variables';
 
 * {
     box-sizing: border-box;
 }
+
 body {
     min-height: 100vh;
     min-width: 100vw;
     margin: 0;
-    background: radial-gradient(circle at center, rgb(255, 255, 255), whitesmoke);
+    background: radial-gradient(circle at center, white, whitesmoke);
     color: #000000;
     overflow: hidden;
 }
 
 button {
     border: none;
+    cursor: pointer;
     &:active {
         @include click;
     }
