@@ -15,8 +15,8 @@ export class WhereaboutsComponent {
   public scanLocation(): void {
     this.setLocation.emit(
       {
-        x: 5,
-        y: 6
+        x: 305,
+        y: 890
       }
     );
   }

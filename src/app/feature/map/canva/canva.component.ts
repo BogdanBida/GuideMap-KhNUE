@@ -1,3 +1,4 @@
+import { LocationNode } from './../../../shared/models/location-node';
 import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
 
@@ -16,6 +17,17 @@ export class CanvaComponent implements OnChanges, OnInit {
   };
 
   @Input() floor;
+  @Input() set userLocation(val: LocationNode) {
+    this._userLocation = val;
+    this.drawPoint(val);
+  }
+  @Input() set endpoint(val: LocationNode) {
+    this._endpoint = val;
+    this.drawPoint(val);
+  }
+
+  private _userLocation: LocationNode;
+  private _endpoint: LocationNode;
   private draw: Svg;
 
   constructor() { }
@@ -35,10 +47,21 @@ export class CanvaComponent implements OnChanges, OnInit {
     return floor + '.svg';
   }
 
-  private drawBackground(imgname): void {
+  private drawBackground(imgname = this.getImgName(this.floor)): void {
     if (this.draw) {
       this.draw.clear();
       this.draw.image('assets/floor-plans/' + imgname).size('100%', '100%');
+    }
+  }
+
+  private drawPoint(location: LocationNode): void {
+    if (this.draw) {
+      this.drawBackground();
+      const r = 50;
+      const maxr = 2000;
+      const circle = this.draw.circle(maxr).attr({fill: "#ff0000", opacity: 0}).move(location.x - maxr / 2, location.y - maxr / 2);
+      circle.animate(2500).size(r, r).attr({fill: "#ff0000", opacity: 0.5});
+      circle.animate({ease: '<'});
     }
   }
 }
