@@ -1,6 +1,8 @@
 @import 'variables';
+@import 'mixins';
 
 :host {
+    @include shadow;
     width: 90%;
     max-width: 720px;
     position: fixed;

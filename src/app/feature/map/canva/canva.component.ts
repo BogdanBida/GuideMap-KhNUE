@@ -59,8 +59,10 @@ export class CanvaComponent implements OnChanges, OnInit {
       this.drawBackground();
       const r = 50;
       const maxr = 2000;
-      const circle = this.draw.circle(maxr).attr({fill: "#ff0000", opacity: 0}).move(location.x - maxr / 2, location.y - maxr / 2);
-      circle.animate(2500).size(r, r).attr({fill: "#ff0000", opacity: 0.5});
+      const circle = this.draw.circle(maxr)
+      .attr({fill: '#ff0000', opacity: 0})
+      .move(location.x - maxr / 2, location.y - maxr / 2);
+      circle.animate(2500).size(r, r).attr({fill: '#ff0000', opacity: 0.5});
       circle.animate({ease: '<'});
     }
   }
