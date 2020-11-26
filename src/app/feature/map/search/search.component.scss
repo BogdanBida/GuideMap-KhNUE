@@ -1,0 +1,58 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+    @include shadow;
+    width: 90%;
+    max-width: 720px;
+    position: fixed;
+    top: 8px;
+    left: 5%;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right,
+    mix(rgba(228,228,228,0.8), #24C6FB, 90%),
+    mix(rgba(228,228,228,0.8), #1681a5, 90%));
+    input {
+        padding-left: 4px;
+        height: 100%;
+        width: calc(100% - 32px*3);
+        border: none;
+        font-size: 16px;
+        background-color: transparent;
+    }
+    button {
+        width: 32px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        font-size: 32px;
+    }
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div {
+        border: 2px solid #444444;
+        border-radius: 99px;
+        width: 16px;
+        height: 16px;
+        &::after {
+            content: " ";
+            display: block;
+            width: 4px;
+            height: 8px;
+            transform: translateY(10px) translateX(-3px) rotate(45deg);
+            background-color: #444444;
+        }
+    }
+}
