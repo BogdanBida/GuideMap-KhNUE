@@ -8,13 +8,15 @@ import { SwitchesComponent } from './switches/switches.component';
 import { CanvaComponent } from './canva/canva.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   imports: [
     CommonModule,
     MapRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ZXingScannerModule,
   ],
   declarations: [
     MapComponent,
@@ -22,7 +24,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     SwitchesComponent,
     CanvaComponent,
     FloorSwitcherComponent,
-    WhereaboutsComponent
-  ]
+    WhereaboutsComponent,
+  ],
 })
-export class MapModule { }
+export class MapModule {}
