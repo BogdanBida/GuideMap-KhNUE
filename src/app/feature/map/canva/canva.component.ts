@@ -16,7 +16,7 @@ export class CanvaComponent implements OnChanges, OnInit {
     linejoin: 'round',
   };
 
-  @Input() floor;
+  @Input() floor = 2;
   @Input() set userLocation(val: LocationNode) {
     this._userLocation = val;
     this.drawPoint(val);
@@ -57,12 +57,12 @@ export class CanvaComponent implements OnChanges, OnInit {
   private drawPoint(location: LocationNode): void {
     if (this.draw) {
       this.drawBackground();
-      const r = 50;
-      const maxr = 2000;
+      const r = 25;
+      const maxr = 2500;
       const circle = this.draw.circle(maxr)
       .attr({fill: '#ff0000', opacity: 0})
       .move(location.x - maxr / 2, location.y - maxr / 2);
-      circle.animate(2500).size(r, r).attr({fill: '#ff0000', opacity: 0.5});
+      circle.animate(2500).size(r, r).attr({fill: '#ff0010', opacity: 0.75});
       circle.animate({ease: '<'});
     }
   }

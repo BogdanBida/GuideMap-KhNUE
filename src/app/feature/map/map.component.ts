@@ -12,6 +12,6 @@ export class MapComponent {
   public endpoint: LocationNode;
 
   constructor() {
-    this.floor = 1;
+    this.floor = 2;
   }
 }

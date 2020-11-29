@@ -6,7 +6,7 @@
     flex-direction: column;
     position: fixed;
     bottom: 25%;
-    right: 12px;
+    right: 32px;
     .settings-btn {
         display: flex;
         height: 52px;
@@ -68,5 +68,11 @@
                 @include click;
             }
         }
+    }
+}
+
+@media (max-width: 720px) {
+    :host {
+        right: 14px;
     }
 }
