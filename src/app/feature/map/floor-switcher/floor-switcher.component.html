@@ -1,6 +1,8 @@
-<svg (click)="changeFloor(1)" [ngClass]="{'disabled': floor >= 8}">
-  <image xlink:href="assets/icons.ui/up-arrow.svg" src="assets/icons.ui/up-arrow.svg" width="100%" height="100%"></image>
+<svg (click)="upFloor()" [class.disabled]="floor >= 4">
+  <image xlink:href="assets/icons/up-arrow.svg" src="assets/icons/up-arrow.svg" width="100%" height="100%">
+  </image>
 </svg>
-<svg (click)="changeFloor(-1)" [ngClass]="{'disabled': floor <= 1}">
-  <image xlink:href="assets/icons.ui/up-arrow.svg" transform="rotate(180, 26, 26)" src="assets/icons.ui/up-arrow.svg" width="100%" height="100%"></image>
+<svg (click)="downFloor()" [class.disabled]="floor <= 1">
+  <image xlink:href="assets/icons/up-arrow.svg" transform="rotate(180, 26, 26)" src="assets/icons/up-arrow.svg"
+    width="100%" height="100%"></image>
 </svg>

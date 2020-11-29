@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationNode } from 'src/app/shared/models';
+
 
 @Component({
   selector: 'app-whereabouts',
@@ -15,10 +15,10 @@ export class WhereaboutsComponent implements OnInit {
 
   public isOpen = false;
   constructor(
-    private readonly _router: Router,
-    private readonly _acivateRoute: ActivatedRoute
+    private readonly router: Router,
+    private readonly acivateRoute: ActivatedRoute
   ) {
-    this.locNodes = [
+    this.locNodes = [ // todo: moved to service (read this data from assets/json_data/mc_1.json)
       {
         x: 305,
         y: 490
@@ -35,26 +35,21 @@ export class WhereaboutsComponent implements OnInit {
         x: 915,
         y: 920
       },
-    ]
+    ];
   }
 
   public ngOnInit(): void {
-    this._acivateRoute.queryParams.subscribe(params => {
-      const nodeId = params['nodeid'];
-      console.log('nodeId: ' + nodeId);
+    this.acivateRoute.queryParams.subscribe(params => {
+      const nodeId = params.nodeid;
       this.setLocation.emit(this.locNodes[nodeId]);
-    })
-  }
-
-  public scanLocation(): void {
-    this.isOpen = true;
+    });
   }
 
   onCodeResult(resultString: string): void {
     const nodeid = resultString.split('?')[1].split('=')[1];
-    this._router.navigate([], { queryParams: { nodeid }});
-    setTimeout(() => {
+    this.router.navigate([], { queryParams: { nodeid } });
+    setTimeout(() => { // todo: remake scaning delay
       this.isOpen = false;
-    }, 500);
+    }, 250);
   }
 }

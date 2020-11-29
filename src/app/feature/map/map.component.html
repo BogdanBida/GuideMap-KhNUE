@@ -3,12 +3,4 @@
 <app-canva [floor]="floor" [userLocation]="userLocation" [endpoint]="endpoint"></app-canva>
 <app-floor-switcher (setFloor)="floor = $event"></app-floor-switcher>
 <app-whereabouts (setLocation)="userLocation = $event"></app-whereabouts>
-<div class="goto-wrapper">
-  <button class="goto" [class.disabled-goto]="!(userLocation && endpoint)">
-    <svg>
-      <image xlink:href="assets/icons.ui/arrow.svg" src="assets/icons.ui/arrow.svg" width="100%" height="100%"></image>
-    </svg>
-  </button>
-  <span class="mark" *ngIf="!userLocation">Define your location<br>(Right Button)</span>
-  <span class="mark" *ngIf="!endpoint && userLocation">Define your endpoint<br>(Search field on top)</span>
-</div>
+<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint"></app-goto-button>
