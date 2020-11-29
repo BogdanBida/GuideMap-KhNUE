@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
 import { LocationNode } from './../../../shared/models/location-node';
 
@@ -6,9 +6,8 @@ import { LocationNode } from './../../../shared/models/location-node';
   selector: 'app-canva',
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CanvaComponent implements OnChanges, OnInit {
+export class CanvaComponent implements OnInit {
   private strokeConfig = {
     width: 5,
     color: '#f06',
@@ -16,7 +15,14 @@ export class CanvaComponent implements OnChanges, OnInit {
     linejoin: 'round',
   };
 
-  @Input() floor: number;
+  @Input() set floor(value: number) {
+    this.floorPrivate = value;
+    this.drawBackground();
+  }
+
+  get floor(): number {
+    return this.floorPrivate;
+  }
 
   @Input() set userLocation(value: LocationNode) {
     this.drawPoint(value);
@@ -26,14 +32,9 @@ export class CanvaComponent implements OnChanges, OnInit {
   }
 
   private draw: Svg;
+  private floorPrivate: number;
 
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // if (changes.floor.currentValue !== changes.floor.previousValue) {
-    //   this.drawBackground(this.getImgName(changes.floor.currentValue));
-    // }
-  }
 
   ngOnInit(): void {
     this.draw = SVG().addTo('#canv').size('1400px', '1400px');

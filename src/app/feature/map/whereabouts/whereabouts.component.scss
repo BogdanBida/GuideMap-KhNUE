@@ -11,23 +11,12 @@
   height: 64px;
   background-color: $base-color;
   @include shadow;
-  svg {
-    position: relative;
-    width: 120%;
-    left: -10%;
-    top: -10%;
-    height: 120%;
-  }
-  .svg-qr-code {
+  img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 50%;
-    top: 25%;
-    left: 25%;
-    filter: invert(0.2);
-    clip-path: circle(18px);
+    top: 4px;
+    left: 3px;
+    width: 58px;
+    height: 58px;
   }
 }
 
@@ -92,22 +81,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 8px;
-    button {
-      width: 72px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 8px;
-      background-color: transparent;
-      svg {
-        width: 52px;
-        height: 52px;
-      }
-      &:active {
-        @include click;
-      }
-    }
   }
 }
 

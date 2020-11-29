@@ -11,5 +11,5 @@ export class MapComponent {
   public userLocation: LocationNode;
   public endpoint: LocationNode;
 
-  constructor() {}
+  constructor() { }
 }

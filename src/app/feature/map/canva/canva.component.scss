@@ -10,15 +10,10 @@
 }
 
 .canv {
-  flex: 1 1;
+  width: max-content;
+  height: max-content;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
   z-index: 0;
-}
-
-@media (max-width: 720px) {
-  :host {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
 }
