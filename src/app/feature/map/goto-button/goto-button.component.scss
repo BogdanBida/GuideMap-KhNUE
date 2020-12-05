@@ -1,0 +1,41 @@
+@import "mixins";
+
+:host {
+  position: fixed;
+  left: calc(50% - 32px);
+  width: 64px;
+  bottom: 8px;
+
+  .goto {
+    border: none;
+    background: transparent;
+
+    svg {
+      width: 100%;
+      @include shadow;
+    }
+  }
+
+  .mark {
+    transition: 0.2s;
+    position: fixed;
+    bottom: 12px;
+    left: 0;
+    color: red;
+    opacity: 0;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+  }
+
+  &:hover {
+    .disabled-goto~.mark {
+      opacity: 0.9;
+    }
+  }
+
+  .disabled-goto {
+    filter: brightness(0.5);
+    pointer-events: none;
+  }
+}

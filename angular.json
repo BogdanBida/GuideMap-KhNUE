@@ -36,8 +36,7 @@
                 "src/assets/styles"
               ]
             },
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -133,6 +132,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "guidemap"
+    }
+  },
+  "defaultProject": "guidemap",
+  "cli": {
+    "analytics": false
+  }
 }

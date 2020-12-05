@@ -1,5 +1,5 @@
-import { LocationNode } from './../../../shared/models/location-node';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { LocationNode } from './../../../shared/models/location-node';
 
 @Component({
   selector: 'app-search',
@@ -24,8 +24,8 @@ export class SearchComponent {
   public findLocation(): void {
     this.setLocation.emit(
       {
-        x: 5,
-        y: 6
+        x: 325,
+        y: 500
       }
     );
   }

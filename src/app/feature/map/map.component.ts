@@ -1,5 +1,5 @@
-import { LocationNode } from './../../shared/models/location-node';
 import { Component } from '@angular/core';
+import { LocationNode } from './../../shared/models/location-node';
 
 @Component({
   selector: 'app-map',
@@ -11,7 +11,5 @@ export class MapComponent {
   public userLocation: LocationNode;
   public endpoint: LocationNode;
 
-  constructor() {
-    this.floor = 1;
-  }
+  constructor() { }
 }

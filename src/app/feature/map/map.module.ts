@@ -1,14 +1,15 @@
-import { FloorSwitcherComponent } from './floor-switcher/floor-switcher.component';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchComponent } from './search/search.component';
-import { MapComponent } from './map.component';
-import { MapRoutingModule } from './map-routing.module';
-import { SwitchesComponent } from './switches/switches.component';
-import { CanvaComponent } from './canva/canva.component';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { CanvaComponent } from './canva/canva.component';
+import { FloorSwitcherComponent } from './floor-switcher/floor-switcher.component';
+import { GotoButtonComponent } from './goto-button/goto-button.component';
+import { MapRoutingModule } from './map-routing.module';
+import { MapComponent } from './map.component';
+import { SearchComponent } from './search/search.component';
+import { SwitchesComponent } from './switches/switches.component';
+import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     SwitchesComponent,
     CanvaComponent,
     FloorSwitcherComponent,
+    GotoButtonComponent,
     WhereaboutsComponent,
   ],
 })
-export class MapModule {}
+export class MapModule { }

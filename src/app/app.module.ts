@@ -1,14 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { BuildingService } from './core/services/building.service';
-import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     SharedModule,
   ],
-  providers: [BuildingService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

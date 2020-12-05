@@ -1,13 +1,5 @@
-<button class="whereabouts" (click)="scanLocation()">
-  <svg>
-    <image
-      xlink:href="assets/icons.ui/whereabouts.svg"
-      src="assets/icons.ui/whereabouts.svg"
-      width="100%"
-      height="100%"
-    ></image>
-  </svg>
-  <img src="assets/icons.ui/qr.png" alt="" />
+<button class="whereabouts" (click)="isOpen = true">
+  <img src="assets/icons/whereabouts.svg"/>
 </button>
 
 <div class="modal" *ngIf="isOpen">
