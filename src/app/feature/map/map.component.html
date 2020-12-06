@@ -1,6 +1,6 @@
 <app-search (setLocation)="endpoint = $event"></app-search>
 <app-switches></app-switches>
-<app-canva [floor]="floor" [userLocation]="userLocation" [endpoint]="endpoint"></app-canva>
+<app-canva [floor]="floor" [userLocation]="userLocation" [endpoint]="endpoint" [isGoto]="isGoto"></app-canva>
 <app-floor-switcher (setFloor)="floor = $event"></app-floor-switcher>
 <app-whereabouts (setLocation)="userLocation = $event"></app-whereabouts>
-<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint"></app-goto-button>
+<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint" (goto)="isGoto = $event"></app-goto-button>

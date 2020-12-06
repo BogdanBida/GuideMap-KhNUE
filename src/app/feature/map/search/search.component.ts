@@ -1,17 +1,29 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NodeService } from './../../../core/services/node.service';
 import { LocationNode } from './../../../shared/models/location-node';
+import { RoomNode } from './../../../shared/models/room-node';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   public inputText: string;
+  public locations: RoomNode[];
+
   @Output() setLocation = new EventEmitter<LocationNode>();
 
-  constructor() { }
+  constructor(
+    private readonly nodeService: NodeService
+  ) { }
+
+  ngOnInit(): void {
+    this.nodeService.getRoomsNodes().subscribe(data => {
+      this.locations = data;
+    });
+  }
 
   public clear(): void {
     this.inputText = '';
@@ -22,12 +34,7 @@ export class SearchComponent {
   }
 
   public findLocation(): void {
-    this.setLocation.emit(
-      {
-        x: 325,
-        y: 500
-      }
-    );
+    this.setLocation.emit(this.locations[0]);
   }
 
 }

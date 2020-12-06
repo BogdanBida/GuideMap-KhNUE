@@ -1,13 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
+import { environment } from './../../../../environments/environment.prod';
 import { LocationNode } from './../../../shared/models/location-node';
+
+const userLocationColor = '#ff0010';
+const endpointColor = '#5020ff';
 
 @Component({
   selector: 'app-canva',
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
 })
-export class CanvaComponent implements OnInit {
+export class CanvaComponent implements OnInit, OnChanges {
   private strokeConfig = {
     width: 5,
     color: '#f06',
@@ -24,21 +28,39 @@ export class CanvaComponent implements OnInit {
     return this.floorPrivate;
   }
 
+  private _userLocation;
+  private _endpoint;
+
   @Input() set userLocation(value: LocationNode) {
-    this.drawPoint(value);
+    this.drawUserLocation(value);
+    this._userLocation = value;
   }
   @Input() set endpoint(value: LocationNode) {
-    this.drawPoint(value);
+    this.drawEndpointLocation(value);
+    this._endpoint = value;
   }
+  @Input() isGoto;
 
   private draw: Svg;
-  private floorPrivate: number;
+  private bgrDraw: Svg;
+  private floorPrivate: number = environment.defaultFloor;
+  private userDot;
+  private endpointDot;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.draw = SVG().addTo('#canv').size('1400px', '1400px');
+    this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
+    this.draw = SVG().addTo('#canv').size('3500px', '2550px');
     this.drawBackground(this.getImgName(this.floor));
+  }
+
+  ngOnChanges({ isGoto }: SimpleChanges): void {
+    if (isGoto.previousValue !== isGoto.currentValue) {
+      if (this.isGoto) {
+        this.drawPath();
+      }
+    }
   }
 
   private getImgName(floor: number): string {
@@ -46,22 +68,40 @@ export class CanvaComponent implements OnInit {
   }
 
   private drawBackground(imgname = this.getImgName(this.floor)): void {
-    if (this.draw && imgname) {
-      this.draw.clear();
-      this.draw.image('assets/floor-plans/' + imgname).size('100%', '100%');
+    if (this.bgrDraw && imgname) {
+      this.bgrDraw.clear();
+      this.bgrDraw.image('assets/floor-plans/' + imgname).size('100%', '100%');
     }
   }
 
-  private drawPoint(location: LocationNode): void {
+  private drawUserLocation(location: LocationNode): void {
+    this.userDot = this.drawPoint(this.userDot, location, userLocationColor);
+  }
+
+  private drawEndpointLocation(location: LocationNode): void {
+    this.endpointDot = this.drawPoint(this.endpointDot, location, endpointColor);
+  }
+
+  private drawPoint(Dot: any, location: LocationNode, color: string = '#505050'): any {
+    if (Dot) {
+      Dot.remove();
+    }
     if (this.draw) {
-      this.drawBackground();
       const r = 25;
       const maxr = 2500;
-      const circle = this.draw.circle(maxr)
-        .attr({ fill: '#ff0000', opacity: 0 })
-        .move(location.x - maxr / 2, location.y - maxr / 2);
-      circle.animate(2500).size(r, r).attr({ fill: '#ff0010', opacity: 0.75 });
-      circle.animate({ ease: '<' });
+      const [x, y] = [location.x, location.y];
+      Dot = this.draw.circle(maxr)
+        .attr({ fill: color, opacity: 0 })
+        .move(x - maxr / 2, y - maxr / 2);
+      Dot.animate({ duration: 2500 }).size(r, r).attr({ fill: color, opacity: 0.75 });
+      Dot.animate({ ease: '<' });
+      Dot.animate({ duration: 1000, ease: '<>' }).loop(true, true).size(r + 20, r + 20).attr({ opacity: 0.4 });
     }
+    return Dot;
+  }
+
+  private drawPath(): void {
+    this.draw.line(this._userLocation.x, this._userLocation.y, this._endpoint.x, this._endpoint.y)
+    .stroke(this.strokeConfig);
   }
 }

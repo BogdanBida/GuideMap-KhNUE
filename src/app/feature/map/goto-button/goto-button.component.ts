@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-goto-button',
@@ -9,5 +9,7 @@ export class GotoButtonComponent {
 
   @Input() isLocationExist: boolean;
   @Input() isEndpointExist: boolean;
+  @Output() goto = new EventEmitter<boolean>();
+
   constructor() { }
 }

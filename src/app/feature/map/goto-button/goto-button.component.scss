@@ -16,24 +16,6 @@
     }
   }
 
-  .mark {
-    transition: 0.2s;
-    position: fixed;
-    bottom: 12px;
-    left: 0;
-    color: red;
-    opacity: 0;
-    font-size: 12px;
-    width: 100%;
-    text-align: center;
-  }
-
-  &:hover {
-    .disabled-goto~.mark {
-      opacity: 0.9;
-    }
-  }
-
   .disabled-goto {
     filter: brightness(0.5);
     pointer-events: none;

@@ -1,4 +1,4 @@
-<button class="whereabouts" (click)="isOpen = true">
+<button class="whereabouts" *ngIf="locNodes?.length" (click)="isOpen = true">
   <img src="assets/icons/whereabouts.svg"/>
 </button>
 

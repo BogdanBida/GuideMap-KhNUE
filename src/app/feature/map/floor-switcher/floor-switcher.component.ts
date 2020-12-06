@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { environment } from './../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-floor-switcher',
@@ -10,7 +11,7 @@ export class FloorSwitcherComponent implements OnInit {
   public readonly minFloor = 1;
   public readonly maxFloor = 4;
 
-  private floorPrivate;
+  private floorPrivate = environment.defaultFloor;
 
   public set floor(value: number) {
     if ((value > this.maxFloor) && (value < this.minFloor)) { return; }
@@ -27,7 +28,6 @@ export class FloorSwitcherComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.floor = 2;
   }
 
   public upFloor(): void {

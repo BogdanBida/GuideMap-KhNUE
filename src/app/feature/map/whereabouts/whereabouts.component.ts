@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { LocationNode } from 'src/app/shared/models';
+import { NodeService } from './../../../core/services/node.service';
 
 
 @Component({
@@ -11,38 +13,33 @@ import { LocationNode } from 'src/app/shared/models';
 export class WhereaboutsComponent implements OnInit {
   @Output() setLocation = new EventEmitter<LocationNode>();
 
-  private locNodes: LocationNode[];
+  public locNodes: LocationNode[];
 
   public isOpen = false;
   constructor(
     private readonly router: Router,
-    private readonly acivateRoute: ActivatedRoute
-  ) {
-    this.locNodes = [ // todo: moved to service (read this data from assets/json_data/mc_1.json)
-      {
-        x: 305,
-        y: 490
-      },
-      {
-        x: 305,
-        y: 890
-      },
-      {
-        x: 525,
-        y: 920
-      },
-      {
-        x: 915,
-        y: 920
-      },
-    ];
-  }
+    private readonly acivateRoute: ActivatedRoute,
+    private readonly nodeService: NodeService
+  ) {}
 
   public ngOnInit(): void {
-    this.acivateRoute.queryParams.subscribe(params => {
-      const nodeId = params.nodeid;
-      this.setLocation.emit(this.locNodes[nodeId]);
-    });
+    // let nodeId;
+    // this.acivateRoute.queryParams.subscribe(params => {
+    //   nodeId = params.nodeid;
+    // });
+
+    // this.nodeService.getData().subscribe(data => {
+    //   this.locNodes = data;
+    //   this.setLocation.emit(this.locNodes[nodeId]);
+    // });
+    combineLatest([
+      this.acivateRoute.queryParams,
+      this.nodeService.getQRNodes()])
+      .subscribe(([params, data]) => {
+        const nodeId = params.nodeid;
+        this.locNodes = data;
+        this.setLocation.emit(this.locNodes[nodeId]);
+      });
   }
 
   onCodeResult(resultString: string): void {

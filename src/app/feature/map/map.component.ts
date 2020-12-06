@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from './../../../environments/environment';
 import { LocationNode } from './../../shared/models/location-node';
 
 @Component({
@@ -7,9 +8,10 @@ import { LocationNode } from './../../shared/models/location-node';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
-  public floor: number;
-  public userLocation: LocationNode;
+  public floor: number = environment.defaultFloor;
+  public userLocation: LocationNode | null = null;
   public endpoint: LocationNode;
+  public isGoto = false;
 
   constructor() { }
 }
