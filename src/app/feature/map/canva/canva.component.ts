@@ -28,17 +28,8 @@ export class CanvaComponent implements OnInit, OnChanges {
     return this.floorPrivate;
   }
 
-  private _userLocation;
-  private _endpoint;
-
-  @Input() set userLocation(value: LocationNode) {
-    this.drawUserLocation(value);
-    this._userLocation = value;
-  }
-  @Input() set endpoint(value: LocationNode) {
-    this.drawEndpointLocation(value);
-    this._endpoint = value;
-  }
+  @Input() userLocation;
+  @Input() endpoint;
   @Input() isGoto;
 
   private draw: Svg;
@@ -55,9 +46,17 @@ export class CanvaComponent implements OnInit, OnChanges {
     this.drawBackground(this.getImgName(this.floor));
   }
 
-  ngOnChanges({ isGoto }: SimpleChanges): void {
-    if (isGoto.previousValue !== isGoto.currentValue) {
-      if (this.isGoto) {
+  ngOnChanges(changes: SimpleChanges): void {
+    const { userLocation, endpoint, isGoto } = changes;
+
+    if (userLocation && (userLocation.currentValue !== userLocation.previousValue)) {
+      this.drawUserLocation(this.userLocation);
+    }
+    if (endpoint && (endpoint.currentValue !== endpoint.previousValue)) {
+      this.drawEndpointLocation(this.endpoint);
+    }
+    if (isGoto && (isGoto.previousValue !== isGoto.currentValue)) {
+      if (this.isGoto === true) {
         this.drawPath();
       }
     }
@@ -86,7 +85,7 @@ export class CanvaComponent implements OnInit, OnChanges {
     if (Dot) {
       Dot.remove();
     }
-    if (this.draw) {
+    if (this.draw && location) {
       const r = 25;
       const maxr = 2500;
       const [x, y] = [location.x, location.y];
@@ -101,7 +100,25 @@ export class CanvaComponent implements OnInit, OnChanges {
   }
 
   private drawPath(): void {
-    this.draw.line(this._userLocation.x, this._userLocation.y, this._endpoint.x, this._endpoint.y)
-    .stroke(this.strokeConfig);
+    const dots = [ // todo: get node list from path searching
+      [
+        this.userLocation.x,
+        this.userLocation.y
+      ],
+      [
+        this.userLocation.x,
+        this.userLocation.y - (this.userLocation.y - this.endpoint.y) / 2
+      ],
+      [
+        this.endpoint.x,
+        this.endpoint.y
+      ]
+    ];
+
+    for (let i = 0; i < dots.length - 1; i++) {
+      const line = this.draw.line(dots[i][0], dots[i][1], dots[i + 1][0], dots[i + 1][1])
+      .stroke(this.strokeConfig).attr({ opacity: 0.2 });
+      line.animate({ duration: 1000, ease: '<>' }).loop(9999999999, true).attr({ opacity: 0.8 });
+    }
   }
 }
