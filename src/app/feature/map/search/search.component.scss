@@ -7,23 +7,22 @@
   position: fixed;
   top: 8px;
   left: 25%;
-  height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8px;
+  padding: 0px 8px;
   border-radius: 4px;
   background: linear-gradient(to right,
       mix(rgba(228, 228, 228, 0.8), #24C6FB, 90%),
       mix(rgba(228, 228, 228, 0.8), #1681a5, 90%));
 
-  input {
-    padding-left: 4px;
-    height: 100%;
+  .select {
+    padding: 0 8px;
     width: calc(100% - 32px*3);
     border: none;
     font-size: 16px;
     background-color: transparent;
+    margin-bottom: -21.5px;
   }
 
   button {

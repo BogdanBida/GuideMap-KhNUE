@@ -12,7 +12,7 @@ export class NodeService {
   constructor(private http: HttpClient) { }
 
   public getRoomsNodes(): Observable<RoomNode[]> {
-    return this.getData().pipe(map(value => value.roomsNodes))
+    return this.getData().pipe(map(value => value.roomsNodes));
   }
 
   public getQRNodes(): Observable<QRNode[]> {

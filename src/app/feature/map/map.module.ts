@@ -10,6 +10,9 @@ import { MapComponent } from './map.component';
 import { SearchComponent } from './search/search.component';
 import { SwitchesComponent } from './switches/switches.component';
 import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SwitchesDialogComponent } from './switches/switches-dialog/switches-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -18,6 +21,8 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     FormsModule,
     ReactiveFormsModule,
     ZXingScannerModule,
+    MatSelectModule,
+    MatDialogModule,
   ],
   declarations: [
     MapComponent,
@@ -27,6 +32,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     FloorSwitcherComponent,
     GotoButtonComponent,
     WhereaboutsComponent,
+    SwitchesDialogComponent,
   ],
 })
-export class MapModule { }
+export class MapModule {}

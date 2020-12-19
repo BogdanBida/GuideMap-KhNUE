@@ -1,7 +1,18 @@
 <button>
   &equiv;
 </button>
-<input type="text" [(ngModel)]="inputText" placeholder="Choose room...">
+<!-- <input type="text" [(ngModel)]="inputText" placeholder="Choose room..."> -->
+<mat-form-field appearance="fill" class="select">
+  <mat-label>Select a room</mat-label>
+  <mat-select [formControl]="roomControl">
+    <mat-option>None</mat-option>
+    <mat-optgroup *ngFor="let group of roomGroups" [label]="group.name" [disabled]="group.disabled">
+      <mat-option *ngFor="let room of group.room" [value]="room.value">
+        {{room.viewValue}}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
 <button class="search-btn" (click)="findLocation()" *ngIf="locations?.length">
   <div></div>
 </button>

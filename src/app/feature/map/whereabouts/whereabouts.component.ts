@@ -4,7 +4,6 @@ import { combineLatest } from 'rxjs';
 import { LocationNode } from 'src/app/shared/models';
 import { NodeService } from './../../../core/services/node.service';
 
-
 @Component({
   selector: 'app-whereabouts',
   templateUrl: './whereabouts.component.html',
@@ -23,30 +22,19 @@ export class WhereaboutsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    // let nodeId;
-    // this.acivateRoute.queryParams.subscribe(params => {
-    //   nodeId = params.nodeid;
-    // });
-
-    // this.nodeService.getData().subscribe(data => {
-    //   this.locNodes = data;
-    //   this.setLocation.emit(this.locNodes[nodeId]);
-    // });
     combineLatest([
       this.acivateRoute.queryParams,
-      this.nodeService.getQRNodes()])
-      .subscribe(([params, data]) => {
-        const nodeId = params.nodeid;
-        this.locNodes = data;
-        this.setLocation.emit(this.locNodes[nodeId]);
-      });
+      this.nodeService.getQRNodes(),
+    ]).subscribe(([params, data]) => {
+      const nodeId = params.nodeid;
+      this.locNodes = data;
+      this.setLocation.emit(this.locNodes[nodeId]);
+    });
   }
 
   onCodeResult(resultString: string): void {
     const nodeid = resultString.split('?')[1].split('=')[1];
     this.router.navigate([], { queryParams: { nodeid } });
-    setTimeout(() => { // todo: remake scaning delay
-      this.isOpen = false;
-    }, 250);
+    this.isOpen = false;
   }
 }
