@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,42 +19,49 @@ $guidemap-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$guidemap-theme: mat-light-theme((
-  color: (
-    primary: $guidemap-primary,
-    accent: $guidemap-accent,
-    warn: $guidemap-warn,
+$guidemap-theme: mat-light-theme(
+  (
+    color: (
+      primary: $guidemap-primary,
+      accent: $guidemap-accent,
+      warn: $guidemap-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($guidemap-theme);
 
-@import 'mixins';
-@import 'variables';
+@import "mixins";
+@import "variables";
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    min-height: 100vh;
-    min-width: 100vw;
-    margin: 0;
-    background: radial-gradient(circle at center, rgb(225, 225, 225), rgb(200, 200, 200));
-    color: #000000;
-    overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  background: radial-gradient(
+    circle at center,
+    rgb(225, 225, 225),
+    rgb(200, 200, 200)
+  );
+  color: #000000;
 }
 
 button {
-    border: none;
-    cursor: pointer;
-    &:active {
-        @include click;
-    }
+  border: none;
+  cursor: pointer;
+  &:active {
+    @include click;
+  }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NodeService } from './../../../core/services/node.service';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
 import { environment } from './../../../../environments/environment.prod';
 import { LocationNode } from './../../../shared/models/location-node';
@@ -37,25 +44,32 @@ export class CanvaComponent implements OnInit, OnChanges {
   private floorPrivate: number = environment.defaultFloor;
   private userDot;
   private endpointDot;
+  private routes;
 
-  constructor() { }
+  constructor(private nodeService: NodeService) {}
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
     this.draw = SVG().addTo('#canv').size('3500px', '2550px');
     this.drawBackground(this.getImgName(this.floor));
+    this.nodeService.getRouteNodes().subscribe((data) => {
+      this.routes = data;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { userLocation, endpoint, isGoto } = changes;
 
-    if (userLocation && (userLocation.currentValue !== userLocation.previousValue)) {
+    if (
+      userLocation &&
+      userLocation.currentValue !== userLocation.previousValue
+    ) {
       this.drawUserLocation(this.userLocation);
     }
-    if (endpoint && (endpoint.currentValue !== endpoint.previousValue)) {
+    if (endpoint && endpoint.currentValue !== endpoint.previousValue) {
       this.drawEndpointLocation(this.endpoint);
     }
-    if (isGoto && (isGoto.previousValue !== isGoto.currentValue)) {
+    if (isGoto && isGoto.previousValue !== isGoto.currentValue) {
       if (this.isGoto === true) {
         this.drawPath();
       }
@@ -63,7 +77,7 @@ export class CanvaComponent implements OnInit, OnChanges {
   }
 
   private getImgName(floor: number): string {
-    return floor ? (floor + '.svg') : null;
+    return floor ? floor + '.svg' : null;
   }
 
   private drawBackground(imgname = this.getImgName(this.floor)): void {
@@ -78,10 +92,18 @@ export class CanvaComponent implements OnInit, OnChanges {
   }
 
   private drawEndpointLocation(location: LocationNode): void {
-    this.endpointDot = this.drawPoint(this.endpointDot, location, endpointColor);
+    this.endpointDot = this.drawPoint(
+      this.endpointDot,
+      location,
+      endpointColor
+    );
   }
 
-  private drawPoint(Dot: any, location: LocationNode, color: string = '#505050'): any {
+  private drawPoint(
+    Dot: any,
+    location: LocationNode,
+    color: string = '#505050'
+  ): any {
     if (Dot) {
       Dot.remove();
     }
@@ -89,36 +111,40 @@ export class CanvaComponent implements OnInit, OnChanges {
       const r = 25;
       const maxr = 2500;
       const [x, y] = [location.x, location.y];
-      Dot = this.draw.circle(maxr)
+      Dot = this.draw
+        .circle(maxr)
         .attr({ fill: color, opacity: 0 })
         .move(x - maxr / 2, y - maxr / 2);
-      Dot.animate({ duration: 2500 }).size(r, r).attr({ fill: color, opacity: 0.75 });
+      Dot.animate({ duration: 2500 })
+        .size(r, r)
+        .attr({ fill: color, opacity: 0.75 });
       Dot.animate({ ease: '<' });
-      Dot.animate({ duration: 1000, ease: '<>' }).loop(true, true).size(r + 20, r + 20).attr({ opacity: 0.4 });
+      Dot.animate({ duration: 1000, ease: '<>' })
+        .loop(true, true)
+        .size(r + 20, r + 20)
+        .attr({ opacity: 0.4 });
     }
     return Dot;
   }
 
   private drawPath(): void {
-    const dots = [ // todo: get node list from path searching
-      [
-        this.userLocation.x,
-        this.userLocation.y
-      ],
-      [
-        this.userLocation.x,
-        this.userLocation.y - (this.userLocation.y - this.endpoint.y) / 2
-      ],
-      [
-        this.endpoint.x,
-        this.endpoint.y
-      ]
+    const dots = [
+      // todo: get node list from path searching
+      { x: this.userLocation.x, y: this.userLocation.y },
+      ...this.routes,
+      { x: this.endpoint.x, y: this.endpoint.y },
     ];
 
-    for (let i = 0; i < dots.length - 1; i++) {
-      const line = this.draw.line(dots[i][0], dots[i][1], dots[i + 1][0], dots[i + 1][1])
-      .stroke(this.strokeConfig).attr({ opacity: 0.2 });
-      line.animate({ duration: 1000, ease: '<>' }).loop(9999999999, true).attr({ opacity: 0.8 });
+    for (let i = 0; i < dots.length; i++) {
+      // const line = this.draw
+      //   .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
+      //   .stroke(this.strokeConfig)
+      //   .attr({ opacity: 0.2 });
+      // line
+      //   .animate({ duration: 1000, ease: '<>' })
+      //   .loop(9999999999, true)
+      //   .attr({ opacity: 0.8 });
+      this.draw.circle(20).move(dots[i].x - 10, dots[i].y - 10);
     }
   }
 }
