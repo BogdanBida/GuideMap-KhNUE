@@ -2,7 +2,7 @@
 
 .info {
   @include shadow;
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 40px;
   display: flex;

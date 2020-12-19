@@ -1,4 +1,5 @@
-@import 'mixins';
+@import "mixins";
+@import "variables";
 
 :host {
   position: fixed;
@@ -10,15 +11,36 @@
   align-items: center;
   user-select: none;
 
-  svg {
+  button {
     margin-top: 8px;
-    width: 52px;
-    height: 52px;
-    @include shadow;
-
-    &:active {
-      @include click;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 99px;
+    background-color: $base-color;
+    &::after {
+      position: relative;
+      display: block;
+      content: "";
+      border: 8px solid white;
+      border-left: none;
+      border-bottom: none;
+      border-top-right-radius: 2px;
+      width: 24px;
+      height: 24px;
+      box-sizing: border-box;
     }
+    &:nth-child(2)::after {
+      transform: rotate(-45deg);
+      top: 2px;
+    }
+    &:nth-child(3)::after {
+      transform: rotate(135deg);
+      bottom: 2px;
+    }
+    @include shadow;
   }
 
   .disabled {
@@ -26,4 +48,16 @@
     filter: brightness(0.8);
     opacity: 0.8;
   }
+}
+
+.floor {
+  font-size: 24px;
+  opacity: 0.9;
+  background-color: change-color($color: $base-color, $alpha: 0.1);
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid $base-color;
+  border-radius: 4px;
+  @include shadow;
 }
