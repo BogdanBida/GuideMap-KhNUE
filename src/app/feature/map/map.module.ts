@@ -1,3 +1,4 @@
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     GotoButtonComponent,
     WhereaboutsComponent,
     SwitchesDialogComponent,
+    InfoDialogComponent
   ],
 })
 export class MapModule {}

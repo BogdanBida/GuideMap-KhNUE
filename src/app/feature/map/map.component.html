@@ -3,4 +3,10 @@
 <app-canva [floor]="floor" [userLocation]="userLocation" [endpoint]="endpoint" [isGoto]="isGoto"></app-canva>
 <app-floor-switcher (setFloor)="floor = $event"></app-floor-switcher>
 <app-whereabouts (setLocation)="userLocation = $event"></app-whereabouts>
-<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint" (goto)="isGoto = $event"></app-goto-button>
+<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint" (goto)="isGoto = $event">
+</app-goto-button>
+<button class="info" (click)="openDialog()">
+  <svg>
+    <image xlink:href="assets/icons/info.svg" src="assets/icons/info.svg" width="100%" height="100%"></image>
+  </svg>
+</button>

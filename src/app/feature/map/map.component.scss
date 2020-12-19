@@ -1,0 +1,21 @@
+@import 'mixins';
+
+.info {
+  @include shadow;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+  .info {
+    top: 80px;
+  }
+}
