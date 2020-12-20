@@ -1,4 +1,11 @@
-<div class="floor">{{floor}}</div>
+<div class="floor">
+  <label for="">
+    ЭТАЖ
+  </label>
+  <div>
+    {{floor}}
+  </div>
+</div>
 <button (click)="upFloor()" [class.disabled]="floor >= 4">
 </button>
 <button (click)="downFloor()" [class.disabled]="floor <= 1">

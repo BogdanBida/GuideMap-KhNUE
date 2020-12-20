@@ -43,3 +43,7 @@ button {
     @include click;
   }
 }
+
+button, a, input {
+  outline: none;
+}

@@ -51,13 +51,30 @@
 }
 
 .floor {
-  font-size: 24px;
-  opacity: 0.9;
-  background-color: change-color($color: $base-color, $alpha: 0.1);
+  display: flex;
+  align-items: center;
+  width: 52px;
   color: white;
-  padding: 10px;
   margin-bottom: 10px;
-  border-bottom: 2px solid $base-color;
+  border-right: 2px solid $base-color;
   border-radius: 4px;
+  background-color: change-color($color: $base-color, $alpha: 0.1);
+  opacity: 0.9;
   @include shadow;
+  label {
+    background-color: $base-color;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 5px 2px;
+    @supports (writing-mode: vertical-rl) {
+      writing-mode: vertical-rl;
+    }
+    @supports not (writing-mode: vertical-rl) {
+      display: none;
+    }
+  }
+  div {
+    font-size: 24px;
+    margin: 5px 10px;
+  }
 }
