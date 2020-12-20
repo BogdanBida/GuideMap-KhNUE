@@ -22,6 +22,10 @@ export class NodeService {
     return this.getData().pipe(map((value) => value.routeNodes));
   }
 
+  public getPaths(): Observable<Dot[]> {
+    return this.getData().pipe(map((value) => value.paths));
+  }
+
   private getData(): Observable<JsonNodes> {
     return this.http.get<JsonNodes>(
       `http://localhost:4200/assets/json_data/mc_1.json`

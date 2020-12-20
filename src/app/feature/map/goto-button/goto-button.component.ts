@@ -9,7 +9,7 @@ export class GotoButtonComponent {
 
   @Input() isLocationExist: boolean;
   @Input() isEndpointExist: boolean;
-  @Output() goto = new EventEmitter<boolean>();
+  @Output() goto = new EventEmitter<number>();
 
   constructor() { }
 }

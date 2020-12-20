@@ -13,7 +13,7 @@ export class MapComponent {
   public floor: number = environment.defaultFloor;
   public userLocation: LocationNode | null = null;
   public endpoint: LocationNode;
-  public isGoto = false;
+  public isGoto = 0;
 
   constructor(public dialog: MatDialog) {}
 

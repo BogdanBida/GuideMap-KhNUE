@@ -4,4 +4,5 @@ export interface JsonNodes {
   QRNodes: QRNode[];
   roomsNodes: RoomNode[];
   routeNodes: Dot[];
+  paths: any[];
 }

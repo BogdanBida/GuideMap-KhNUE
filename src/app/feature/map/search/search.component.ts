@@ -17,19 +17,19 @@ export class SearchComponent implements OnInit {
 
   roomControl = new FormControl();
   public roomGroups = [
-    {
-      name: 'WC',
-      disabled: true,
-      room: [
-        { value: 'undefined', viewValue: 'M2 - man' },
-        { value: 'undefined', viewValue: 'M2 - women' },
-      ],
-    },
-    {
-      name: 'Other',
-      disabled: true,
-      room: [{ value: 'undefined', viewValue: 'Auditorium' }],
-    },
+    // {
+    //   name: 'WC',
+    //   disabled: true,
+    //   room: [
+    //     { value: 'undefined', viewValue: 'M2 - man' },
+    //     { value: 'undefined', viewValue: 'M2 - women' },
+    //   ],
+    // },
+    // {
+    //   name: 'Other',
+    //   disabled: true,
+    //   room: [{ value: 'undefined', viewValue: 'Auditorium' }],
+    // },
   ];
 
   constructor(private readonly nodeService: NodeService) {}

@@ -1,3 +1,4 @@
+import { combineLatest } from 'rxjs';
 import { NodeService } from './../../../core/services/node.service';
 import {
   Component,
@@ -45,6 +46,8 @@ export class CanvaComponent implements OnInit, OnChanges {
   private userDot;
   private endpointDot;
   private routes;
+  private paths;
+  private path = [];
 
   constructor(private nodeService: NodeService) {}
 
@@ -52,8 +55,12 @@ export class CanvaComponent implements OnInit, OnChanges {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
     this.draw = SVG().addTo('#canv').size('3500px', '2550px');
     this.drawBackground(this.getImgName(this.floor));
-    this.nodeService.getRouteNodes().subscribe((data) => {
-      this.routes = data;
+    combineLatest([
+      this.nodeService.getRouteNodes(),
+      this.nodeService.getPaths(),
+    ]).subscribe(([nodes, paths]) => {
+      this.routes = nodes;
+      this.paths = paths[0];
     });
   }
 
@@ -70,7 +77,7 @@ export class CanvaComponent implements OnInit, OnChanges {
       this.drawEndpointLocation(this.endpoint);
     }
     if (isGoto && isGoto.previousValue !== isGoto.currentValue) {
-      if (this.isGoto === true) {
+      if (this.isGoto !== 0) {
         this.drawPath();
       }
     }
@@ -128,23 +135,31 @@ export class CanvaComponent implements OnInit, OnChanges {
   }
 
   private drawPath(): void {
+    this.path.map((v) => v.remove());
+    this.path = [];
+    const path = this.paths[this.userLocation.id + '-' + this.endpoint.id];
+
     const dots = [
-      // todo: get node list from path searching
       { x: this.userLocation.x, y: this.userLocation.y },
-      ...this.routes,
+      // fake path searching
+      ...this.routes
+        .filter((v, i) => {
+          return path.includes(i);
+        })
+        .reverse(),
       { x: this.endpoint.x, y: this.endpoint.y },
     ];
 
-    for (let i = 0; i < dots.length; i++) {
-      // const line = this.draw
-      //   .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
-      //   .stroke(this.strokeConfig)
-      //   .attr({ opacity: 0.2 });
-      // line
-      //   .animate({ duration: 1000, ease: '<>' })
-      //   .loop(9999999999, true)
-      //   .attr({ opacity: 0.8 });
-      this.draw.circle(20).move(dots[i].x - 10, dots[i].y - 10);
+    for (let i = 0; i < dots.length - 1; i++) {
+      const line = this.draw
+        .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
+        .stroke(this.strokeConfig)
+        .attr({ opacity: 0.2 });
+      line
+        .animate({ duration: 1000, ease: '<>' })
+        .loop(9999999999, true)
+        .attr({ opacity: 0.8 });
+      this.path.push(line);
     }
   }
 }
