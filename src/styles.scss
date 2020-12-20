@@ -34,6 +34,7 @@ body {
     rgb(200, 200, 200)
   );
   color: #000000;
+  touch-action: pinch-zoom;
 }
 
 button {
@@ -44,6 +45,8 @@ button {
   }
 }
 
-button, a, input {
+button,
+a,
+input {
   outline: none;
 }
