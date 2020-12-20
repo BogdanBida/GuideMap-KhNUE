@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -28,7 +29,7 @@ export class NodeService {
 
   private getData(): Observable<JsonNodes> {
     return this.http.get<JsonNodes>(
-      `http://localhost:4200/assets/json_data/mc_1.json`
+      `${environment.url}assets/json_data/mc_1.json`
     );
   }
 }

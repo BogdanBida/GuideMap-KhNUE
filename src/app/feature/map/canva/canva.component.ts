@@ -74,6 +74,9 @@ export class CanvaComponent implements OnInit, OnChanges {
       this.drawUserLocation(this.userLocation);
     }
     if (endpoint && endpoint.currentValue !== endpoint.previousValue) {
+      if (!endpoint.currentValue) {
+        this.clearPath();
+      }
       this.drawEndpointLocation(this.endpoint);
     }
     if (isGoto && isGoto.previousValue !== isGoto.currentValue) {
@@ -134,11 +137,14 @@ export class CanvaComponent implements OnInit, OnChanges {
     return Dot;
   }
 
-  private drawPath(): void {
+  private clearPath(): void {
     this.path.map((v) => v.remove());
     this.path = [];
-    const path = this.paths[this.userLocation.id + '-' + this.endpoint.id];
+  }
 
+  private drawPath(): void {
+    this.clearPath();
+    const path = this.paths[this.userLocation.id + '-' + this.endpoint.id];
     const dots = [
       { x: this.userLocation.x, y: this.userLocation.y },
       // fake path searching

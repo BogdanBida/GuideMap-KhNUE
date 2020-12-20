@@ -12,7 +12,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 export class MapComponent {
   public floor: number = environment.defaultFloor;
   public userLocation: LocationNode | null = null;
-  public endpoint: LocationNode;
+  public endpoint: LocationNode | null = null;
   public isGoto = 0;
 
   constructor(public dialog: MatDialog) {}

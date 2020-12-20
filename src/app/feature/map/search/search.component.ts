@@ -10,7 +10,6 @@ import { RoomNode } from './../../../shared/models/room-node';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  public inputText: string;
   public locations: RoomNode[];
 
   @Output() setLocation = new EventEmitter<LocationNode>();
@@ -51,11 +50,8 @@ export class SearchComponent implements OnInit {
   }
 
   public clear(): void {
-    this.inputText = '';
-  }
-
-  public find(): void {
-    console.log(this.inputText);
+    this.roomControl.setValue(null);
+    this.setLocation.emit(null);
   }
 
   public findLocation(): void {
