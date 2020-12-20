@@ -22,12 +22,10 @@ const endpointColor = '#5020ff';
 export class CanvaComponent implements OnInit, OnChanges {
   private strokeConfig = {
     width: 5,
-    color: '#387400',
+    color: '#ff0080',
     linecap: 'round',
     linejoin: 'round',
-    'stroke-width': 3,
-    'stroke-dasharray': '1px, 8px',
-    'stroke-linecap': 'round'
+    dasharray: '1,7',
   };
 
   @Input() set floor(value: number) {
@@ -159,12 +157,15 @@ export class CanvaComponent implements OnInit, OnChanges {
       const line = this.draw
         .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
         .stroke(this.strokeConfig)
-        .attr({ opacity: 0.7 });
+        .attr({
+          'stroke-dashoffset': '0'
+        });
       line
-        .animate({ duration: 10000, ease: '<>' })
-        .loop(9999999999, true)
-        .attr({ opacity: 0.8 });
-      // line.css('box-shadow', '2px 2px 3px black');
+        .animate({ duration: 700, ease: '<>' })
+        .loop(0, false)
+        .attr({
+          'stroke-dashoffset': '-7'
+        });
       this.path.push(line);
     }
   }
