@@ -22,9 +22,12 @@ const endpointColor = '#5020ff';
 export class CanvaComponent implements OnInit, OnChanges {
   private strokeConfig = {
     width: 5,
-    color: '#f06',
+    color: '#387400',
     linecap: 'round',
     linejoin: 'round',
+    'stroke-width': 3,
+    'stroke-dasharray': '1px, 8px',
+    'stroke-linecap': 'round'
   };
 
   @Input() set floor(value: number) {
@@ -49,7 +52,7 @@ export class CanvaComponent implements OnInit, OnChanges {
   private paths;
   private path = [];
 
-  constructor(private nodeService: NodeService) {}
+  constructor(private nodeService: NodeService) { }
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
@@ -148,11 +151,7 @@ export class CanvaComponent implements OnInit, OnChanges {
     const dots = [
       { x: this.userLocation.x, y: this.userLocation.y },
       // fake path searching
-      ...this.routes
-        .filter((v, i) => {
-          return path.includes(i);
-        })
-        .reverse(),
+      ...path.map(v => (this.routes[v])),
       { x: this.endpoint.x, y: this.endpoint.y },
     ];
 
@@ -160,11 +159,12 @@ export class CanvaComponent implements OnInit, OnChanges {
       const line = this.draw
         .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
         .stroke(this.strokeConfig)
-        .attr({ opacity: 0.2 });
+        .attr({ opacity: 0.7 });
       line
-        .animate({ duration: 1000, ease: '<>' })
+        .animate({ duration: 10000, ease: '<>' })
         .loop(9999999999, true)
         .attr({ opacity: 0.8 });
+      // line.css('box-shadow', '2px 2px 3px black');
       this.path.push(line);
     }
   }

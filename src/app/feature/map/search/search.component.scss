@@ -2,6 +2,7 @@
 @import 'mixins';
 
 :host {
+  user-select: none;
   @include shadow;
   width: 50%;
   position: fixed;
