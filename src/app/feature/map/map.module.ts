@@ -14,6 +14,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SwitchesDialogComponent } from './switches/switches-dialog/switches-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ZXingScannerModule,
     MatSelectModule,
     MatDialogModule,
+    MatCheckboxModule
   ],
   declarations: [
     MapComponent,
