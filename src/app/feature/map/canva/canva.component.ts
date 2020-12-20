@@ -75,9 +75,7 @@ export class CanvaComponent implements OnInit, OnChanges {
       this.drawUserLocation(this.userLocation);
     }
     if (endpoint && endpoint.currentValue !== endpoint.previousValue) {
-      if (!endpoint.currentValue) {
-        this.clearPath();
-      }
+      this.clearPath();
       this.drawEndpointLocation(this.endpoint);
     }
     if (isGoto && isGoto.previousValue !== isGoto.currentValue) {
