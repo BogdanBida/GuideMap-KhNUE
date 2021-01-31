@@ -1,35 +1,35 @@
-import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Dot, JsonNodes, QRNode, RoomNode } from './../../shared/models';
+import { environment } from './../../../environments/environment';
+import { NodeType } from './../../shared/enums/NodeType.enum';
+import { Dot, QRNode, RoomNode } from './../../shared/models';
+import { Path } from './../../shared/models/path';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class NodeService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public getRoomsNodes(): Observable<RoomNode[]> {
-    return this.getData().pipe(map((value) => value.roomsNodes));
+    return this.getJsonDoc('mc', 1, NodeType.RoomNode);
   }
 
   public getQRNodes(): Observable<QRNode[]> {
-    return this.getData().pipe(map((value) => value.QRNodes));
+    return this.getJsonDoc('mc', 1, NodeType.QrNode);
   }
 
   public getRouteNodes(): Observable<Dot[]> {
-    return this.getData().pipe(map((value) => value.routeNodes));
+    return this.getJsonDoc('mc', 1, NodeType.RouteNode);
   }
 
-  public getPaths(): Observable<Dot[]> {
-    return this.getData().pipe(map((value) => value.paths));
+  public getPaths(): Observable<Path[]> {
+    return this.getJsonDoc('mc', 1, NodeType.PathNode);
   }
 
-  private getData(): Observable<JsonNodes> {
-    return this.http.get<JsonNodes>(
-      `${environment.url}assets/json_data/mc_1.json`
-    );
+  private getJsonDoc(corpsName: string, floor: number, type: string): Observable<any> {
+    return this.http.get<Path[]>(`${environment.url}assets/json_data/${corpsName}${floor}/${type}.json`);
   }
 }

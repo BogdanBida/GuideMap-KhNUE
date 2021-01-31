@@ -3,10 +3,10 @@
     ЭТАЖ
   </label>
   <div>
-    {{floor}}
+    {{floorService.floor}}
   </div>
 </div>
-<button (click)="upFloor()" [class.disabled]="floor >= 4">
+<button (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
 </button>
-<button (click)="downFloor()" [class.disabled]="floor <= 1">
+<button (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
 </button>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from './../../../environments/environment';
 import { LocationNode } from './../../shared/models/location-node';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
@@ -10,7 +9,6 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
-  public floor: number = environment.defaultFloor;
   public userLocation: LocationNode | null = null;
   public endpoint: LocationNode | null = null;
   public isGoto = 0;
@@ -19,6 +17,6 @@ export class MapComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(InfoDialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe();
   }
 }

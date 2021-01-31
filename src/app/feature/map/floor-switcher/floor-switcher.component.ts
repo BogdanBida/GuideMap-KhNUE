@@ -1,45 +1,21 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { environment } from './../../../../environments/environment.prod';
+import { Component } from '@angular/core';
+import { FloorService } from './../../../core/services/floor.service';
 
 @Component({
   selector: 'app-floor-switcher',
   templateUrl: './floor-switcher.component.html',
   styleUrls: ['./floor-switcher.component.scss']
 })
-export class FloorSwitcherComponent implements OnInit {
+export class FloorSwitcherComponent {
 
-  public readonly minFloor = 1;
-  public readonly maxFloor = 4;
-
-  private floorPrivate = environment.defaultFloor;
-
-  public set floor(value: number) {
-    if ((value > this.maxFloor) && (value < this.minFloor)) { return; }
-    this.setFloor.emit(value);
-    this.floorPrivate = value;
-  }
-
-  public get floor(): number {
-    return this.floorPrivate;
-  }
-
-  @Output() setFloor = new EventEmitter<number>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(public floorService: FloorService) { }
 
   public upFloor(): void {
-    if (this.floor < this.maxFloor) {
-      this.floor++;
-    }
+    this.floorService.floor++;
   }
 
   public downFloor(): void {
-    if (this.floor > this.minFloor) {
-      this.floor--;
-    }
+    this.floorService.floor--;
   }
 
 }

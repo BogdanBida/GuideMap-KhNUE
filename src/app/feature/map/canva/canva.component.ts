@@ -1,14 +1,15 @@
-import { combineLatest } from 'rxjs';
-import { NodeService } from './../../../core/services/node.service';
 import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
-import { environment } from './../../../../environments/environment.prod';
+import { combineLatest, Subscription } from 'rxjs';
+import { FloorService } from './../../../core/services/floor.service';
+import { NodeService } from './../../../core/services/node.service';
 import { LocationNode } from './../../../shared/models/location-node';
 
 const userLocationColor = '#ff0010';
@@ -19,7 +20,7 @@ const endpointColor = '#5020ff';
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
 })
-export class CanvaComponent implements OnInit, OnChanges {
+export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
   private strokeConfig = {
     width: 5,
     color: '#ff0080',
@@ -28,29 +29,22 @@ export class CanvaComponent implements OnInit, OnChanges {
     dasharray: '1,7',
   };
 
-  @Input() set floor(value: number) {
-    this.floorPrivate = value;
-    this.drawBackground();
-  }
-
-  get floor(): number {
-    return this.floorPrivate;
-  }
-
   @Input() userLocation;
   @Input() endpoint;
   @Input() isGoto;
 
+  public floor: number;
+
   private draw: Svg;
   private bgrDraw: Svg;
-  private floorPrivate: number = environment.defaultFloor;
   private userDot;
   private endpointDot;
   private routes;
   private paths;
   private path = [];
+  private floorSubscription: Subscription;
 
-  constructor(private nodeService: NodeService) { }
+  constructor(private nodeService: NodeService, private floorService: FloorService) { }
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
@@ -62,6 +56,11 @@ export class CanvaComponent implements OnInit, OnChanges {
     ]).subscribe(([nodes, paths]) => {
       this.routes = nodes;
       this.paths = paths[0];
+    });
+
+    this.floorSubscription = this.floorService.setFloorSubscribe((floor) => {
+      this.floor = floor;
+      this.drawBackground();
     });
   }
 
@@ -83,6 +82,10 @@ export class CanvaComponent implements OnInit, OnChanges {
         this.drawPath();
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.floorSubscription.unsubscribe();
   }
 
   private getImgName(floor: number): string {

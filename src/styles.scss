@@ -34,7 +34,7 @@ body {
     rgb(200, 200, 200)
   );
   color: #000000;
-  touch-action: pinch-zoom;
+  touch-action: pan-left, pan-right, pan-up, pan-down;
 }
 
 button {
