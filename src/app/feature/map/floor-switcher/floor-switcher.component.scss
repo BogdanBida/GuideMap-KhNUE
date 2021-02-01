@@ -2,9 +2,6 @@
 @import "variables";
 
 :host {
-  position: fixed;
-  left: 12px;
-  bottom: 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;

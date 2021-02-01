@@ -4,10 +4,6 @@
 :host {
   display: flex;
   flex-direction: column;
-  position: fixed;
-  bottom: 160px;
-  right: 32px;
-
   .settings-btn {
     height: 52px;
     width: 52px;
@@ -15,13 +11,5 @@
     justify-content: center;
     background-color: transparent;
     @include shadow;
-  }
-
-  z-index: 2;
-}
-
-@media (max-width: 720px) {
-  :host {
-    right: 14px;
   }
 }

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { LocationNode } from 'src/app/shared/models';
 import { NodeService } from './../../../core/services/node.service';
+import { StateService } from './../../../core/services/state.service';
+import { LocationNode } from './../../../shared/models/location-node';
 
 @Component({
   selector: 'app-whereabouts',
@@ -16,6 +17,7 @@ export class WhereaboutsComponent implements OnInit {
 
   public isOpen = false;
   constructor(
+    private stateService: StateService,
     private readonly router: Router,
     private readonly acivateRoute: ActivatedRoute,
     private readonly nodeService: NodeService
@@ -28,7 +30,7 @@ export class WhereaboutsComponent implements OnInit {
     ]).subscribe(([params, data]) => {
       const nodeId = params.nodeid;
       this.locNodes = data;
-      this.setLocation.emit(this.locNodes[nodeId]);
+      this.stateService.userLocation = this.locNodes[nodeId];
     });
   }
 

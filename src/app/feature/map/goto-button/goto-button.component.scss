@@ -1,11 +1,7 @@
 @import "mixins";
 
 :host {
-  position: fixed;
-  left: calc(50% - 32px);
   width: 64px;
-  bottom: 8px;
-
   .goto {
     border: none;
     background: transparent;

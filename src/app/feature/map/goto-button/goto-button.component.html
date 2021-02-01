@@ -1,4 +1,5 @@
-<button class="goto" [class.disabled-goto]="!(isLocationExist && isEndpointExist)" (click)="goto.emit(1)">
+<button class="goto" [class.disabled-goto]="!(stateServive.userLocation && stateServive.endpoint)"
+  (click)="goto.emit(1)">
   <svg>
     <image xlink:href="assets/icons/arrow.svg" src="assets/icons/arrow.svg" width="100%" height="100%"></image>
   </svg>

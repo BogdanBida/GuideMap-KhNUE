@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { StateService } from './../../../core/services/state.service';
 
 @Component({
   selector: 'app-goto-button',
@@ -7,9 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class GotoButtonComponent {
 
-  @Input() isLocationExist: boolean;
-  @Input() isEndpointExist: boolean;
   @Output() goto = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(public stateServive: StateService) { }
 }

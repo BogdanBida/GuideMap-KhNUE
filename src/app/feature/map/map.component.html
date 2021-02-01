@@ -1,10 +1,10 @@
-<app-search (setLocation)="endpoint = $event"></app-search>
-<app-switches></app-switches>
-<app-canva [userLocation]="userLocation" [endpoint]="endpoint" [isGoto]="isGoto">
+<app-search class="search"></app-search>
+<app-switches class="settings"></app-switches>
+<app-canva class="canva" [isGoto]="isGoto">
 </app-canva>
-<app-floor-switcher></app-floor-switcher>
-<app-whereabouts (setLocation)="userLocation = $event"></app-whereabouts>
-<app-goto-button [isLocationExist]="!!userLocation" [isEndpointExist]="!!endpoint" (goto)="isGoto = isGoto + $event">
+<app-floor-switcher class="floor-switcher"></app-floor-switcher>
+<app-whereabouts class="whereabouts"></app-whereabouts>
+<app-goto-button class="nav-button" (goto)="isGoto = isGoto + $event">
 </app-goto-button>
 <button class="info" (click)="openDialog()">
   <svg>

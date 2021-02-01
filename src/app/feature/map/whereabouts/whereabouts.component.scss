@@ -2,9 +2,6 @@
 @import "variables";
 
 .whereabouts {
-  position: fixed;
-  bottom: 64px;
-  right: 42px;
   border-radius: 999px;
   border: none;
   width: 64px;
@@ -81,11 +78,5 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 8px;
-  }
-}
-
-@media (max-width: 720px) {
-  :host {
-      right: 32px;
   }
 }

@@ -10,6 +10,7 @@ import { Svg, SVG } from '@svgdotjs/svg.js';
 import { combineLatest, Subscription } from 'rxjs';
 import { FloorService } from './../../../core/services/floor.service';
 import { NodeService } from './../../../core/services/node.service';
+import { StateService } from './../../../core/services/state.service';
 import { LocationNode } from './../../../shared/models/location-node';
 
 const userLocationColor = '#ff0010';
@@ -29,8 +30,6 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
     dasharray: '1,7',
   };
 
-  @Input() userLocation;
-  @Input() endpoint;
   @Input() isGoto;
 
   public floor: number;
@@ -44,7 +43,11 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
   private path = [];
   private floorSubscription: Subscription;
 
-  constructor(private nodeService: NodeService, private floorService: FloorService) { }
+  constructor(
+    private stateService: StateService,
+    private nodeService: NodeService,
+    private floorService: FloorService,
+  ) { }
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
@@ -65,23 +68,16 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { userLocation, endpoint, isGoto } = changes;
+    const { isGoto } = changes;
+    const { userLocation, endpoint } = this.stateService;
 
-    if (
-      userLocation &&
-      userLocation.currentValue !== userLocation.previousValue
-    ) {
-      this.drawUserLocation(this.userLocation);
-    }
-    if (endpoint && endpoint.currentValue !== endpoint.previousValue) {
+    userLocation && this.drawUserLocation(userLocation);
+
+    if (endpoint) {
       this.clearPath();
-      this.drawEndpointLocation(this.endpoint);
+      this.drawEndpointLocation(endpoint);
     }
-    if (isGoto && isGoto.previousValue !== isGoto.currentValue) {
-      if (this.isGoto !== 0) {
-        this.drawPath();
-      }
-    }
+    isGoto && this.isGoto && this.drawPath();
   }
 
   ngOnDestroy(): void {
@@ -146,12 +142,13 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
 
   private drawPath(): void {
     this.clearPath();
-    const path = this.paths[this.userLocation.id + '-' + this.endpoint.id];
+    const { userLocation, endpoint } = this.stateService;
+    const path = this.paths[userLocation.id + '-' + endpoint.id];
     const dots = [
-      { x: this.userLocation.x, y: this.userLocation.y },
+      { x: userLocation.x, y: userLocation.y },
       // fake path searching
       ...path.map(v => (this.routes[v])),
-      { x: this.endpoint.x, y: this.endpoint.y },
+      { x: endpoint.x, y: endpoint.y },
     ];
 
     for (let i = 0; i < dots.length - 1; i++) {

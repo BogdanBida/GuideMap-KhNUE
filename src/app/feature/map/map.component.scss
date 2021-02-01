@@ -1,4 +1,5 @@
-@import 'mixins';
+@import "mixins";
+@import "variables";
 
 .info {
   @include shadow;
@@ -14,8 +15,79 @@
   opacity: 0.9;
 }
 
-@media (max-width: 900px) {
+.search,
+.canva,
+.floor-switcher,
+.whereabouts,
+.nav-button,
+.settings {
+  position: fixed;
+}
+
+.search {
+  width: 50%;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.canva {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+}
+
+.floor-switcher {
+  left: 12px;
+  bottom: 64px;
+}
+
+.whereabouts {
+  bottom: 64px;
+  right: 42px;
+}
+
+.nav-button {
+  left: calc(50% - 32px);
+  bottom: 8px;
+}
+
+.settings {
+  bottom: 160px;
+  right: 32px;
+  z-index: 2;
+}
+
+@media (max-width: $portrait) {
+  .search {
+    width: 90%;
+  }
   .info {
     top: 80px;
+  }
+}
+
+@media (max-width: $middle) {
+  .settings {
+    right: 14px;
+  }
+
+  .whereabouts {
+    right: 32px;
+  }
+}
+
+@media (max-width: $lowgen) {
+  .search {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+  }
+
+  .info {
+    display: none;
   }
 }
