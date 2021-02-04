@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocationNode } from './../../shared/models/location-node';
 
 @Injectable({
@@ -9,6 +9,7 @@ export class StateService {
 
   private $userLocation = new BehaviorSubject<LocationNode | null>(null);
   private $endpoint = new BehaviorSubject<LocationNode | null>(null);
+  public gotoClickEvent = new Observable();
 
   public set userLocation(value: LocationNode | null) {
     this.$userLocation.next(value);
@@ -29,5 +30,4 @@ export class StateService {
   }
 
   constructor() { }
-
 }

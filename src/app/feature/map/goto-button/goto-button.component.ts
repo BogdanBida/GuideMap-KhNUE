@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 import { StateService } from './../../../core/services/state.service';
 
 @Component({
@@ -6,9 +7,11 @@ import { StateService } from './../../../core/services/state.service';
   templateUrl: './goto-button.component.html',
   styleUrls: ['./goto-button.component.scss']
 })
-export class GotoButtonComponent {
+export class GotoButtonComponent implements OnInit {
 
-  @Output() goto = new EventEmitter<number>();
+  constructor(public stateService: StateService, private elementRef: ElementRef) { }
 
-  constructor(public stateServive: StateService) { }
+  ngOnInit(): void {
+    this.stateService.gotoClickEvent = fromEvent(this.elementRef.nativeElement, 'click');
+  }
 }

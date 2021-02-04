@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
@@ -7,7 +8,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { FloorService } from './../../../core/services/floor.service';
 import { NodeService } from './../../../core/services/node.service';
 import { StateService } from './../../../core/services/state.service';
@@ -21,7 +23,7 @@ const endpointColor = '#5020ff';
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
 })
-export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
+export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   private strokeConfig = {
     width: 5,
     color: '#ff0080',
@@ -42,8 +44,7 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
   private paths;
   private path = [];
   private floorSubscription: Subscription;
-  private userLocSubscription: Subscription;
-  private endpSubscription: Subscription;
+  private locationsSubscription: Subject<void> = new Subject();
   public styles = {};
 
   constructor(
@@ -73,11 +74,21 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
     combineLatest([
       this.stateService.getUserLocationBehaviorSubject(),
       this.stateService.getEndpointBehaviorSubject()
-    ]).subscribe(([userLocation, endpoint]) => {
+    ]).pipe(
+      takeUntil(this.locationsSubscription)
+    ).subscribe(([userLocation, endpoint]) => {
       userLocation && this.drawUserLocation(userLocation);
       if (endpoint) {
         this.clearPath();
         this.drawEndpointLocation(endpoint);
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.stateService.gotoClickEvent.subscribe(() => {
+      if (this.stateService.userLocation && this.stateService.endpoint) {
+        this.drawPath();
       }
     });
   }
@@ -89,6 +100,8 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     this.floorSubscription.unsubscribe();
+    this.locationsSubscription.next();
+    this.locationsSubscription.complete();
   }
 
   public change(): void {
