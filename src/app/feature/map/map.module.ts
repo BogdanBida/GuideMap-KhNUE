@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +33,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    MatRippleModule,
   ],
   declarations: [
     MapComponent,

@@ -49,19 +49,8 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.nodeService.getRoomsNodes().subscribe((data) => {
       this.locations = data;
-      // this.roomGroups.push({
-      //   name: 'Classroom',
-      //   disabled: !data.length,
-      //   room: data.map((v, i) => {
-      //     return {
-      //       value: String(i),
-      //       viewValue: v.name,
-      //     };
-      //   }),
-      // });
       this.stateGroups.push({
         groupName: 'Classroom',
         rooms: data.map((v, i) => {
@@ -81,13 +70,13 @@ export class SearchComponent implements OnInit {
   }
 
   public clear(): void {
-    // this.roomControl.setValue(null);
     this.stateService.endpoint = null;
   }
 
   public findLocation(): void {
-    // this.roomControl.value &&
-    // (this.stateService.endpoint = this.locations[this.roomControl.value]);
+    this.stateService.endpoint = this.locations.find((v) => {
+      return this.stateForm.get('stateGroup').value === v.name;
+    });
   }
 
   private _filterGroup(value: string): StateGroup[] {

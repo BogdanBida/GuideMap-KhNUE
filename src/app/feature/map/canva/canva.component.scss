@@ -1,18 +1,19 @@
 :host {
   display: flex;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
 }
 
 .canv {
   pointer-events: none;
-  position: absolute;
   width: max-content;
   height: max-content;
-  flex-basis: 100%;
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex-shrink: 0;
   z-index: 0;
+  transition: 0.1s;
 }
 
 #bgr-canv {
@@ -20,5 +21,6 @@
 }
 
 #canv {
+  position: absolute;
   z-index: 2;
 }

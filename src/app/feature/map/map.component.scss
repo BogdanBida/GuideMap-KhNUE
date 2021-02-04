@@ -29,6 +29,7 @@
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 3;
 }
 
 .canva {
@@ -36,28 +37,31 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -5;
+  z-index: 0;
 }
 
 .floor-switcher {
   left: 12px;
   bottom: 64px;
+  z-index: 3;
 }
 
 .whereabouts {
   bottom: 64px;
   right: 42px;
+  z-index: 3;
 }
 
 .nav-button {
   left: calc(50% - 32px);
   bottom: 8px;
+  z-index: 3;
 }
 
 .settings {
   bottom: 160px;
   right: 32px;
-  z-index: 2;
+  z-index: 4;
 }
 
 @media (max-width: $portrait) {

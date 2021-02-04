@@ -42,6 +42,9 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
   private paths;
   private path = [];
   private floorSubscription: Subscription;
+  private userLocSubscription: Subscription;
+  private endpSubscription: Subscription;
+  public styles = {};
 
   constructor(
     private stateService: StateService,
@@ -53,6 +56,7 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
     this.draw = SVG().addTo('#canv').size('3500px', '2550px');
     this.drawBackground(this.getImgName(this.floor));
+
     combineLatest([
       this.nodeService.getRouteNodes(),
       this.nodeService.getPaths(),
@@ -65,23 +69,32 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
       this.floor = floor;
       this.drawBackground();
     });
+
+    combineLatest([
+      this.stateService.getUserLocationBehaviorSubject(),
+      this.stateService.getEndpointBehaviorSubject()
+    ]).subscribe(([userLocation, endpoint]) => {
+      userLocation && this.drawUserLocation(userLocation);
+      if (endpoint) {
+        this.clearPath();
+        this.drawEndpointLocation(endpoint);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const { isGoto } = changes;
-    const { userLocation, endpoint } = this.stateService;
-
-    userLocation && this.drawUserLocation(userLocation);
-
-    if (endpoint) {
-      this.clearPath();
-      this.drawEndpointLocation(endpoint);
-    }
     isGoto && this.isGoto && this.drawPath();
   }
 
   ngOnDestroy(): void {
     this.floorSubscription.unsubscribe();
+  }
+
+  public change(): void {
+    this.styles = {
+      transform: `translate(${0}%, ${-50}%)`
+    };
   }
 
   private getImgName(floor: number): string {
@@ -165,6 +178,60 @@ export class CanvaComponent implements OnInit, OnChanges, OnDestroy {
           'stroke-dashoffset': '-7'
         });
       this.path.push(line);
+    }
+  }
+
+  public onmousedown(event, target): void {
+    target.ondragstart = () => {
+      return false;
+    };
+
+    const coords = getCoords(target);
+    const shiftX = event.pageX - coords.left;
+    const shiftY = event.pageY - coords.top;
+
+    target.style.position = 'absolute';
+    moveAt(event);
+    document.body.appendChild(target);
+
+    function moveAt(e): void {
+      target.style.left = e.pageX - shiftX + 'px';
+      target.style.top = e.pageY - shiftY + 'px';
+
+      const left = +target.style.left.replace('px', '');
+      const top = +target.style.top.replace('px', '');
+
+      if (left > 0) {
+        target.style.left = 0;
+      }
+      const maxWidth = 3500 - window.innerWidth;
+      if (left < -maxWidth) {
+        target.style.left = `-${maxWidth}px`;
+      }
+      if (top > 0) {
+        target.style.top = 0;
+      }
+      const maxHeight = 2550 - window.innerHeight;
+      if (top < -maxHeight) {
+        target.style.top = `-${maxHeight}px`;
+      }
+    }
+
+    document.onmousemove = (e) => {
+      moveAt(e);
+    };
+
+    target.onmouseup = () => {
+      document.onmousemove = null;
+      target.onmouseup = null;
+    };
+
+    function getCoords(elem): { top: number, left: number } {
+      const box = elem.getBoundingClientRect();
+      return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+      };
     }
   }
 }

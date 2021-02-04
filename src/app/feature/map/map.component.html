@@ -1,11 +1,11 @@
 <app-search class="search"></app-search>
 <app-switches class="settings"></app-switches>
-<app-canva class="canva" [isGoto]="isGoto">
+<app-canva class="canva">
 </app-canva>
 <app-floor-switcher class="floor-switcher"></app-floor-switcher>
-<app-whereabouts class="whereabouts"></app-whereabouts>
 <app-goto-button class="nav-button" (goto)="isGoto = isGoto + $event">
 </app-goto-button>
+<app-whereabouts class="whereabouts"></app-whereabouts>
 <button class="info" (click)="openDialog()">
   <svg>
     <image xlink:href="assets/icons/info.svg" src="assets/icons/info.svg" width="100%" height="100%"></image>
