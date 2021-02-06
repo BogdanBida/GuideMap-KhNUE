@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { LocationNode } from '../../../core/models/location-node';
+import { RoomNode } from '../../../core/models/room-node';
 import { NodeService } from './../../../core/services/node.service';
 import { StateService } from './../../../core/services/state.service';
-import { LocationNode } from './../../../shared/models/location-node';
-import { RoomNode } from './../../../shared/models/room-node';
 
 interface Room {
   value: string;

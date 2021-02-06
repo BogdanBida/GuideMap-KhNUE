@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LocationNode } from './../../shared/models/location-node';
+import { LocationNode } from '../models/location-node';
 
 @Injectable({
   providedIn: 'root'

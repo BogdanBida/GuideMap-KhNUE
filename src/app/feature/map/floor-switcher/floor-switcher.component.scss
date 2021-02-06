@@ -40,11 +40,11 @@
 
 .floor {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 52px;
   color: white;
   margin-bottom: 10px;
-  border-right: 2px solid $base-color;
+  border-bottom: 2px solid $base-color;
   border-radius: 4px;
   background-color: change-color($color: $base-color, $alpha: 0.1);
   opacity: 0.9;
@@ -53,14 +53,10 @@
     background-color: $base-color;
     font-size: 12px;
     line-height: 16px;
-    padding: 5px 2px;
+    padding: 4px 1em;
+    min-width: 6em;
+    text-align: center;
     text-transform: uppercase;
-    @supports (writing-mode: vertical-rl) {
-      writing-mode: vertical-rl;
-    }
-    @supports not (writing-mode: vertical-rl) {
-      display: none;
-    }
   }
   div {
     font-size: 24px;

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NodeType } from '../enums/node-type.enum';
+import { QRNode, RoomNode } from '../models';
+import { LocationNode } from '../models/location-node';
+import { Path } from '../models/path';
 import { environment } from './../../../environments/environment';
-import { NodeType } from './../../shared/enums/NodeType.enum';
-import { Dot, QRNode, RoomNode } from './../../shared/models';
-import { Path } from './../../shared/models/path';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class NodeService {
     return this.getJsonDoc('mc', 1, NodeType.QrNode);
   }
 
-  public getRouteNodes(): Observable<Dot[]> {
+  public getRouteNodes(): Observable<LocationNode[]> {
     return this.getJsonDoc('mc', 1, NodeType.RouteNode);
   }
 
