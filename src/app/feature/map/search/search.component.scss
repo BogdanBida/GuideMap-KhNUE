@@ -14,8 +14,6 @@
   );
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 4px 4px 10px 10px;
-  opacity: 0.9;
-  @include shadow;
   user-select: none;
 
   .form {

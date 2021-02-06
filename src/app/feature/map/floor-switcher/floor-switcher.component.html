@@ -6,7 +6,9 @@
     {{floorService.floor}}
   </div>
 </div>
-<button (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
+<button class="up-btn" (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
+  <img src="assets/icons/arrow-up.svg" alt="">
 </button>
-<button (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
+<button class="down-btn" (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
+  <img src="assets/icons/arrow-up.svg" alt="">
 </button>

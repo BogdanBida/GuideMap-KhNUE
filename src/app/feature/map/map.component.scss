@@ -1,26 +1,20 @@
 @import "mixins";
 @import "variables";
 
-.info {
-  @include shadow;
+.coordinates {
   position: fixed;
-  top: 20px;
-  right: 40px;
-  display: flex;
-  width: 44px;
-  height: 44px;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  opacity: 0.9;
+  bottom: 8px;
+  right: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  filter: drop-shadow(0px 0px 1px white);
 }
 
 .search,
 .canva,
 .floor-switcher,
-.whereabouts,
 .nav-button,
-.settings {
+.left-bottom-ui {
   position: fixed;
 }
 
@@ -30,6 +24,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
+  @include shadow;
 }
 
 .canva {
@@ -41,45 +36,52 @@
 }
 
 .floor-switcher {
-  left: 12px;
-  bottom: 64px;
-  z-index: 3;
-}
-
-.whereabouts {
-  bottom: 64px;
-  right: 42px;
+  bottom: 68px;
+  left: 2.5%;
   z-index: 3;
 }
 
 .nav-button {
   left: calc(50% - 32px);
-  bottom: 8px;
   z-index: 3;
+  bottom: 32px;
 }
 
-.settings {
-  bottom: 160px;
-  right: 32px;
-  z-index: 4;
+.left-bottom-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  right: 2.5%;
+  bottom: 68px;
+  z-index: 3;
+  .whereabouts {
+    display: block;
+  }
+  .settings {
+    display: block;
+    margin-bottom: 32px;
+  }
+  .info {
+    @include shadow;
+    display: flex;
+    padding: 0;
+    margin-right: -4px;
+    margin-bottom: 40px;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    opacity: 0.9;
+  }
 }
 
 @media (max-width: $portrait) {
   .search {
     width: 90%;
   }
-  .info {
-    top: 80px;
-  }
-}
-
-@media (max-width: $middle) {
-  .settings {
-    right: 14px;
-  }
-
-  .whereabouts {
-    right: 32px;
+  .left-bottom-ui {
+    right: 5%;
   }
 }
 
@@ -89,9 +91,5 @@
     left: 0;
     transform: none;
     width: 100%;
-  }
-
-  .info {
-    display: none;
   }
 }

@@ -13,31 +13,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
     border-radius: 99px;
     background-color: $base-color;
-    &::after {
-      position: relative;
-      display: block;
-      content: "";
-      border: 8px solid white;
-      border-left: none;
-      border-bottom: none;
-      border-top-right-radius: 2px;
-      width: 24px;
-      height: 24px;
-      box-sizing: border-box;
-    }
-    &:nth-child(2)::after {
-      transform: rotate(-45deg);
-      top: 2px;
-    }
-    &:nth-child(3)::after {
-      transform: rotate(135deg);
-      bottom: 2px;
-    }
     @include shadow;
+    img {
+      margin: auto;
+      width: 66.66%;
+      height: 66.66%;
+    }
+    &.down-btn {
+      margin-top: 12px;
+      img {
+        transform: scaleY(-1);
+      }
+    }
   }
 
   .disabled {

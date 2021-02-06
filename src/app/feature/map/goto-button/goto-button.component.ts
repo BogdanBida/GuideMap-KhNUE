@@ -9,6 +9,8 @@ import { StateService } from './../../../core/services/state.service';
 })
 export class GotoButtonComponent implements OnInit {
 
+  public deg: number;
+
   constructor(public stateService: StateService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
