@@ -1,15 +1,8 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Svg, SVG } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DragNDrop } from '../../../../utils/dragndrop';
 import { LocationNode } from './../../../core/models';
 import { FloorService, NodeService, StateService } from './../../../core/services';
 
@@ -21,7 +14,13 @@ const endpointColor = '#5020ff';
   templateUrl: './canva.component.html',
   styleUrls: ['./canva.component.scss'],
 })
-export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  constructor(
+    private stateService: StateService,
+    private nodeService: NodeService,
+    private floorService: FloorService,
+  ) { }
   private strokeConfig = {
     width: 5,
     color: '#ff0080',
@@ -42,14 +41,11 @@ export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   private paths;
   private path = [];
   private floorSubscription: Subscription;
+  private gotoEventSubscription: Subscription;
   private locationsSubscription: Subject<void> = new Subject();
+  private nodesSubscription: Subject<void> = new Subject();
   public styles = {};
-
-  constructor(
-    private stateService: StateService,
-    private nodeService: NodeService,
-    private floorService: FloorService,
-  ) { }
+  public dndOnMouseDown = DragNDrop.onMouseDown;
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');
@@ -59,7 +55,9 @@ export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     combineLatest([
       this.nodeService.getRouteNodes(),
       this.nodeService.getPaths(),
-    ]).subscribe(([nodes, paths]) => {
+    ]).pipe(
+      takeUntil(this.nodesSubscription)
+    ).subscribe(([nodes, paths]) => {
       this.routes = nodes;
       this.paths = paths[0];
     });
@@ -84,28 +82,20 @@ export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   }
 
   ngAfterViewInit(): void {
-    this.stateService.gotoClickEvent.subscribe(() => {
+    this.gotoEventSubscription = this.stateService.gotoClickEvent.subscribe(() => {
       if (this.stateService.userLocation && this.stateService.endpoint) {
         this.drawPath();
       }
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const { isGoto } = changes;
-    isGoto && this.isGoto && this.drawPath();
-  }
-
   ngOnDestroy(): void {
     this.floorSubscription.unsubscribe();
+    this.gotoEventSubscription.unsubscribe();
     this.locationsSubscription.next();
     this.locationsSubscription.complete();
-  }
-
-  public change(): void {
-    this.styles = {
-      transform: `translate(${0}%, ${-50}%)`
-    };
+    this.nodesSubscription.next();
+    this.nodesSubscription.complete();
   }
 
   private getImgName(floor: number): string {
@@ -189,60 +179,6 @@ export class CanvaComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
           'stroke-dashoffset': '-7'
         });
       this.path.push(line);
-    }
-  }
-
-  public onmousedown(event, target): void {
-    target.ondragstart = () => {
-      return false;
-    };
-
-    const coords = getCoords(target);
-    const shiftX = event.pageX - coords.left;
-    const shiftY = event.pageY - coords.top;
-
-    target.style.position = 'absolute';
-    moveAt(event);
-    document.body.appendChild(target);
-
-    function moveAt(e): void {
-      target.style.left = e.pageX - shiftX + 'px';
-      target.style.top = e.pageY - shiftY + 'px';
-
-      const left = +target.style.left.replace('px', '');
-      const top = +target.style.top.replace('px', '');
-
-      if (left > 0) {
-        target.style.left = 0;
-      }
-      const maxWidth = 3500 - window.innerWidth;
-      if (left < -maxWidth) {
-        target.style.left = `-${maxWidth}px`;
-      }
-      if (top > 0) {
-        target.style.top = 0;
-      }
-      const maxHeight = 2550 - window.innerHeight;
-      if (top < -maxHeight) {
-        target.style.top = `-${maxHeight}px`;
-      }
-    }
-
-    document.onmousemove = (e) => {
-      moveAt(e);
-    };
-
-    target.onmouseup = () => {
-      document.onmousemove = null;
-      target.onmouseup = null;
-    };
-
-    function getCoords(elem): { top: number, left: number } {
-      const box = elem.getBoundingClientRect();
-      return {
-        top: box.top + pageYOffset,
-        left: box.left + pageXOffset
-      };
     }
   }
 }

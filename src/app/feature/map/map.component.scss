@@ -4,10 +4,11 @@
 .coordinates {
   position: fixed;
   bottom: 8px;
-  right: 50%;
-  transform: translateX(-50%);
+  left: 5%;
   z-index: 10;
   filter: drop-shadow(0px 0px 1px white);
+  user-select: none;
+  pointer-events: none;
 }
 
 .search,
