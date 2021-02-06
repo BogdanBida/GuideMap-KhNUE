@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NodeType } from '../enums/node-type.enum';
-import { QRNode, RoomNode } from '../models';
-import { LocationNode } from '../models/location-node';
-import { Path } from '../models/path';
+import { LocationNode, Path, QRNode, RoomNode } from '../models';
 import { environment } from './../../../environments/environment';
 
 

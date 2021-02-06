@@ -1,5 +1,4 @@
-import { QRNode, RoomNode } from './index';
-import { LocationNode } from './location-node';
+import { LocationNode, QRNode, RoomNode } from './index';
 
 export interface JsonNodes {
   QRNodes: QRNode[];

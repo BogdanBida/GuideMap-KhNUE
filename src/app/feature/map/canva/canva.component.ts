@@ -10,10 +10,8 @@ import {
 import { Svg, SVG } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { LocationNode } from './../../../core/models/location-node';
-import { FloorService } from './../../../core/services/floor.service';
-import { NodeService } from './../../../core/services/node.service';
-import { StateService } from './../../../core/services/state.service';
+import { LocationNode } from './../../../core/models';
+import { FloorService, NodeService, StateService } from './../../../core/services';
 
 const userLocationColor = '#ff0010';
 const endpointColor = '#5020ff';

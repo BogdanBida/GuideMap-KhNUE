@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FloorService } from './../../../core/services/floor.service';
+import { FloorService } from './../../../core/services';
 
 @Component({
   selector: 'app-floor-switcher',
