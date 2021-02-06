@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { NodeService } from './../../../core/services/node.service';
@@ -44,6 +45,7 @@ export class SearchComponent implements OnInit {
     private stateService: StateService,
     private readonly nodeService: NodeService,
     private fb: FormBuilder,
+    private translateService: TranslateService
   ) {
     this.stateGroups = [];
   }
@@ -52,10 +54,10 @@ export class SearchComponent implements OnInit {
     this.nodeService.getRoomsNodes().subscribe((data) => {
       this.locations = data;
       this.stateGroups.push({
-        groupName: 'Classroom',
+        groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
         rooms: data.map((v, i) => {
           return {
-            value: String(i),
+            value: String(v.id),
             viewValue: v.name,
           };
         })

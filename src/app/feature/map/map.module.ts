@@ -9,6 +9,7 @@ import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/mat
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
 import { FloorSwitcherComponent } from './floor-switcher/floor-switcher.component';
 import { GotoButtonComponent } from './goto-button/goto-button.component';
@@ -23,6 +24,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     MapRoutingModule,
     FormsModule,
     ReactiveFormsModule,
