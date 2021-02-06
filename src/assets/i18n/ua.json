@@ -8,6 +8,9 @@
     "FLOOR": "Поверх",
     "CANCEL": "Скасувати"
   },
+  "SETTINGS": {
+    "CHOOSE_LANG": "Вибрати мову"
+  },
   "INFO": {
     "INTERFACE": {
       "TITLE": "Інтерфейс"

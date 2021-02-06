@@ -17,8 +17,8 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
 import { SearchComponent } from './search/search.component';
-import { SwitchesDialogComponent } from './switches/switches-dialog/switches-dialog.component';
-import { SwitchesComponent } from './switches/switches.component';
+import { SettingsDialogComponent } from './settings/settings-dialog/settings-dialog.component';
+import { SettingsComponent } from './settings/settings.component';
 import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
 
 @NgModule({
@@ -40,12 +40,12 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
   declarations: [
     MapComponent,
     SearchComponent,
-    SwitchesComponent,
+    SettingsComponent,
     CanvaComponent,
     FloorSwitcherComponent,
     GotoButtonComponent,
     WhereaboutsComponent,
-    SwitchesDialogComponent,
+    SettingsDialogComponent,
     InfoDialogComponent,
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } }]

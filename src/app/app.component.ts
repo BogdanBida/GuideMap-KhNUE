@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ export class AppComponent {
   title = 'guidemap';
 
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('ua');
-    translate.use('ua');
-}
+    const defaultLang = translate.getBrowserLang() || environment.defaultLang;
+    translate.setDefaultLang(defaultLang);
+    translate.use(defaultLang);
+  }
 }

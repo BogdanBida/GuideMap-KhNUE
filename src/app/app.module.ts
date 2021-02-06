@@ -25,7 +25,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     NoopAnimationsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'ua',
+      defaultLanguage: environment.defaultLang,
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
