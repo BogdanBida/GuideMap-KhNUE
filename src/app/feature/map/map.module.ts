@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
@@ -36,6 +37,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     MatInputModule,
     MatFormFieldModule,
     MatRippleModule,
+    MatTooltipModule,
   ],
   declarations: [
     MapComponent,

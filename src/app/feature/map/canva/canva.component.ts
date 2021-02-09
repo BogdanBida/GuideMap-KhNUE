@@ -45,7 +45,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   private locationsSubscription: Subject<void> = new Subject();
   private nodesSubscription: Subject<void> = new Subject();
   public styles = {};
-  public dndOnMouseDown = DragNDrop.onMouseDown;
+  public dragNDrop = DragNDrop.onDrag;
 
   ngOnInit(): void {
     this.bgrDraw = SVG().addTo('#bgr-canv').size('3500px', '2550px');

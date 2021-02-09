@@ -1,4 +1,4 @@
-<div class="container" #target (mousedown)="dndOnMouseDown($event, target)">
+<div class="container" #target (mousedown)="dragNDrop($event, target)" (touchstart)="dragNDrop($event, target)">
   <div class="canv" id="canv" [ngStyle]="styles"></div>
   <div class="canv" id="bgr-canv" [ngStyle]="styles"></div>
 </div>
