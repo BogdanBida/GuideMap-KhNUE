@@ -15,7 +15,7 @@
 .canva,
 .floor-switcher,
 .nav-button,
-.left-bottom-ui {
+.left-gui-section {
   position: fixed;
 }
 
@@ -48,33 +48,31 @@
   bottom: 32px;
 }
 
-.left-bottom-ui {
+.left-gui-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  justify-content: space-between;
   right: 2.5%;
   bottom: 68px;
   z-index: 3;
-  .whereabouts {
-    display: block;
-  }
-  .settings {
-    display: block;
-    margin-bottom: 32px;
+  .whereabouts,
+  .settings,
+  .info {
+    margin-top: 32px;
+    margin-left: auto;
   }
   .info {
     @include shadow;
-    display: flex;
     padding: 0;
-    margin-right: -4px;
-    margin-bottom: 40px;
-    width: 44px;
-    height: 44px;
     background-color: transparent;
     border: none;
     padding: 0;
-    opacity: 0.9;
+    width: min-content;
+    height: min-content;
+    .img {
+      width: 32px;
+      height: 44px;
+    }
   }
 }
 
@@ -82,7 +80,7 @@
   .search {
     width: 90%;
   }
-  .left-bottom-ui {
+  .left-gui-section {
     right: 5%;
   }
 }

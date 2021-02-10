@@ -2,15 +2,19 @@
 @import 'variables';
 
 :host {
-  display: flex;
-  flex-direction: column;
+  height: 38px;
+  width: 38px;
   .settings-btn {
-    height: 38px;
-    width: 38px;
+    width: 100%;
+    height: 100%;
     padding: 0;
     display: flex;
     justify-content: center;
     background-color: transparent;
     @include shadow;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
