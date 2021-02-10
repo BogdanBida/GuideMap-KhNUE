@@ -4,5 +4,5 @@ export const environment = {
   production: false,
   defaultFloor: 2,
   defaultLang: Lang.UA,
-  url: 'https://5dfdd09f0442.ngrok.io/',
+  url: 'http://localhost:4200/',
 };
