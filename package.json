@@ -27,10 +27,7 @@
     "@svgdotjs/svg.js": "^3.0.16",
     "@types/snapsvg": "^0.5.0",
     "@zxing/ngx-scanner": "^3.1.3",
-    "ngx-svg": "^1.1.0",
     "rxjs": "~6.6.0",
-    "snapsvg": "^0.5.1",
-    "svg-draw": "^1.1.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
