@@ -26,7 +26,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@svgdotjs/svg.js": "^3.0.16",
     "@types/snapsvg": "^0.5.0",
-    "@zxing/ngx-scanner": "^3.0.0",
+    "@zxing/ngx-scanner": "^3.1.3",
     "ngx-svg": "^1.1.0",
     "rxjs": "~6.6.0",
     "snapsvg": "^0.5.1",
