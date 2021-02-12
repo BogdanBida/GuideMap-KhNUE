@@ -9,10 +9,10 @@
   </form>
 </div>
 <nav>
-  <button (click)="reset()">
+  <button (click)="reset()" class="btn-cancel">
     {{ 'UI.CANCEL' | translate }}
   </button>
-  <button mat-button [mat-dialog-close]="true" type="button">
+  <button mat-button [mat-dialog-close]="true" class="btn-ok" type="button">
     OK
   </button>
 </nav>

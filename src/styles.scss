@@ -50,3 +50,13 @@ a,
 input {
   outline: none;
 }
+
+.btn-ok {
+  background-color: $base-color;
+  color: whitesmoke;
+}
+
+.btn-cancel {
+  background-color: indianred;
+  color: whitesmoke;
+}
