@@ -35,7 +35,7 @@
     width: 100%;
     .line {
       fill: none;
-      stroke: #303030;
+      stroke: $negative-secondary;
       stroke-width: 6;
       transition: stroke-dasharray 300ms cubic-bezier(0.4, 0, 0.2, 1),
         stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1);

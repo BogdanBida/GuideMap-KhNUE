@@ -1,3 +1,5 @@
+@import "variables";
+
 :host {
   display: flex;
   overflow: hidden;
@@ -14,6 +16,12 @@
   flex-shrink: 0;
   z-index: 0;
   transition: 0.1s;
+
+  $dot-color: mix($secondary-tone, transparent, 20%);
+  background-image: radial-gradient($dot-color 1px, transparent 1px);
+  background-position: 20px 24px;
+  $sector-size: 24px;
+  background-size: $sector-size $sector-size;
 }
 
 #bgr-canv {

@@ -23,16 +23,22 @@ $guidemap-theme: mat-light-theme(
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
 body {
-  min-height: 100vh;
+  box-sizing: border-box;
+  min-height: 100%;
+  @supports (min-height: -webkit-fill-available) {
+    min-height: -webkit-fill-available;
+    box-sizing: content-box;
+  }
   min-width: 100vw;
   margin: 0;
   overflow: hidden;
-  background: radial-gradient(
-    circle at center,
-    rgb(225, 225, 225),
-    rgb(200, 200, 200)
-  );
+  background: $background;
   color: #000000;
   touch-action: pan-left, pan-right, pan-up, pan-down;
 }

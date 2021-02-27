@@ -6,12 +6,7 @@
   display: flex;
   padding: 5px 8px;
   height: min-content;
-  background: transparent;
-  background: linear-gradient(
-    to right,
-    mix(rgba(228, 228, 228, 0.8), #24c6fb, 90%),
-    mix(rgba(228, 228, 228, 0.8), #1681a5, 90%)
-  );
+  background: $search-bar-bg;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 4px 4px 10px 10px;
   user-select: none;
@@ -43,7 +38,7 @@
       justify-content: center;
       div {
         flex-shrink: 0;
-        border: 2px solid #303030;
+        border: 2px solid $negative-secondary;
         border-radius: 99px;
         width: 16px;
         height: 16px;
@@ -54,7 +49,7 @@
           width: 4px;
           height: 8px;
           transform: translateY(10px) translateX(-3px) rotate(45deg);
-          background-color: #303030;
+          background-color: $negative-secondary;
         }
       }
     }
@@ -67,7 +62,7 @@
       align-items: center;
       background-color: transparent;
       border: none;
-      color: #303030;
+      color: $negative-secondary;
       font-size: 32px;
     }
   }
