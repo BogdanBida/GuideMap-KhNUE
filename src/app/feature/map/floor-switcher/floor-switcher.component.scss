@@ -18,14 +18,14 @@
     border-radius: 99px;
     background-color: $base-color;
     @include shadow;
-    img {
+    .icon {
       margin: auto;
       width: 66.66%;
       height: 66.66%;
     }
     &.down-btn {
       margin-top: 12px;
-      img {
+      .icon {
         transform: scaleY(-1);
       }
     }

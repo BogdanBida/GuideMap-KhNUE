@@ -1,5 +1,7 @@
 <button class="whereabouts" *ngIf="locNodes?.length" (click)="isOpen = true">
-  <img src="assets/icons/whereabouts.svg"/>
+  <svg class="icon">
+    <use xlink:href="assets/icons/sprite.svg#whereabouts"></use>
+  </svg>
 </button>
 
 <div class="modal" *ngIf="isOpen">

@@ -7,8 +7,12 @@
   </div>
 </div>
 <button class="up-btn" (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
-  <img src="assets/icons/arrow-up.svg" alt="">
+  <svg class="icon">
+    <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
+  </svg>
 </button>
 <button class="down-btn" (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
-  <img src="assets/icons/arrow-up.svg" alt="">
+  <svg class="icon">
+    <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
+  </svg>
 </button>

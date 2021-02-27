@@ -5,7 +5,9 @@
 <app-goto-button class="nav-button"></app-goto-button>
 <div class="left-gui-section">
   <button class="info" (click)="openDialog()">
-    <img class="img" src="assets/icons/info.svg" alt="Info">
+    <svg class="icon">
+      <use xlink:href="assets/icons/sprite.svg#info"></use>
+    </svg>
   </button>
   <app-settings class="settings"></app-settings>
   <app-whereabouts class="whereabouts"></app-whereabouts>

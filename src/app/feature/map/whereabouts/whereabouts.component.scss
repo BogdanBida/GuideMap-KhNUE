@@ -9,7 +9,7 @@
   height: 64px;
   background-color: $base-color;
   @include shadow;
-  img {
+  .icon {
     position: absolute;
     top: 4px;
     left: 3px;

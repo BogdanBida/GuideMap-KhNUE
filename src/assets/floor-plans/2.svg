@@ -3,7 +3,6 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 3500 2550" style="enable-background:new 0 0 3500 2550;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#D7D7D7;}
 	.st1{opacity:0.5;fill:#C1272D;}
 	.st2{fill:#C1272D;}
 	.st3{fill:#1A1A1A;}
@@ -13,20 +12,17 @@
 	.st7{fill:none;stroke:#4D4D4D;stroke-width:8;stroke-miterlimit:10;}
 	.st8{fill:none;stroke:#4D4D4D;stroke-width:9;stroke-miterlimit:10;}
 </style>
-<g id="background">
-	<rect x="0.5" y="-0.5" class="st0" width="3499" height="2550"/>
-</g>
 <g id="reference">
-	
+
 		<image style="display:none;overflow:visible;" width="3501" height="2550" id="_x31_" xlink:href="1.png"  transform="matrix(0.75 0 0 0.75 474.285 319)">
 	</image>
-	
+
 		<image style="display:none;overflow:visible;" width="3501" height="2550" id="_x32_" xlink:href="2.png"  transform="matrix(0.75 0 0 0.75 485.6 319)">
 	</image>
-	
+
 		<image style="display:none;overflow:visible;" width="3501" height="2550" id="_x33_" xlink:href="3.png"  transform="matrix(0.75 0 0 0.75 485.6 318.25)">
 	</image>
-	
+
 		<image style="display:none;overflow:visible;" width="3501" height="2550" id="_x34_" xlink:href="4.png"  transform="matrix(0.75 0 0 0.75 485.6 318.25)">
 	</image>
 </g>
@@ -1141,10 +1137,10 @@
 	</g>
 	<g id="schema">
 		<path class="st7" d="M253,239.7"/>
-		<polyline class="st8" points="439.8,239.7 253,239.7 253,1975.7 2747,1975.7 2747,1615.7 1948,1615.7 1948,1504.7 1898,1504.7 		
+		<polyline class="st8" points="439.8,239.7 253,239.7 253,1975.7 2747,1975.7 2747,1615.7 1948,1615.7 1948,1504.7 1898,1504.7
 			"/>
 		<path class="st7" d="M434,239.7"/>
-		<polyline class="st8" points="1843,1505.7 1796.6,1505.7 1796.6,1555.6 1265,1555.6 1265,1609.7 1104,1609.7 1104,1557.7 
+		<polyline class="st8" points="1843,1505.7 1796.6,1505.7 1796.6,1555.6 1265,1555.6 1265,1609.7 1104,1609.7 1104,1557.7
 			491,1557.7 491,1402.7 652,1402.7 652,841.7 693.3,841.7 693.3,746.7 653.7,746.7 653.7,239.7 476.8,239.7 		"/>
 		<path class="st7" d="M468,236.7"/>
 		<line class="st8" x1="2109.5" y1="1615.7" x2="2109.5" y2="1975.7"/>
