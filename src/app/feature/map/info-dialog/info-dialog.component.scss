@@ -5,6 +5,8 @@
   max-width: 900px;
   max-height: 80vh;
   section {
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     padding: 20px;
   }
@@ -12,9 +14,28 @@
     display: flex;
     justify-content: space-between;
     padding-top: 10px;
-    button{
+    button {
       padding: 10px 25px;
       font-size: 18px;
     }
   }
+}
+
+hr {
+  width: 100%;
+}
+
+.screenshot-group {
+  display: flex;
+  margin: 0 auto;
+  width: min-content;
+  .screenshot {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.screenshot {
+  margin: 25px auto 10px;
+  box-shadow: 1px 2px 3px black;
 }
