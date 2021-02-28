@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment.prod';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @Component({
@@ -11,6 +12,7 @@ export class MapComponent implements OnInit {
   public isGoto = 0;
   public x: number;
   public y: number;
+  public isDevMode = isDevMode();
 
   constructor(public dialog: MatDialog) { }
 
