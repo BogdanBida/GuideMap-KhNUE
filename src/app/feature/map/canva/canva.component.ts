@@ -96,8 +96,11 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // ---------------------------------- other functions -------------------------------
   private moveMapTo(left: number, top: number, transitionSpeed: number = 500): void {
-    const targetTop = top - window.innerHeight / 2;
-    const targetLeft = left - window.innerWidth / 2;
+    let targetTop = top - window.innerHeight / 2;
+    let targetLeft = left - window.innerWidth / 2;
+
+    targetTop = targetTop < 0 ? 0 : targetTop;
+    targetLeft = targetLeft < 0 ? 0 : targetLeft;
     this.renderer.setStyle(this.elementRef.nativeElement, 'transition', `${transitionSpeed}ms`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', - targetTop + 'px');
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', - targetLeft + 'px');
