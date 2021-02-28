@@ -2,7 +2,6 @@ export class DragNDrop {
   public static onDrag(event, target): void {
 
     target.ondragstart = () => false;
-    target.style.position = 'absolute';
 
     const box = target.getBoundingClientRect();
     const coords = {

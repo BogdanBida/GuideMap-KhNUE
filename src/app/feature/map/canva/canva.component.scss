@@ -3,10 +3,12 @@
 :host {
   display: flex;
   overflow: hidden;
+  transition: 100ms;
 }
 
 .container {
-  position: relative;
+  position: absolute;
+  transition: inherit;
 }
 
 .canv {
