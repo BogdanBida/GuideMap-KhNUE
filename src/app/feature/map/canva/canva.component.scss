@@ -9,6 +9,7 @@
 .container {
   position: absolute;
   transition: inherit;
+  cursor: url('../../../../assets/map-cursor.png') 16 16, move;
 }
 
 .canv {
