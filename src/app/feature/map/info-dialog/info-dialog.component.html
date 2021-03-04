@@ -1,5 +1,5 @@
 <section>
-  <h1>Руководство</h1>
+  <h1>{{ "INFO.MANUAL" | translate }}</h1>
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum corrupti quam distinctio a itaque reprehenderit
     suscipit optio hic nulla, nihil eum at fugit nobis qui corporis enim, reiciendis perferendis dolor repellendus
@@ -21,26 +21,26 @@
   <hr>
   <img class="screenshot" src="assets/guide/floor-switcher.jpg" alt="">
   <p>
-    В левом нижнем углу, находится <strong>переключатель этажей</strong>
+    В левом нижнем углу, находится <strong>переключатель этажей</strong> чуть выше выводится текущий этаж, если выше или
+    ниже этажей нет, то соответствующая кнопка станет не активной
   </p>
   <hr>
-  <div class="screenshot-group">
-    <img class="screenshot" src="assets/guide/goto-disabled.jpg" alt="">
-    <img class="screenshot" src="assets/guide/goto-active.jpg" alt="">
-  </div>
+  <img class="screenshot" src="assets/guide/goto-active.jpg" alt="">
   <p>
-    Внизу окна приложения, в центре, находится <strong>кнопка прокладки маршрута с компасом</strong>
+    Если вы определили местоположение а так-же указали место назначения, то внизу окна приложения, в центре, появится
+    <strong>кнопка прокладки маршрута с компасом</strong>
   </p>
   <hr>
   <img class="screenshot" src="assets/guide/right-menu.jpg" alt="">
-  В правом нижнем углу, находятся 3 кнопки:
+  <span>В правом нижнем углу, находятся 3 кнопки:</span>
   <ul>
     <li>Кнопка с иконкой QR кода - позволяет отсканировать QR код в здании, и определить местоположение кода
       относительно здания</li>
-    <li>Кнопка настроек</li>
-    <li>Кнопка справочника, благодаря которой, вы сюда попали</li>
+    <li>Кнопка настроек с переключением языка интерфейса</li>
+    <li>Кнопка справочника с информацией о пользовании, подсказками, авторами, и благодаря которой, вы сюда попали</li>
   </ul>
   <h2>{{ "INFO.AUTHORS.TITLE" | translate }}</h2>
+  <hr>
   <ul>
     <li>Бида Богдан</li>
     <li>Котелевец Егор
@@ -48,6 +48,7 @@
     <li>Тягло Евгений
   </ul>
   <h3>{{ "INFO.SUPPORT.TITLE" | translate }}</h3>
+  <hr>
   <ul>
     <li>
       <a href="">guidemap.support@gmail.com</a>

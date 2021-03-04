@@ -8,7 +8,20 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    width: 100%;
     padding: 20px;
+    ul {
+      padding-left: 2em;
+      margin-top: 0.25em;
+    }
+    h1 {
+      margin: 0 auto;
+    }
+    h2, h3 {
+      margin-bottom: 0;
+      padding: 0;
+      line-height: 1;
+    }
   }
   nav {
     display: flex;
@@ -23,19 +36,11 @@
 
 hr {
   width: 100%;
-}
-
-.screenshot-group {
-  display: flex;
-  margin: 0 auto;
-  width: min-content;
-  .screenshot {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+  margin: 0.25em 0;
 }
 
 .screenshot {
-  margin: 25px auto 10px;
+  margin: 25px auto 15px;
+  max-width: 100%;
   box-shadow: 1px 2px 3px black;
 }
