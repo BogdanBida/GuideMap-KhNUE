@@ -9,9 +9,9 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  public isGoto = 0;
   public x: number;
   public y: number;
+  public zoomFactor: number;
   public isDevMode = isDevMode();
 
   constructor(public dialog: MatDialog) { }
