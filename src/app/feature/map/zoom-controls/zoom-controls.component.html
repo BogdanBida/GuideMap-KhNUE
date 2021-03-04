@@ -1,0 +1,13 @@
+<div class="zoom-controls">
+  <button (click)="zoomIn()" *ngIf="!isMax">
+    <svg class="icon">
+      <use xlink:href="assets/icons/sprite.svg#zoom-in"></use>
+    </svg>
+  </button>
+  <div class="zoom-value">{{ zoomFactor !== 1 && zoomFactor || ''}}</div>
+  <button (click)="zoomOut()" *ngIf="!isMin">
+    <svg class="icon">
+      <use xlink:href="assets/icons/sprite.svg#zoom-out"></use>
+    </svg>
+  </button>
+</div>

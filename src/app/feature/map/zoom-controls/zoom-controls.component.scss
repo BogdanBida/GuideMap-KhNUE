@@ -1,0 +1,50 @@
+@import "variables";
+
+.zoom-controls {
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  button {
+    border: none;
+    background: transparent;
+    transition: 0.2s;
+    .icon {
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+    }
+  }
+  .zoom-value {
+    width: 100%;
+    height: 1.2em;
+    line-height: 1.2em;
+    letter-spacing: -0.05em;
+    text-align: center;
+    color: $positive;
+    padding: 0.1em 0;
+    margin: 0 0 0.25em 0;
+    $bgr-color: change-color(
+      $color: $base-color,
+      $alpha: 0.75,
+    );
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      $bgr-color 20%,
+      $bgr-color 80%,
+      transparent
+    );
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    transition: 0.2s;
+    &:empty {
+      opacity: 0;
+    }
+    &:not(:empty) {
+      &::after {
+        content: "%";
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ $negative: black;
 $negative-secondary: #262626;
 $secondary-tone: #444444;
 
+// backgrounds
 $background: radial-gradient(
   circle at center,
   rgb(225, 225, 225),
@@ -16,6 +17,10 @@ $search-bar-bg: linear-gradient(
   mix(rgba(228, 228, 228, 0.8), $base-color, 90%),
   mix(rgba(228, 228, 228, 0.8), #1681a5, 90%)
 );
+
+// durations
+$map-drag-smoothing: 100ms;
+$zoom-transition: 0.3s;
 
 // breakpoints
 $lowgen: 320px;
