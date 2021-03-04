@@ -1,3 +1,4 @@
+import { ZoomControlsComponent } from './zoom-controls/zoom-controls.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -47,6 +48,7 @@ import { WhereaboutsComponent } from './whereabouts/whereabouts.component';
     WhereaboutsComponent,
     SettingsDialogComponent,
     InfoDialogComponent,
+    ZoomControlsComponent,
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } }]
 })

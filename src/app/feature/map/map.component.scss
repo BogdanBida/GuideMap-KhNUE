@@ -2,7 +2,6 @@
 @import "variables";
 
 .coordinates {
-  position: fixed;
   bottom: 8px;
   left: 5%;
   z-index: 10;
@@ -11,11 +10,13 @@
   pointer-events: none;
 }
 
+.coordinates,
 .search,
 .canva,
 .floor-switcher,
 .nav-button,
-.left-gui-section {
+.left-gui-section,
+.zoom-controls {
   position: fixed;
 }
 
@@ -46,6 +47,12 @@
   left: calc(50% - 32px);
   z-index: 3;
   bottom: 32px;
+}
+
+.zoom-controls {
+  left: 10px;
+  top: 68px;
+  z-index: 3;
 }
 
 .left-gui-section {
@@ -82,6 +89,9 @@
   }
   .left-gui-section {
     right: 5%;
+  }
+  .zoom-controls {
+    top: 85px;
   }
 }
 

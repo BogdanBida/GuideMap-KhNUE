@@ -1,12 +1,18 @@
+import { SvgPathUtils } from './../../../../utils/svg-path.utils';
 import { Path, LocationNode } from './../../../core/models';
-import { Component, ElementRef, OnDestroy, OnInit, AfterViewInit, Renderer2, ViewChild } from '@angular/core';
-import { Circle, Line, Svg, SVG } from '@svgdotjs/svg.js';
+import { Component, ElementRef, OnDestroy, OnInit, AfterViewInit, Renderer2, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Circle, Svg, SVG, Path as SvgPath } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DragNDrop } from '../../../../utils/dragndrop';
 import { FloorService, NodeService, StateService } from './../../../core/services';
 
 import { USER_LOC_COLOR, ENDPOINT_COLOR, STROKE_CONFIG } from './canvas-config';
+
+const WIDTH = 3500;
+const HEIGHT = 2550;
+const DEFAULT_TRANSITION_SPEED = 500;
+const DEFAULT_ZOOM_FACTOR = 1;
 
 @Component({
   selector: 'app-canva',
@@ -17,15 +23,17 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('target') elementRef: ElementRef;
 
+  @Input() zoomFactor = DEFAULT_ZOOM_FACTOR;
+
   public currentFloor: number;
-  public dragNDrop = DragNDrop.onDrag; // * composition for expanding functionality (add drag n drop to map)
-  // ---------------- Drawing context
+
+  public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
+  // ---------------- svg entities
   private canvas: Svg;
   private backgroundCanvas: Svg;
-  // ---------------- svg entities
   private userDot: Circle;
   private endpointDot: Circle;
-  private currentPath: Line[] = [];
+  private currentPath: SvgPath;
   // ----------------
   private routes: LocationNode[];
   private path: Path;
@@ -40,9 +48,9 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     private floorService: FloorService,
     private renderer: Renderer2,
   ) { }
-  // --------------------- lifecycle methods -----------------------------------
+
   ngOnInit(): void {
-    const [width, height] = ['3500px', '2550px'];
+    const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
     this.canvas = SVG().addTo('#canv').size(width, height);
     this.backgroundCanvas = SVG().addTo('#bgr-canv').size(width, height);
     this.drawBackground(this.getFloorImageName(this.currentFloor));
@@ -59,6 +67,8 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions$.push(this.floorService.setFloorSubscribe((floor) => {
       this.currentFloor = floor;
+      this.stateService.endpoint = null;
+      this.clearPath();
       this.drawBackground();
     }));
 
@@ -69,21 +79,19 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.locationsSubject$)
     ).subscribe(([userLocation, endpoint]) => {
       this.clearPath();
-      if (userLocation) {
-        this.drawUserLocation(userLocation);
-        this.moveMapTo(userLocation.x, userLocation.y);
-      }
-      if (endpoint) {
-        this.drawEndpointLocation(endpoint);
-        this.moveMapTo(endpoint.x, endpoint.y);
-      }
+      this.drawUserLocation(userLocation);
+      this.drawEndpointLocation(endpoint);
+      userLocation && this.moveMapTo(userLocation.x, userLocation.y);
+      endpoint && this.moveMapTo(endpoint.x, endpoint.y);
     });
   }
 
   ngAfterViewInit(): void { // * drawing path if goto btn is clicked
     this.subscriptions$.push(this.stateService.gotoClickEvent.subscribe(() => {
-      if (this.stateService.userLocation && this.stateService.endpoint) {
+      const userLocation = this.stateService.userLocation;
+      if (userLocation && this.stateService.endpoint) {
         this.drawPath();
+        userLocation && this.moveMapTo(userLocation.x, userLocation.y);
       }
     }));
   }
@@ -94,13 +102,17 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     subjects.forEach(s => { s.next(); s.complete(); });
   }
 
-  // ---------------------------------- other functions -------------------------------
-  private moveMapTo(left: number, top: number, transitionSpeed: number = 500): void {
+  private moveMapTo(left: number, top: number, transitionSpeed: number = DEFAULT_TRANSITION_SPEED): void {
+    // adapt values ​​for zoom
+    top = top * this.zoomFactor + (HEIGHT - HEIGHT * this.zoomFactor) / 2;
+    left = left * this.zoomFactor + (WIDTH - WIDTH * this.zoomFactor) / 2;
+    // centering
     let targetTop = top - window.innerHeight / 2;
     let targetLeft = left - window.innerWidth / 2;
 
     targetTop = targetTop < 0 ? 0 : targetTop;
     targetLeft = targetLeft < 0 ? 0 : targetLeft;
+
     this.renderer.setStyle(this.elementRef.nativeElement, 'transition', `${transitionSpeed}ms`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'top', - targetTop + 'px');
     this.renderer.setStyle(this.elementRef.nativeElement, 'left', - targetLeft + 'px');
@@ -121,7 +133,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (this.canvas && location) {
       const radius = 25;
-      const maxRadius = 2500;
+      const maxRadius = 500;
       const { x, y } = location;
       Dot = this.canvas
         .circle(maxRadius)
@@ -140,8 +152,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private clearPath(): void {
-    this.currentPath.forEach((p) => p.remove());
-    this.currentPath = [];
+    this.currentPath && this.currentPath.remove();
   }
 
   private drawPath(): void {
@@ -150,27 +161,33 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     // todo: change to find path data by user and endpoint
     const path = this.path[userLocation.id + '-' + endpoint.id];
 
-    const dots: { x: number, y: number }[] = [
-      { x: userLocation.x, y: userLocation.y },
-      ...path.map(v => (this.routes[v])),
-      { x: endpoint.x, y: endpoint.y },
+    const points: number[][] = [
+      [userLocation.x, userLocation.y],
+      ...path.map(v => {
+        const { x, y } = this.routes[v];
+        return [x, y];
+      }),
+      [endpoint.x, endpoint.y],
     ];
 
-    for (let i = 0; i < dots.length - 1; i++) {
-      const line = this.canvas
-        .line(dots[i].x, dots[i].y, dots[i + 1].x, dots[i + 1].y)
-        .stroke(STROKE_CONFIG)
-        .attr({
-          'stroke-dashoffset': '0'
-        });
-      line
-        .animate({ duration: 700, ease: '<>' })
-        .loop(0, false)
-        .attr({
-          'stroke-dashoffset': '-7'
-        });
-      this.currentPath.push(line);
-    }
+    const pathString = points.reduce((acc, point, i, a) => {
+      return i === 0 ? `M ${point[0]},${point[1]}`
+        : `${acc} ${SvgPathUtils.bezierCommand(point, i, a)}`;
+    }, '');
+
+    this.currentPath = this.canvas.path(pathString)
+      .stroke(STROKE_CONFIG)
+      .fill({
+        color: '#00000000',
+      })
+      .attr({
+        'stroke-dashoffset': '0',
+      });
+    this.currentPath.animate({ duration: 4000, ease: '>' })
+      .loop(1, false)
+      .attr({
+        'stroke-dashoffset': '-70'
+      });
   }
 
   private drawBackground(imgname = this.getFloorImageName(this.currentFloor)): void {

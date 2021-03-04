@@ -1,15 +1,20 @@
 @import "variables";
 
 :host {
+  position: relative;
   display: flex;
   overflow: hidden;
-  transition: 100ms;
+  transition: $map-drag-smoothing;
 }
 
 .container {
   position: absolute;
   transition: inherit;
   cursor: url('../../../../assets/map-cursor.png') 16 16, move;
+  z-index: 0 !important;
+  .zoom-wrapper {
+    transition: $zoom-transition;
+  }
 }
 
 .canv {
@@ -17,8 +22,6 @@
   width: max-content;
   height: max-content;
   flex-shrink: 0;
-  z-index: 0;
-  transition: 0.1s;
 
   $dot-color: mix($secondary-tone, transparent, 20%);
   background-image: radial-gradient($dot-color 1px, transparent 1px);
