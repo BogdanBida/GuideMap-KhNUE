@@ -1,6 +1,9 @@
 import { SvgPathUtils } from './../../../../utils/svg-path.utils';
 import { Path, LocationNode } from './../../../core/models';
-import { Component, ElementRef, OnDestroy, OnInit, AfterViewInit, Renderer2, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component, ElementRef, OnDestroy, OnInit,
+  AfterViewInit, Renderer2, ViewChild, Input
+} from '@angular/core';
 import { Circle, Svg, SVG, Path as SvgPath } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -100,6 +103,17 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions$.forEach(s => s.unsubscribe());
     const subjects = [this.locationsSubject$, this.nodesSubject$];
     subjects.forEach(s => { s.next(); s.complete(); });
+  }
+
+  public setCursor(event, target): void {
+    if (event.button === 2) {
+      target.classList.add('with-cursor');
+    }
+  }
+  public removeCursor(event, target): void {
+    if (event.button === 2) {
+      target.classList.remove('with-cursor');
+    }
   }
 
   private moveMapTo(left: number, top: number, transitionSpeed: number = DEFAULT_TRANSITION_SPEED): void {

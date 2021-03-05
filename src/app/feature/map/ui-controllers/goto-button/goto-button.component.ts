@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { StateService } from './../../../core/services';
+import { StateService } from '../../../../core/services';
 
 @Component({
   selector: 'app-goto-button',

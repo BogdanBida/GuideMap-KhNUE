@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { LocationNode } from '../../../core/models';
-import { NodeService, StateService } from './../../../core/services';
+import { LocationNode } from '../../../../core/models';
+import { NodeService, StateService } from '../../../../core/services';
 
 @Component({
   selector: 'app-whereabouts',

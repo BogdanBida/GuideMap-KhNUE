@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { Lang } from './../../../../core/enums/lang.enum';
+import { Lang } from '../../../../core/enums/lang.enum';
 
 @Component({
   selector: 'app-settings-dialog',

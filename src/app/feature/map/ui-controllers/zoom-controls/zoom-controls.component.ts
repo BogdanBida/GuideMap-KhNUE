@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 const MAX_ZOOM = 1;
 const MIN_ZOOM = 0.25;
@@ -29,7 +30,7 @@ export class ZoomControlsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.zoomFactor = 1;
+    this.zoomFactor = environment.defaultZoomFactor;
   }
 
   public zoomIn(): void {

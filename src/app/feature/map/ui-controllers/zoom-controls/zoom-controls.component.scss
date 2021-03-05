@@ -1,23 +1,26 @@
 @import "variables";
 
+$icon-size: 32px;
+$zoom-value-height: 1.2em;
+
 .zoom-controls {
-  display: flex;
-  flex-direction: column;
-  transition: 0.2s;
   button {
     border: none;
     background: transparent;
-    transition: 0.2s;
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
     .icon {
-      width: 32px;
-      height: 32px;
+      width: $icon-size;
+      height: $icon-size;
       filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
     }
   }
   .zoom-value {
     width: 100%;
-    height: 1.2em;
-    line-height: 1.2em;
+    height: $zoom-value-height;
+    line-height: $zoom-value-height;
     letter-spacing: -0.05em;
     text-align: center;
     color: $positive;
@@ -37,14 +40,13 @@
     opacity: 1;
     pointer-events: none;
     user-select: none;
-    transition: 0.2s;
-    &:empty {
+    transition-delay: 150ms;
+    transition-duration: 350ms;
+    &.hidden {
       opacity: 0;
     }
-    &:not(:empty) {
-      &::after {
-        content: "%";
-      }
+    &::after {
+      content: "%";
     }
   }
 }

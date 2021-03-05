@@ -20,8 +20,15 @@
     .select {
       flex-grow: 1;
       padding: 0 8px;
-      margin-bottom: -22px;
+      margin-bottom: -15px;
       z-index: 10;
+      .label {
+        font-size: 1rem;
+        color: $negative-secondary;
+        letter-spacing: 0.05em;
+        font-weight: 300;
+        opacity: 0.75;
+      }
       .input {
         width: 100%;
         flex-shrink: 1;
