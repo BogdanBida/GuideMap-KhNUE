@@ -1,6 +1,5 @@
 @import "variables";
 @import "mixins";
-@import "./burger-btn.scss";
 
 :host {
   display: flex;
@@ -72,6 +71,12 @@
       color: $negative-secondary;
       font-size: 32px;
     }
+  }
+}
+
+::ng-deep {
+  .select > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix {
+    width: auto;
   }
 }
 

@@ -16,8 +16,13 @@
 .floor-switcher,
 .nav-button,
 .left-gui-section,
-.zoom-controls {
+.zoom-controls
+{
   position: fixed;
+}
+
+.sidebar {
+  z-index: 5;
 }
 
 .search {
@@ -39,7 +44,7 @@
 
 .floor-switcher {
   bottom: 68px;
-  left: 2%;
+  left: 48px;
   z-index: 3;
 }
 
@@ -85,13 +90,24 @@
 
 @media (max-width: $portrait) {
   .search {
-    width: 90%;
+    width: calc(95% - 48px);
+    left: calc(50% - 16px);
+  }
+  .floor-switcher {
+    left: 2%;
   }
   .left-gui-section {
     right: 5%;
   }
   .zoom-controls {
     top: 85px;
+  }
+}
+
+@media (max-width: $small) {
+  .search {
+    width: 95%;
+    left: 50%;
   }
 }
 

@@ -1,3 +1,4 @@
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -49,6 +50,7 @@ import { WhereaboutsComponent } from './ui-controllers/whereabouts/whereabouts.c
     SettingsDialogComponent,
     InfoDialogComponent,
     ZoomControlsComponent,
+    SidebarComponent,
   ],
   providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } }]
 })
