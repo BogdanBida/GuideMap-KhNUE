@@ -27,6 +27,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  padding: 20px 64px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,16 +47,23 @@
     box-shadow: 0 0 300px black;
     .content {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+      flex-direction: column;
+      gap: 20px;
       width: 100%;
-      height: 100%;
+      min-height: 100%;
+      overflow-y: auto;
       $animation-duration: 500ms;
       animation-name: appearance;
       animation-delay: calc(#{$sidebar-animation-duration} - #{$animation-duration});
       animation-duration: $animation-duration;
       animation-timing-function: ease-out;
       animation-fill-mode: backwards;
+      .whereabouts-form, .search {
+        width: 50%;
+        min-width: 200px;
+      }
     }
   }
 }

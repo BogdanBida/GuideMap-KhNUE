@@ -16,8 +16,7 @@
 .floor-switcher,
 .nav-button,
 .left-gui-section,
-.zoom-controls
-{
+.zoom-controls {
   position: fixed;
 }
 
@@ -117,5 +116,19 @@
     left: 0;
     transform: none;
     width: 100%;
+  }
+}
+
+@media (max-height: 460px) {
+  .floor-switcher {
+    left: 64px;
+    bottom: 32px;
+  }
+  .zoom-controls {
+    top: auto;
+    bottom: 32px;
+  }
+  .search {
+    display: none;
   }
 }

@@ -10,7 +10,8 @@
 </label>
 <aside class="wrapper" [class.opened]="sidebarService.isOpen.asObservable() | async">
   <div class="content">
-    <form [formGroup]="form">
+    <app-search class="search"></app-search>
+    <form class="whereabouts-form" [formGroup]="form">
       <mat-form-field>
         <mat-label>Выбор местоположения (QR кода)</mat-label>
         <mat-select formControlName="location">
