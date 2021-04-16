@@ -9,3 +9,8 @@
     transform: translateY(1px);
     opacity: 0.9;
 }
+
+@mixin glassmorphism($px) {
+  backdrop-filter: blur($px);
+  -webkit-backdrop-filter: blur($px);
+}
