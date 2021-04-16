@@ -1,0 +1,63 @@
+<section>
+  <h1>{{ "INFO.MANUAL" | translate }}</h1>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum corrupti quam distinctio a itaque reprehenderit
+    suscipit optio hic nulla, nihil eum at fugit nobis qui corporis enim, reiciendis perferendis dolor repellendus
+    ratione
+    accusantium. Totam cum minima molestiae error eaque laudantium, ducimus possimus distinctio obcaecati nulla
+    consectetur quasi ad facere! Cumque eos amet odit totam. Provident facere est numquam vel consequuntur, soluta in,
+    dolore enim hic corrupti ullam esse similique cupiditate, accusantium minus magni accusamus. Iure distinctio
+    perferendis fugiat obcaecati asperiores soluta alias repudiandae nam dolores ut consectetur aspernatur a dolore
+    maxime, velit architecto optio eum impedit reprehenderit veritatis sunt totam!
+  </p>
+  <h2>{{ "INFO.INTERFACE.TITLE" | translate }}</h2>
+  <hr>
+  <img class="screenshot" src="assets/guide/searchbar.jpg" alt="">
+  <p>
+    В самом верху, находится <strong>форма поиска</strong>, в которую можно ввести название аудитории или другого
+    помещения. Далее следует нажать кнопку поиска (лупа), либо же кнопку очистки (крестик).<br>
+    В первом случае, на карте будет подсвечено расположение данного помещения.
+  </p>
+  <hr>
+  <img class="screenshot" src="assets/guide/floor-switcher.jpg" alt="">
+  <p>
+    В левом нижнем углу, находится <strong>переключатель этажей</strong> чуть выше выводится текущий этаж, если выше или
+    ниже этажей нет, то соответствующая кнопка станет не активной
+  </p>
+  <hr>
+  <img class="screenshot" src="assets/guide/goto-active.jpg" alt="">
+  <p>
+    Если вы определили местоположение а так-же указали место назначения, то внизу окна приложения, в центре, появится
+    <strong>кнопка прокладки маршрута с компасом</strong>
+  </p>
+  <hr>
+  <img class="screenshot" src="assets/guide/right-menu.jpg" alt="">
+  <span>В правом нижнем углу, находятся 3 кнопки:</span>
+  <ul>
+    <li>Кнопка с иконкой QR кода - позволяет отсканировать QR код в здании, и определить местоположение кода
+      относительно здания</li>
+    <li>Кнопка настроек с переключением языка интерфейса</li>
+    <li>Кнопка справочника с информацией о пользовании, подсказками, авторами, и благодаря которой, вы сюда попали</li>
+  </ul>
+  <h2>{{ "INFO.AUTHORS.TITLE" | translate }}</h2>
+  <hr>
+  <ul>
+    <li>Бида Богдан</li>
+    <li>Котелевец Егор
+    <li>Поляков Денис
+    <li>Тягло Евгений
+  </ul>
+  <h3>{{ "INFO.SUPPORT.TITLE" | translate }}</h3>
+  <hr>
+  <ul>
+    <li>
+      <a href="">guidemap.support@gmail.com</a>
+    </li>
+  </ul>
+</section>
+<nav>
+  <strong>{{ "INFO.FOOTER" | translate }}</strong>
+  <button mat-button [mat-dialog-close]="true" class="btn-ok" cdkFocusInitial>
+    OK
+  </button>
+</nav>

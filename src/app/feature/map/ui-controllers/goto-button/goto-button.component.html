@@ -1,0 +1,8 @@
+<button class="goto" [class.disabled]="!(stateService.userLocation && stateService.endpoint)">
+  <svg class="compass">
+    <use xlink:href="assets/icons/sprite.svg#nav-compass"></use>
+  </svg>
+  <svg class="compass-arrow" [ngStyle]="{'transform' : 'rotate(' + deg + 'deg)'}">
+    <use xlink:href="assets/icons/sprite.svg#nav-arrow"></use>
+  </svg>
+</button>

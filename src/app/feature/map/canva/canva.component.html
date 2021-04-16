@@ -1,0 +1,7 @@
+<div class="container" #target (mousedown)="dragNDrop($event, target); setCursor($event, target)"
+  (mouseup)="removeCursor($event, target)" (touchstart)="dragNDrop($event, target)" oncontextmenu="return false;">
+  <div class="zoom-wrapper" [style.transform]="'scale(' + zoomFactor + ')'">
+    <div class="canv" id="canv"></div>
+    <div class="canv" id="bgr-canv"></div>
+  </div>
+</div>

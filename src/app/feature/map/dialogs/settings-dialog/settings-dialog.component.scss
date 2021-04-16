@@ -1,0 +1,28 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 8px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 5;
+  }
+
+  nav {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin-left: 10px;
+      padding: 10px 25px;
+      font-size: 18px;
+    }
+  }
+}

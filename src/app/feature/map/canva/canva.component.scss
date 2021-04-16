@@ -1,0 +1,59 @@
+@import "variables";
+
+:host {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  transition: $map-drag-smoothing;
+}
+
+.container {
+  position: absolute;
+  transition: inherit;
+  cursor: url('../../../../assets/map-cursor.png') 16 16, move;
+  z-index: 0 !important;
+  .zoom-wrapper {
+    transition: $zoom-transition;
+  }
+  .main-cursor {
+    display: none;
+    transition: 0.5s;
+  }
+
+  &.with-cursor {
+    &::after {
+      content: "";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: block;
+      width: 128px;
+      height: 128px;
+      border: 1px dashed black;
+      border-radius: 999px;
+    }
+  }
+}
+
+.canv {
+  pointer-events: none;
+  width: max-content;
+  height: max-content;
+  flex-shrink: 0;
+
+  $dot-color: mix($secondary-tone, transparent, 20%);
+  background-image: radial-gradient($dot-color 1px, transparent 1px);
+  background-position: 20px 24px;
+  $sector-size: 24px;
+  background-size: $sector-size $sector-size;
+}
+
+#bgr-canv {
+  z-index: 1;
+}
+
+#canv {
+  position: absolute;
+  z-index: 2;
+}

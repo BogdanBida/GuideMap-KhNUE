@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+@include mat-core();
+$guidemap-primary: mat-palette($mat-indigo);
+$guidemap-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$guidemap-warn: mat-palette($mat-red);
+$guidemap-theme: mat-light-theme(
+  (
+    color: (
+      primary: $guidemap-primary,
+      accent: $guidemap-accent,
+      warn: $guidemap-warn,
+    ),
+  )
+);
+
+@include angular-material-theme($guidemap-theme);
+
+@import "mixins";
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  box-sizing: border-box;
+  min-height: 100%;
+  @supports (min-height: -webkit-fill-available) {
+    min-height: -webkit-fill-available;
+    box-sizing: content-box;
+  }
+  min-width: 100vw;
+  margin: 0;
+  overflow: hidden;
+  background: $background;
+  color: #000000;
+  touch-action: pan-left, pan-right, pan-up, pan-down;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  &:active {
+    @include click;
+  }
+}
+
+button,
+a,
+input {
+  outline: none;
+}
+
+.btn-ok {
+  background-color: $base-color;
+  color: whitesmoke;
+}
+
+.btn-cancel {
+  background-color: indianred;
+  color: whitesmoke;
+}
+
+@media (max-width: $middle) {
+  .fullscreen-modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw !important;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,55 @@
+.burger {
+  position: relative;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  user-select: none;
+  cursor: pointer;
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    &:checked {
+      ~ .icon .line1 {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+        stroke-width: 6;
+      }
+      ~ .icon .line2 {
+        stroke-dasharray: 1 60;
+        stroke-dashoffset: -30;
+        stroke-width: 6;
+      }
+      ~ .icon .line3 {
+        stroke-dasharray: 90 207;
+        stroke-dashoffset: -134;
+        stroke-width: 6;
+      }
+    }
+  }
+  .icon {
+    height: 100%;
+    width: 100%;
+    .line {
+      fill: none;
+      stroke: #f0f0f0;
+      stroke-width: 6;
+      transition: stroke-dasharray 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .line1 {
+      stroke-dasharray: 60 207;
+      stroke-width: 6;
+    }
+    .line2 {
+      stroke-dasharray: 60 60;
+      stroke-width: 6;
+    }
+    .line3 {
+      stroke-dasharray: 60 207;
+      stroke-width: 6;
+    }
+  }
+}

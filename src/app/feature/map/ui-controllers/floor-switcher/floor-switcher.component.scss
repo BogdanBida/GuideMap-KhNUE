@@ -1,0 +1,66 @@
+@import "mixins";
+@import "variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  button {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 99px;
+    background-color: $base-color;
+    @include shadow;
+    .icon {
+      margin: auto;
+      width: 66.66%;
+      height: 66.66%;
+    }
+    &.down-btn {
+      margin-top: 12px;
+      .icon {
+        transform: scaleY(-1);
+      }
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+    filter: brightness(0.8);
+    opacity: 0.8;
+  }
+}
+
+.floor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-bottom: 10px;
+  border-bottom: 2px solid $base-color;
+  border-radius: 4px;
+  @include glassmorphism(4px);
+  background-color: change-color($color: $base-color, $alpha: 0.1);
+  opacity: 0.9;
+  @include shadow;
+  label {
+    background-color: $base-color;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 4px 1em;
+    min-width: 6em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  div {
+    font-size: 24px;
+    margin: 5px 10px;
+  }
+}
