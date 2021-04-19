@@ -105,17 +105,6 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     subjects.forEach(s => { s.next(); s.complete(); });
   }
 
-  public setCursor(event, target): void {
-    if (event.button === 2) {
-      target.classList.add('with-cursor');
-    }
-  }
-  public removeCursor(event, target): void {
-    if (event.button === 2) {
-      target.classList.remove('with-cursor');
-    }
-  }
-
   private moveMapTo(left: number, top: number, transitionSpeed: number = DEFAULT_TRANSITION_SPEED): void {
     // adapt values ​​for zoom
     top = top * this.zoomFactor + (HEIGHT - HEIGHT * this.zoomFactor) / 2;
