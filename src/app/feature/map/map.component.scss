@@ -43,7 +43,7 @@
 
 .floor-switcher {
   bottom: 68px;
-  left: 48px;
+  left: 0px;
   z-index: 3;
 }
 
@@ -92,9 +92,6 @@
     width: calc(95% - 48px);
     left: calc(50% - 16px);
   }
-  .floor-switcher {
-    left: 2%;
-  }
   .left-gui-section {
     right: 5%;
   }
@@ -121,7 +118,6 @@
 
 @media (max-height: 460px) {
   .floor-switcher {
-    left: 64px;
     bottom: 32px;
   }
   .zoom-controls {

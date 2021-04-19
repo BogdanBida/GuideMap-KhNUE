@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FloorService } from '../../../../core/services';
 
 @Component({
@@ -7,6 +7,11 @@ import { FloorService } from '../../../../core/services';
   styleUrls: ['./floor-switcher.component.scss']
 })
 export class FloorSwitcherComponent {
+  @HostListener('window:keyup', ['$event'])
+  private keyEvent(event: KeyboardEvent): void {
+    event.key === 'ArrowUp' && this.upFloor();
+    event.key === 'ArrowDown' && this.downFloor();
+  }
 
   constructor(public floorService: FloorService) { }
 

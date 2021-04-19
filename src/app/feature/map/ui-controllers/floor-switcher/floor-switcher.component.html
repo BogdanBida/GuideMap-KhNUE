@@ -1,16 +1,19 @@
-<div class="floor">
-  <label for="">
-    {{ "UI.FLOOR" | translate }}
-  </label>
-  <div>
-    {{floorService.floor}}
-  </div>
-</div>
 <button class="up-btn" (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
   <svg class="icon">
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
   </svg>
 </button>
+<div class="floor">
+  <label for="">
+    {{ "UI.FLOOR" | translate }}
+  </label>
+  <div class="floor-container">
+    <div class="floor-number" *ngFor="let fl of [1,2,3,4]"
+      [ngStyle]="{'transform': 'translateY(' + ((1 - floorService.floor) * 100) + '%)'}">
+      {{ fl }}
+    </div>
+  </div>
+</div>
 <button class="down-btn" (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
   <svg class="icon">
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
