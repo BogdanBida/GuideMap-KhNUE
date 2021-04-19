@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public get value(): boolean {
     return this.sidebarService.isOpen.value;
   }
+  public isOpen: boolean = this.value;
 
   public form = this.formBuilder.group({
     location: [''],
@@ -40,6 +41,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions$.push(this.stateSerivce.getUserLocationBehaviorSubject()
       .subscribe(this.closeSidebar.bind(this)));
     this.subscriptions$.push(this.stateSerivce.getEndpointBehaviorSubject().subscribe(this.closeSidebar.bind(this)));
+    this.subscriptions$.push(this.sidebarService.isOpen.asObservable().subscribe((val: boolean) => {
+      this.isOpen = val;
+    }));
   }
 
   ngOnDestroy(): void {
