@@ -19,13 +19,31 @@
     margin-left: 10px;
   }
   @include shadow;
+  z-index: 5;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 0px;
+  z-index: 4;
+  user-select: none;
+  pointer-events: all;
+  background-color: transparent;
+  transition: 0.5s background-color;
+  &.opened {
+    background-color: rgba(0,0,0,0.2);
+    width: 100vw;
+  }
 }
 
 .wrapper {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 50vw;
   height: 100vh;
   padding: 20px 64px;
   display: flex;
@@ -47,7 +65,7 @@
     box-shadow: 0 0 300px black;
     .content {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       flex-direction: column;
       gap: 20px;
@@ -56,11 +74,14 @@
       overflow-y: auto;
       $animation-duration: 500ms;
       animation-name: appearance;
-      animation-delay: calc(#{$sidebar-animation-duration} - #{$animation-duration});
+      animation-delay: calc(
+        #{$sidebar-animation-duration} - #{$animation-duration}
+      );
       animation-duration: $animation-duration;
       animation-timing-function: ease-out;
       animation-fill-mode: backwards;
-      .whereabouts-form, .search {
+      .whereabouts-form,
+      .search {
         width: 50%;
         min-width: 200px;
       }
@@ -92,10 +113,16 @@
       margin-right: 10px;
     }
   }
+  .wrapper {
+    width: 75vw;
+  }
 }
 
 @media (max-width: $small) {
   .burger {
     top: 92px;
+  }
+  .wrapper {
+    width: 100vw;
   }
 }
