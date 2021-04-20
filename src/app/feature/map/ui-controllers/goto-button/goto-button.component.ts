@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { fromEvent, of, combineLatest } from 'rxjs';
 import { StateService } from '../../../../core/services';
 
 @Component({
@@ -9,11 +9,21 @@ import { StateService } from '../../../../core/services';
 })
 export class GotoButtonComponent implements OnInit {
 
-  public deg: number;
-
-  constructor(public stateService: StateService, private elementRef: ElementRef) { }
+  constructor(
+    public stateService: StateService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
+  ) { }
 
   ngOnInit(): void {
     this.stateService.gotoClickEvent = fromEvent(this.elementRef.nativeElement, 'click');
+    combineLatest([ // todo: add unsubsribing
+      this.stateService.getEndpointBehaviorSubject(),
+      this.stateService.getUserLocationBehaviorSubject()
+    ]).subscribe(([endpoint, userloc]) => {
+      !(userloc && endpoint) ?
+        this.renderer.addClass(this.elementRef.nativeElement, 'disabled')
+        : this.renderer.removeClass(this.elementRef.nativeElement, 'disabled');
+    });
   }
 }

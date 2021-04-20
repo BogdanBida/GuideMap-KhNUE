@@ -2,7 +2,7 @@ import { SvgPathUtils } from './../../../../utils/svg-path.utils';
 import { Path, LocationNode } from './../../../core/models';
 import {
   Component, ElementRef, OnDestroy, OnInit,
-  AfterViewInit, Renderer2, ViewChild, Input
+  AfterViewInit, Renderer2, ViewChild, Input, HostListener
 } from '@angular/core';
 import { Circle, Svg, SVG, Path as SvgPath } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
@@ -44,6 +44,14 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions$: Subscription[] = [];
   private locationsSubject$: Subject<void> = new Subject();
   private nodesSubject$: Subject<void> = new Subject();
+
+  @HostListener('wheel', ['$event'])
+  public onWheel(event: MouseEvent): void {
+    if (event.ctrlKey === true) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
 
   constructor(
     private stateService: StateService,
