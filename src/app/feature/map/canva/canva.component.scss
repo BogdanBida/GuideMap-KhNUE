@@ -10,7 +10,6 @@
 .container {
   position: absolute;
   transition: inherit;
-  // cursor: url('../../../../assets/map-cursor.png') 16 16, move;
   cursor: move;
   z-index: 0 !important;
   .zoom-wrapper {

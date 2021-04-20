@@ -161,6 +161,9 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   private drawPath(): void {
     this.clearPath();
     const { userLocation, endpoint } = this.stateService;
+    console.log(userLocation);
+    console.log(endpoint);
+
     // todo: change to find path data by user and endpoint
     const path = this.path[userLocation.id + '-' + endpoint.id];
 
