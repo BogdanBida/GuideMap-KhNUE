@@ -9,12 +9,15 @@ const MAX_FLOOR = 4;
   providedIn: 'root'
 })
 export class FloorService {
-  private $floor = new BehaviorSubject(environment.defaultFloor);
+  private $floor = new BehaviorSubject(Number(window.localStorage.getItem('floor')) || environment.defaultFloor);
 
   constructor() { }
 
   public set floor(value: number) {
-    if (value >= MIN_FLOOR && value <= MAX_FLOOR) { this.$floor.next(value); }
+    if (value >= MIN_FLOOR && value <= MAX_FLOOR) {
+      this.$floor.next(value);
+      window.localStorage.setItem('floor', String(value));
+    }
   }
 
   public get floor(): number { return this.$floor.value; }
