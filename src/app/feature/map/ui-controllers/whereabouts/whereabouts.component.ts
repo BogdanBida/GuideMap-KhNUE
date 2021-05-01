@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { LocationNode } from '../../../../core/models';
+import { GuideMapFeaturePoint, GuideMapRoomProperties, LocationNode } from '../../../../core/models';
 import { NodeService, StateService } from '../../../../core/services';
 
 @Component({
@@ -12,7 +12,7 @@ import { NodeService, StateService } from '../../../../core/services';
 export class WhereaboutsComponent implements OnInit {
   @Output() setLocation = new EventEmitter<LocationNode>();
 
-  public locNodes: LocationNode[];
+  public locNodes: GuideMapFeaturePoint[];
 
   public isOpen = false;
   constructor(
@@ -25,11 +25,12 @@ export class WhereaboutsComponent implements OnInit {
   public ngOnInit(): void {
     combineLatest([
       this.acivateRoute.queryParams,
-      this.nodeService.getQRNodes(),
+      this.nodeService.getQrCodes(),
     ]).subscribe(([params, data]) => {
-      const nodeId = params.nodeid;
+      const nodeId = parseFloat(params.nodeid);
+      const userLocation = data.find(({ properties }) => properties.id === nodeId).properties as unknown as GuideMapRoomProperties;
       this.locNodes = data;
-      this.stateService.userLocation = this.locNodes[nodeId];
+      this.stateService.userLocation = userLocation; 
     });
   }
 

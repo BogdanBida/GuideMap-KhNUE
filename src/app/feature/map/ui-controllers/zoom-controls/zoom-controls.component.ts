@@ -27,8 +27,6 @@ export class ZoomControlsComponent implements OnInit {
   public get zoomFactor(): number { return this.$zoomFactor; }
   private $zoomFactor: number;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.zoomFactor = environment.defaultZoomFactor;
   }

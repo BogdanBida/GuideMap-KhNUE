@@ -4,13 +4,23 @@ import { SidebarService } from './../../../core/services/sidebar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NodeService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
+  constructor(
+    public sidebarService: SidebarService,
+    private stateService: StateService,
+    private readonly _nodeService: NodeService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
+
+  public readonly qrCodesProperties$ = this._nodeService.qrCodesProperties$;
 
   public set value(val: boolean) {
     this.sidebarService.isOpen.next(val);
@@ -25,32 +35,31 @@ export class SidebarComponent implements OnInit, OnDestroy {
   });
   public subscriptions$: Subscription[] = [];
 
-  constructor(
-    public sidebarService: SidebarService,
-    private stateSerivce: StateService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-  ) { }
-
   ngOnInit(): void {
     const valChangesSubs = this.form.valueChanges.subscribe(() => {
       const nodeid = this.form.get('location').value;
       this.router.navigate([], { queryParams: { nodeid } });
     });
-    this.subscriptions$.push(valChangesSubs);
-    this.subscriptions$.push(this.stateSerivce.getUserLocationBehaviorSubject()
-      .subscribe(this.closeSidebar.bind(this)));
-    this.subscriptions$.push(this.stateSerivce.getEndpointBehaviorSubject().subscribe(this.closeSidebar.bind(this)));
-    this.subscriptions$.push(this.sidebarService.isOpen.asObservable().subscribe((val: boolean) => {
-      this.isOpen = val;
-    }));
+    this.subscriptions$.push(
+      valChangesSubs,
+      this.stateService
+        .getUserLocationBehaviorSubject()
+        .subscribe(this.closeSidebar.bind(this)),
+      this.stateService
+        .getEndpointBehaviorSubject()
+        .subscribe(this.closeSidebar.bind(this)),
+      this.sidebarService.isOpen.asObservable().subscribe((val: boolean) => {
+        this.isOpen = val;
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions$.forEach(s => s.unsubscribe());
+    this.subscriptions$.forEach((s) => s.unsubscribe());
   }
 
   private closeSidebar(): void {
-    this.sidebarService.isOpen.getValue() && this.sidebarService.isOpen.next(false);
+    this.sidebarService.isOpen.getValue() &&
+      this.sidebarService.isOpen.next(false);
   }
 }

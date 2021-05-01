@@ -11,7 +11,7 @@ export class DragNDrop {
       const shiftX = (event.pageX || event.touches[0].pageX) - coords.left;
       const shiftY = (event.pageY || event.touches[0].pageY) - coords.top;
 
-      document.body.appendChild(target);
+      // document.body.appendChild(target);
       document.onmouseup = drop;
       document.ontouchend = drop;
 

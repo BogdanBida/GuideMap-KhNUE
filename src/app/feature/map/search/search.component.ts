@@ -1,9 +1,21 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { LocationNode, RoomNode } from '../../../core/models';
+import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
+import {
+  GuideMapFeaturePoint,
+  GuideMapRoomProperties,
+  LocationNode,
+  RoomNode,
+} from '../../../core/models';
 import { NodeService, StateService } from './../../../core/services';
 
 interface Room {
@@ -18,7 +30,9 @@ export interface StateGroup {
 
 export const $filter = (opt: Room[], value: string): Room[] => {
   const filterValue = value.toLowerCase();
-  return opt.filter(item => item.viewValue.toLowerCase().indexOf(filterValue) === 0);
+  return opt.filter(
+    (item) => item.viewValue.toLowerCase().indexOf(filterValue) === 0
+  );
 };
 
 @Component({
@@ -27,17 +41,17 @@ export const $filter = (opt: Room[], value: string): Room[] => {
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  public locations: RoomNode[];
+  public locations: GuideMapFeaturePoint[];
 
   @Output() setLocation = new EventEmitter<LocationNode>();
 
   public stateForm: FormGroup = this.fb.group({
-    stateGroup: '',
+    stateGroup: "232",
   });
 
   public stateGroups: StateGroup[];
 
-  stateGroupOptions: Observable<StateGroup[]>;
+  public stateGroupOptions: Observable<StateGroup[]>;
 
   constructor(
     private stateService: StateService,
@@ -48,25 +62,29 @@ export class SearchComponent implements OnInit {
     this.stateGroups = [];
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.nodeService.getRoomsNodes().subscribe((data) => {
       this.locations = data;
       this.stateGroups.push({
         groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
-        rooms: data.map((v, i) => {
-          return {
-            value: String(v.id),
-            viewValue: v.name,
-          };
-        })
+        rooms: data
+          .filter(
+            (item) =>
+              item.properties.category === GuideMapFeaturePointCategory.room
+          )
+          .map(({ properties }) => {
+            return {
+              value: String(properties.id),
+              viewValue: properties.name,
+            };
+          }),
       });
     });
 
-    this.stateGroupOptions = this.stateForm.get('stateGroup').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
+    this.stateGroupOptions = this.stateGroupControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filterGroup(value))
+    );
   }
 
   public clear(): void {
@@ -74,20 +92,25 @@ export class SearchComponent implements OnInit {
   }
 
   public findLocation(): void {
-    this.stateService.endpoint = this.locations.find((v) => {
-      return this.stateForm.get('stateGroup').value === v.name;
+    const foundLocation = this.locations.find((roomNode) => {
+      return this.stateGroupControl.value === roomNode.properties.name;
     });
+    this.stateService.endpoint = foundLocation.properties as unknown as GuideMapRoomProperties;
   }
 
   private _filterGroup(value: string): StateGroup[] {
     if (value) {
       return this.stateGroups
-        .map(group => ({
+        .map((group) => ({
           groupName: group.groupName,
-          rooms: $filter(group.rooms, value)
+          rooms: $filter(group.rooms, value),
         }))
-        .filter(group => group.rooms.length > 0);
+        .filter((group) => group.rooms.length > 0);
     }
     return this.stateGroups;
+  }
+
+  private get stateGroupControl(): AbstractControl {
+    return this.stateForm.get('stateGroup');
   }
 }
