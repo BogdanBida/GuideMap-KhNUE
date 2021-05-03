@@ -1,7 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { GuideMapFeaturePoint, GuideMapRoomProperties, LocationNode } from '../../../../core/models';
+import {
+  GuideMapFeaturePoint,
+  GuideMapRoomProperties,
+  LocationNode,
+} from '../../../../core/models';
 import { NodeService, StateService } from '../../../../core/services';
 
 @Component({
@@ -28,9 +32,26 @@ export class WhereaboutsComponent implements OnInit {
       this.nodeService.getQrCodes(),
     ]).subscribe(([params, data]) => {
       const nodeId = parseFloat(params.nodeid);
-      const userLocation = data.find(({ properties }) => properties.id === nodeId).properties as unknown as GuideMapRoomProperties;
+      const userLocation = (data.find(
+        ({ properties }) => properties.id === nodeId
+      ).properties as unknown) as GuideMapRoomProperties;
       this.locNodes = data;
-      this.stateService.userLocation = userLocation; 
+      // this.stateService.userLocation = userLocation;
+
+      this.stateService.userLocation = ({
+          id: 0,
+          name: '201',
+          category: 'room',
+          x: 2070,
+          y: 1825,
+          corridor: 2,
+          corridors: [
+            {
+              endRoom: 1,
+              corridorTracks: [2, 3],
+            },
+          ],
+      } as unknown) as GuideMapRoomProperties;
     });
   }
 

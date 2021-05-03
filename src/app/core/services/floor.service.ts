@@ -20,6 +20,10 @@ export class FloorService {
     }
   }
 
+  public get floor$() {
+    return this.$floor.asObservable();
+  }
+
   public get floor(): number { return this.$floor.value; }
 
   public isMaxFloor(): boolean {

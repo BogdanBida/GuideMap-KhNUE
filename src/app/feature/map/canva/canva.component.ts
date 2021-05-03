@@ -25,7 +25,7 @@ import {
   StateService,
 } from './../../../core/services';
 
-import { USER_LOC_COLOR, ENDPOINT_COLOR, STROKE_CONFIG } from './canvas-config';
+import { USER_LOC_COLOR, ENDPOINT_COLOR, STROKE_CONFIG, STAIRS_ENDPOINT_COLOR } from './canvas-config';
 
 const WIDTH = 3500;
 const HEIGHT = 2550;
@@ -93,17 +93,16 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     //   this.nodeService.getRoomsNodes(),
     //   this.nodeService.getRooms(),
     // ])
-    this.nodeService.init$()
-      .subscribe((featurePoint) => {
-        this.stateService.createGraph(featurePoint);
-        // this.routes = nodes;
-        // this.path = paths[0];
-      });
+    this.nodeService.init$().subscribe(() => {
+      this.stateService.createGraph();
+      // this.routes = nodes;
+      // this.path = paths[0];
+    });
 
     this.subscriptions$.push(
       this.floorService.setFloorSubscribe((floor) => {
         this.currentFloor = floor;
-        this.stateService.endpoint = null;
+        // this.stateService.endpoint = null;
         this.clearPath();
         this.drawBackground();
       })
@@ -117,9 +116,28 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(([userLocation, endpoint]) => {
         this.clearPath();
         this.drawUserLocation(userLocation);
-        this.drawEndpointLocation(endpoint);
         userLocation && this.moveMapTo(userLocation.x, userLocation.y);
         endpoint && this.moveMapTo(endpoint.x, endpoint.y);
+      });
+
+    combineLatest([
+      this.stateService.stairsEndPoint$,
+      this.stateService.getEndpointBehaviorSubject(),
+    ])
+      .subscribe(([stairsEndPoint, endpoint]) => {
+        if(stairsEndPoint) {
+          this.endpointDot = this.drawPoint(
+            this.endpointDot,
+            stairsEndPoint,
+            STAIRS_ENDPOINT_COLOR
+          );
+        } else {
+          this.endpointDot = this.drawPoint(
+            this.endpointDot,
+            endpoint,
+            ENDPOINT_COLOR
+          );
+        }
       });
   }
 
@@ -132,7 +150,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  private _drawAndMove(): void {
+  public _drawAndMove(): void {
     if (this.stateService.isHasUserLocationAndEndPoint) {
       this.drawPath();
       this.moveMapTo(
@@ -237,10 +255,12 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       .getPathCoordinates$()
       .pipe(
         tap((coordinates) => {
+          debugger
           this.clearPath();
           const { userLocation, endpoint } = this.stateService;
-          console.log(userLocation);
-          console.log(endpoint);
+          const stairsEndPoint = this.stateService.stairsEndPoint$.getValue();
+
+          const currentEndPoint = stairsEndPoint ?? endpoint;
 
           const properties = userLocation;
           // todo: change to find path data by user and endpoint
@@ -253,7 +273,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
             //   const { x, y } = this.routes[v];
             //   return [x, y];
             // }),
-            [endpoint.x, endpoint.y],
+            [currentEndPoint.x, currentEndPoint.y],
           ];
 
           const pathString = points.reduce((acc, point, i, a) => {

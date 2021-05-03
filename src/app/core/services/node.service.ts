@@ -30,6 +30,8 @@ export class NodeService {
 
   public readonly qrCodes$ = new BehaviorSubject<GuideMapFeaturePoint[]>([]);
 
+  public readonly corridors$ = new BehaviorSubject<any[]>([]);
+
   public readonly qrCodesAndRooms$ = combineLatest([
     this.qrCodes$,
     this.rooms$,
@@ -39,6 +41,28 @@ export class NodeService {
     })
   );
 
+  public readonly allNodes$ = combineLatest([
+    this.qrCodes$,
+    this.rooms$,
+    this.corridors$,
+  ]).pipe(
+    map(([qrCodes, rooms, corridors]) => {
+      return [...qrCodes, ...rooms, ...corridors];
+    })
+  );
+
+  public get allNodes(): GuideMapFeaturePoint[] {
+    return [
+      ...this.rooms$.getValue(),
+      ...this.qrCodes$.getValue(),
+      ...this.corridors$.getValue(),
+    ];
+  }
+
+  public get qrCodesAndRooms(): GuideMapFeaturePoint[] {
+    return [...this.rooms$.getValue(), ...this.qrCodes$.getValue()];
+  }
+
   public init$(): Observable<GuideMapFeaturePoint[]> {
     return this.getRoomsNodes().pipe(
       tap((points) => {
@@ -47,6 +71,9 @@ export class NodeService {
         );
         this.qrCodes$.next(
           this._filterDataSet(points, GuideMapFeaturePointCategory.qrCode)
+        );
+        this.corridors$.next(
+          this._filterDataSet(points, GuideMapFeaturePointCategory.corridor)
         );
       })
     );

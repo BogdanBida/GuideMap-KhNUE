@@ -6,12 +6,8 @@
       "category": "room",
       "x": 2070,
       "y": 1825,
-      "corridors": [
-        {
-          "endRoom": 1,
-          "corridorTracks": [2, 3]
-        }
-      ]
+      "floor": 2,
+      "corridor": 2
     }
   },
   {
@@ -21,12 +17,7 @@
       "category": "room",
       "x": 1611,
       "y": 1804,
-      "corridors": [
-        {
-          "endRoom": 0,
-          "corridorTracks": [3, 2]
-        }
-      ]
+      "corridor": 8
     }
   },
   {
@@ -35,8 +26,8 @@
       "category": "corridor",
       "x": 2031,
       "y": 1783,
-      "endRooms": [],
-      "startRooms": []
+      "floor": 2,
+      "corridors": [3]
     }
   },
   {
@@ -45,8 +36,8 @@
       "category": "corridor",
       "x": 1872,
       "y": 1766,
-      "endRooms": [],
-      "startRooms": []
+      "floor": 2,
+      "corridors": [7]
     }
   },
   {
@@ -92,6 +83,97 @@
           "corridorTracks": [2, 3]
         }
       ]
+    }
+  },
+  {
+    "properties": {
+      "id": 7,
+      "category": "corridor",
+      "x": 1725,
+      "y": 1770,
+      "corridors": [8]
+    }
+  },
+  {
+    "properties": {
+      "id": 8,
+      "category": "corridor",
+      "x": 1625,
+      "y": 1762,
+      "corridors": [9]
+    }
+  },
+  {
+    "properties": {
+      "id": 9,
+      "category": "corridor",
+      "x": 1376,
+      "y": 1765,
+      "corridors": [10]
+    }
+  },
+  {
+    "properties": {
+      "id": 10,
+      "category": "corridor",
+      "x": 1199,
+      "y": 1768,
+      "corridors": []
+    }
+  },
+  {
+    "properties": {
+      "id": 11,
+      "category": "corridor",
+      "x": 1199,
+      "y": 1768,
+      "corridors": []
+    }
+  },
+  {
+    "properties": {
+      "id": 12,
+      "name": "Лестница 2 этаж",
+      "category": "corridor",
+      "isStairs": true,
+      "x": 1876,
+      "y": 1616,
+      "floor": 2,
+      "corridors": [3]
+    }
+  },
+  {
+    "properties": {
+      "id": 13,
+      "name": "338",
+      "category": "room",
+      "x": 1874,
+      "y": 1802,
+      "floor": 3,
+      "corridor": 14
+    }
+  },
+  {
+    "properties": {
+      "id": 14,
+      "name": "корридор 3 этаж",
+      "category": "corridor",
+      "x": 1880,
+      "y": 1739,
+      "floor": 3,
+      "corridors": [15] 
+    }
+  },
+  {
+    "properties": {
+      "id": 15,
+      "name": "Лестница 3 этаж",
+      "category": "corridor",
+      "isStairs": true,
+      "x": 1873,
+      "y": 1671,
+      "floor": 3,
+      "corridors": [12]
     }
   }
 ]

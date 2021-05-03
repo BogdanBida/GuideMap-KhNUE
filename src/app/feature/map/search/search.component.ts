@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
   @Output() setLocation = new EventEmitter<LocationNode>();
 
   public stateForm: FormGroup = this.fb.group({
-    stateGroup: "232",
+    stateGroup: "338",
   });
 
   public stateGroups: StateGroup[];
