@@ -16,7 +16,7 @@ import { MapUtils } from '../utils';
 @Injectable({
   providedIn: 'root',
 })
-export class MapPointsService {
+export class MapDataProviderService {
   constructor(private readonly _httpClient: HttpClient) {}
 
   public readonly rooms$ = new BehaviorSubject<GuideMapFeaturePoint[]>([]);

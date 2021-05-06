@@ -11,13 +11,15 @@ import {
   GuideMapSimpleRoute,
 } from '../models';
 import { MapUtils } from '../utils';
-import { MapPointsService } from './map-points.service';
+import { MapDataProviderService } from './map-data-provider.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapGraphService {
-  constructor(private readonly _mapPointsService: MapPointsService) {}
+  constructor(
+    private readonly _mapDataProviderService: MapDataProviderService
+  ) {}
 
   private readonly _graph = new Graph();
 
@@ -91,9 +93,13 @@ export class MapGraphService {
     corridorsVertexes: GraphVertex[];
   } {
     return {
-      roomsVertexes: MapUtils.getVertexes(this._mapPointsService.rooms),
-      qrCodesVertexes: MapUtils.getVertexes(this._mapPointsService.qrCodes),
-      corridorsVertexes: MapUtils.getVertexes(this._mapPointsService.corridors),
+      roomsVertexes: MapUtils.getVertexes(this._mapDataProviderService.rooms),
+      qrCodesVertexes: MapUtils.getVertexes(
+        this._mapDataProviderService.qrCodes
+      ),
+      corridorsVertexes: MapUtils.getVertexes(
+        this._mapDataProviderService.corridors
+      ),
     };
   }
 
@@ -112,7 +118,7 @@ export class MapGraphService {
     corridorsVertexes: GraphVertex[]
   ): GraphEdge[] {
     const corridorsEdges: GraphEdge[] = [];
-    const qrCodesAndRooms = this._mapPointsService.qrCodesAndRooms; // !!!
+    const qrCodesAndRooms = this._mapDataProviderService.qrCodesAndRooms; // !!!
 
     roomVertexes.forEach((roomVertex) => {
       const foundedRoomItem = qrCodesAndRooms.find(
@@ -138,7 +144,7 @@ export class MapGraphService {
   }
 
   private _getCorridorsEdges(corridorsVertexes: GraphVertex[]): GraphEdge[] {
-    const corridors = this._mapPointsService.corridors$.getValue();
+    const corridors = this._mapDataProviderService.corridors$.getValue();
     const oneToManyCorridorsEdges: GraphEdge[] = [];
 
     corridorsVertexes.forEach((corridor) => {

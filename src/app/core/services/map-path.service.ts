@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
+import { ICoordinates } from '../interfaces';
 import {
   GuideMapCorridorProperties,
   GuideMapFeaturePoint,
@@ -8,15 +9,15 @@ import {
   GuideMapSimpleRoute,
 } from '../models';
 import { FloorService } from './floor.service';
+import { MapDataProviderService } from './map-data-provider.service';
 import { MapGraphService } from './map-graph.service';
-import { MapPointsService } from './map-points.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MapPathService {
   constructor(
-    private readonly _mapPointsService: MapPointsService,
+    private readonly _mapPointsService: MapDataProviderService,
     private readonly _mapGraphService: MapGraphService,
     private readonly _floorService: FloorService
   ) {}
@@ -31,6 +32,21 @@ export class MapPathService {
     null
   );
 
+  public get pathCoordinatesChanges$(): Observable<
+    [GuideMapRoomProperties, GuideMapRoomProperties]
+  > {
+    return combineLatest([this.userLocation$, this.endpoint$]);
+  }
+
+  public readonly pathPoints$ = this.userLocation$.pipe(
+    withLatestFrom(this.endpoint$, this.stairsMiddlePoint$),
+    map(([userLocation, endpoint, stairsMiddlePoint]) => ({
+      userLocation,
+      endpoint,
+      stairsMiddlePoint,
+    }))
+  );
+
   public readonly endPointId$ = this.endpoint$.pipe(
     map((endpoint) => endpoint?.id)
   );
@@ -39,6 +55,10 @@ export class MapPathService {
     map((userLocation) => userLocation?.id)
   );
 
+  public get isHasUserLocationAndEndPoint(): boolean {
+    return !!this.endpoint$.value && !!this.userLocation$.value;
+  }
+
   public drawPath(): void {
     const stairsMiddlePointValue = this.stairsMiddlePoint$.getValue();
 
@@ -46,7 +66,7 @@ export class MapPathService {
     this.stairsMiddlePoint$.next(null);
   }
 
-  public getPathCoordinates$(): Observable<{ x: number; y: number }[]> {
+  public getPathCoordinates$(): Observable<ICoordinates[]> {
     return this._floorService.floor$.pipe(
       withLatestFrom(
         this._mapPointsService.allPoints$,
@@ -71,7 +91,7 @@ export class MapPathService {
     path: GuideMapSimpleRoute[],
     floor: number,
     points: GuideMapFeaturePoint[]
-  ): { x: number; y: number }[] {
+  ): ICoordinates[] {
     const fullPath: number[] = path.map((item) => item.end);
 
     const fullPathWithCorridors = fullPath.map((pointId) => {

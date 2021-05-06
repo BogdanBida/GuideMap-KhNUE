@@ -4,9 +4,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MapPointsService } from 'src/app/core/services';
+import { MapDataProviderService } from 'src/app/core/services';
 import { SidebarService } from './../../../core/services/sidebar.service';
-import { StateService } from './../../../core/services/state.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,13 +15,14 @@ import { StateService } from './../../../core/services/state.service';
 export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     public sidebarService: SidebarService,
-    private readonly stateService: StateService,
-    private readonly _nodeService: MapPointsService,
+    // private readonly stateService: StateService,
+    private readonly _mapDataProviderService: MapDataProviderService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router
   ) {}
 
-  public readonly qrCodesProperties$ = this._nodeService.qrCodesProperties$;
+  public readonly qrCodesProperties$ = this._mapDataProviderService
+    .qrCodesProperties$;
 
   public set value(val: boolean) {
     this.sidebarService.isOpen.next(val);
@@ -49,12 +49,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.subscriptions$.push(
       valChangesSubs,
-      this.stateService
-        .getUserLocationBehaviorSubject()
-        .subscribe(this.closeSidebar.bind(this)),
-      this.stateService
-        .getEndpointBehaviorSubject()
-        .subscribe(this.closeSidebar.bind(this)),
+      // this.stateService
+      //   .getUserLocationBehaviorSubject()
+      //   .subscribe(this.closeSidebar.bind(this)),
+      // this.stateService
+      //   .getEndpointBehaviorSubject()
+      //   .subscribe(this.closeSidebar.bind(this)),
       this.sidebarService.isOpen.asObservable().subscribe((val: boolean) => {
         this.isOpen = val;
       })
@@ -65,8 +65,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions$.forEach((s) => s.unsubscribe());
   }
 
-  private closeSidebar(): void {
-    this.sidebarService.isOpen.getValue() &&
-      this.sidebarService.isOpen.next(false);
-  }
+  // private closeSidebar(): void {
+  //   this.sidebarService.isOpen.getValue() &&
+  //     this.sidebarService.isOpen.next(false);
+  // }
 }

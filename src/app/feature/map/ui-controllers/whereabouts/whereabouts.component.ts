@@ -2,12 +2,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
+import { GuideMapFeaturePoint, LocationNode } from '../../../../core/models';
 import {
-  GuideMapFeaturePoint,
-  GuideMapRoomProperties,
-  LocationNode,
-} from '../../../../core/models';
-import { MapPointsService, StateService } from '../../../../core/services';
+  MapDataProviderService,
+  MapPathService,
+} from '../../../../core/services';
 
 @Component({
   selector: 'app-whereabouts',
@@ -16,10 +16,10 @@ import { MapPointsService, StateService } from '../../../../core/services';
 })
 export class WhereaboutsComponent implements OnInit {
   constructor(
-    private stateService: StateService,
+    private readonly _mapPathService: MapPathService,
     private readonly router: Router,
     private readonly acivateRoute: ActivatedRoute,
-    private readonly nodeService: MapPointsService
+    private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
   @Output() public setLocation = new EventEmitter<LocationNode>();
@@ -31,7 +31,7 @@ export class WhereaboutsComponent implements OnInit {
   public ngOnInit(): void {
     combineLatest([
       this.acivateRoute.queryParams,
-      this.nodeService.qrCodes$,
+      this._mapDataProviderService.qrCodes$,
     ]).subscribe(([, data]) => {
       // const nodeId = parseFloat(params.nodeid);
       // const userLocation = (data.find(
@@ -41,20 +41,14 @@ export class WhereaboutsComponent implements OnInit {
       this.locNodes = data;
       // this.stateService.userLocation = userLocation;
 
-      this.stateService.userLocation = ({
+      this._mapPathService.userLocation$.next({
         id: 0,
         name: '201',
-        category: 'room',
+        category: GuideMapFeaturePointCategory.room,
         x: 2070,
         y: 1825,
         corridor: 2,
-        corridors: [
-          {
-            endRoom: 1,
-            corridorTracks: [2, 3],
-          },
-        ],
-      } as unknown) as GuideMapRoomProperties;
+      });
     });
   }
 

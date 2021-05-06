@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component } from '@angular/core';
-import { FloorService, StateService } from '../../../../core/services';
+import { FloorService, MapPathService } from '../../../../core/services';
 
 @Component({
   selector: 'app-floor-switcher',
@@ -9,17 +8,24 @@ import { FloorService, StateService } from '../../../../core/services';
 })
 export class FloorSwitcherComponent {
   constructor(
-    public floorService: FloorService,
-    private readonly stateService: StateService
+    private readonly _floorService: FloorService,
+    private readonly _mapPathService: MapPathService
   ) {}
 
+  public readonly floorNumberPositionStyle$ = this._floorService
+    .floorNumberPositionStyle$;
+
+  public readonly isMinFloor$ = this._floorService.isMinFloor$;
+
+  public readonly isMaxFloor$ = this._floorService.isMaxFloor$;
+
   public upFloor(): void {
-    this.stateService.drawPath();
-    this.floorService.floor++;
+    this._mapPathService.drawPath();
+    this._floorService.floor++;
   }
 
   public downFloor(): void {
-    this.stateService.drawPath();
-    this.floorService.floor--;
+    this._mapPathService.drawPath();
+    this._floorService.floor--;
   }
 }

@@ -10,7 +10,10 @@ import {
   GuideMapRoomProperties,
   LocationNode,
 } from '../../../core/models';
-import { MapPointsService, StateService } from './../../../core/services';
+import {
+  MapDataProviderService,
+  MapPathService,
+} from './../../../core/services';
 
 interface Room {
   value: string;
@@ -37,8 +40,8 @@ export const $filter = (opt: Room[], value: string): Room[] => {
 })
 export class SearchComponent implements OnInit {
   constructor(
-    private stateService: StateService,
-    private readonly nodeService: MapPointsService,
+    private readonly _mapPathService: MapPathService,
+    private readonly _mapDataProviderService: MapDataProviderService,
     private readonly fb: FormBuilder,
     private readonly translateService: TranslateService
   ) {
@@ -58,7 +61,7 @@ export class SearchComponent implements OnInit {
   public stateGroupOptions: Observable<StateGroup[]>;
 
   public ngOnInit(): void {
-    this.nodeService.getRoomsNodes().subscribe((data) => {
+    this._mapDataProviderService.getRoomsNodes().subscribe((data) => {
       this.locations = data;
       this.stateGroups.push({
         groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
@@ -84,7 +87,7 @@ export class SearchComponent implements OnInit {
   }
 
   public clear(): void {
-    this.stateService.endpoint = null;
+    this._mapPathService.endpoint$.next(null);
   }
 
   public findLocation(): void {
@@ -92,7 +95,9 @@ export class SearchComponent implements OnInit {
       return this.stateGroupControl.value === roomNode.properties.name;
     });
 
-    this.stateService.endpoint = (foundLocation.properties as unknown) as GuideMapRoomProperties;
+    this._mapPathService.endpoint$.next(
+      (foundLocation.properties as unknown) as GuideMapRoomProperties
+    );
   }
 
   private _filterGroup(value: string): StateGroup[] {

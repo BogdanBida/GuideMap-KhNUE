@@ -4,45 +4,51 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
 
 const MIN_FLOOR = 1;
 const MAX_FLOOR = 4;
+const ONE_HUNDRED = 100;
 
 @Injectable({
   providedIn: 'root',
 })
 export class FloorService {
-  constructor() {}
-
-  private readonly $floor = new BehaviorSubject(
+  public readonly floor$ = new BehaviorSubject(
     Number(window.localStorage.getItem('floor')) || environment.defaultFloor
+  );
+
+  public readonly isMaxFloor$ = this.floor$.pipe(
+    map((floor) => floor >= MAX_FLOOR)
+  );
+
+  public readonly isMinFloor$ = this.floor$.pipe(
+    map((floor) => floor <= MIN_FLOOR)
+  );
+
+  public readonly floorNumberPositionStyle$ = this.floor$.pipe(
+    map((floor) => {
+      return { transform: 'translateY(' + (1 - floor) * ONE_HUNDRED + '%)' };
+    })
   );
 
   public set floor(value: number) {
     if (value >= MIN_FLOOR && value <= MAX_FLOOR) {
-      this.$floor.next(value);
+      this.floor$.next(value);
       window.localStorage.setItem('floor', String(value));
     }
   }
 
-  public get floor$() {
-    return this.$floor.asObservable();
-  }
-
   public get floor(): number {
-    return this.$floor.value;
-  }
-
-  public isMaxFloor(): boolean {
-    return this.$floor.value >= MAX_FLOOR;
-  }
-
-  public isMinFloor(): boolean {
-    return this.$floor.value <= MIN_FLOOR;
+    return this.floor$.value;
   }
 
   public setFloorSubscribe(observer: any): Subscription {
-    return this.$floor.subscribe(observer);
+    return this.floor$.subscribe(observer);
+  }
+
+  public getFloorImageName(): string {
+    return this.floor ? this.floor + '.svg' : null;
   }
 }
