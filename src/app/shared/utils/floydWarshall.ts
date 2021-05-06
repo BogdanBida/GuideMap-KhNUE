@@ -1,10 +1,6 @@
 import { Graph } from './Graph';
 import { GraphVertex } from './GraphVertex';
 
-/**
- * @param {Graph} graph
- * @return {{distances: number[][], nextVertices: GraphVertex[][]}}
- */
 export function floydWarshall(
   graph: Graph
 ): { distances: number[][]; nextVertices: GraphVertex[][] } {
@@ -35,7 +31,7 @@ export function floydWarshall(
         distances[startIndex][endIndex] = 0;
       } else {
         // Find edge between the start and end vertices.
-        const edge = graph.findEdge(startVertex, endVertex);
+        const edge = graph.findEdge(startVertex, endVertex) as any;
 
         if (edge) {
           // There is an edge from vertex with startIndex to vertex with endIndex.
@@ -56,9 +52,9 @@ export function floydWarshall(
   // loops over all graph vertices: for start, end and middle vertices.
   vertices.forEach((middleVertex, middleIndex) => {
     // Path starts from startVertex with startIndex.
-    vertices.forEach((startVertex, startIndex) => {
+    vertices.forEach((_, startIndex) => {
       // Path ends to endVertex with endIndex.
-      vertices.forEach((endVertex, endIndex) => {
+      vertices.forEach((__, endIndex) => {
         // Compare existing distance from startVertex to endVertex, with distance
         // from startVertex to endVertex but via middleVertex.
         // Save the shortest distance and previous vertex that allows

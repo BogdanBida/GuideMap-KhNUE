@@ -7,7 +7,7 @@ import {
   GuideMapRoomProperties,
   LocationNode,
 } from '../../../../core/models';
-import { NodeService, StateService } from '../../../../core/services';
+import { MapPointsService, StateService } from '../../../../core/services';
 
 @Component({
   selector: 'app-whereabouts',
@@ -19,7 +19,7 @@ export class WhereaboutsComponent implements OnInit {
     private stateService: StateService,
     private readonly router: Router,
     private readonly acivateRoute: ActivatedRoute,
-    private readonly nodeService: NodeService
+    private readonly nodeService: MapPointsService
   ) {}
 
   @Output() public setLocation = new EventEmitter<LocationNode>();
@@ -31,12 +31,12 @@ export class WhereaboutsComponent implements OnInit {
   public ngOnInit(): void {
     combineLatest([
       this.acivateRoute.queryParams,
-      this.nodeService.getQrCodes(),
-    ]).subscribe(([params, data]) => {
-      const nodeId = parseFloat(params.nodeid);
-      const userLocation = (data.find(
-        ({ properties }) => properties.id === nodeId
-      ).properties as unknown) as GuideMapRoomProperties;
+      this.nodeService.qrCodes$,
+    ]).subscribe(([, data]) => {
+      // const nodeId = parseFloat(params.nodeid);
+      // const userLocation = (data.find(
+      //   ({ properties }) => properties.id === nodeId
+      // ).properties as unknown) as GuideMapRoomProperties;
 
       this.locNodes = data;
       // this.stateService.userLocation = userLocation;

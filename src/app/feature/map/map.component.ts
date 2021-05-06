@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
   public isDevMode = isDevMode();
 
   @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
+  onMouseMove(event: { layerX: number; layerY: number }): void {
     this.x = event.layerX;
     this.y = event.layerY;
   }

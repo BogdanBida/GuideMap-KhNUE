@@ -111,15 +111,7 @@ export class LinkedList {
     return deletedNode;
   }
 
-  /**
-   *
-   *
-   * @param findParams
-   * @param findParams.value
-   * @param [findParams.callback]
-   * @return
-   */
-  public find({ value = undefined, callback = undefined }) {
+  public find({ value = undefined, callback = undefined }: any) {
     if (!this.head) {
       return null;
     }
@@ -127,12 +119,10 @@ export class LinkedList {
     let currentNode = this.head;
 
     while (currentNode) {
-      // If callback is specified then try to find node by callback.
       if (callback && callback(currentNode.value)) {
         return currentNode;
       }
 
-      // If value is specified then try to compare by value..
       if (value !== undefined && this.compare.equal(currentNode.value, value)) {
         return currentNode;
       }

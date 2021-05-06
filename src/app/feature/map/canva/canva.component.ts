@@ -22,7 +22,7 @@ import { SvgPathUtils } from './../../../../utils/svg-path.utils';
 import { LocationNode } from './../../../core/models';
 import {
   FloorService,
-  NodeService,
+  MapPointsService,
   StateService,
 } from './../../../core/services';
 import {
@@ -45,7 +45,7 @@ const DEFAULT_ZOOM_FACTOR = 1;
 export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private readonly stateService: StateService,
-    private readonly nodeService: NodeService,
+    private readonly nodeService: MapPointsService,
     private readonly floorService: FloorService,
     private readonly renderer: Renderer2
   ) {}
@@ -71,11 +71,6 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private currentPath: SvgPath;
 
-  // ----------------
-  private readonly routes: LocationNode[];
-
-  // private path: Path;
-  // ---------------- rxjs entities
   private readonly subscriptions$: Subscription[] = [];
 
   private readonly locationsSubject$: Subject<void> = new Subject();
@@ -226,14 +221,6 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private drawUserLocation(location: LocationNode): void {
     this.userDot = this.drawPoint(this.userDot, location, USER_LOC_COLOR);
-  }
-
-  private drawEndpointLocation(location: LocationNode): void {
-    this.endpointDot = this.drawPoint(
-      this.endpointDot,
-      location,
-      ENDPOINT_COLOR
-    );
   }
 
   private drawPoint(

@@ -46,13 +46,7 @@
       "x": 1966,
       "y": 1740,
       "name": "Актовый",
-      "category": "qr-code",
-      "corridors": [
-        {
-          "endRoom": 1,
-          "corridorTracks": [2, 3]
-        }
-      ]
+      "category": "qr-code"
     }
   },
   {
@@ -61,13 +55,7 @@
       "x": 485,
       "y": 1665,
       "name": "Переход",
-      "category": "qr-code",
-      "corridors": [
-        {
-          "endRoom": 1,
-          "corridorTracks": [2, 3]
-        }
-      ]
+      "category": "qr-code"
     }
   },
   {
@@ -76,13 +64,7 @@
       "x": 420,
       "y": 455,
       "name": "Лестница",
-      "category": "qr-code",
-      "corridors": [
-        {
-          "endRoom": 1,
-          "corridorTracks": [2, 3]
-        }
-      ]
+      "category": "qr-code"
     }
   },
   {
@@ -161,7 +143,7 @@
       "x": 1880,
       "y": 1739,
       "floor": 3,
-      "corridors": [15] 
+      "corridors": [15]
     }
   },
   {

@@ -38,7 +38,7 @@ export class Graph {
    * @param vertexKey
    * @returns GraphVertex
    */
-  public getVertexByKey(vertexKey): GraphVertex {
+  public getVertexByKey(vertexKey: number): GraphVertex {
     return this.vertices[vertexKey];
   }
 
@@ -118,7 +118,7 @@ export class Graph {
    *
    * @param edge
    */
-  public deleteEdge(edge) {
+  public deleteEdge(edge: GraphEdge) {
     // Delete edge from the list of edges.
     if (this.edges[edge.getKey()]) {
       delete this.edges[edge.getKey()];
@@ -141,7 +141,7 @@ export class Graph {
    * @param endVertex
    * @return
    */
-  public findEdge(startVertex, endVertex) {
+  public findEdge(startVertex: GraphVertex, endVertex: GraphVertex): any {
     const vertex = this.getVertexByKey(startVertex.getKey());
 
     if (!vertex) {
@@ -157,7 +157,7 @@ export class Graph {
    * @param vertexKey
    * @returns
    */
-  public findVertexByKey(vertexKey) {
+  public findVertexByKey(vertexKey: string | number) {
     if (this.vertices[vertexKey]) {
       return this.vertices[vertexKey];
     }
@@ -205,10 +205,11 @@ export class Graph {
    * @return
    */
   public getVerticesIndices() {
-    const verticesIndices = {};
+    const verticesIndices = {} as any;
 
     this.getAllVertices().forEach((vertex: GraphVertex, index) => {
-      verticesIndices[vertex.getKey()] = index;
+      const key = vertex.getKey() as any;
+      verticesIndices[key] = index;
     });
 
     return verticesIndices;
@@ -221,7 +222,7 @@ export class Graph {
    */
   public getAdjacencyMatrix() {
     const vertices = this.getAllVertices();
-    const verticesIndices = this.getVerticesIndices();
+    const verticesIndices = this.getVerticesIndices() as any;
 
     // Init matrix with infinities meaning that there is no ways of
     // getting from one vertex to another yet.
@@ -229,11 +230,11 @@ export class Graph {
       .fill(null)
       .map(() => {
         return Array(vertices.length).fill(Infinity);
-      });
+      }) as any;
 
     // Fill the columns.
     vertices.forEach((vertex: GraphVertex, vertexIndex) => {
-      vertex.getNeighbors().forEach((neighbor) => {
+      vertex.getNeighbors().forEach((neighbor: any) => {
         const neighborIndex = verticesIndices[neighbor.getKey()];
 
         adjacencyMatrix[vertexIndex][neighborIndex] = this.findEdge(

@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NodeService } from 'src/app/core/services';
+import { MapPointsService } from 'src/app/core/services';
 import { SidebarService } from './../../../core/services/sidebar.service';
 import { StateService } from './../../../core/services/state.service';
 
@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     public sidebarService: SidebarService,
     private readonly stateService: StateService,
-    private readonly _nodeService: NodeService,
+    private readonly _nodeService: MapPointsService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router
   ) {}

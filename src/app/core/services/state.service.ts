@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-debugger */
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/member-ordering */
@@ -19,14 +18,14 @@ import { GuideMapCorridorProperties, GuideMapSimpleRoute } from '../models';
 import { GuideMapFeaturePoint } from '../models/guide-map-feature-point.interface';
 import { GuideMapRoomProperties } from '../models/guide-map-room-properties.interface';
 import { FloorService } from './floor.service';
-import { NodeService } from './node.service';
+import { MapPointsService } from './map-points.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
   constructor(
-    private readonly _nodeService: NodeService,
+    private readonly _guideMapPointsService: MapPointsService,
     private readonly _floorService: FloorService
   ) {}
 
@@ -34,23 +33,13 @@ export class StateService {
 
   private readonly roomsGraph: Graph = new Graph();
 
-  private distances: number[][] = [];
+  // private distances: number[][] = [];
 
   private nextVertices: GraphVertex[][] = [];
 
   public drawPath() {
-    // this.endpoint = null;
     this.userLocation = this.stairsEndPoint$.getValue();
     this.stairsEndPoint$.next(null);
-  }
-
-  private _filterDataSet(
-    dataSet: GuideMapFeaturePoint[],
-    category: GuideMapFeaturePointCategory
-  ): GuideMapFeaturePoint[] {
-    return dataSet.filter(
-      (featurePoint) => featurePoint.properties.category === category
-    );
   }
 
   private _getVertexes(points: GuideMapFeaturePoint[]): GraphVertex[] {
@@ -66,8 +55,8 @@ export class StateService {
   }
 
   public createGraph(): void {
-    const qrCodesAndRooms = this._nodeService.qrCodesAndRooms;
-    const corridors = this._nodeService.corridors$.getValue();
+    const qrCodesAndRooms = this._guideMapPointsService.qrCodesAndRooms;
+    const corridors = this._guideMapPointsService.corridors$.getValue();
     const roomVertexes: GraphVertex[] = [...this._getVertexes(qrCodesAndRooms)];
     const corridorsVertexes = [...this._getVertexes(corridors)];
     const edges: GraphEdge[] = [];
@@ -77,17 +66,23 @@ export class StateService {
         ({ properties }) => corridor.getKey() === properties.id
       )?.properties;
 
-      foundedCorridorItem.corridors.forEach((corridorId: number) => {
-        const foundedRelatedCorridorVertex = corridorsVertexes.find(
-          (corridor) => corridor.getKey() === corridorId
-        );
+      (foundedCorridorItem as GuideMapCorridorProperties).corridors.forEach(
+        (corridorId: number) => {
+          const foundedRelatedCorridorVertex = corridorsVertexes.find(
+            (corridor) => corridor.getKey() === corridorId
+          );
 
-        if (foundedRelatedCorridorVertex) {
-          const edge = new GraphEdge(corridor, foundedRelatedCorridorVertex, 1);
+          if (foundedRelatedCorridorVertex) {
+            const edge = new GraphEdge(
+              corridor,
+              foundedRelatedCorridorVertex,
+              1
+            );
 
-          edges.push(edge);
+            edges.push(edge);
+          }
         }
-      });
+      );
     });
 
     roomVertexes.forEach((roomVertex) => {
@@ -118,15 +113,18 @@ export class StateService {
       this.roomsGraph.addEdge(edge);
     });
 
-    const { distances, nextVertices } = floydWarshall(this.roomsGraph);
+    const { nextVertices } = floydWarshall(this.roomsGraph);
 
-    this.distances = distances;
+    // this.distances = distances;
     this.nextVertices = nextVertices;
   }
 
   public getPathCoordinates$(): Observable<{ x: number; y: number }[]> {
     return this._floorService.floor$.pipe(
-      withLatestFrom(this.userLocation$, this._nodeService.allNodes$),
+      withLatestFrom(
+        this.userLocation$,
+        this._guideMapPointsService.allPoints$
+      ),
       map(([floor, userLocation, points]) => {
         const start = userLocation.id;
         const end = this.endpoint$.getValue().id;
@@ -164,9 +162,8 @@ export class StateService {
         break;
       }
 
-      fullFuckingPath.push(fullPathWithCorridors[i].properties);
+      fullFuckingPath.push(fullPathWithCorridors[i].properties as any);
     }
-    debugger;
     const isStairsInPathFounded = fullFuckingPath.find(
       (item, index) => item.isStairs && index !== 0
     );
@@ -179,8 +176,6 @@ export class StateService {
       (item) => item.category === 'corridor' && !item.isStairs
     );
 
-    debugger;
-
     return corridors.map(({ x, y }) => ({ x, y }));
   }
 
@@ -189,10 +184,11 @@ export class StateService {
     id: number,
     category: GuideMapFeaturePointCategory
   ) {
-    const foundedObject = dataSet.find(
-      (value) =>
+    const foundedObject = dataSet.find((value) => {
+      return (
         value.properties.id === id && value.properties.category === category
-    )?.properties;
+      );
+    })?.properties;
 
     return foundedObject;
   }
@@ -226,13 +222,6 @@ export class StateService {
 
     const midNodeId = nextVertex.getKey();
 
-    // const roomObject = this._nodeService.qrCodesAndRooms.find(
-    //   ({ properties: { id } }) => id === from
-    // );
-
-    // const routesBetweenStartAndMidRoom = (<GuideMapRoomProperties>(
-    //   roomObject?.properties
-    // ))?.corridor;
     if (midNodeId === to) {
       resultList.push({
         start: from,
@@ -243,15 +232,6 @@ export class StateService {
       return resultList;
     }
 
-    // if (routesBetweenStartAndMidRoom) {
-    //   resultList.push({
-    //     start: from,
-    //     end: midStationId,
-    //     tracks: routesBetweenStartAndMidRoom || [],
-    //   });
-
-    //   return this.findPath(midStationId, to, resultList);
-    // }
     const foundedPathFromToMid = this.findPath(from, midNodeId, resultList);
 
     return this.findPath(midNodeId, to, foundedPathFromToMid, dataSet);

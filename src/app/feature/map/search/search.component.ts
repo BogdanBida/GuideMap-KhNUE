@@ -10,7 +10,7 @@ import {
   GuideMapRoomProperties,
   LocationNode,
 } from '../../../core/models';
-import { NodeService, StateService } from './../../../core/services';
+import { MapPointsService, StateService } from './../../../core/services';
 
 interface Room {
   value: string;
@@ -38,7 +38,7 @@ export const $filter = (opt: Room[], value: string): Room[] => {
 export class SearchComponent implements OnInit {
   constructor(
     private stateService: StateService,
-    private readonly nodeService: NodeService,
+    private readonly nodeService: MapPointsService,
     private readonly fb: FormBuilder,
     private readonly translateService: TranslateService
   ) {
@@ -63,10 +63,11 @@ export class SearchComponent implements OnInit {
       this.stateGroups.push({
         groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
         rooms: data
-          .filter(
-            (item) =>
+          .filter((item) => {
+            return (
               item.properties.category === GuideMapFeaturePointCategory.room
-          )
+            );
+          })
           .map(({ properties }) => {
             return {
               value: String(properties.id),

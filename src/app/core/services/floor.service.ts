@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, PartialObserver, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { environment } from './../../../environments/environment';
 
 const MIN_FLOOR = 1;
@@ -42,7 +42,7 @@ export class FloorService {
     return this.$floor.value <= MIN_FLOOR;
   }
 
-  public setFloorSubscribe(observer: PartialObserver<number>): Subscription {
+  public setFloorSubscribe(observer: any): Subscription {
     return this.$floor.subscribe(observer);
   }
 }
