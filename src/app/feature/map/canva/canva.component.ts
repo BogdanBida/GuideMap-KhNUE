@@ -6,7 +6,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnInit,
   Renderer2,
@@ -55,14 +54,6 @@ export class CanvaComponent implements OnInit, AfterViewInit {
   public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
 
   private readonly coordinates: ICoordinates[] = [];
-
-  @HostListener('wheel', ['$event'])
-  public onWheel(event: MouseEvent): void {
-    if (event.ctrlKey === true) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
-  }
 
   public onClick(event: { layerX: any; layerY: any }): void {
     // TODO: logic in scope of task: https://trello.com/c/IwLVTBrl/4-map-admin-panel-for-creating-new-rooms-corridors-and-stairs

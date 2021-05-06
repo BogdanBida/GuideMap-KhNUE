@@ -1,10 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
+  template:
+    '<div class="app-content-wrapper" appDisableBrowserZoom><router-outlet></router-outlet></div>',
   styles: [''],
 })
 export class AppComponent {
@@ -16,13 +17,4 @@ export class AppComponent {
   }
 
   public title = 'guidemap';
-
-  @HostListener('wheel', ['$event'])
-  public onWheel(event: MouseEvent): void {
-    if (event.ctrlKey === true) {
-      console.log('app wheel + ctrl');
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
 }

@@ -1,7 +1,10 @@
 <app-search class="search"></app-search>
-<app-canva class="canva" [zoomFactor]="zoomFactor">
+<app-canva class="canva" [zoomFactor]="zoomFactor" appDisableBrowserZoom>
 </app-canva>
-<app-zoom-controls class="zoom-controls" (zoomChange)="zoomFactor = $event"></app-zoom-controls>
+<app-zoom-controls
+  class="zoom-controls"
+  (zoomChange)="zoomFactor = $event"
+></app-zoom-controls>
 <app-floor-switcher class="floor-switcher"></app-floor-switcher>
 <app-sidebar class="sidebar"></app-sidebar>
 <div class="left-gui-section">
@@ -14,7 +17,5 @@
   <app-whereabouts class="whereabouts"></app-whereabouts>
 </div>
 <div class="coordinates" *ngIf="isDevMode && x && y">
-  <span>
-    x: {{ x }} y: {{ y }}
-  </span>
+  <span> x: {{ x }} y: {{ y }} </span>
 </div>
