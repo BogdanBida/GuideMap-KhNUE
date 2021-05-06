@@ -1,10 +1,12 @@
-import { StateService } from './../../../core/services/state.service';
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SidebarService } from './../../../core/services/sidebar.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { NodeService } from 'src/app/core/services';
+import { SidebarService } from './../../../core/services/sidebar.service';
+import { StateService } from './../../../core/services/state.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,10 +16,10 @@ import { NodeService } from 'src/app/core/services';
 export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     public sidebarService: SidebarService,
-    private stateService: StateService,
+    private readonly stateService: StateService,
     private readonly _nodeService: NodeService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router
   ) {}
 
   public readonly qrCodesProperties$ = this._nodeService.qrCodesProperties$;
@@ -25,21 +27,26 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public set value(val: boolean) {
     this.sidebarService.isOpen.next(val);
   }
+
   public get value(): boolean {
     return this.sidebarService.isOpen.value;
   }
+
   public isOpen: boolean = this.value;
 
   public form = this.formBuilder.group({
     location: [''],
   });
+
   public subscriptions$: Subscription[] = [];
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const valChangesSubs = this.form.valueChanges.subscribe(() => {
       const nodeid = this.form.get('location').value;
+
       this.router.navigate([], { queryParams: { nodeid } });
     });
+
     this.subscriptions$.push(
       valChangesSubs,
       this.stateService
@@ -54,7 +61,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscriptions$.forEach((s) => s.unsubscribe());
   }
 

@@ -1,12 +1,12 @@
-import { GraphEdge } from "./GraphEdge";
-import { GraphVertex } from "./GraphVertex";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { GraphEdge } from './GraphEdge';
+import { GraphVertex } from './GraphVertex';
 
 export class Graph {
-  vertices: {[ key: string ]: GraphVertex};
-  edges: {[key: string]: GraphEdge};
-  isDirected: boolean;
   /**
-   * @param {boolean} isDirected
+   *
+   *
+   * @param isDirected
    */
   constructor(isDirected = false) {
     this.vertices = {};
@@ -14,51 +14,69 @@ export class Graph {
     this.isDirected = isDirected;
   }
 
+  public vertices: { [key: string]: GraphVertex };
+
+  public edges: { [key: string]: GraphEdge };
+
+  public isDirected: boolean;
+
   /**
-   * @param {GraphVertex} newVertex
-   * @returns {Graph}
+   *
+   *
+   * @param newVertex
+   * @returns
    */
-  addVertex(newVertex: GraphVertex): Graph {
+  public addVertex(newVertex: GraphVertex): Graph {
     this.vertices[newVertex.getKey()] = newVertex;
 
     return this;
   }
 
   /**
-   * @param {string} vertexKey
+   *
+   *
+   * @param vertexKey
    * @returns GraphVertex
    */
-  getVertexByKey(vertexKey): GraphVertex {
+  public getVertexByKey(vertexKey): GraphVertex {
     return this.vertices[vertexKey];
   }
 
   /**
-   * @param {GraphVertex} vertex
-   * @returns {GraphVertex[]}
+   *
+   *
+   * @param vertex
+   * @returns
    */
-  getNeighbors(vertex: GraphVertex) {
+  public getNeighbors(vertex: GraphVertex) {
     return vertex.getNeighbors();
   }
 
   /**
-   * @return {GraphVertex[]}
+   *
+   *
+   * @return
    */
-  getAllVertices(): GraphVertex[] {
+  public getAllVertices(): GraphVertex[] {
     return Object.values(this.vertices);
   }
 
   /**
-   * @return {GraphEdge[]}
+   *
+   *
+   * @return
    */
-  getAllEdges(): GraphEdge[] {
+  public getAllEdges(): GraphEdge[] {
     return Object.values(this.edges);
   }
 
   /**
-   * @param {GraphEdge} edge
-   * @returns {Graph}
+   *
+   *
+   * @param edge
+   * @returns
    */
-  addEdge(edge: GraphEdge) {
+  public addEdge(edge: GraphEdge) {
     // Try to find and end start vertices.
     let startVertex = this.getVertexByKey(edge.startVertex.getKey());
     let endVertex = this.getVertexByKey(edge.endVertex.getKey());
@@ -96,9 +114,11 @@ export class Graph {
   }
 
   /**
-   * @param {GraphEdge} edge
+   *
+   *
+   * @param edge
    */
-  deleteEdge(edge) {
+  public deleteEdge(edge) {
     // Delete edge from the list of edges.
     if (this.edges[edge.getKey()]) {
       delete this.edges[edge.getKey()];
@@ -115,11 +135,13 @@ export class Graph {
   }
 
   /**
-   * @param {GraphVertex} startVertex
-   * @param {GraphVertex} endVertex
-   * @return {(GraphEdge|null)}
+   *
+   *
+   * @param startVertex
+   * @param endVertex
+   * @return
    */
-  findEdge(startVertex, endVertex) {
+  public findEdge(startVertex, endVertex) {
     const vertex = this.getVertexByKey(startVertex.getKey());
 
     if (!vertex) {
@@ -130,10 +152,12 @@ export class Graph {
   }
 
   /**
-   * @param {string} vertexKey
-   * @returns {GraphVertex}
+   *
+   *
+   * @param vertexKey
+   * @returns
    */
-  findVertexByKey(vertexKey) {
+  public findVertexByKey(vertexKey) {
     if (this.vertices[vertexKey]) {
       return this.vertices[vertexKey];
     }
@@ -142,19 +166,24 @@ export class Graph {
   }
 
   /**
-   * @return {number}
+   *
+   *
+   * @return
    */
-  getWeight() {
+  public getWeight() {
     return this.getAllEdges().reduce((weight: number, graphEdge: GraphEdge) => {
       return weight + graphEdge.weight;
     }, 0);
   }
 
   /**
+   *
+   *
    * Reverse all the edges in directed graph.
-   * @return {Graph}
+   *
+   * @return
    */
-  reverse() {
+  public reverse() {
     /** @param {GraphEdge} edge */
     this.getAllEdges().forEach((edge: GraphEdge) => {
       // Delete straight edge from graph and from vertices.
@@ -171,10 +200,13 @@ export class Graph {
   }
 
   /**
-   * @return {object}
+   *
+   *
+   * @return
    */
-  getVerticesIndices() {
+  public getVerticesIndices() {
     const verticesIndices = {};
+
     this.getAllVertices().forEach((vertex: GraphVertex, index) => {
       verticesIndices[vertex.getKey()] = index;
     });
@@ -183,23 +215,31 @@ export class Graph {
   }
 
   /**
-   * @return {*[][]}
+   *
+   *
+   * @return
    */
-  getAdjacencyMatrix() {
+  public getAdjacencyMatrix() {
     const vertices = this.getAllVertices();
     const verticesIndices = this.getVerticesIndices();
 
     // Init matrix with infinities meaning that there is no ways of
     // getting from one vertex to another yet.
-    const adjacencyMatrix = Array(vertices.length).fill(null).map(() => {
-      return Array(vertices.length).fill(Infinity);
-    });
+    const adjacencyMatrix = Array(vertices.length)
+      .fill(null)
+      .map(() => {
+        return Array(vertices.length).fill(Infinity);
+      });
 
     // Fill the columns.
     vertices.forEach((vertex: GraphVertex, vertexIndex) => {
       vertex.getNeighbors().forEach((neighbor) => {
         const neighborIndex = verticesIndices[neighbor.getKey()];
-        adjacencyMatrix[vertexIndex][neighborIndex] = this.findEdge(vertex, neighbor).weight;
+
+        adjacencyMatrix[vertexIndex][neighborIndex] = this.findEdge(
+          vertex,
+          neighbor
+        ).weight;
       });
     });
 
@@ -207,9 +247,11 @@ export class Graph {
   }
 
   /**
-   * @return {string}
+   *
+   *
+   * @return
    */
-  toString() {
+  public toString() {
     return Object.keys(this.vertices).toString();
   }
 }

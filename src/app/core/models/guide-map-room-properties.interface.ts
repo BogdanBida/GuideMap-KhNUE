@@ -1,5 +1,5 @@
 import { GuideMapBaseProperties } from './guide-map-base-properties.interface';
-import {GuideMapCorridor} from "./guide-map-corridor.interface";
+import { GuideMapCorridor } from './guide-map-corridor.interface';
 
 export interface GuideMapRoomProperties extends GuideMapBaseProperties {
   readonly x: number;

@@ -1,5 +1,3 @@
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,15 +15,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
 import { SearchComponent } from './search/search.component';
-import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { SettingsComponent } from './settings/settings.component';
-import {
-  FloorSwitcherComponent,
-  WhereaboutsComponent,
-} from './ui-controllers';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FloorSwitcherComponent, WhereaboutsComponent } from './ui-controllers';
+import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
 
 @NgModule({
   imports: [

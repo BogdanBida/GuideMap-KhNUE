@@ -1,22 +1,12 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  combineLatest,
-  forkJoin,
-  merge,
-  Observable,
-} from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { GuideMapFeaturePointCategory } from '../enums';
 import { NodeType } from '../enums/node-type.enum';
-import {
-  GuideMapFeaturePoint,
-  LocationNode,
-  Path,
-  QRNode,
-  RoomNode,
-} from '../models';
+import { GuideMapFeaturePoint, LocationNode, Path, QRNode } from '../models';
 import { RouteNode } from '../models/route-node';
 import { environment } from './../../../environments/environment';
 
@@ -31,6 +21,10 @@ export class NodeService {
   public readonly qrCodes$ = new BehaviorSubject<GuideMapFeaturePoint[]>([]);
 
   public readonly corridors$ = new BehaviorSubject<any[]>([]);
+
+  public readonly qrCodesProperties$ = this.qrCodes$.pipe(
+    map((qrCode) => qrCode.map((item) => item.properties))
+  );
 
   public readonly qrCodesAndRooms$ = combineLatest([
     this.qrCodes$,
@@ -78,10 +72,6 @@ export class NodeService {
       })
     );
   }
-
-  public readonly qrCodesProperties$ = this.qrCodes$.pipe(
-    map((qrCode) => qrCode.map((item) => item.properties))
-  );
 
   public getRoomsNodes(): Observable<GuideMapFeaturePoint[]> {
     return this.getJsonDoc('mc', 1, NodeType.RoomNode);

@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { GraphEdge } from './GraphEdge';
 import { LinkedList } from './LinkedList';
 import { LinkedListNode } from './LinkedListNode';
 
 export class GraphVertex {
-  public value: any;
-  public edges: LinkedList;
-
   constructor(value: number) {
     if (value === undefined) {
       throw new Error('Graph vertex must have a value');
@@ -24,6 +24,10 @@ export class GraphVertex {
     this.value = value;
     this.edges = new LinkedList(edgeComparator);
   }
+
+  public value: any;
+
+  public edges: LinkedList;
 
   public addEdge(edge: GraphEdge): GraphVertex {
     this.edges.append(edge);

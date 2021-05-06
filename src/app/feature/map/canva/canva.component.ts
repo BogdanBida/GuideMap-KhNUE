@@ -1,31 +1,36 @@
-import { SvgPathUtils } from './../../../../utils/svg-path.utils';
+/* eslint-disable no-debugger */
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
-  Path,
-  LocationNode,
-  GuideMapRoomProperties,
-} from './../../../core/models';
-import {
+  AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
+  Input,
   OnDestroy,
   OnInit,
-  AfterViewInit,
   Renderer2,
   ViewChild,
-  Input,
-  HostListener,
 } from '@angular/core';
-import { Circle, Svg, SVG, Path as SvgPath } from '@svgdotjs/svg.js';
+import { Circle, Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
 import { combineLatest, Subject, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { DragNDrop } from '../../../../utils/dragndrop';
+import { SvgPathUtils } from './../../../../utils/svg-path.utils';
+import { LocationNode } from './../../../core/models';
 import {
   FloorService,
   NodeService,
   StateService,
 } from './../../../core/services';
-
-import { USER_LOC_COLOR, ENDPOINT_COLOR, STROKE_CONFIG, STAIRS_ENDPOINT_COLOR } from './canvas-config';
+import {
+  ENDPOINT_COLOR,
+  STAIRS_ENDPOINT_COLOR,
+  STROKE_CONFIG,
+  USER_LOC_COLOR,
+} from './canvas-config';
 
 const WIDTH = 3500;
 const HEIGHT = 2550;
@@ -38,26 +43,44 @@ const DEFAULT_ZOOM_FACTOR = 1;
   styleUrls: ['./canva.component.scss'],
 })
 export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('target') elementRef: ElementRef;
+  constructor(
+    private readonly stateService: StateService,
+    private readonly nodeService: NodeService,
+    private readonly floorService: FloorService,
+    private readonly renderer: Renderer2
+  ) {}
 
-  @Input() zoomFactor = DEFAULT_ZOOM_FACTOR;
+  @ViewChild('target') public elementRef: ElementRef;
+
+  @Input() public zoomFactor = DEFAULT_ZOOM_FACTOR;
 
   public currentFloor: number;
 
   public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
+
+  private readonly coordinates: { x: any; y: any }[] = [];
+
   // ---------------- svg entities
   private canvas: Svg;
+
   private backgroundCanvas: Svg;
+
   private userDot: Circle;
+
   private endpointDot: Circle;
+
   private currentPath: SvgPath;
+
   // ----------------
-  private routes: LocationNode[];
+  private readonly routes: LocationNode[];
+
   // private path: Path;
   // ---------------- rxjs entities
-  private subscriptions$: Subscription[] = [];
-  private locationsSubject$: Subject<void> = new Subject();
-  private nodesSubject$: Subject<void> = new Subject();
+  private readonly subscriptions$: Subscription[] = [];
+
+  private readonly locationsSubject$: Subject<void> = new Subject();
+
+  private readonly nodesSubject$: Subject<void> = new Subject();
 
   @HostListener('wheel', ['$event'])
   public onWheel(event: MouseEvent): void {
@@ -67,22 +90,14 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private coordinates = [];
-
-  constructor(
-    private stateService: StateService,
-    private nodeService: NodeService,
-    private floorService: FloorService,
-    private renderer: Renderer2
-  ) {}
-
-  public onClick(event): void {
+  public onClick(event: { layerX: any; layerY: any }): void {
     this.coordinates.push({ x: event.layerX, y: event.layerY });
     console.log(this.coordinates);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
+
     this.canvas = SVG().addTo('#canv').size(width, height);
     this.backgroundCanvas = SVG().addTo('#bgr-canv').size(width, height);
     this.drawBackground(this.getFloorImageName(this.currentFloor));
@@ -100,7 +115,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.subscriptions$.push(
-      this.floorService.setFloorSubscribe((floor) => {
+      this.floorService.setFloorSubscribe((floor: number) => {
         this.currentFloor = floor;
         // this.stateService.endpoint = null;
         this.clearPath();
@@ -123,25 +138,24 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     combineLatest([
       this.stateService.stairsEndPoint$,
       this.stateService.getEndpointBehaviorSubject(),
-    ])
-      .subscribe(([stairsEndPoint, endpoint]) => {
-        if(stairsEndPoint) {
-          this.endpointDot = this.drawPoint(
-            this.endpointDot,
-            stairsEndPoint,
-            STAIRS_ENDPOINT_COLOR
-          );
-        } else {
-          this.endpointDot = this.drawPoint(
-            this.endpointDot,
-            endpoint,
-            ENDPOINT_COLOR
-          );
-        }
-      });
+    ]).subscribe(([stairsEndPoint, endpoint]) => {
+      if (stairsEndPoint) {
+        this.endpointDot = this.drawPoint(
+          this.endpointDot,
+          stairsEndPoint,
+          STAIRS_ENDPOINT_COLOR
+        );
+      } else {
+        this.endpointDot = this.drawPoint(
+          this.endpointDot,
+          endpoint,
+          ENDPOINT_COLOR
+        );
+      }
+    });
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     // * drawing path if goto btn is clicked
     this.subscriptions$.push(
       this.stateService.searchParamsChanges$.subscribe(() => {
@@ -160,9 +174,10 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscriptions$.forEach((s) => s.unsubscribe());
     const subjects = [this.locationsSubject$, this.nodesSubject$];
+
     subjects.forEach((s) => {
       s.next();
       s.complete();
@@ -212,6 +227,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
   private drawUserLocation(location: LocationNode): void {
     this.userDot = this.drawPoint(this.userDot, location, USER_LOC_COLOR);
   }
+
   private drawEndpointLocation(location: LocationNode): void {
     this.endpointDot = this.drawPoint(
       this.endpointDot,
@@ -219,6 +235,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       ENDPOINT_COLOR
     );
   }
+
   private drawPoint(
     Dot: Circle,
     location: LocationNode,
@@ -230,6 +247,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       const radius = 25;
       const maxRadius = 500;
       const { x, y } = location;
+
       Dot = this.canvas
         .circle(maxRadius)
         .attr({ fill: color, opacity: 0 })
@@ -243,6 +261,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
         .size(radius + 20, radius + 20)
         .attr({ opacity: 0.4 });
     }
+
     return Dot;
   }
 
@@ -255,7 +274,7 @@ export class CanvaComponent implements OnInit, AfterViewInit, OnDestroy {
       .getPathCoordinates$()
       .pipe(
         tap((coordinates) => {
-          debugger
+          debugger;
           this.clearPath();
           const { userLocation, endpoint } = this.stateService;
           const stairsEndPoint = this.stateService.stairsEndPoint$.getValue();

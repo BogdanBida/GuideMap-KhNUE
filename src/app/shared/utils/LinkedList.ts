@@ -1,27 +1,41 @@
-import {LinkedListNode }  from './LinkedListNode';
-import {Comparator }from './Comparator';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Comparator } from './Comparator';
+import { GraphEdge } from './GraphEdge';
+import { LinkedListNode } from './LinkedListNode';
 
 export class LinkedList {
-  head: LinkedListNode;
-  tail: LinkedListNode;
-  compare: Comparator;
   /**
-   * @param {Function} [comparatorFunction]
+   *
+   *
+   * @param [comparatorFunction]
    */
-  constructor(comparatorFunction) {
+  constructor(comparatorFunction: {
+    (edgeA: GraphEdge, edgeB: GraphEdge): 0 | 1 | -1;
+    (a: number, b: number): number;
+  }) {
     this.head = null;
     this.tail = null;
 
     this.compare = new Comparator(comparatorFunction);
   }
 
+  public head: LinkedListNode;
+
+  public tail: LinkedListNode;
+
+  public compare: Comparator;
+
   /**
-   * @param {*} value
-   * @return {LinkedList}
+   *
+   *
+   * @param value
+   * @return
    */
-  prepend(value): LinkedList {
+  public prepend(value: number): LinkedList {
     // Make new node to be a head.
     const newNode = new LinkedListNode(value, this.head);
+
     this.head = newNode;
 
     // If there is no tail yet let's make new node a tail.
@@ -33,10 +47,12 @@ export class LinkedList {
   }
 
   /**
-   * @param {*} value
-   * @return {LinkedList}
+   *
+   *
+   * @param value
+   * @return
    */
-  append(value) {
+  public append(value: number) {
     const newNode = new LinkedListNode(value);
 
     // If there is no head yet let's make new node a head.
@@ -55,10 +71,12 @@ export class LinkedList {
   }
 
   /**
-   * @param {*} value
-   * @return {LinkedListNode}
+   *
+   *
+   * @param value
+   * @return
    */
-  delete(value) {
+  public delete(value: GraphEdge) {
     if (!this.head) {
       return null;
     }
@@ -94,12 +112,14 @@ export class LinkedList {
   }
 
   /**
-   * @param {Object} findParams
-   * @param {*} findParams.value
-   * @param {function} [findParams.callback]
-   * @return {LinkedListNode}
+   *
+   *
+   * @param findParams
+   * @param findParams.value
+   * @param [findParams.callback]
+   * @return
    */
-  find({ value = undefined, callback = undefined }) {
+  public find({ value = undefined, callback = undefined }) {
     if (!this.head) {
       return null;
     }
@@ -124,12 +144,15 @@ export class LinkedList {
   }
 
   /**
-   * @return {LinkedListNode}
+   *
+   *
+   * @return
    */
-  deleteTail() {
+  public deleteTail() {
     if (this.head === this.tail) {
       // There is only one node in linked list.
       const deletedTail = this.tail;
+
       this.head = null;
       this.tail = null;
 
@@ -141,6 +164,7 @@ export class LinkedList {
 
     // Rewind to the last node and delete "next" link for the node before the last one.
     let currentNode = this.head;
+
     while (currentNode.next) {
       if (!currentNode.next.next) {
         currentNode.next = null;
@@ -155,9 +179,11 @@ export class LinkedList {
   }
 
   /**
-   * @return {LinkedListNode}
+   *
+   *
+   * @return
    */
-  deleteHead() {
+  public deleteHead() {
     if (!this.head) {
       return null;
     }
@@ -175,12 +201,15 @@ export class LinkedList {
   }
 
   /**
-   * @return {LinkedListNode[]}
+   *
+   *
+   * @return
    */
-  toArray() {
+  public toArray() {
     const nodes = [];
 
     let currentNode = this.head;
+
     while (currentNode) {
       nodes.push(currentNode);
       currentNode = currentNode.next;
@@ -190,10 +219,14 @@ export class LinkedList {
   }
 
   /**
-   * @param {function} [callback]
-   * @return {string}
+   *
+   *
+   * @param [callback]
+   * @return
    */
-  toString(callback) {
-    return this.toArray().map(node => node.toString(callback)).toString();
+  public toString(callback: (arg0: number) => any) {
+    return this.toArray()
+      .map((node) => node.toString(callback))
+      .toString();
   }
 }

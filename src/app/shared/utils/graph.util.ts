@@ -1,4 +1,4 @@
-// function 
+// function
 
 // export const GraphUtils ={
 

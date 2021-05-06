@@ -1,13 +1,13 @@
-import { GraphVertex } from "./GraphVertex";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { GraphVertex } from './GraphVertex';
 
 export class GraphEdge {
-  startVertex: GraphVertex;
-  endVertex: GraphVertex;
-  weight: number;
   /**
-   * @param {GraphVertex} startVertex
-   * @param {GraphVertex} endVertex
-   * @param {number} [weight=1]
+   *
+   *
+   * @param startVertex
+   * @param endVertex
+   * @param [weight=1]
    */
   constructor(startVertex: GraphVertex, endVertex: GraphVertex, weight = 0) {
     this.startVertex = startVertex;
@@ -15,10 +15,18 @@ export class GraphEdge {
     this.weight = weight;
   }
 
+  public startVertex: GraphVertex;
+
+  public endVertex: GraphVertex;
+
+  public weight: number;
+
   /**
-   * @return {string}
+   *
+   *
+   * @return
    */
-  getKey() {
+  public getKey() {
     const startVertexKey = this.startVertex.getKey();
     const endVertexKey = this.endVertex.getKey();
 
@@ -26,10 +34,13 @@ export class GraphEdge {
   }
 
   /**
-   * @return {GraphEdge}
+   *
+   *
+   * @return
    */
-  reverse() {
+  public reverse() {
     const tmp = this.startVertex;
+
     this.startVertex = this.endVertex;
     this.endVertex = tmp;
 
@@ -37,9 +48,11 @@ export class GraphEdge {
   }
 
   /**
-   * @return {string}
+   *
+   *
+   * @return
    */
-  toString() {
+  public toString() {
     return this.getKey();
   }
 }

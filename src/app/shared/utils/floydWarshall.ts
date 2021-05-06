@@ -1,24 +1,30 @@
-import { Graph } from "./Graph";
-import { GraphVertex } from "./GraphVertex";
+import { Graph } from './Graph';
+import { GraphVertex } from './GraphVertex';
 
 /**
  * @param {Graph} graph
  * @return {{distances: number[][], nextVertices: GraphVertex[][]}}
  */
-export function floydWarshall(graph: Graph): {distances: number[][], nextVertices: GraphVertex[][]} {
+export function floydWarshall(
+  graph: Graph
+): { distances: number[][]; nextVertices: GraphVertex[][] } {
   // Get all graph vertices.
   const vertices = graph.getAllVertices();
   // Init previous vertices matrix with nulls meaning that there are no
   // previous vertices exist that will give us shortest path.
-  const nextVertices = Array(vertices.length).fill(null).map(() => {
-    return Array(vertices.length).fill(null);
-  });
+  const nextVertices = Array(vertices.length)
+    .fill(null)
+    .map(() => {
+      return Array(vertices.length).fill(null);
+    });
 
   // Init distances matrix with Infinities meaning there are no paths
   // between vertices exist so far.
-  const distances = Array(vertices.length).fill(null).map(() => {
-    return Array(vertices.length).fill(Infinity);
-  });
+  const distances = Array(vertices.length)
+    .fill(null)
+    .map(() => {
+      return Array(vertices.length).fill(Infinity);
+    });
 
   // Init distance matrix with the distance we already now (from existing edges).
   // And also init previous vertices from the edges.
@@ -57,7 +63,8 @@ export function floydWarshall(graph: Graph): {distances: number[][], nextVertice
         // from startVertex to endVertex but via middleVertex.
         // Save the shortest distance and previous vertex that allows
         // us to have this shortest distance.
-        const distViaMiddle = distances[startIndex][middleIndex] + distances[middleIndex][endIndex];
+        const distViaMiddle =
+          distances[startIndex][middleIndex] + distances[middleIndex][endIndex];
 
         if (distances[startIndex][endIndex] > distViaMiddle) {
           // We've found a shortest pass via middle vertex.

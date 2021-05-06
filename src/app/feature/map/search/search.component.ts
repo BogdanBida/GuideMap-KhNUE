@@ -1,10 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -14,7 +9,6 @@ import {
   GuideMapFeaturePoint,
   GuideMapRoomProperties,
   LocationNode,
-  RoomNode,
 } from '../../../core/models';
 import { NodeService, StateService } from './../../../core/services';
 
@@ -30,6 +24,7 @@ export interface StateGroup {
 
 export const $filter = (opt: Room[], value: string): Room[] => {
   const filterValue = value.toLowerCase();
+
   return opt.filter(
     (item) => item.viewValue.toLowerCase().indexOf(filterValue) === 0
   );
@@ -41,26 +36,26 @@ export const $filter = (opt: Room[], value: string): Room[] => {
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  constructor(
+    private stateService: StateService,
+    private readonly nodeService: NodeService,
+    private readonly fb: FormBuilder,
+    private readonly translateService: TranslateService
+  ) {
+    this.stateGroups = [];
+  }
+
+  @Output() public setLocation = new EventEmitter<LocationNode>();
+
   public locations: GuideMapFeaturePoint[];
 
-  @Output() setLocation = new EventEmitter<LocationNode>();
-
   public stateForm: FormGroup = this.fb.group({
-    stateGroup: "338",
+    stateGroup: '338',
   });
 
   public stateGroups: StateGroup[];
 
   public stateGroupOptions: Observable<StateGroup[]>;
-
-  constructor(
-    private stateService: StateService,
-    private readonly nodeService: NodeService,
-    private fb: FormBuilder,
-    private translateService: TranslateService
-  ) {
-    this.stateGroups = [];
-  }
 
   public ngOnInit(): void {
     this.nodeService.getRoomsNodes().subscribe((data) => {
@@ -95,7 +90,8 @@ export class SearchComponent implements OnInit {
     const foundLocation = this.locations.find((roomNode) => {
       return this.stateGroupControl.value === roomNode.properties.name;
     });
-    this.stateService.endpoint = foundLocation.properties as unknown as GuideMapRoomProperties;
+
+    this.stateService.endpoint = (foundLocation.properties as unknown) as GuideMapRoomProperties;
   }
 
   private _filterGroup(value: string): StateGroup[] {
@@ -107,6 +103,7 @@ export class SearchComponent implements OnInit {
         }))
         .filter((group) => group.rooms.length > 0);
     }
+
     return this.stateGroups;
   }
 

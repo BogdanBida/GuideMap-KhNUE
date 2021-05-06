@@ -1,25 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-debugger */
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { groupBy } from 'lodash';
-import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import {
   floydWarshall,
   Graph,
   GraphEdge,
   GraphVertex,
 } from 'src/app/shared/utils';
-import { depthFirstSearch } from 'src/app/shared/utils/depthFirstSearch';
 import { GuideMapFeaturePointCategory } from '../enums';
-import {
-  LocationNode,
-  GuideMapCorridor,
-  GuideMapSimpleRoute,
-  GuideMapCorridorProperties,
-} from '../models';
+import { GuideMapCorridorProperties, GuideMapSimpleRoute } from '../models';
 import { GuideMapFeaturePoint } from '../models/guide-map-feature-point.interface';
 import { GuideMapRoomProperties } from '../models/guide-map-room-properties.interface';
-import { NodeService } from './node.service';
 import { FloorService } from './floor.service';
+import { NodeService } from './node.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +30,13 @@ export class StateService {
     private readonly _floorService: FloorService
   ) {}
 
-  private roomsGraph: Graph = new Graph();
+  public gotoClickEvent$ = new Observable();
+
+  private readonly roomsGraph: Graph = new Graph();
 
   private distances: number[][] = [];
 
   private nextVertices: GraphVertex[][] = [];
-
-  public gotoClickEvent$ = new Observable();
 
   public drawPath() {
     // this.endpoint = null;
@@ -58,6 +58,7 @@ export class StateService {
 
     points.forEach((point) => {
       const corridorVertex = new GraphVertex(point.properties.id);
+
       vertexes.push(corridorVertex);
     });
 
@@ -83,6 +84,7 @@ export class StateService {
 
         if (foundedRelatedCorridorVertex) {
           const edge = new GraphEdge(corridor, foundedRelatedCorridorVertex, 1);
+
           edges.push(edge);
         }
       });
@@ -99,8 +101,10 @@ export class StateService {
             corridorsVertex.getKey() ===
             (foundedRoomItem as GuideMapRoomProperties).corridor
         );
+
         if (foundedCorridorVertex) {
           const edge = new GraphEdge(foundedCorridorVertex, roomVertex, 1);
+
           edges.push(edge);
         }
       }
@@ -146,6 +150,7 @@ export class StateService {
       const foundedCorridor = points.find(
         (item) => item.properties.id === pointId
       );
+
       return foundedCorridor;
     });
 
@@ -158,17 +163,24 @@ export class StateService {
       ) {
         break;
       }
+
       fullFuckingPath.push(fullPathWithCorridors[i].properties);
     }
-debugger
-    const isStairsInPathFounded = fullFuckingPath.find((item, index) => item.isStairs && index !== 0);
+    debugger;
+    const isStairsInPathFounded = fullFuckingPath.find(
+      (item, index) => item.isStairs && index !== 0
+    );
+
     if (isStairsInPathFounded) {
       this.stairsEndPoint$.next(isStairsInPathFounded);
     }
+
     const corridors = fullFuckingPath.filter(
       (item) => item.category === 'corridor' && !item.isStairs
     );
+
     debugger;
+
     return corridors.map(({ x, y }) => ({ x, y }));
   }
 
@@ -181,6 +193,7 @@ debugger
       (value) =>
         value.properties.id === id && value.properties.category === category
     )?.properties;
+
     return foundedObject;
   }
 
@@ -206,6 +219,7 @@ debugger
     const endVertexIndex = allGraphVertices.indexOf(endVertex);
 
     const nextVertex = this.nextVertices[endVertexIndex][startVertexIndex];
+
     if (!nextVertex) {
       return [];
     }
@@ -239,6 +253,7 @@ debugger
     //   return this.findPath(midStationId, to, resultList);
     // }
     const foundedPathFromToMid = this.findPath(from, midNodeId, resultList);
+
     return this.findPath(midNodeId, to, foundedPathFromToMid, dataSet);
   }
 
@@ -276,11 +291,13 @@ debugger
     return this.endpoint$;
   }
 
-  private userLocation$ = new BehaviorSubject<GuideMapRoomProperties | null>(
+  private readonly userLocation$ = new BehaviorSubject<GuideMapRoomProperties | null>(
     null
   );
 
-  private endpoint$ = new BehaviorSubject<GuideMapRoomProperties | null>(null);
+  private readonly endpoint$ = new BehaviorSubject<GuideMapRoomProperties | null>(
+    null
+  );
 
   public stairsEndPoint$ = new BehaviorSubject<GuideMapRoomProperties | null>(
     null
