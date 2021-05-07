@@ -4,7 +4,8 @@
     #target
     (mousedown)="dragNDrop($event, target)"
     (touchstart)="dragNDrop($event, target)"
-    (wheel)="onWheel($event)"
+    (contextmenu)="(false)"
+    appDisableBrowserZoom
   >
     <div class="zoom-wrapper" [style.transform]="'scale(' + zoomFactor + ')'">
       <div class="canv" id="canv"></div>
