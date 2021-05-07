@@ -13,9 +13,12 @@ $icon-width: 3em;
       width: min-content;
       position: relative;
       display: flex;
-      border: 2px solid $base-color;
+      border: 4px solid $base-color;
       background-color: rgba($base-color, 0.15);
-      @include glassmorphism(6px);
+      @include glassmorphism(12px);
+      @supports not (backdrop-filter: blur(12px)) {
+        background-color: #c5d2e3;
+      }
       border-radius: 4em;
       padding: 0.5em 2em;
       margin: 5px;
