@@ -25,12 +25,9 @@
 }
 
 .search {
-  width: 50%;
+  width: 100%;
   top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 3;
-  @include shadow;
 }
 
 .canva {
@@ -92,31 +89,17 @@
 }
 
 @media (max-width: $portrait) {
-  .search {
-    width: calc(95% - 48px);
-    left: calc(50% - 16px);
-  }
   .left-gui-section {
     right: 5%;
-  }
-  .zoom-controls {
-    top: 85px;
   }
 }
 
 @media (max-width: $small) {
   .search {
-    width: 95%;
-    left: 50%;
+    padding: 0 20px;
   }
-}
-
-@media (max-width: $lowgen) {
-  .search {
-    top: 0;
-    left: 0;
-    transform: none;
-    width: 100%;
+  .zoom-controls {
+    top: 145px;
   }
 }
 
@@ -126,8 +109,5 @@
   }
   .zoom-controls {
     top: 32px;
-  }
-  .search {
-    display: none;
   }
 }
