@@ -132,10 +132,6 @@ export class MapPathService {
       (point) => point.properties.floor === floor
     ) as GuideMapFeaturePoint<GuideMapRoomProperties>[];
 
-    // const stairsInPathIndex = fullFloorPath.findIndex(
-    //   (item) => item.properties.category === GuideMapFeaturePointCategory.stairs
-    // );
-
     if (fullFloorPath.length > 1) {
       this.currentUserLocationPoint$.next(fullFloorPath[0].properties);
       this.currentUserEndpoint$.next(
@@ -145,22 +141,6 @@ export class MapPathService {
       this.currentUserLocationPoint$.next(null);
       this.currentUserEndpoint$.next(null);
     }
-
-    // if (stairsInPathIndex > 0) {
-    //   this.currentUserEndpoint$.next(
-    //     fullFloorPath[stairsInPathIndex].properties
-    //   );
-    // }
-
-    // if (stairsInPathIndex === 0) {
-    //   this.currentUserLocationPoint$.next(
-    //     fullFloorPath[stairsInPathIndex].properties
-    //   );
-    // }
-
-    // if (stairsInPathIndex > 0) {
-    //   this.stairsMiddlePoint$.next(fullFloorPath[stairsInPathIndex].properties);
-    // }
 
     const corridors = fullFloorPath.filter(
       (item) =>
