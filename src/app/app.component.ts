@@ -4,8 +4,7 @@ import { environment } from './../environments/environment';
 
 @Component({
   selector: 'app-root',
-  template:
-    '<div class="app-content-wrapper" appDisableBrowserZoom><router-outlet></router-outlet></div>',
+  template: './app.component.html',
   styles: [''],
 })
 export class AppComponent {

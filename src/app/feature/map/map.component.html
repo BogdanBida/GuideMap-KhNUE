@@ -16,6 +16,6 @@
   <app-settings class="settings"></app-settings>
   <app-whereabouts class="whereabouts"></app-whereabouts>
 </div>
-<div class="coordinates" *ngIf="isDevMode && x && y">
+<div class="coordinates" *ngIf="isShowCoordinates">
   <span> x: {{ x }} y: {{ y }} </span>
 </div>
