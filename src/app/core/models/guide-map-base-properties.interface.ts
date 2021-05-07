@@ -4,4 +4,5 @@ export interface GuideMapBaseProperties {
   readonly id: number;
   readonly name: string;
   readonly category: GuideMapFeaturePointCategory;
+  readonly floor: number;
 }

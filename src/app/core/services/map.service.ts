@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
-import { tap, withLatestFrom } from 'rxjs/operators';
 import { STROKE_CONFIG } from 'src/app/feature/map/canva/canvas-config';
 import { SvgPathUtils } from 'src/utils/svg-path.utils';
+import { GuideMapRoomProperties } from '../models';
 import { FloorService } from './floor.service';
 import { MapPathService } from './map-path.service';
 
@@ -26,13 +26,22 @@ export class MapService {
   public svgPathInstance: SvgPath;
 
   public init(): void {
+    // TODO: refactor
     this.svgInstance = SVG().addTo('#canv').size(width, height);
-    console.log(this.svgInstance);
     this.svgBackgroundInstance = SVG().addTo('#bgr-canv').size(width, height);
     this.drawBackground();
+    this._subscribeOnFloorChanges();
+  }
+
+  public setFinalEndpoint(finalEndpoint: GuideMapRoomProperties): void {
+    // TODO: refactor
+    this._mapPathService.finalEndpoint$.next(finalEndpoint);
+    this._mapPathService.calculateFullPath();
+    this._drawPath();
   }
 
   public drawBackground(): void {
+    // TODO: refactor
     const floorImageName = this._floorService.getFloorImageName();
 
     if (this.svgBackgroundInstance && floorImageName) {
@@ -49,46 +58,58 @@ export class MapService {
     }
   }
 
-  public drawPath(): void {
-    this._mapPathService
-      .getPathCoordinates$()
-      .pipe(
-        withLatestFrom(this._mapPathService.pathPoints$),
-        tap(([coordinates, pathPoints]) => {
-          this.clearPath();
-          const { userLocation, endpoint, stairsMiddlePoint } = pathPoints;
-          const currentEndPoint = stairsMiddlePoint ?? endpoint;
-          const properties = userLocation;
-          // todo: change to find path data by user and endpoint
-          // const path = this.path[properties.id + '-' + endpoint.id];
-          const points: number[][] = [
-            [properties.x, properties.y],
-            ...coordinates.map(({ x, y }) => [x, y]),
-            [currentEndPoint.x, currentEndPoint.y],
-          ];
-          const pathString = points.reduce((acc, point, i, a) => {
-            return i === 0
-              ? `M ${point[0]},${point[1]}`
-              : `${acc} ${SvgPathUtils.bezierCommand(point, i, a)}`;
-          }, '');
+  private _subscribeOnFloorChanges(): void {
+    this._floorService.floor$.subscribe(() => {
+      this._drawPath();
+    });
+  }
 
-          this.svgPathInstance = this.svgInstance
-            .path(pathString)
-            .stroke(STROKE_CONFIG)
-            .fill({
-              color: '#00000000',
-            })
-            .attr({
-              'stroke-dashoffset': '0',
-            });
-          this.svgPathInstance
-            .animate({ duration: 4000, ease: '>' })
-            .loop(1, false)
-            .attr({
-              'stroke-dashoffset': '-70',
-            });
-        })
-      )
-      .subscribe();
+  private _drawPath(): void {
+    // TODO: refactor
+    this.clearPath();
+    const currentPathCoordinates = this._mapPathService.getPathCoordinates();
+    const {
+      currentUserLocationPoint,
+      currentUserEndpoint,
+    } = this._mapPathService.pathPointsValues;
+
+    const properties = currentUserLocationPoint;
+
+    if (!currentUserLocationPoint && !currentUserEndpoint) {
+      return;
+    }
+
+    const points: number[][] = [
+      [properties.x, properties.y],
+      ...currentPathCoordinates.map(({ x, y }) => [x, y]),
+      [currentUserEndpoint.x, currentUserEndpoint.y],
+    ];
+
+    this._animatePath(points);
+  }
+
+  private _animatePath(points: number[][]): void {
+    // TODO: refactor
+    const pathString = points.reduce((acc, point, i, a) => {
+      return i === 0
+        ? `M ${point[0]},${point[1]}`
+        : `${acc} ${SvgPathUtils.bezierCommand(point, i, a)}`;
+    }, '');
+
+    this.svgPathInstance = this.svgInstance
+      .path(pathString)
+      .stroke(STROKE_CONFIG)
+      .fill({
+        color: '#00000000',
+      })
+      .attr({
+        'stroke-dashoffset': '0',
+      });
+    this.svgPathInstance
+      .animate({ duration: 4000, ease: '>' })
+      .loop(1, false)
+      .attr({
+        'stroke-dashoffset': '-70',
+      });
   }
 }

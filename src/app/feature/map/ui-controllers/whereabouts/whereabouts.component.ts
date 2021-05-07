@@ -41,13 +41,24 @@ export class WhereaboutsComponent implements OnInit {
       this.locNodes = data;
       // this.stateService.userLocation = userLocation;
 
-      this._mapPathService.userLocation$.next({
+      this._mapPathService.startPoint$.next({
         id: 0,
         name: '201',
-        category: GuideMapFeaturePointCategory.room,
+        category: GuideMapFeaturePointCategory.Room,
         x: 2070,
         y: 1825,
         corridor: 2,
+        floor: 2,
+      });
+
+      this._mapPathService.currentUserLocationPoint$.next({
+        id: 0,
+        name: '201',
+        category: GuideMapFeaturePointCategory.Room,
+        x: 2070,
+        y: 1825,
+        corridor: 2,
+        floor: 2,
       });
     });
   }

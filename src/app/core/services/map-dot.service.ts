@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Circle } from '@svgdotjs/svg.js';
 import {
   ENDPOINT_COLOR,
-  STAIRS_ENDPOINT_COLOR,
   USER_LOC_COLOR as USER_LOCATION_COLOR,
 } from 'src/app/feature/map/canva/canvas-config';
 import { GuideMapRoomProperties } from '../models';
@@ -24,6 +23,7 @@ export class MapDotService {
   public endpointDot: Circle;
 
   public drawUserLocation(location: GuideMapRoomProperties): void {
+    // TODO: refactor approach
     this.userDot = this.drawPoint(this.userDot, location, USER_LOCATION_COLOR);
   }
 
@@ -37,6 +37,7 @@ export class MapDotService {
     location: GuideMapRoomProperties,
     color: string = '#505050'
   ): Circle {
+    // TODO: refactor magic numbers and approach
     if (Dot) {
       Dot.remove();
     }
@@ -64,26 +65,29 @@ export class MapDotService {
   }
 
   private _subscribeOnPathCoordinatesChanges(): void {
-    this._mapPathService.pathCoordinatesChanges$.subscribe(([, endPoint]) => {
-      if (endPoint) {
+    // TODO: refactor add new methods
+    this._mapPathService.pathCoordinatesChanges$.subscribe(
+      ([userLocation, endPoint]) => {
         this.endpointDot = this.drawPoint(
           this.endpointDot,
           endPoint,
           ENDPOINT_COLOR
         );
+        this.drawUserLocation(userLocation);
       }
-    });
+    );
   }
 
   private _subscribeOnStairsLocationChanges(): void {
-    this._mapPathService.stairsMiddlePoint$.subscribe((stairsEndPoint) => {
-      if (stairsEndPoint) {
-        this.endpointDot = this.drawPoint(
-          this.endpointDot,
-          stairsEndPoint,
-          STAIRS_ENDPOINT_COLOR
-        );
-      }
-    });
+    // TODO: create stairs logic
+    // this._mapPathService.stairsMiddlePoint$.subscribe((stairsEndPoint) => {
+    //   if (stairsEndPoint) {
+    //     this.endpointDot = this.drawPoint(
+    //       this.endpointDot,
+    //       stairsEndPoint,
+    //       STAIRS_ENDPOINT_COLOR
+    //     );
+    //   }
+    // });
   }
 }

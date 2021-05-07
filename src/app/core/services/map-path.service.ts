@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { GuideMapFeaturePointCategory } from '../enums';
 import { ICoordinates } from '../interfaces';
 import {
-  GuideMapCorridorProperties,
   GuideMapFeaturePoint,
   GuideMapRoomProperties,
   GuideMapSimpleRoute,
@@ -17,74 +16,96 @@ import { MapGraphService } from './map-graph.service';
 })
 export class MapPathService {
   constructor(
-    private readonly _mapPointsService: MapDataProviderService,
+    private readonly _mapDataProviderService: MapDataProviderService,
     private readonly _mapGraphService: MapGraphService,
     private readonly _floorService: FloorService
   ) {}
 
-  public readonly userLocation$ = new BehaviorSubject<GuideMapRoomProperties>(
+  public readonly startPoint$ = new BehaviorSubject<GuideMapRoomProperties>(
     null
   );
 
-  public readonly endpoint$ = new BehaviorSubject<GuideMapRoomProperties>(null);
+  public readonly finalEndpoint$ = new BehaviorSubject<GuideMapRoomProperties>(
+    null
+  );
 
-  public readonly stairsMiddlePoint$ = new BehaviorSubject<GuideMapRoomProperties>(
+  public readonly fullPath$ = new BehaviorSubject<GuideMapSimpleRoute[]>([]);
+
+  public readonly currentUserLocationPoint$ = new BehaviorSubject<GuideMapRoomProperties>(
+    null
+  );
+
+  public readonly currentUserEndpoint$ = new BehaviorSubject<GuideMapRoomProperties>(
     null
   );
 
   public get pathCoordinatesChanges$(): Observable<
     [GuideMapRoomProperties, GuideMapRoomProperties]
   > {
-    return combineLatest([this.userLocation$, this.endpoint$]);
+    return combineLatest([
+      this.currentUserLocationPoint$,
+      this.currentUserEndpoint$,
+    ]);
   }
 
-  public readonly pathPoints$ = this.userLocation$.pipe(
-    withLatestFrom(this.endpoint$, this.stairsMiddlePoint$),
-    map(([userLocation, endpoint, stairsMiddlePoint]) => ({
-      userLocation,
-      endpoint,
-      stairsMiddlePoint,
-    }))
-  );
-
-  public readonly endPointId$ = this.endpoint$.pipe(
-    map((endpoint) => endpoint?.id)
-  );
-
-  public readonly userLocationId$ = this.userLocation$.pipe(
-    map((userLocation) => userLocation?.id)
-  );
+  public get pathPointsValues(): {
+    currentUserLocationPoint: GuideMapRoomProperties;
+    currentUserEndpoint: GuideMapRoomProperties;
+  } {
+    return {
+      currentUserLocationPoint: this.currentUserLocationPoint$.value,
+      currentUserEndpoint: this.currentUserEndpoint$.value,
+    };
+  }
 
   public get isHasUserLocationAndEndPoint(): boolean {
-    return !!this.endpoint$.value && !!this.userLocation$.value;
+    return !!this.startPoint$.value && !!this.finalEndpoint$.value;
   }
 
-  public drawPath(): void {
-    const stairsMiddlePointValue = this.stairsMiddlePoint$.getValue();
+  public calculateFullPath(): void {
+    // TODO: refactor
+    const allPoints = this._mapDataProviderService.allPoints;
+    const startPoint = this.startPoint$.value.id;
+    const finalEndpoint = this.finalEndpoint$.value.id;
 
-    this.userLocation$.next(stairsMiddlePointValue);
-    this.stairsMiddlePoint$.next(null);
-  }
-
-  public getPathCoordinates$(): Observable<ICoordinates[]> {
-    return this._floorService.floor$.pipe(
-      withLatestFrom(
-        this._mapPointsService.allPoints$,
-        this.userLocationId$,
-        this.endPointId$
-      ),
-      map(([floor, allPoints, userLocationId, endPointId]) => {
-        const path = this._mapGraphService.findPath(
-          userLocationId,
-          endPointId,
-          [],
-          allPoints
-        );
-        const pathCoordinates = this._fillDataOfPath(path, floor, allPoints);
-
-        return pathCoordinates;
-      })
+    const path = this._mapGraphService.findPath(
+      startPoint,
+      finalEndpoint,
+      [],
+      allPoints
     );
+
+    this.fullPath$.next(path);
+  }
+
+  public getPathCoordinates(): ICoordinates[] {
+    const floor = this._floorService.floor;
+    const allPoints = this._mapDataProviderService.allPoints;
+    const pathCoordinates = this._findFloorPath(
+      floor,
+      allPoints,
+      this.startPoint$.value?.id,
+      this.finalEndpoint$.value?.id
+    );
+
+    return pathCoordinates;
+  }
+
+  private _findFloorPath(
+    floor: number,
+    allPoints: GuideMapFeaturePoint[],
+    userLocationId: number,
+    endPointId: number
+  ): ICoordinates[] {
+    const path = this._mapGraphService.findPath(
+      userLocationId,
+      endPointId,
+      [],
+      allPoints
+    );
+    const pathCoordinates = this._fillDataOfPath(path, floor, allPoints);
+
+    return pathCoordinates;
   }
 
   private _fillDataOfPath(
@@ -92,9 +113,14 @@ export class MapPathService {
     floor: number,
     points: GuideMapFeaturePoint[]
   ): ICoordinates[] {
-    const fullPath: number[] = path.map((item) => item.end);
+    const fullPath: Set<number> = path.reduce((acc, { start, end }) => {
+      acc.add(start);
+      acc.add(end);
 
-    const fullPathWithCorridors = fullPath.map((pointId) => {
+      return acc;
+    }, new Set<number>());
+
+    const fullPathWithCorridors = Array.from(fullPath).map((pointId) => {
       const foundedCorridor = points.find(
         (item) => item.properties.id === pointId
       );
@@ -102,30 +128,45 @@ export class MapPathService {
       return foundedCorridor;
     });
 
-    const fullFuckingPath = [];
+    const fullFloorPath = fullPathWithCorridors.filter(
+      (point) => point.properties.floor === floor
+    ) as GuideMapFeaturePoint<GuideMapRoomProperties>[];
 
-    for (const i in fullPathWithCorridors) {
-      if (
-        (fullPathWithCorridors[i].properties as GuideMapCorridorProperties)
-          .floor !== floor
-      ) {
-        break;
-      } else {
-        fullFuckingPath.push(fullPathWithCorridors[i].properties as any);
-      }
-    }
-    const isStairsInPathFounded = fullFuckingPath.find(
-      (item, index) => item.isStairs && index !== 0
-    );
+    // const stairsInPathIndex = fullFloorPath.findIndex(
+    //   (item) => item.properties.category === GuideMapFeaturePointCategory.stairs
+    // );
 
-    if (isStairsInPathFounded) {
-      this.stairsMiddlePoint$.next(isStairsInPathFounded);
+    if (fullFloorPath.length > 1) {
+      this.currentUserLocationPoint$.next(fullFloorPath[0].properties);
+      this.currentUserEndpoint$.next(
+        fullFloorPath[fullFloorPath.length - 1].properties
+      );
+    } else {
+      this.currentUserLocationPoint$.next(null);
+      this.currentUserEndpoint$.next(null);
     }
 
-    const corridors = fullFuckingPath.filter(
-      (item) => item.category === 'corridor' && !item.isStairs
+    // if (stairsInPathIndex > 0) {
+    //   this.currentUserEndpoint$.next(
+    //     fullFloorPath[stairsInPathIndex].properties
+    //   );
+    // }
+
+    // if (stairsInPathIndex === 0) {
+    //   this.currentUserLocationPoint$.next(
+    //     fullFloorPath[stairsInPathIndex].properties
+    //   );
+    // }
+
+    // if (stairsInPathIndex > 0) {
+    //   this.stairsMiddlePoint$.next(fullFloorPath[stairsInPathIndex].properties);
+    // }
+
+    const corridors = fullFloorPath.filter(
+      (item) =>
+        item.properties.category === GuideMapFeaturePointCategory.Сorridor
     );
 
-    return corridors.map(({ x, y }) => ({ x, y }));
+    return corridors.map(({ properties: { x, y } }) => ({ x, y }));
   }
 }

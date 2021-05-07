@@ -116,8 +116,7 @@
     "properties": {
       "id": 12,
       "name": "Лестница 2 этаж",
-      "category": "corridor",
-      "isStairs": true,
+      "category": "stairs",
       "x": 1876,
       "y": 1616,
       "floor": 2,
@@ -150,8 +149,7 @@
     "properties": {
       "id": 15,
       "name": "Лестница 3 этаж",
-      "category": "corridor",
-      "isStairs": true,
+      "category": "stairs",
       "x": 1873,
       "y": 1671,
       "floor": 3,

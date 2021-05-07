@@ -4,10 +4,10 @@ import { GuideMapFeaturePoint } from '../models';
 
 function filterByCategories<T>(
   dataSet: Record<string, any>[],
-  category: GuideMapFeaturePointCategory
+  ...categories: GuideMapFeaturePointCategory[]
 ): T[] {
   return dataSet.filter((featurePoint) => {
-    return featurePoint.properties.category === category;
+    return categories.includes(featurePoint.properties.category);
   }) as T[];
 }
 

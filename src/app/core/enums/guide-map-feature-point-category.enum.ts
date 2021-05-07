@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export enum GuideMapFeaturePointCategory {
-  corridor = 'corridor',
-  room = 'room',
-  qrCode = 'qr-code',
+  Сorridor = 'corridor',
+  Room = 'room',
+  QrCode = 'qr-code',
+  Stairs = 'stairs',
 }

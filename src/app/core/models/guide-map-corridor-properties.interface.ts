@@ -5,6 +5,4 @@ export interface GuideMapCorridorProperties extends GuideMapBaseProperties {
   x: number;
   y: number;
   corridors: number[];
-  isStairs: boolean;
-  floor: number;
 }

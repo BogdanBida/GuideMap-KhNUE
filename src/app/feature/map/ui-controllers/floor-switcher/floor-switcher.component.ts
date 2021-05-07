@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FloorService, MapPathService } from '../../../../core/services';
+import { FloorService } from '../../../../core/services';
 
 @Component({
   selector: 'app-floor-switcher',
@@ -7,10 +7,7 @@ import { FloorService, MapPathService } from '../../../../core/services';
   styleUrls: ['./floor-switcher.component.scss'],
 })
 export class FloorSwitcherComponent {
-  constructor(
-    private readonly _floorService: FloorService,
-    private readonly _mapPathService: MapPathService
-  ) {}
+  constructor(private readonly _floorService: FloorService) {}
 
   public readonly floorNumberPositionStyle$ = this._floorService
     .floorNumberPositionStyle$;
@@ -20,12 +17,10 @@ export class FloorSwitcherComponent {
   public readonly isMaxFloor$ = this._floorService.isMaxFloor$;
 
   public upFloor(): void {
-    this._mapPathService.drawPath();
     this._floorService.floor++;
   }
 
   public downFloor(): void {
-    this._mapPathService.drawPath();
     this._floorService.floor--;
   }
 }

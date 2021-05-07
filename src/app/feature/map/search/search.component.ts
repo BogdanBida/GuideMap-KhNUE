@@ -10,10 +10,7 @@ import {
   GuideMapRoomProperties,
   LocationNode,
 } from '../../../core/models';
-import {
-  MapDataProviderService,
-  MapPathService,
-} from './../../../core/services';
+import { MapDataProviderService, MapService } from './../../../core/services';
 
 interface Room {
   value: string;
@@ -40,7 +37,7 @@ export const $filter = (opt: Room[], value: string): Room[] => {
 })
 export class SearchComponent implements OnInit {
   constructor(
-    private readonly _mapPathService: MapPathService,
+    private readonly _mapService: MapService,
     private readonly _mapDataProviderService: MapDataProviderService,
     private readonly fb: FormBuilder,
     private readonly translateService: TranslateService
@@ -61,14 +58,14 @@ export class SearchComponent implements OnInit {
   public stateGroupOptions: Observable<StateGroup[]>;
 
   public ngOnInit(): void {
-    this._mapDataProviderService.getRoomsNodes().subscribe((data) => {
+    this._mapDataProviderService.getFeaturePoints().subscribe((data) => {
       this.locations = data;
       this.stateGroups.push({
         groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
         rooms: data
           .filter((item) => {
             return (
-              item.properties.category === GuideMapFeaturePointCategory.room
+              item.properties.category === GuideMapFeaturePointCategory.Room
             );
           })
           .map(({ properties }) => {
@@ -87,7 +84,7 @@ export class SearchComponent implements OnInit {
   }
 
   public clear(): void {
-    this._mapPathService.endpoint$.next(null);
+    // TODO: clear logic
   }
 
   public findLocation(): void {
@@ -95,7 +92,7 @@ export class SearchComponent implements OnInit {
       return this.stateGroupControl.value === roomNode.properties.name;
     });
 
-    this._mapPathService.endpoint$.next(
+    this._mapService.setFinalEndpoint(
       (foundLocation.properties as unknown) as GuideMapRoomProperties
     );
   }

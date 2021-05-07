@@ -83,11 +83,15 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       this._mapService.drawBackground();
     });
 
-    this._mapPathService.pathPoints$
-      .pipe(untilDestroyed(this))
-      .subscribe(({ userLocation, endpoint }) => {
+    this._mapPathService.currentUserLocationPoint$
+      .pipe(
+        withLatestFrom(this._mapPathService.currentUserEndpoint$),
+        untilDestroyed(this)
+      )
+      .subscribe(([userLocation, endpoint]) => {
+        // TODO: refactor
         this._mapService.clearPath();
-        this._mapDotService.drawUserLocation(userLocation);
+        // this._mapDotService.drawUserLocation(userLocation);
 
         if (endpoint) {
           this.moveMapTo(endpoint?.x, endpoint?.y);
@@ -98,16 +102,16 @@ export class CanvaComponent implements OnInit, AfterViewInit {
 
     this._mapDotService.init();
     this._mapService.init();
-    this._mapPathService.pathCoordinatesChanges$
-      .pipe(withLatestFrom(this._mapPathService.userLocation$))
-      .subscribe(([, userLocation]) => {
-        this._drawAndMove(userLocation);
-      });
+    // this._mapPathService.pathCoordinatesChanges$
+    //   .pipe(withLatestFrom(this._mapPathService.userLocation$))
+    //   .subscribe(([, userLocation]) => {
+    //     this._drawAndMove(userLocation);
+    //   });
   }
 
   public _drawAndMove(userLocation: GuideMapRoomProperties): void {
     if (this._mapPathService.isHasUserLocationAndEndPoint) {
-      this._mapService.drawPath();
+      // this._mapService.drawPath();
       this.moveMapTo(userLocation.x, userLocation.y);
     }
   }

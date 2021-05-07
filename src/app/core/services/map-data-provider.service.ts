@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { GuideMapFeaturePointCategory } from '../enums';
@@ -29,24 +29,13 @@ export class MapDataProviderService {
     map((qrCode) => qrCode.map(({ properties }) => properties))
   );
 
-  public readonly qrCodesAndRooms$ = combineLatest([
-    this.qrCodes$,
-    this.rooms$,
-  ]).pipe(
-    map(([qrCodes, rooms]) => {
-      return [...qrCodes, ...rooms];
-    })
-  );
-
-  public readonly allPoints$ = combineLatest([
-    this.qrCodes$,
-    this.rooms$,
-    this.corridors$,
-  ]).pipe(
-    map(([qrCodes, rooms, corridors]) => {
-      return [...qrCodes, ...rooms, ...corridors];
-    })
-  );
+  public get allPoints(): GuideMapFeaturePoint[] {
+    return [
+      ...this.rooms$.getValue(),
+      ...this.qrCodes$.getValue(),
+      ...this.corridors$.getValue(),
+    ];
+  }
 
   public get qrCodesAndRooms(): GuideMapFeaturePoint[] {
     return [...this.rooms$.getValue(), ...this.qrCodes$.getValue()];
@@ -65,12 +54,12 @@ export class MapDataProviderService {
   }
 
   public init$(): Observable<GuideMapFeaturePoint[]> {
-    return this.getRoomsNodes().pipe(
+    return this.getFeaturePoints().pipe(
       tap((points) => this._initFeaturePoints(points))
     );
   }
 
-  public getRoomsNodes(): Observable<GuideMapFeaturePoint[]> {
+  public getFeaturePoints(): Observable<GuideMapFeaturePoint[]> {
     return this._getJsonDoc('mc', 1, JsonFile.Points);
   }
 
@@ -86,13 +75,19 @@ export class MapDataProviderService {
 
   private _initFeaturePoints(points: GuideMapFeaturePoint[]): void {
     this.rooms$.next(
-      MapUtils.filterByCategories(points, GuideMapFeaturePointCategory.room)
+      MapUtils.filterByCategories(points, GuideMapFeaturePointCategory.Room)
     );
     this.qrCodes$.next(
-      MapUtils.filterByCategories(points, GuideMapFeaturePointCategory.qrCode)
+      MapUtils.filterByCategories(points, GuideMapFeaturePointCategory.QrCode)
     );
     this.corridors$.next(
-      MapUtils.filterByCategories(points, GuideMapFeaturePointCategory.corridor)
+      MapUtils.filterByCategories(
+        points,
+        ...[
+          GuideMapFeaturePointCategory.Сorridor,
+          GuideMapFeaturePointCategory.Stairs,
+        ]
+      )
     );
   }
 }

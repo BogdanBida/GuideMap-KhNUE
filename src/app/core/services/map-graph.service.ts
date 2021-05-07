@@ -54,6 +54,8 @@ export class MapGraphService {
     resultList: any[] = [],
     dataSet: any[] = []
   ): GuideMapSimpleRoute[] {
+    // TODO: refactor add new methods
+
     if (from === undefined || to === undefined) {
       return [];
     }
@@ -117,6 +119,8 @@ export class MapGraphService {
     roomVertexes: GraphVertex[],
     corridorsVertexes: GraphVertex[]
   ): GraphEdge[] {
+    // TODO: refactor add new methods
+
     const corridorsEdges: GraphEdge[] = [];
     const qrCodesAndRooms = this._mapDataProviderService.qrCodesAndRooms; // !!!
 
@@ -144,6 +148,7 @@ export class MapGraphService {
   }
 
   private _getCorridorsEdges(corridorsVertexes: GraphVertex[]): GraphEdge[] {
+    // TODO: refactor add new methods
     const corridors = this._mapDataProviderService.corridors$.getValue();
     const oneToManyCorridorsEdges: GraphEdge[] = [];
 
