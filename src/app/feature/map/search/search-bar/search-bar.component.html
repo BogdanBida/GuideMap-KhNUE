@@ -1,0 +1,28 @@
+<form class="select" [formGroup]="stateForm">
+  <div class="icon-wrapper">
+    <svg class="icon">
+      <use [attr.xlink:href]="svgIconUrl"></use>
+    </svg>
+  </div>
+  <mat-form-field class="form-field" appearance="legacy">
+    <mat-label class="label">{{ labelText | translate }}</mat-label>
+    <input
+      class="input"
+      type="text"
+      matInput
+      formControlName="stateGroup"
+      [matAutocomplete]="autoGroup"
+    />
+    <mat-autocomplete #autoGroup="matAutocomplete">
+      <mat-option>{{ "UI.CANCEL" | translate }}</mat-option>
+      <mat-optgroup
+        *ngFor="let group of stateGroupOptions | async"
+        [label]="group.groupName"
+      >
+        <mat-option *ngFor="let room of group.rooms" [value]="room.viewValue">
+          {{ room.viewValue }}
+        </mat-option>
+      </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

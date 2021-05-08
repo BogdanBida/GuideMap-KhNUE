@@ -18,6 +18,7 @@ import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component
 import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
+import { SearchBarComponent } from './search/search-bar/search-bar.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -43,6 +44,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
   declarations: [
     MapComponent,
     SearchComponent,
+    SearchBarComponent,
     SettingsComponent,
     CanvaComponent,
     FloorSwitcherComponent,

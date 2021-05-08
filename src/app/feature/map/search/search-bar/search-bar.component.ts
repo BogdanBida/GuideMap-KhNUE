@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -8,8 +8,11 @@ import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
 import {
   GuideMapFeaturePoint,
   GuideMapRoomProperties,
-} from '../../../core/models';
-import { MapDataProviderService, MapService } from './../../../core/services';
+} from '../../../../core/models';
+import {
+  MapDataProviderService,
+  MapService,
+} from './../../../../core/services';
 
 interface IRoom {
   value: string;
@@ -30,11 +33,11 @@ export const $filter = (opt: IRoom[], value: string): IRoom[] => {
 };
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
   constructor(
     private readonly _mapService: MapService,
     private readonly _mapDataProviderService: MapDataProviderService,
@@ -43,6 +46,9 @@ export class SearchComponent implements OnInit {
   ) {
     this.stateGroups = [];
   }
+
+  @Input() svgIconUrl: string;
+  @Input() labelText: string;
 
   public locations: GuideMapFeaturePoint[];
 
