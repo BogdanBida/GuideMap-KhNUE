@@ -1,27 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
 import {
   GuideMapFeaturePoint,
   GuideMapRoomProperties,
 } from '../../../core/models';
 import { MapDataProviderService, MapService } from './../../../core/services';
+import { IOption, IOptionGroup } from './search-bar/search-bar.component';
 
-interface IRoom {
-  value: string;
-  viewValue: string;
-}
-
-export interface IStateGroup {
-  groupName: string;
-  rooms: IRoom[];
-}
-
-export const $filter = (opt: IRoom[], value: string): IRoom[] => {
+export const $filter = (opt: IOption[], value: string): IOption[] => {
   const filterValue = value.toLowerCase();
 
   return opt.filter(
@@ -38,76 +26,74 @@ export class SearchComponent implements OnInit {
   constructor(
     private readonly _mapService: MapService,
     private readonly _mapDataProviderService: MapDataProviderService,
-    private readonly fb: FormBuilder,
     private readonly translateService: TranslateService
   ) {
-    this.stateGroups = [];
+    this.destinationGroups = [];
+    this.userLocationGroups = [];
   }
 
-  public locations: GuideMapFeaturePoint[];
+  @Output() set location(value: string) {
+    value && value.length && this.findUserLocation(value);
+  }
+  @Output() set destination(value: string) {
+    value && value.length && this.findDestination(value);
+  }
 
-  public stateForm: FormGroup = this.fb.group({
-    stateGroup: '338',
-  });
+  public featurePoints: GuideMapFeaturePoint[];
 
-  public stateGroups: IStateGroup[];
-
-  public stateGroupOptions: Observable<IStateGroup[]>;
+  public destinationGroups: IOptionGroup[];
+  public userLocationGroups: IOptionGroup[];
 
   public ngOnInit(): void {
     this._mapDataProviderService.getFeaturePoints().subscribe((data) => {
-      this.locations = data;
-      this.stateGroups.push({
+      this.featurePoints = data;
+      const qrCodes = data.filter((item) => {
+        return item.properties.category === GuideMapFeaturePointCategory.QrCode;
+      });
+      const rooms = data.filter((item) => {
+        return item.properties.category === GuideMapFeaturePointCategory.Room;
+      });
+      this.userLocationGroups.push({
+        // TODO: group logic
+        groupName: this.translateService.instant('UI.QRCODE_GROUPS.COMMON'),
+        rooms: qrCodes.map(({ properties }) => {
+          return {
+            value: String(properties.id),
+            viewValue: properties.name,
+          };
+        }),
+      });
+      this.destinationGroups.push({
         groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
-        rooms: data
-          .filter((item) => {
-            return (
-              item.properties.category === GuideMapFeaturePointCategory.Room
-            );
-          })
-          .map(({ properties }) => {
-            return {
-              value: String(properties.id),
-              viewValue: properties.name,
-            };
-          }),
+        rooms: rooms.map(({ properties }) => {
+          return {
+            value: String(properties.id),
+            viewValue: properties.name,
+          };
+        }),
       });
     });
-
-    this.stateGroupOptions = this.stateGroupControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filterGroup(value))
-    );
   }
 
-  public clear(): void {
-    // TODO: clear logic
-  }
-
-  public findLocation(): void {
-    const foundLocation = this.locations.find((roomNode) => {
-      return this.stateGroupControl.value === roomNode.properties.name;
+  public findUserLocation(userLocationName: string): void {
+    const foundLocation = this.featurePoints.find((roomNode) => {
+      return userLocationName === roomNode.properties.name;
     });
 
-    this._mapService.setFinalEndpoint(
-      (foundLocation.properties as unknown) as GuideMapRoomProperties
-    );
+    foundLocation &&
+      this._mapService.setUserLocation(
+        (foundLocation.properties as unknown) as GuideMapRoomProperties
+      );
   }
 
-  private _filterGroup(value: string): IStateGroup[] {
-    if (value) {
-      return this.stateGroups
-        .map((group) => ({
-          groupName: group.groupName,
-          rooms: $filter(group.rooms, value),
-        }))
-        .filter((group) => group.rooms.length > 0);
-    }
+  public findDestination(destinationName: string): void {
+    const foundDestination = this.featurePoints.find((roomNode) => {
+      return destinationName === roomNode.properties.name;
+    });
 
-    return this.stateGroups;
-  }
-
-  private get stateGroupControl(): AbstractControl {
-    return this.stateForm.get('stateGroup');
+    foundDestination &&
+      this._mapService.setFinalEndpoint(
+        (foundDestination.properties as unknown) as GuideMapRoomProperties
+      );
   }
 }

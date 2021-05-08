@@ -6,6 +6,9 @@
       "CLASSROOMS": "Audiences",
       "WC": "WC"
     },
+    "QRCODE_GROUPS": {
+      "COMMON": "Common"
+    },
     "FLOOR": "Floor",
     "CANCEL": "Cancel"
   },

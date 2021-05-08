@@ -6,6 +6,9 @@
       "CLASSROOMS": "Аудитории",
       "WC": "Туалеті"
     },
+    "QRCODE_GROUPS": {
+      "COMMON": "Общее"
+    },
     "FLOOR": "Этаж",
     "CANCEL": "Отменить"
   },

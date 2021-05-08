@@ -2,9 +2,13 @@
   class="search-bar"
   [svgIconUrl]="'assets/icons/sprite.svg#location-marker'"
   [labelText]="'UI.ENTER_LOCATION'"
+  [optionGroups]="userLocationGroups"
+  (selectData)="location = $event"
 ></app-search-bar>
 <app-search-bar
   class="search-bar"
   [svgIconUrl]="'assets/icons/sprite.svg#destination-marker'"
   [labelText]="'UI.ENTER_ROOM'"
+  [optionGroups]="destinationGroups"
+  (selectData)="destination = $event"
 ></app-search-bar>

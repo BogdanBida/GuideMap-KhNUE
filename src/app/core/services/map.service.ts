@@ -40,6 +40,14 @@ export class MapService {
     this._drawPath();
   }
 
+  public setUserLocation(qrCodeLocation: GuideMapRoomProperties): void {
+    // TODO: refactor
+    this._mapPathService.startPoint$.next(qrCodeLocation);
+    // ! error
+    // this._mapPathService.calculateFullPath();
+    // this._drawPath();
+  }
+
   public drawBackground(): void {
     // TODO: refactor
     const floorImageName = this._floorService.getFloorImageName();
