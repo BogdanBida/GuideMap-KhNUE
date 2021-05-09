@@ -6,7 +6,8 @@
       "WC": "WC"
     },
     "FLOOR": "Floor",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "RESET": "Reset"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Choose language"
