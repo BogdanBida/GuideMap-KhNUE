@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
+import { isNil } from 'lodash';
 import { STROKE_CONFIG } from 'src/app/feature/map/canva/canvas-config';
 import { SvgPathUtils } from 'src/utils/svg-path.utils';
 import { GuideMapRoomProperties } from '../models';
@@ -36,6 +37,9 @@ export class MapService {
   public setFinalEndpoint(finalEndpoint: GuideMapRoomProperties): void {
     // TODO: refactor
     this._mapPathService.finalEndpoint$.next(finalEndpoint);
+    if (isNil(this._mapPathService.startPoint$.value)) {
+      return;
+    }
     this._mapPathService.calculateFullPath();
     this._drawPath();
   }
@@ -43,9 +47,11 @@ export class MapService {
   public setUserLocation(qrCodeLocation: GuideMapRoomProperties): void {
     // TODO: refactor
     this._mapPathService.startPoint$.next(qrCodeLocation);
-    // ! error
-    // this._mapPathService.calculateFullPath();
-    // this._drawPath();
+    if (isNil(this._mapPathService.finalEndpoint$.value)) {
+      return;
+    }
+    this._mapPathService.calculateFullPath();
+    this._drawPath();
   }
 
   public drawBackground(): void {
