@@ -6,7 +6,7 @@
     </g>
   </symbol>
   
-  <symbol id="arrow-down-d" viewBox="0 0 128 128">
+  <symbol id="arrow-down-switcher" viewBox="0 0 128 128">
     <g transform="scale(1, -1) translate(0, -100)">
       <polygon fill="#f5f5f5" points="22.7,96.3 22.7,121 64,87.4 105.3,121 105.3,96.3 64,62.6" />
       <polygon fill="#f5f5f5" points="0,53 0,91.4 64,39.2 128,91.4 128,53 64,0.9" />
