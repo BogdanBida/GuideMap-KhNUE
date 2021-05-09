@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
-import { STROKE_CONFIG } from 'src/app/feature/map/canva/canvas-config';
+import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { SvgPathUtils } from 'src/utils/svg-path.utils';
 import { GuideMapRoomProperties } from '../models';
 import { FloorService } from './floor.service';
