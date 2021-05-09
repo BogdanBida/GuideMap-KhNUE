@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { withLatestFrom } from 'rxjs/operators';
-import { ICoordinates } from 'src/app/core/interfaces';
 import { MapService } from 'src/app/core/services/map.service';
 import { DragNDrop } from '../../../../utils/dragndrop';
 import { GuideMapRoomProperties } from './../../../core/models';
@@ -52,14 +51,6 @@ export class CanvaComponent implements OnInit, AfterViewInit {
   @Input() public zoomFactor = DEFAULT_ZOOM_FACTOR;
 
   public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
-
-  private readonly coordinates: ICoordinates[] = [];
-
-  public onClick(event: { layerX: any; layerY: any }): void {
-    // TODO: logic in scope of task: https://trello.com/c/IwLVTBrl/4-map-admin-panel-for-creating-new-rooms-corridors-and-stairs
-    this.coordinates.push({ x: event.layerX, y: event.layerY });
-    console.log(this.coordinates);
-  }
 
   public ngOnInit(): void {
     this._mapDataProviderService.init$().subscribe(() => {
