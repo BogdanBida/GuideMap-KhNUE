@@ -33,7 +33,7 @@ export class SearchBarComponent implements OnInit {
   public ngOnInit(): void {
     this.formGroupValues = this._formGroupControl.valueChanges.pipe(
       startWith(''),
-      map(this._filterGroup)
+      map((value) => this._filterGroup(value))
     );
   }
 
