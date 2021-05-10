@@ -1,22 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
+import { environment } from 'src/environments/environment';
 import {
   GuideMapFeaturePoint,
   GuideMapRoomProperties,
 } from '../../../core/models';
+import { IOptionGroup } from '../interfaces';
 import { MapDataProviderService, MapService } from './../../../core/services';
-import { IOption, IOptionGroup } from './search-bar/search-bar.component';
 
-export const $filter = (opt: IOption[], value: string): IOption[] => {
-  const filterValue = value.toLowerCase();
-
-  return opt.filter(
-    (item) => item.viewValue.toLowerCase().indexOf(filterValue) === 0
-  );
-};
-
+enum LabelText {
+  Location = 'UI.ENTER_LOCATION',
+  Destination = 'UI.ENTER_ROOM',
+}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -26,23 +22,23 @@ export class SearchComponent implements OnInit {
   constructor(
     private readonly _mapService: MapService,
     private readonly _mapDataProviderService: MapDataProviderService,
-    private readonly translateService: TranslateService
-  ) {
-    this.destinationGroups = [];
-    this.userLocationGroups = [];
-  }
+    private readonly _translateService: TranslateService
+  ) {}
 
-  @Output() set location(value: string) {
+  public readonly spriteIconsUrl = environment.spriteIconsPath;
+  public readonly labelText = LabelText;
+
+  public setLocation(value: string): void {
     value && value.length && this.findUserLocation(value);
   }
-  @Output() set destination(value: string) {
+  public setDestination(value: string): void {
     value && value.length && this.findDestination(value);
   }
 
   public featurePoints: GuideMapFeaturePoint[];
 
-  public destinationGroups: IOptionGroup[];
-  public userLocationGroups: IOptionGroup[];
+  public destinationGroups = [] as IOptionGroup[];
+  public userLocationGroups = [] as IOptionGroup[];
 
   public ngOnInit(): void {
     this._mapDataProviderService.getFeaturePoints().subscribe((data) => {
@@ -55,7 +51,7 @@ export class SearchComponent implements OnInit {
       });
       this.userLocationGroups.push({
         // TODO: group logic
-        groupName: this.translateService.instant('UI.QRCODE_GROUPS.COMMON'),
+        groupName: this._translateService.instant('UI.QRCODE_GROUPS.COMMON'),
         rooms: qrCodes.map(({ properties }) => {
           return {
             value: String(properties.id),
@@ -64,7 +60,7 @@ export class SearchComponent implements OnInit {
         }),
       });
       this.destinationGroups.push({
-        groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
+        groupName: this._translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
         rooms: rooms.map(({ properties }) => {
           return {
             value: String(properties.id),

@@ -1,28 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { filterSearchValue } from 'src/app/core/utils';
+import { environment } from 'src/environments/environment';
 import { GuideMapFeaturePoint } from '../../../../core/models';
-
-// TODO: Moved interfaces to another place
-export interface IOption {
-  value: string;
-  viewValue: string;
-}
-
-export interface IOptionGroup {
-  groupName: string;
-  rooms: IOption[];
-}
-
-export const $filter = (opt: IOption[], value: string): IOption[] => {
-  const filterValue = value.toLowerCase();
-
-  return opt.filter(
-    (item) => item.viewValue.toLowerCase().indexOf(filterValue) === 0
-  );
-};
+import { IOptionGroup } from '../../interfaces';
 
 @Component({
   selector: 'app-search-bar',
@@ -30,23 +13,25 @@ export const $filter = (opt: IOption[], value: string): IOption[] => {
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly _formBuilder: FormBuilder) {}
 
   @Input() svgIconUrl: string;
   @Input() labelText: string;
   @Input() optionGroups: IOptionGroup[];
   @Output() selectData = new EventEmitter<string>();
 
+  public readonly searchIconPath = environment.spriteIconsPath + 'search';
+
   public locations: GuideMapFeaturePoint[];
 
-  public formGroup: FormGroup = this.fb.group({
+  public formGroup = this._formBuilder.group({
     value: '',
   });
 
-  public stateGroupOptions: Observable<IOptionGroup[]>;
+  public formGroupValues: Observable<IOptionGroup[]>;
 
   public ngOnInit(): void {
-    this.stateGroupOptions = this.formGroupControl.valueChanges.pipe(
+    this.formGroupValues = this.formGroupControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filterGroup(value))
     );
@@ -61,7 +46,7 @@ export class SearchBarComponent implements OnInit {
       return this.optionGroups
         .map((group) => ({
           groupName: group.groupName,
-          rooms: $filter(group.rooms, value),
+          rooms: filterSearchValue(group.rooms, value),
         }))
         .filter((group) => group.rooms.length > 0);
     }

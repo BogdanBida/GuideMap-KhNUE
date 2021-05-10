@@ -3,10 +3,10 @@
   #target
   (mousedown)="dragNDrop($event, target)"
   (touchstart)="dragNDrop($event, target)"
-  (contextmenu)="(false)"
   appDisableBrowserZoom
+  appDisableContextmenu
 >
-  <div class="zoom-wrapper" [style.transform]="'scale(' + zoomFactor + ')'">
+  <div class="zoom-wrapper" [style.transform]="zoomTransform">
     <div class="canv" id="canv"></div>
     <div class="canv" id="bgr-canv"></div>
   </div>

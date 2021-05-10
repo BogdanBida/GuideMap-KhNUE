@@ -1,14 +1,14 @@
 <app-search-bar
   class="search-bar"
-  [svgIconUrl]="'assets/icons/sprite.svg#location-marker'"
-  [labelText]="'UI.ENTER_LOCATION'"
+  [svgIconUrl]="spriteIconsUrl + 'location-marker'"
+  [labelText]="labelText.Location"
   [optionGroups]="userLocationGroups"
-  (selectData)="location = $event"
+  (selectData)="setLocation($event)"
 ></app-search-bar>
 <app-search-bar
   class="search-bar"
-  [svgIconUrl]="'assets/icons/sprite.svg#destination-marker'"
-  [labelText]="'UI.ENTER_ROOM'"
+  [svgIconUrl]="spriteIconsUrl + 'destination-marker'"
+  [labelText]="labelText.Destination"
   [optionGroups]="destinationGroups"
-  (selectData)="destination = $event"
+  (selectData)="setDestination($event)"
 ></app-search-bar>

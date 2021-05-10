@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
 import {
   AfterViewInit,
   Component,
@@ -14,7 +10,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { withLatestFrom } from 'rxjs/operators';
 import { MapService } from 'src/app/core/services/map.service';
-import { DragNDrop } from '../../../../utils/dragndrop';
+import { DragNDrop } from 'src/app/core/utils';
 import { GuideMapRoomProperties } from './../../../core/models';
 import {
   FloorService,
@@ -96,6 +92,10 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       // this._mapService.drawPath();
       this.moveMapTo(userLocation.x, userLocation.y);
     }
+  }
+
+  public get zoomTransform(): string {
+    return `scale(${this.zoomFactor})`;
   }
 
   private moveMapTo(
