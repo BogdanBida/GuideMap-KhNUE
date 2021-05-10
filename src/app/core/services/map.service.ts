@@ -5,6 +5,7 @@ import { STROKE_CONFIG } from 'src/app/feature/map/canva/canvas-config';
 import { GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
+import { MapDataProviderService } from './map-data-provider.service';
 import { MapPathService } from './map-path.service';
 
 const WIDTH = 3500;
@@ -17,7 +18,8 @@ const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
 export class MapService {
   constructor(
     private readonly _floorService: FloorService,
-    private readonly _mapPathService: MapPathService
+    private readonly _mapPathService: MapPathService,
+    private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
   public svgInstance: Svg;
@@ -52,6 +54,30 @@ export class MapService {
     }
     this._mapPathService.calculateFullPath();
     this._drawPath();
+  }
+
+  public findAndSetEndpointByName(destinationName: string): void {
+    const foundEndpoint = this._mapDataProviderService.rooms.find(
+      (roomNode) => {
+        return destinationName === roomNode.properties.name;
+      }
+    );
+    foundEndpoint &&
+      this.setFinalEndpoint(
+        (foundEndpoint.properties as unknown) as GuideMapRoomProperties
+      );
+  }
+
+  public findAndSetLocationByName(userLocation: string): void {
+    const foundLocation = this._mapDataProviderService.qrCodes.find(
+      (roomNode) => {
+        return userLocation === roomNode.properties.name;
+      }
+    );
+    foundLocation &&
+      this.setUserLocation(
+        (foundLocation.properties as unknown) as GuideMapRoomProperties
+      );
   }
 
   public drawBackground(): void {

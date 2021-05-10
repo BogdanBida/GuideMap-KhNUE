@@ -31,14 +31,14 @@ export class SearchBarComponent implements OnInit {
   public formGroupValues: Observable<IOptionGroup[]>;
 
   public ngOnInit(): void {
-    this.formGroupValues = this.formGroupControl.valueChanges.pipe(
+    this.formGroupValues = this._formGroupControl.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filterGroup(value))
+      map(this._filterGroup)
     );
   }
 
   public findLocation(): void {
-    this.selectData.emit(this.formGroupControl.value);
+    this.selectData.emit(this._formGroupControl.value);
   }
 
   private _filterGroup(value: string): IOptionGroup[] {
@@ -46,15 +46,15 @@ export class SearchBarComponent implements OnInit {
       return this.optionGroups
         .map((group) => ({
           groupName: group.groupName,
-          rooms: filterSearchValue(group.rooms, value),
+          values: filterSearchValue(group.values, value),
         }))
-        .filter((group) => group.rooms.length > 0);
+        .filter((group) => group.values.length > 0);
     }
 
     return this.optionGroups;
   }
 
-  private get formGroupControl(): AbstractControl {
+  private get _formGroupControl(): AbstractControl {
     return this.formGroup.get('value');
   }
 }

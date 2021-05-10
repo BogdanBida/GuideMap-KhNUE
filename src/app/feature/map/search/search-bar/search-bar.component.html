@@ -19,7 +19,7 @@
         *ngFor="let group of formGroupValues | async"
         [label]="group.groupName"
       >
-        <mat-option *ngFor="let room of group.rooms" [value]="room.viewValue">
+        <mat-option *ngFor="let room of group.values" [value]="room.viewValue">
           {{ room.viewValue }}
         </mat-option>
       </mat-optgroup>
