@@ -8,17 +8,18 @@
   align-items: center;
   user-select: none;
   width: 5.5em;
+  cursor: pointer;
   button {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 76px;
-    background-color: transparent;
     @include shadow;
+    background-color: transparent;
     .icon {
       margin: auto;
-      width: 75%;
+      width: 100%;
       height: 75%;
     }
     &:active {
@@ -48,7 +49,6 @@
   color: white;
   border-bottom: 2px solid $base-color;
   background-color: change-color($color: $base-color, $alpha: 0.1);
-  // opacity: 0.9;
   label {
     background-color: $base-color;
     font-size: 12px;
