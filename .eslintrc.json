@@ -1,14 +1,23 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "src/app/shared/utils/*"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "src/app/shared/utils/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.app.json"],
+        "project": [
+          "tsconfig.app.json"
+        ],
         "createDefaultProgram": true
       },
-      "plugins": ["rxjs"],
+      "plugins": [
+        "rxjs"
+      ],
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
@@ -41,54 +50,47 @@
         ],
         // "@typescript-eslint/no-explicit-any": "warning",
         "@typescript-eslint/prefer-readonly": "error",
-        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error"
+        ],
         "@typescript-eslint/member-ordering": [
           "error",
           {
             "classes": [
               // Index signature
               "signature",
-
               // Constructors
               "public-constructor",
               "protected-constructor",
               "private-constructor",
-
               // Abstract fields
               "protected-abstract-field",
               "public-abstract-field",
               "private-abstract-field",
-
               // Static Fields
               "protected-static-field",
               "public-static-field",
               "private-static-field",
-
               // Decorated fields
               "protected-decorated-field",
               "public-decorated-field",
               "private-decorated-field",
-
               // Instance fields
               "protected-instance-field",
               "public-instance-field",
               "private-instance-field",
-
               // Abstract Methods
               "protected-abstract-method",
               "public-abstract-method",
               "private-abstract-method",
-
               // Static Methods
               "protected-static-method",
               "public-static-method",
               "private-static-method",
-
               // Decorated Methods
               "protected-decorated-method",
               "public-decorated-method",
               "private-decorated-method",
-
               // Instance Methods
               "protected-instance-method",
               "public-instance-method",
@@ -97,7 +99,6 @@
             "interfaces": [
               "field",
               "method",
-
               // Index signature
               "signature"
             ]
@@ -107,51 +108,101 @@
           "error",
           {
             "selector": "default",
-            "format": ["camelCase"],
-            "modifiers": ["public"],
+            "format": [
+              "camelCase"
+            ],
+            "modifiers": [
+              "public"
+            ],
             "leadingUnderscore": "forbid",
             "trailingUnderscore": "forbid"
           },
           {
             "selector": "variable",
-            "format": ["camelCase", "StrictPascalCase", "UPPER_CASE"]
+            "format": [
+              "camelCase",
+              "StrictPascalCase",
+              "UPPER_CASE"
+            ]
           },
           {
-            "selector": ["variable"],
-            "prefix": ["is", "has"],
-            "types": ["boolean"],
-            "format": ["StrictPascalCase"]
+            "selector": [
+              "variable"
+            ],
+            "prefix": [
+              "is",
+              "has"
+            ],
+            "types": [
+              "boolean"
+            ],
+            "format": [
+              "StrictPascalCase"
+            ]
           },
           {
             "selector": "typeLike",
-            "format": ["PascalCase"]
+            "format": [
+              "PascalCase"
+            ]
           },
           {
-            "selector": ["property", "parameterProperty", "method", "accessor"],
-            "modifiers": ["private", "readonly"],
+            "selector": [
+              "property",
+              "parameterProperty",
+              "method",
+              "accessor"
+            ],
+            "modifiers": [
+              "private",
+              "readonly"
+            ],
             "leadingUnderscore": "require",
-            "format": ["camelCase"]
+            "format": [
+              "camelCase"
+            ]
           },
           {
-            "selector": ["property", "parameterProperty", "method", "accessor"],
-            "modifiers": ["private"],
+            "selector": [
+              "property",
+              "parameterProperty",
+              "method",
+              "accessor"
+            ],
+            "modifiers": [
+              "private"
+            ],
             "leadingUnderscore": "require",
-            "format": ["camelCase"]
+            "format": [
+              "camelCase"
+            ]
           },
           {
             "selector": "enum",
-            "format": ["StrictPascalCase"]
+            "format": [
+              "StrictPascalCase"
+            ]
           },
           {
             "selector": "enumMember",
-            "format": ["StrictPascalCase"]
+            "format": [
+              "StrictPascalCase"
+            ]
           }
         ],
-
         "import/no-deprecated": "off",
-        "arrow-parens": ["error", "always", { "requireForBlockBody": true }],
+        "arrow-parens": [
+          "error",
+          "always",
+          {
+            "requireForBlockBody": true
+          }
+        ],
         "arrow-body-style": "off",
-        "eqeqeq": ["error", "always"],
+        "eqeqeq": [
+          "error",
+          "always"
+        ],
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off",
@@ -159,43 +210,115 @@
         "jsdoc/newline-after-description": "off",
         "padding-line-between-statements": [
           "error",
-          { "blankLine": "always", "prev": "*", "next": "return" },
-          { "blankLine": "always", "prev": "*", "next": "try" },
-          { "blankLine": "always", "prev": "*", "next": "if" },
-          { "blankLine": "always", "prev": "*", "next": "switch" },
-          { "blankLine": "always", "prev": "*", "next": "while" },
-          { "blankLine": "always", "prev": "*", "next": "function" },
-          { "blankLine": "always", "prev": "*", "next": "break" },
-          { "blankLine": "always", "prev": ["default"], "next": "*" },
-          { "blankLine": "always", "prev": ["case"], "next": ["default"] },
-          { "blankLine": "always", "prev": ["const", "let"], "next": "*" },
           {
-            "blankLine": "any",
-            "prev": ["const", "let"],
-            "next": ["const", "let"]
+            "blankLine": "always",
+            "prev": "*",
+            "next": "return"
           },
           {
             "blankLine": "always",
-            "prev": ["if", "try", "switch", "while", "function"],
+            "prev": "*",
+            "next": "try"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "if"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "switch"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "while"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "function"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "break"
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "default"
+            ],
+            "next": "*"
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "case"
+            ],
+            "next": [
+              "default"
+            ]
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "const",
+              "let"
+            ],
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": [
+              "const",
+              "let"
+            ],
+            "next": [
+              "const",
+              "let"
+            ]
+          },
+          {
+            "blankLine": "always",
+            "prev": [
+              "if",
+              "try",
+              "switch",
+              "while",
+              "function"
+            ],
             "next": "*"
           }
         ],
-        "lines-between-class-members": ["error", "always"],
+        "lines-between-class-members": [
+          "error",
+          "always"
+        ],
         // "implicit-arrow-linebreak": ["error", "beside"],
         "prefer-arrow/prefer-arrow-functions": "off",
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
-
         "no-magic-numbers": "off",
         "@typescript-eslint/no-magic-numbers": [
           "error",
-          { "ignore": [1, 0, -1], "ignoreEnums": true }
+          {
+            "ignore": [
+              1,
+              0,
+              -1
+            ],
+            "ignoreEnums": true
+          }
         ],
         "no-empty-function": "off",
         "@typescript-eslint/no-empty-function": [
           "error",
           {
-            "allow": ["methods"]
+            "allow": [
+              "methods"
+            ]
           }
         ],
         "space-before-function-paren": "off",
@@ -209,7 +332,10 @@
         ],
         "max-len": [
           "error",
-          { "code": 140, "ignorePattern": "^import\\s+\\{\\D+\\}\\s+from\\s+" }
+          {
+            "code": 140,
+            "ignorePattern": "^import\\s+\\{\\D+\\}\\s+from\\s+"
+          }
         ],
         "no-fallthrough": "off",
         "@typescript-eslint/no-empty-interface": [
@@ -221,14 +347,21 @@
         "rxjs/no-unsafe-takeuntil": [
           "error",
           {
-            "alias": ["untilDestroyed"]
+            "alias": [
+              "untilDestroyed"
+            ]
           }
-        ]
+        ],
+        "@typescript-eslint/no-unused-expressions": "error"
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]
