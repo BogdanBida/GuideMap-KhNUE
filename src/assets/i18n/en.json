@@ -1,9 +1,13 @@
 {
   "UI": {
-    "ENTER_ROOM": "Enter the destination",
+    "ENTER_LOCATION": "The start location",
+    "ENTER_ROOM": "The destination",
     "ROOM_GROUPS": {
       "CLASSROOMS": "Audiences",
       "WC": "WC"
+    },
+    "QRCODE_GROUPS": {
+      "COMMON": "Common"
     },
     "FLOOR": "Floor",
     "CANCEL": "Cancel",
