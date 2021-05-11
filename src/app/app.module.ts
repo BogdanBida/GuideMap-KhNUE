@@ -5,7 +5,7 @@ import { LOCATION_INITIALIZED } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   TranslateLoader,
@@ -62,7 +62,8 @@ export function appInitializerFactory(
     }),
     CoreModule,
     SharedModule,
-    NoopAnimationsModule,
+    // NoopAnimationsModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

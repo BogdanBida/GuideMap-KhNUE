@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'variables';
+@import "mixins";
+@import "variables";
 
 :host {
   height: 38px;
@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     background-color: transparent;
+    border-radius: 999px;
     @include shadow;
     .icon {
       width: 100%;

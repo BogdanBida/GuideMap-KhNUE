@@ -11,10 +11,16 @@
   </form>
 </div>
 <nav>
-  <button (click)="reset()" class="btn-cancel">
+  <button (click)="reset()" class="btn-cancel" matRipple>
     {{ "UI.RESET" | translate }}
   </button>
-  <button mat-button [mat-dialog-close]="true" class="btn-ok" type="button">
+  <button
+    mat-button
+    matRipple
+    [mat-dialog-close]="true"
+    class="btn-ok"
+    type="button"
+  >
     OK
   </button>
 </nav>

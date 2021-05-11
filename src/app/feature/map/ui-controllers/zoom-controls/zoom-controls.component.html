@@ -4,7 +4,9 @@
       <use xlink:href="assets/icons/sprite.svg#zoom-in"></use>
     </svg>
   </button>
-  <div class="zoom-value" [class.hidden]="zoomFactor === 1">{{ zoomFactor * 100 }}</div>
+  <div class="zoom-value" [class.hidden]="zoomFactor === 1">
+    {{ zoomFactor * 100 }}
+  </div>
   <button (click)="zoomOut()" [class.disabled]="isMin">
     <svg class="icon">
       <use xlink:href="assets/icons/sprite.svg#zoom-out"></use>
