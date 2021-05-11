@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { LabelText } from '../../../../app/core/enums';
+import { MapDataProviderService, MapService } from '../../../core/services';
 import { IOptionGroup } from '../interfaces';
-import { MapDataProviderService, MapService } from './../../../core/services';
 
-enum LabelText {
-  Location = 'UI.ENTER_LOCATION',
-  Destination = 'UI.ENTER_ROOM',
-}
+@UntilDestroy()
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -21,6 +20,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   public readonly spriteIconsUrl = environment.spriteIconsPath;
+
   public readonly labelText = LabelText;
 
   public setLocation(value: string): void {
@@ -31,13 +31,14 @@ export class SearchComponent implements OnInit {
   }
 
   public destinationGroups = [] as IOptionGroup[];
+
   public userLocationGroups = [] as IOptionGroup[];
 
   public ngOnInit(): void {
     const { qrCodes$, rooms$ } = this._mapDataProviderService;
 
     // TODO: split rooms and qr codes into groups (in scope of task: https://trello.com/c/JhfD3q4U/14-app-split-rooms-and-qr-codes-into-groups)
-    qrCodes$.subscribe((qrCodes) => {
+    qrCodes$.pipe(untilDestroyed(this)).subscribe((qrCodes) => {
       qrCodes.length &&
         this.userLocationGroups.push({
           groupName: this._translateService.instant('UI.QRCODE_GROUPS.COMMON'),
@@ -49,7 +50,8 @@ export class SearchComponent implements OnInit {
           }),
         });
     });
-    rooms$.subscribe((rooms) => {
+
+    rooms$.pipe(untilDestroyed(this)).subscribe((rooms) => {
       rooms.length &&
         this.destinationGroups.push({
           groupName: this._translateService.instant(

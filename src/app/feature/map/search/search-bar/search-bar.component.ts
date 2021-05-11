@@ -16,8 +16,11 @@ export class SearchBarComponent implements OnInit {
   constructor(private readonly _formBuilder: FormBuilder) {}
 
   @Input() svgIconUrl: string;
+
   @Input() labelText: string;
+
   @Input() optionGroups: IOptionGroup[];
+
   @Output() selectData = new EventEmitter<string>();
 
   public readonly searchIconPath = environment.spriteIconsPath + 'search';
