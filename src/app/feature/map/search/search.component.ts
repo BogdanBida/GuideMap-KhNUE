@@ -23,16 +23,17 @@ export class SearchComponent implements OnInit {
 
   public readonly labelText = LabelText;
 
-  public setLocation(value: string): void {
-    value && value.length && this.findUserLocation(value);
-  }
-  public setDestination(value: string): void {
-    value && value.length && this.findDestination(value);
-  }
-
   public destinationGroups = [] as IOptionGroup[];
 
   public userLocationGroups = [] as IOptionGroup[];
+
+  public setLocation(value: string): void {
+    value && value.length && this.findUserLocation(value);
+  }
+
+  public setDestination(value: string): void {
+    value && value.length && this.findDestination(value);
+  }
 
   public ngOnInit(): void {
     const { qrCodes$, rooms$ } = this._mapDataProviderService;
