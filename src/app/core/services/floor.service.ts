@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
+import { range } from 'lodash';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
@@ -19,6 +20,8 @@ export class FloorService {
     Number(window.localStorage.getItem('floor')) || environment.defaultFloor
   );
 
+  public readonly floorList = range(MIN_FLOOR, MAX_FLOOR + 1).reverse();
+
   public readonly isMaxFloor$ = this.floor$.pipe(
     map((floor) => floor >= MAX_FLOOR)
   );
@@ -29,7 +32,12 @@ export class FloorService {
 
   public readonly floorNumberPositionStyle$ = this.floor$.pipe(
     map((floor) => {
-      return { transform: 'translateY(' + (1 - floor) * ONE_HUNDRED + '%)' };
+      return {
+        transform:
+          'translateY(' +
+          Number((1 - MAX_FLOOR) * ONE_HUNDRED + (floor - 1) * ONE_HUNDRED) +
+          '%)',
+      };
     })
   );
 

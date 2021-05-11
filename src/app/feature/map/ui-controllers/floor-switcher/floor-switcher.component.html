@@ -14,7 +14,7 @@
   <div class="floor-container">
     <div
       class="floor-number"
-      *ngFor="let fl of [1, 2, 3, 4]"
+      *ngFor="let fl of floorList"
       [ngStyle]="floorNumberPositionStyle$ | async"
     >
       {{ fl }}
