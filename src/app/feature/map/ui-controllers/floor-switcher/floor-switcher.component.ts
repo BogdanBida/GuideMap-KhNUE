@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { FloorService } from '../../../../core/services';
 
 @Component({
@@ -7,11 +7,9 @@ import { FloorService } from '../../../../core/services';
   styleUrls: ['./floor-switcher.component.scss'],
 })
 export class FloorSwitcherComponent {
-  constructor(private readonly _floorService: FloorService) {
-    this.floorList = _floorService.floorList;
-  }
+  constructor(private readonly _floorService: FloorService) {}
 
-  public readonly floorList: number[];
+  public readonly floorList = this._floorService.floorList;
 
   public readonly floorNumberPositionStyle$ =
     this._floorService.floorNumberPositionStyle$;
@@ -20,17 +18,11 @@ export class FloorSwitcherComponent {
 
   public readonly isMaxFloor$ = this._floorService.isMaxFloor$;
 
-  @HostListener('wheel', ['$event'])
-  public onWheel(event: WheelEvent): void {
-    event.deltaY < -1 && this.upFloor();
-    event.deltaY > 1 && this.downFloor();
-  }
-
   public upFloor(): void {
-    this._floorService.floor++;
+    this._floorService.upFloor();
   }
 
   public downFloor(): void {
-    this._floorService.floor--;
+    this._floorService.downFloor();
   }
 }

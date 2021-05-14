@@ -1,16 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/adjacent-overload-signatures */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
 import { range } from 'lodash';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { getSlideTransform } from '../utils';
 import { environment } from './../../../environments/environment';
 
 const MIN_FLOOR = 1;
 const MAX_FLOOR = 4;
-const ONE_HUNDRED = 100;
+const FLOOR_LIST = range(MIN_FLOOR, MAX_FLOOR + 1).reverse();
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +17,7 @@ export class FloorService {
     Number(window.localStorage.getItem('floor')) || environment.defaultFloor
   );
 
-  public readonly floorList = range(MIN_FLOOR, MAX_FLOOR + 1).reverse();
+  public readonly floorList = FLOOR_LIST;
 
   public readonly isMaxFloor$ = this.floor$.pipe(
     map((floor) => floor >= MAX_FLOOR)
@@ -31,14 +28,7 @@ export class FloorService {
   );
 
   public readonly floorNumberPositionStyle$ = this.floor$.pipe(
-    map((floor) => {
-      return {
-        transform:
-          'translateY(' +
-          Number((1 - MAX_FLOOR) * ONE_HUNDRED + (floor - 1) * ONE_HUNDRED) +
-          '%)',
-      };
-    })
+    map((floor) => getSlideTransform(floor, MAX_FLOOR))
   );
 
   public set floor(value: number) {
@@ -50,6 +40,14 @@ export class FloorService {
 
   public get floor(): number {
     return this.floor$.value;
+  }
+
+  public upFloor(): void {
+    this.floor++;
+  }
+
+  public downFloor(): void {
+    this.floor--;
   }
 
   public setFloorSubscribe(observer: any): Subscription {
