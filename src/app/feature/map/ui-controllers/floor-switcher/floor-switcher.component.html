@@ -7,7 +7,12 @@
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
   </svg>
 </button>
-<div class="floor">
+<div
+  class="floor"
+  appMouseWheel
+  (eventUp)="upFloor()"
+  (eventDown)="downFloor()"
+>
   <label for="">
     {{ "UI.FLOOR" | translate }}
   </label>
