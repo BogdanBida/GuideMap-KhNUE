@@ -57,11 +57,6 @@
   }
 }
 
-// -----------------------------------------------
-// .gui-overlay {
-//   padding-top: 8px;
-//   padding-bottom: 52px;
-// }
 // -------------------------------- WIDTH ADAPTIVE
 @media (min-width: $lg) {
   .gui-overlay {
@@ -126,7 +121,7 @@
     }
   }
 }
-
+// TODO: move to new component
 .manual {
   @include shadow;
   padding: 0;

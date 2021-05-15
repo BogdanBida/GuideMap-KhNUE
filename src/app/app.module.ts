@@ -62,7 +62,6 @@ export function appInitializerFactory(
     }),
     CoreModule,
     SharedModule,
-    // NoopAnimationsModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
