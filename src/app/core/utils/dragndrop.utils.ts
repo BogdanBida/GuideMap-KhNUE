@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 export class DragNDrop {
   public static onDrag(
     width: number,
     height: number
   ): (event: any, target: any) => void {
-    return (event, target) => {
-      target.ondragstart = () => false;
+    return (event, target): void => {
+      target.ondragstart = (): boolean => false;
 
       const box = target.getBoundingClientRect();
       const coords = {
@@ -28,14 +25,14 @@ export class DragNDrop {
         target.ontouchend = null;
       }
 
-      document.onmousemove = (e) => {
+      document.onmousemove = (e): void => {
         const top = e.pageY - shiftY;
         const left = e.pageX - shiftX;
 
         move(top, left);
       };
 
-      document.ontouchmove = (e) => {
+      document.ontouchmove = (e): void => {
         const top = e.touches[0].pageY - shiftY;
         const left = e.touches[0].pageX - shiftX;
 

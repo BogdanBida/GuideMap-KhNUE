@@ -7,14 +7,19 @@
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
   </svg>
 </button>
-<div class="floor">
+<div
+  class="floor"
+  appMouseWheel
+  (eventUp)="upFloor()"
+  (eventDown)="downFloor()"
+>
   <label for="">
     {{ "UI.FLOOR" | translate }}
   </label>
   <div class="floor-container">
     <div
       class="floor-number"
-      *ngFor="let fl of [1, 2, 3, 4]"
+      *ngFor="let fl of floorList"
       [ngStyle]="floorNumberPositionStyle$ | async"
     >
       {{ fl }}
