@@ -24,8 +24,14 @@ $zoom-transition: 0.3s;
 $sidebar-animation-duration: 0.8s;
 
 // breakpoints
-$lowgen: 320px;
-$small: 568px;
-$middle: 768px;
-$portrait: 900px;
-$large: 1024px;
+$xs: 320px;
+$sm: 600px;
+$md: 960px;
+$lg: 1280px;
+$xl: 1920px;
+
+$xs-height: 320px;
+$sm-height: 480px;
+$md-height: 768px;
+$lg-height: 1024px;
+$xl-height: 1280px;

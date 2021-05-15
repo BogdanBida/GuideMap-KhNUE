@@ -76,7 +76,7 @@ input {
   }
 }
 
-@media (max-width: $middle) {
+@media (max-width: $md) {
   .fullscreen-modal {
     width: 100vw;
     height: 100vh;
