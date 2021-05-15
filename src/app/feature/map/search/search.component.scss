@@ -5,11 +5,16 @@ $icon-width: 3em;
 
 :host {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   column-gap: 16px;
   row-gap: 8px;
   .search-bar {
-    width: min-content;
+    width: 100%;
+  }
+}
+
+@media (max-width: $sm) {
+  :host {
+    flex-wrap: wrap;
   }
 }
