@@ -1,0 +1,42 @@
+<section>
+  <h1>{{ "INFO.MANUAL" | translate }}</h1>
+  <p>Описание приложения, что оно делает и вкратце какой функционал содержит</p>
+  <h2 class="subtitle">{{ "INFO.INTERFACE.TITLE" | translate }}</h2>
+  <hr />
+  <p>
+    Далее следует описание элементов интерфейса и их функционала по следующему
+    шаблону:
+  </p>
+  <p>- Подзаголовок из названия</p>
+  <p>- Скриншот элемента</p>
+  <p>- Описание местоположения на экране, как он работает и для чего нужен</p>
+  <p>- (Опционально) дополнительные скриншоты меньшего размера</p>
+  <h2 class="subtitle">{{ "INFO.AUTHORS.TITLE" | translate }}</h2>
+  <hr />
+  <ul>
+    <li>Бида Богдан</li>
+    <li>Котелевец Егор</li>
+    <li>Поляков Денис</li>
+    <li>Тягло Евгений</li>
+  </ul>
+
+  <h2 class="subtitle">{{ "INFO.SUPPORT.TITLE" | translate }}</h2>
+  <hr />
+  <ul>
+    <li>
+      <a href="">guidemap.support@gmail.com</a>
+    </li>
+  </ul>
+</section>
+<div class="dialog-footer">
+  <strong>{{ "INFO.FOOTER" | translate }}</strong>
+  <button
+    mat-button
+    matRipple
+    [mat-dialog-close]="true"
+    class="btn-ok"
+    cdkFocusInitial
+  >
+    OK
+  </button>
+</div>
