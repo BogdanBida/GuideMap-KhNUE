@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GuideMapFeaturePointCategory } from '../enums';
 import { ICoordinates } from '../interfaces';
 import {
@@ -7,6 +8,7 @@ import {
   GuideMapRoomProperties,
   GuideMapSimpleRoute,
 } from '../models';
+import { MapPathUtils } from '../utils/map-path.utils';
 import { FloorService } from './floor.service';
 import { MapDataProviderService } from './map-data-provider.service';
 import { MapGraphService } from './map-graph.service';
@@ -30,6 +32,18 @@ export class MapPathService {
   );
 
   public readonly fullPath$ = new BehaviorSubject<GuideMapSimpleRoute[]>([]);
+
+  public readonly fullPathProperties$ = this.fullPath$.pipe(
+    map((fullPath) => {
+      const uniqPathIds = MapPathUtils.getUniquePathIds(fullPath);
+      const fullPathProperties = MapPathUtils.getPathProperties(
+        uniqPathIds,
+        this._mapDataProviderService.allPoints
+      );
+
+      return fullPathProperties;
+    })
+  );
 
   public readonly currentUserLocationPoint$ =
     new BehaviorSubject<GuideMapRoomProperties>(null);
@@ -77,7 +91,6 @@ export class MapPathService {
   }
 
   public getPathCoordinates(): ICoordinates[] {
-    debugger;
     const floor = this._floorService.floor;
     const allPoints = this._mapDataProviderService.allPoints;
     const pathCoordinates = this._findFloorPath(
@@ -112,14 +125,9 @@ export class MapPathService {
     floor: number,
     points: GuideMapFeaturePoint[]
   ): ICoordinates[] {
-    const fullPath: Set<number> = path.reduce((acc, { start, end }) => {
-      acc.add(start);
-      acc.add(end);
+    const uniqPathIds = MapPathUtils.getUniquePathIds(path);
 
-      return acc;
-    }, new Set<number>());
-
-    const fullPathWithCorridors = Array.from(fullPath).map((pointId) => {
+    const fullPathWithCorridors = Array.from(uniqPathIds).map((pointId) => {
       const foundedCorridor = points.find(
         (item) => item.properties.id === pointId
       );

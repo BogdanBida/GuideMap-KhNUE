@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Circle, Use } from '@svgdotjs/svg.js';
+import { withLatestFrom } from 'rxjs/operators';
 import { GuideMapFeaturePointCategory, MapStairsFloorSwitcher } from '../enums';
-import { GuideMapRoomProperties } from '../models';
-import { MapPointUtils } from '../utils';
+import { GuideMapCorridorProperties, GuideMapRoomProperties } from '../models';
+import { MapDotUtils, MapPointUtils } from '../utils';
 import { FloorService } from './floor.service';
 import { MapPathService } from './map-path.service';
 import { MapService } from './map.service';
+
+// TODO: for now we stairsFloorSwitcher only once on UI, we need to create new instance when will it need
+// When new floors and other buildings will be add
+// Also we need to update _onFloorSwitcherClick, when path will be build on middle floors
 
 @UntilDestroy()
 @Injectable({
@@ -76,38 +81,51 @@ export class MapDotService {
 
   private _subscribeOnPathCoordinatesChanges(): void {
     this._mapPathService.pathCoordinatesChanges$
-      .pipe(untilDestroyed(this))
-      .subscribe(([userLocation, endPoint]) => {
+      .pipe(
+        withLatestFrom(this._mapPathService.fullPathProperties$),
+        untilDestroyed(this)
+      )
+      .subscribe(([[userLocation, endPoint], fullPathProperties]) => {
         this.endpointDot = this.drawPoint(this.endpointDot, endPoint);
         this.userDot = this.drawPoint(this.userDot, userLocation, false);
-        this._drawFloorSwitcher([userLocation, endPoint]);
+        this._drawFloorSwitcher(userLocation, endPoint, fullPathProperties);
       });
   }
 
-  private _drawFloorSwitcher(points: GuideMapRoomProperties[]): void {
-    const stairsPointIndex = points.findIndex(
-      (point) => point?.category === GuideMapFeaturePointCategory.Stairs
-    );
+  private _drawFloorSwitcher(
+    userLocation: GuideMapRoomProperties,
+    endPoint: GuideMapRoomProperties,
+    fullPathProperties: (GuideMapRoomProperties | GuideMapCorridorProperties)[]
+  ): void {
+    const currentFloor = this._floorService.floor;
 
     this.stairsFloorSwitcher?.remove();
 
-    const isShowDownArrow = stairsPointIndex === 0;
-    const isShowArrowUp = stairsPointIndex > -1;
+    const isUserOnStairs =
+      userLocation?.category === GuideMapFeaturePointCategory.Stairs;
+    const isEndpointOnStairs =
+      endPoint?.category === GuideMapFeaturePointCategory.Stairs;
 
-    if (isShowDownArrow) {
-      this.stairsFloorSwitcher = this._drawArrow(
-        points[stairsPointIndex],
-        MapStairsFloorSwitcher.ArrowDown
+    if (isUserOnStairs) {
+      const arrowDirection = MapDotUtils.getPrevStairsArrowDirection(
+        fullPathProperties,
+        userLocation.id,
+        currentFloor
       );
+
+      this.stairsFloorSwitcher = this._drawArrow(userLocation, arrowDirection);
 
       return;
     }
 
-    if (isShowArrowUp) {
-      this.stairsFloorSwitcher = this._drawArrow(
-        points[stairsPointIndex],
-        MapStairsFloorSwitcher.ArrowUp
+    if (isEndpointOnStairs) {
+      const arrowDirection = MapDotUtils.getNextStairsArrowDirection(
+        fullPathProperties,
+        endPoint.id,
+        currentFloor
       );
+
+      this.stairsFloorSwitcher = this._drawArrow(endPoint, arrowDirection);
     }
   }
 
@@ -143,14 +161,17 @@ export class MapDotService {
   }
 
   private _onFloorSwitcherClick(arrowDirection: MapStairsFloorSwitcher): void {
+    const finalEndpoint = this._mapPathService.finalEndpoint$.getValue();
+    const startPoint = this._mapPathService.startPoint$.getValue();
+    const minFloor = Math.min(startPoint.floor, finalEndpoint.floor);
+    const maxFloor = Math.max(startPoint.floor, finalEndpoint.floor);
+
     if (arrowDirection === MapStairsFloorSwitcher.ArrowUp) {
-      const finalEndpoint = this._mapPathService.finalEndpoint$.getValue();
+      this._floorService.floor = maxFloor;
+    }
 
-      this._floorService.floor = finalEndpoint.floor;
-    } else {
-      const startPoint = this._mapPathService.startPoint$.getValue();
-
-      this._floorService.floor = startPoint.floor;
+    if (arrowDirection === MapStairsFloorSwitcher.ArrowDown) {
+      this._floorService.floor = minFloor;
     }
   }
 }

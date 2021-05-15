@@ -7,6 +7,12 @@ export interface GuideMapFeaturePoint<
   properties: T;
 }
 
-export type GuideMapFeaturePointCorridor = GuideMapFeaturePoint<GuideMapCorridorProperties>;
+export type GuideMapFeature =
+  | GuideMapCorridorProperties
+  | GuideMapRoomProperties;
 
-export type GuideMapFeaturePointRoom = GuideMapFeaturePoint<GuideMapRoomProperties>;
+export type GuideMapFeaturePointCorridor =
+  GuideMapFeaturePoint<GuideMapCorridorProperties>;
+
+export type GuideMapFeaturePointRoom =
+  GuideMapFeaturePoint<GuideMapRoomProperties>;
