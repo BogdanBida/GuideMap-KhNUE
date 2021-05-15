@@ -9,18 +9,20 @@ import { FloorService } from '../../../../core/services';
 export class FloorSwitcherComponent {
   constructor(private readonly _floorService: FloorService) {}
 
-  public readonly floorNumberPositionStyle$ = this._floorService
-    .floorNumberPositionStyle$;
+  public readonly floorList = this._floorService.floorList;
+
+  public readonly floorNumberPositionStyle$ =
+    this._floorService.floorNumberPositionStyle$;
 
   public readonly isMinFloor$ = this._floorService.isMinFloor$;
 
   public readonly isMaxFloor$ = this._floorService.isMaxFloor$;
 
   public upFloor(): void {
-    this._floorService.floor++;
+    this._floorService.upFloor();
   }
 
   public downFloor(): void {
-    this._floorService.floor--;
+    this._floorService.downFloor();
   }
 }
