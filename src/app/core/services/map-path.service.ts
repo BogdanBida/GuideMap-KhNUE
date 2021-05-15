@@ -31,13 +31,11 @@ export class MapPathService {
 
   public readonly fullPath$ = new BehaviorSubject<GuideMapSimpleRoute[]>([]);
 
-  public readonly currentUserLocationPoint$ = new BehaviorSubject<GuideMapRoomProperties>(
-    null
-  );
+  public readonly currentUserLocationPoint$ =
+    new BehaviorSubject<GuideMapRoomProperties>(null);
 
-  public readonly currentUserEndpoint$ = new BehaviorSubject<GuideMapRoomProperties>(
-    null
-  );
+  public readonly currentUserEndpoint$ =
+    new BehaviorSubject<GuideMapRoomProperties>(null);
 
   public get pathCoordinatesChanges$(): Observable<
     [GuideMapRoomProperties, GuideMapRoomProperties]
@@ -79,6 +77,7 @@ export class MapPathService {
   }
 
   public getPathCoordinates(): ICoordinates[] {
+    debugger;
     const floor = this._floorService.floor;
     const allPoints = this._mapDataProviderService.allPoints;
     const pathCoordinates = this._findFloorPath(

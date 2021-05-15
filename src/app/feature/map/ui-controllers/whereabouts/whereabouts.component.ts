@@ -2,12 +2,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { GuideMapFeaturePointCategory } from 'src/app/core/enums';
 import { GuideMapFeaturePoint, LocationNode } from '../../../../core/models';
-import {
-  MapDataProviderService,
-  MapPathService,
-} from '../../../../core/services';
+import { MapDataProviderService } from '../../../../core/services';
 
 @Component({
   selector: 'app-whereabouts',
@@ -16,7 +12,7 @@ import {
 })
 export class WhereaboutsComponent implements OnInit {
   constructor(
-    private readonly _mapPathService: MapPathService,
+    // private readonly _mapPathService: MapPathService,
     private readonly router: Router,
     private readonly acivateRoute: ActivatedRoute,
     private readonly _mapDataProviderService: MapDataProviderService
@@ -28,6 +24,7 @@ export class WhereaboutsComponent implements OnInit {
 
   public isOpen = false;
 
+  // TODO:
   public ngOnInit(): void {
     combineLatest([
       this.acivateRoute.queryParams,
@@ -41,25 +38,25 @@ export class WhereaboutsComponent implements OnInit {
       this.locNodes = data;
       // this.stateService.userLocation = userLocation;
 
-      this._mapPathService.startPoint$.next({
-        id: 0,
-        name: '201',
-        category: GuideMapFeaturePointCategory.Room,
-        x: 2070,
-        y: 1825,
-        corridor: 2,
-        floor: 2,
-      });
+      // this._mapPathService.startPoint$.next({
+      //   id: 0,
+      //   name: '201',
+      //   category: GuideMapFeaturePointCategory.Room,
+      //   x: 2070,
+      //   y: 1825,
+      //   corridor: 2,
+      //   floor: 2,
+      // });
 
-      this._mapPathService.currentUserLocationPoint$.next({
-        id: 0,
-        name: '201',
-        category: GuideMapFeaturePointCategory.Room,
-        x: 2070,
-        y: 1825,
-        corridor: 2,
-        floor: 2,
-      });
+      // this._mapPathService.currentUserLocationPoint$.next({
+      //   id: 0,
+      //   name: '201',
+      //   category: GuideMapFeaturePointCategory.Room,
+      //   x: 2070,
+      //   y: 1825,
+      //   corridor: 2,
+      //   floor: 2,
+      // });
     });
   }
 
