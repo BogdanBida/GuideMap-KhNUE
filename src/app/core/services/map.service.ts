@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
+import { isNil } from 'lodash';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
-import { SvgPathUtils } from 'src/utils/svg-path.utils';
 import { GuideMapRoomProperties } from '../models';
+import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
+import { MapDataProviderService } from './map-data-provider.service';
 import { MapPathService } from './map-path.service';
 
 const WIDTH = 3500;
@@ -16,7 +18,8 @@ const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
 export class MapService {
   constructor(
     private readonly _floorService: FloorService,
-    private readonly _mapPathService: MapPathService
+    private readonly _mapPathService: MapPathService,
+    private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
   public svgInstance: Svg;
@@ -36,8 +39,51 @@ export class MapService {
   public setFinalEndpoint(finalEndpoint: GuideMapRoomProperties): void {
     // TODO: refactor
     this._mapPathService.finalEndpoint$.next(finalEndpoint);
+
+    if (isNil(this._mapPathService.startPoint$.value)) {
+      return;
+    }
+
     this._mapPathService.calculateFullPath();
     this._drawPath();
+  }
+
+  public setUserLocation(qrCodeLocation: GuideMapRoomProperties): void {
+    // TODO: refactor
+    this._mapPathService.startPoint$.next(qrCodeLocation);
+
+    if (isNil(this._mapPathService.finalEndpoint$.value)) {
+      return;
+    }
+
+    this._mapPathService.calculateFullPath();
+    this._drawPath();
+  }
+
+  public findAndSetEndpointByName(destinationName: string): void {
+    const foundEndpoint = this._mapDataProviderService.rooms.find(
+      (roomNode) => {
+        return destinationName === roomNode.properties.name;
+      }
+    );
+
+    foundEndpoint &&
+      this.setFinalEndpoint(
+        foundEndpoint.properties as unknown as GuideMapRoomProperties
+      );
+  }
+
+  public findAndSetLocationByName(userLocation: string): void {
+    const foundLocation = this._mapDataProviderService.qrCodes.find(
+      (roomNode) => {
+        return userLocation === roomNode.properties.name;
+      }
+    );
+
+    foundLocation &&
+      this.setUserLocation(
+        foundLocation.properties as unknown as GuideMapRoomProperties
+      );
   }
 
   public drawBackground(): void {
@@ -68,10 +114,8 @@ export class MapService {
     // TODO: refactor
     this.clearPath();
     const currentPathCoordinates = this._mapPathService.getPathCoordinates();
-    const {
-      currentUserLocationPoint,
-      currentUserEndpoint,
-    } = this._mapPathService.pathPointsValues;
+    const { currentUserLocationPoint, currentUserEndpoint } =
+      this._mapPathService.pathPointsValues;
 
     const properties = currentUserLocationPoint;
 

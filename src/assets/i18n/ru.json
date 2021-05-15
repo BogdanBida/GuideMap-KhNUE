@@ -1,12 +1,17 @@
 {
   "UI": {
-    "ENTER_ROOM": "Введите место назначения",
+    "ENTER_LOCATION": "Начальное местоположение",
+    "ENTER_ROOM": "Место назначения",
     "ROOM_GROUPS": {
       "CLASSROOMS": "Аудитории",
       "WC": "Туалеті"
     },
+    "QRCODE_GROUPS": {
+      "COMMON": "Общее"
+    },
     "FLOOR": "Этаж",
-    "CANCEL": "Отменить"
+    "CANCEL": "Отменить",
+    "RESET": "Сбросить"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Выбрать язык"

@@ -46,9 +46,6 @@ body {
 button {
   border: none;
   cursor: pointer;
-  &:active {
-    @include click;
-  }
 }
 
 button,
