@@ -1,41 +1,28 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { environment } from 'src/environments/environment';
-
-const MAX_ZOOM = 1;
-const MIN_ZOOM = 0.25;
-const ZOOM_STEP = 0.25;
+import { Component } from '@angular/core';
+import { MapZoomService } from './../../../../core/services/map-zoom.service';
 
 @Component({
   selector: 'app-zoom-controls',
   templateUrl: './zoom-controls.component.html',
-  styleUrls: ['./zoom-controls.component.scss']
+  styleUrls: ['./zoom-controls.component.scss'],
 })
-export class ZoomControlsComponent implements OnInit {
+export class ZoomControlsComponent {
+  constructor(private readonly _mapZoomService: MapZoomService) {}
 
-  @Output() zoomChange = new EventEmitter<number>();
+  public readonly isMax$ = this._mapZoomService.isMaxZoom$;
 
-  public isMax: boolean;
-  public isMin: boolean;
+  public readonly isMin$ = this._mapZoomService.isMinZoom$;
 
-  public set zoomFactor(value: number) {
-    this.isMax = value === MAX_ZOOM;
-    this.isMin = value === MIN_ZOOM;
-    if (value > MAX_ZOOM || value < MIN_ZOOM) { return; }
-    this.$zoomFactor = value;
-    this.zoomChange.emit(value);
-  }
-  public get zoomFactor(): number { return this.$zoomFactor; }
-  private $zoomFactor: number;
+  public isOneHungredPercentZoom$ =
+    this._mapZoomService.isOneHungredPercentZoom$;
 
-  ngOnInit(): void {
-    this.zoomFactor = environment.defaultZoomFactor;
-  }
+  public scale$ = this._mapZoomService.scale$;
 
   public zoomIn(): void {
-    this.zoomFactor = this.$zoomFactor + (this.$zoomFactor < MAX_ZOOM ? ZOOM_STEP : 0);
+    this._mapZoomService.zoomIn();
   }
 
   public zoomOut(): void {
-    this.zoomFactor = this.$zoomFactor - (this.$zoomFactor > MIN_ZOOM ? ZOOM_STEP : 0);
+    this._mapZoomService.zoomOut();
   }
 }

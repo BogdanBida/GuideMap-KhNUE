@@ -1,13 +1,13 @@
 <div class="zoom-controls">
-  <button (click)="zoomIn()" [class.disabled]="isMax">
+  <button (click)="zoomIn()" [class.disabled]="isMax$ | async">
     <svg class="icon">
       <use xlink:href="assets/icons/sprite.svg#zoom-in"></use>
     </svg>
   </button>
-  <div class="zoom-value" [class.hidden]="zoomFactor === 1">
-    {{ zoomFactor * 100 }}
+  <div class="zoom-value" [class.hidden]="isOneHungredPercentZoom$ | async">
+    {{ scale$ | async }}
   </div>
-  <button (click)="zoomOut()" [class.disabled]="isMin">
+  <button (click)="zoomOut()" [class.disabled]="isMin$ | async">
     <svg class="icon">
       <use xlink:href="assets/icons/sprite.svg#zoom-out"></use>
     </svg>
