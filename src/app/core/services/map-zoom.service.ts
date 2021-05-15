@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 
 const MAX_ZOOM = 1;
 const MIN_ZOOM = 0.25;
-const ZOOM_STEP = 0.25;
+const DEFAULT_ZOOM_STEP = 0.25;
 const DEFAULT_ZOOM_FACTOR = environment.defaultZoomFactor;
 const ONE_HUNGRED = 100;
 
@@ -30,18 +30,38 @@ export class MapZoomService {
   );
 
   public readonly scale$ = this.zoomFactor$.pipe(
-    map((value) => value * ONE_HUNGRED)
+    map((value) => Math.round(value * ONE_HUNGRED))
   );
 
   public readonly scaleTransform$ = this.zoomFactor$.pipe(
     map((value) => `scale(${value})`)
   );
 
+  public zoomIn(step: number = DEFAULT_ZOOM_STEP): void {
+    const value = this._zoomFactor;
+    const newValue = value + step;
+
+    this._zoomFactor = newValue < MAX_ZOOM ? newValue : MAX_ZOOM;
+  }
+
+  public zoomOut(step: number = DEFAULT_ZOOM_STEP): void {
+    const value = this._zoomFactor;
+    const newValue = value - step;
+
+    this._zoomFactor = newValue > MIN_ZOOM ? newValue : MIN_ZOOM;
+  }
+
+  public resetZoomFactor(): void {
+    this._zoomFactor = DEFAULT_ZOOM_FACTOR;
+  }
+
   private get _zoomFactor(): number {
     return this.zoomFactor$.getValue();
   }
 
-  private set _zoomFactor(value: number) {
+  private set _zoomFactor(rawValue: number) {
+    const value = Math.round(rawValue * ONE_HUNGRED) / ONE_HUNGRED;
+
     if (value > MAX_ZOOM || value < MIN_ZOOM) {
       return;
     }
@@ -51,13 +71,5 @@ export class MapZoomService {
     this.isMaxZoom$.next(value === MAX_ZOOM);
     this.isMinZoom$.next(value === MIN_ZOOM);
     this.isOneHungredPercentZoom$.next(value * ONE_HUNGRED === ONE_HUNGRED);
-  }
-
-  public zoomIn(): void {
-    this._zoomFactor += this._zoomFactor < MAX_ZOOM ? ZOOM_STEP : 0;
-  }
-
-  public zoomOut(): void {
-    this._zoomFactor -= this._zoomFactor > MIN_ZOOM ? ZOOM_STEP : 0;
   }
 }

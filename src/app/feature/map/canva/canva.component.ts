@@ -23,6 +23,7 @@ import { MapZoomService } from './../../../core/services/map-zoom.service';
 const WIDTH = 3500;
 const HEIGHT = 2550;
 const DEFAULT_TRANSITION_SPEED = 500;
+const WHEEL_ZOOM_STEP = 0.05;
 
 @UntilDestroy()
 @Component({
@@ -92,6 +93,18 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       // this._mapService.drawPath();
       this.moveMapTo(userLocation.x, userLocation.y);
     }
+  }
+
+  public zoomIn(): void {
+    this._mapZoomService.zoomIn(WHEEL_ZOOM_STEP);
+  }
+
+  public zoomOut(): void {
+    this._mapZoomService.zoomOut(WHEEL_ZOOM_STEP);
+  }
+
+  public resetZoom(): void {
+    this._mapZoomService.resetZoomFactor();
   }
 
   private moveMapTo(
