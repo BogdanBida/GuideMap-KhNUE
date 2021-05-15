@@ -57,7 +57,6 @@ $button-height: 36px;
         border-right: calc(#{$host-width} / 2) solid transparent;
         top: 0;
         transform: translateY(-100%);
-        @include glassmorphism(8px);
       }
       .icon {
         margin-top: -1em;
@@ -94,7 +93,10 @@ $button-height: 36px;
   width: 100%;
   color: white;
   border-bottom: 2px solid $base-color;
-  background-color: change-color($color: $base-color, $alpha: 0.1);
+  background-color: rgba($base-color, 0.3);
+  @supports not (backdrop-filter: blur(6px)) {
+    background-color: rgba($base-color, 0.5);
+  }
   label {
     background-color: $base-color;
     font-size: 12px;

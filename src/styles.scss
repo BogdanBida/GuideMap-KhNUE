@@ -68,10 +68,10 @@ input {
   background-color: transparent;
   > .mat-dialog-container {
     padding: 0;
-    background-color: rgb(235, 235, 235, 0.3);
+    background-color: rgba($bgr-color-first, 0.3);
     @include glassmorphism(12px);
     @supports not (backdrop-filter: blur(1px)) {
-      background-color: rgb(235, 235, 235, 0.75);
+      background-color: $bgr-color-first;
     }
   }
 }
