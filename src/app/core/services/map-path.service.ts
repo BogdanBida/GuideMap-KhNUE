@@ -77,7 +77,6 @@ export class MapPathService {
   }
 
   public getPathCoordinates(): ICoordinates[] {
-    debugger;
     const floor = this._floorService.floor;
     const allPoints = this._mapDataProviderService.allPoints;
     const pathCoordinates = this._findFloorPath(
