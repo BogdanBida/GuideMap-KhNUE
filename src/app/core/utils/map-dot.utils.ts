@@ -1,6 +1,12 @@
 import { MapStairsFloorSwitcher } from '../enums';
 import { GuideMapCorridorProperties, GuideMapRoomProperties } from '../models';
 
+function getArrowDirection(isUpperFloor: boolean): MapStairsFloorSwitcher {
+  return isUpperFloor
+    ? MapStairsFloorSwitcher.ArrowUp
+    : MapStairsFloorSwitcher.ArrowDown;
+}
+
 function getPrevStairsArrowDirection(
   fullPathProperties: (GuideMapRoomProperties | GuideMapCorridorProperties)[],
   userLocationId: number,
@@ -11,11 +17,8 @@ function getPrevStairsArrowDirection(
   const previousFloorInPath =
     fullPathProperties[previousPointBeforeUserInPathIndex].floor;
   const isPreviousPointOnUpperFloor = previousFloorInPath > currentFloor;
-  const arrowDirection = isPreviousPointOnUpperFloor
-    ? MapStairsFloorSwitcher.ArrowUp
-    : MapStairsFloorSwitcher.ArrowDown;
 
-  return arrowDirection;
+  return getArrowDirection(isPreviousPointOnUpperFloor);
 }
 
 function getNextStairsArrowDirection(
@@ -28,11 +31,8 @@ function getNextStairsArrowDirection(
   const nextFloorInPath =
     fullPathProperties[nextPointBeforeUserInPathIndex].floor;
   const isNextPointOnUpperFloor = nextFloorInPath > currentFloor;
-  const arrowDirection = isNextPointOnUpperFloor
-    ? MapStairsFloorSwitcher.ArrowUp
-    : MapStairsFloorSwitcher.ArrowDown;
 
-  return arrowDirection;
+  return getArrowDirection(isNextPointOnUpperFloor);
 }
 
 export const MapDotUtils = {
