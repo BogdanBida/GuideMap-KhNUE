@@ -46,9 +46,3 @@ hr {
   max-width: 100%;
   box-shadow: 1px 2px 3px black;
 }
-
-@media (max-width: $middle) {
-  :host {
-    max-height: 90vh;
-  }
-}

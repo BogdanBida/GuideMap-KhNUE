@@ -7,16 +7,9 @@ $icon-width: 3em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  column-gap: 16px;
+  row-gap: 8px;
   .search-bar {
     width: min-content;
-  }
-}
-
-@media (max-width: $small) {
-  :host {
-    .search-bar {
-      width: 100%;
-    }
   }
 }
