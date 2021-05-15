@@ -1,25 +1,10 @@
 <button
   class="whereabouts"
   *ngIf="locNodes?.length"
-  (click)="isOpen = true"
+  (click)="openDialog()"
   matRipple
 >
   <svg class="icon">
     <use xlink:href="assets/icons/sprite.svg#whereabouts"></use>
   </svg>
 </button>
-
-<div class="modal" *ngIf="isOpen">
-  <div class="container">
-    <div class="qr-scan-area">
-      <zxing-scanner
-        #scanner
-        (scanSuccess)="onCodeResult($event)"
-      ></zxing-scanner>
-      <div class="qr-area">
-        <div class="area"></div>
-      </div>
-    </div>
-  </div>
-  <button (click)="isOpen = false" class="close-btn" matRipple>OK</button>
-</div>

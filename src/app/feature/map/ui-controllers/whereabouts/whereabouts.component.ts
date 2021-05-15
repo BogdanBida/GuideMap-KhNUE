@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { GuideMapFeaturePoint, LocationNode } from '../../../../core/models';
 import { MapDataProviderService } from '../../../../core/services';
+import { CodeScannerDialogComponent } from './../../dialogs/code-scanner-dialog/code-scanner-dialog.component';
 
 @Component({
   selector: 'app-whereabouts',
@@ -12,9 +13,9 @@ import { MapDataProviderService } from '../../../../core/services';
 })
 export class WhereaboutsComponent implements OnInit {
   constructor(
-    // private readonly _mapPathService: MapPathService,
-    private readonly router: Router,
-    private readonly acivateRoute: ActivatedRoute,
+    private readonly _router: Router,
+    private readonly _acivateRoute: ActivatedRoute,
+    private readonly _dialog: MatDialog,
     private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
@@ -27,7 +28,7 @@ export class WhereaboutsComponent implements OnInit {
   // TODO:
   public ngOnInit(): void {
     combineLatest([
-      this.acivateRoute.queryParams,
+      this._acivateRoute.queryParams,
       this._mapDataProviderService.qrCodes$,
     ]).subscribe(([, data]) => {
       // const nodeId = parseFloat(params.nodeid);
@@ -63,7 +64,14 @@ export class WhereaboutsComponent implements OnInit {
   public onCodeResult(resultString: string): void {
     const nodeid = resultString.split('?')[1].split('=')[1];
 
-    this.router.navigate([], { queryParams: { nodeid } });
+    this._router.navigate([], { queryParams: { nodeid } });
     this.isOpen = false;
+  }
+
+  public openDialog(): void {
+    this._dialog.open(CodeScannerDialogComponent, {
+      panelClass: 'guidemap-dialog-window',
+      maxWidth: '95vw',
+    });
   }
 }

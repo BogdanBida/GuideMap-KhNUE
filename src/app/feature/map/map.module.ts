@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
+import { CodeScannerDialogComponent } from './dialogs/code-scanner-dialog/code-scanner-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
@@ -50,6 +51,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     WhereaboutsComponent,
     SettingsDialogComponent,
     InfoDialogComponent,
+    CodeScannerDialogComponent,
     ZoomControlsComponent,
   ],
   providers: [
