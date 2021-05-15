@@ -70,7 +70,7 @@ export class WhereaboutsComponent implements OnInit {
 
   public openDialog(): void {
     this._dialog.open(CodeScannerDialogComponent, {
-      panelClass: 'guidemap-dialog-window',
+      panelClass: 'guidemap-dialog-window-glassmorphed',
       maxWidth: '95vw',
     });
   }
