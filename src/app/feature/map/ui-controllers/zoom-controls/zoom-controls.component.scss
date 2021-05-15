@@ -4,6 +4,10 @@
 $icon-size: 32px;
 $zoom-value-height: 1.2em;
 
+:host {
+  width: min-content;
+}
+
 .zoom-controls {
   button {
     border: none;

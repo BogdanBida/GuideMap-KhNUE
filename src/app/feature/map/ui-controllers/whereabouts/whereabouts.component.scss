@@ -47,10 +47,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 2.5%;
-  bottom: calc(5% + 32px);
-  width: 95%;
-  height: 80%;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: min-content;
+  height: min-content;
   background: radial-gradient(
     circle at center,
     rgb(245, 245, 245),
@@ -78,4 +79,8 @@
     justify-content: space-around;
     padding: 8px;
   }
+}
+
+.scanner-dialog-container {
+  padding: 0;
 }

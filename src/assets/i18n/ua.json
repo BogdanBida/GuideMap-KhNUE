@@ -11,7 +11,9 @@
     },
     "FLOOR": "Поверх",
     "CANCEL": "Скасувати",
-    "RESET": "Скинути"
+    "RESET": "Скинути",
+    "LOADING": "Завантаження",
+    "VIDEODEVICE_REQUEST": "Запит на відеокамеру"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Вибрати мову"
