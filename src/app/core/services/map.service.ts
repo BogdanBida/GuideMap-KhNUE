@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
 import { isNil } from 'lodash';
-import { STROKE_CONFIG } from 'src/app/feature/map/canva/canvas-config';
+import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
@@ -39,9 +39,11 @@ export class MapService {
   public setFinalEndpoint(finalEndpoint: GuideMapRoomProperties): void {
     // TODO: refactor
     this._mapPathService.finalEndpoint$.next(finalEndpoint);
+
     if (isNil(this._mapPathService.startPoint$.value)) {
       return;
     }
+
     this._mapPathService.calculateFullPath();
     this._drawPath();
   }
@@ -49,9 +51,11 @@ export class MapService {
   public setUserLocation(qrCodeLocation: GuideMapRoomProperties): void {
     // TODO: refactor
     this._mapPathService.startPoint$.next(qrCodeLocation);
+
     if (isNil(this._mapPathService.finalEndpoint$.value)) {
       return;
     }
+
     this._mapPathService.calculateFullPath();
     this._drawPath();
   }
@@ -62,9 +66,10 @@ export class MapService {
         return destinationName === roomNode.properties.name;
       }
     );
+
     foundEndpoint &&
       this.setFinalEndpoint(
-        (foundEndpoint.properties as unknown) as GuideMapRoomProperties
+        foundEndpoint.properties as unknown as GuideMapRoomProperties
       );
   }
 
@@ -74,9 +79,10 @@ export class MapService {
         return userLocation === roomNode.properties.name;
       }
     );
+
     foundLocation &&
       this.setUserLocation(
-        (foundLocation.properties as unknown) as GuideMapRoomProperties
+        foundLocation.properties as unknown as GuideMapRoomProperties
       );
   }
 
@@ -108,10 +114,8 @@ export class MapService {
     // TODO: refactor
     this.clearPath();
     const currentPathCoordinates = this._mapPathService.getPathCoordinates();
-    const {
-      currentUserLocationPoint,
-      currentUserEndpoint,
-    } = this._mapPathService.pathPointsValues;
+    const { currentUserLocationPoint, currentUserEndpoint } =
+      this._mapPathService.pathPointsValues;
 
     const properties = currentUserLocationPoint;
 
