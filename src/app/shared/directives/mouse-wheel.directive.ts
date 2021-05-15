@@ -4,9 +4,9 @@ import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
   selector: '[appMouseWheel]',
 })
 export class MouseWheelDirective {
-  @Output() public eventUp = new EventEmitter<WheelEvent>();
+  @Output() public readonly eventUp = new EventEmitter<WheelEvent>();
 
-  @Output() public eventDown = new EventEmitter<WheelEvent>();
+  @Output() public readonly eventDown = new EventEmitter<WheelEvent>();
 
   @HostListener('wheel', ['$event'])
   public handler(event: WheelEvent): void {
