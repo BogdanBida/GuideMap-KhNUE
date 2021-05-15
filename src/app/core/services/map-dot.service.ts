@@ -3,7 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Circle, Use } from '@svgdotjs/svg.js';
 import { withLatestFrom } from 'rxjs/operators';
 import { GuideMapFeaturePointCategory, MapStairsFloorSwitcher } from '../enums';
-import { GuideMapCorridorProperties, GuideMapRoomProperties } from '../models';
+import { GuideMapFeature, GuideMapRoomProperties } from '../models';
 import { MapDotUtils, MapPointUtils } from '../utils';
 import { FloorService } from './floor.service';
 import { MapPathService } from './map-path.service';
@@ -95,7 +95,7 @@ export class MapDotService {
   private _drawFloorSwitcher(
     userLocation: GuideMapRoomProperties,
     endPoint: GuideMapRoomProperties,
-    fullPathProperties: (GuideMapRoomProperties | GuideMapCorridorProperties)[]
+    fullPathProperties: GuideMapFeature[]
   ): void {
     const currentFloor = this._floorService.floor;
 

@@ -1,5 +1,5 @@
 import { MapStairsFloorSwitcher } from '../enums';
-import { GuideMapCorridorProperties, GuideMapRoomProperties } from '../models';
+import { GuideMapFeature } from '../models';
 
 function getArrowDirection(isUpperFloor: boolean): MapStairsFloorSwitcher {
   return isUpperFloor
@@ -8,7 +8,7 @@ function getArrowDirection(isUpperFloor: boolean): MapStairsFloorSwitcher {
 }
 
 function getPrevStairsArrowDirection(
-  fullPathProperties: (GuideMapRoomProperties | GuideMapCorridorProperties)[],
+  fullPathProperties: GuideMapFeature[],
   userLocationId: number,
   currentFloor: number
 ): MapStairsFloorSwitcher {
@@ -22,7 +22,7 @@ function getPrevStairsArrowDirection(
 }
 
 function getNextStairsArrowDirection(
-  fullPathProperties: (GuideMapRoomProperties | GuideMapCorridorProperties)[],
+  fullPathProperties: GuideMapFeature[],
   endPointId: number,
   currentFloor: number
 ): MapStairsFloorSwitcher {
