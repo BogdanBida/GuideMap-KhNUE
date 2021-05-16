@@ -28,7 +28,10 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": [
+              "app",
+              "gmp"
+            ],
             "style": "kebab-case"
           }
         ],
@@ -305,6 +308,8 @@
           "error",
           {
             "ignore": [
+              100,
+              2,
               1,
               0,
               -1
