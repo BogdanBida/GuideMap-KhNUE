@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MapZoomService } from './../../../../core/services/map-zoom.service';
+import { MapZoomService } from 'src/app/core/services/map-zoom.service';
 
 @Component({
   selector: 'app-zoom-controls',
@@ -13,8 +13,7 @@ export class ZoomControlsComponent {
 
   public readonly isMin$ = this._mapZoomService.isMinZoom$;
 
-  public isOneHungredPercentZoom$ =
-    this._mapZoomService.isOneHungredPercentZoom$;
+  public isNaturalScale$ = this._mapZoomService.isNaturalScale;
 
   public scale$ = this._mapZoomService.scale$;
 
