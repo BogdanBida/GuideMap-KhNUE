@@ -114,7 +114,8 @@ export class CanvaComponent implements OnInit, AfterViewInit {
   ): void {
     if (left && top) {
       // adapt values ​​for zoom
-      const zoomFactor = this._mapZoomService.zoomFactor$.getValue();
+      const zoomFactor = this._mapZoomService.zoomFactor;
+
       top = top * zoomFactor + (HEIGHT - HEIGHT * zoomFactor) / 2;
       left = left * zoomFactor + (WIDTH - WIDTH * zoomFactor) / 2;
       // centering

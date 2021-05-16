@@ -36,26 +36,26 @@ export class MapZoomService {
   );
 
   public zoomIn(step: number = DEFAULT_ZOOM_STEP): void {
-    const newValue = this._zoomFactor + step;
+    const newValue = this.zoomFactor + step;
 
-    this._zoomFactor = newValue < MAX_ZOOM ? newValue : MAX_ZOOM;
+    this.zoomFactor = newValue < MAX_ZOOM ? newValue : MAX_ZOOM;
   }
 
   public zoomOut(step: number = DEFAULT_ZOOM_STEP): void {
-    const newValue = this._zoomFactor - step;
+    const newValue = this.zoomFactor - step;
 
-    this._zoomFactor = newValue > MIN_ZOOM ? newValue : MIN_ZOOM;
+    this.zoomFactor = newValue > MIN_ZOOM ? newValue : MIN_ZOOM;
   }
 
   public resetZoomFactor(): void {
-    this._zoomFactor = DEFAULT_ZOOM_FACTOR;
+    this.zoomFactor = DEFAULT_ZOOM_FACTOR;
   }
 
-  private get _zoomFactor(): number {
+  public get zoomFactor(): number {
     return this.zoomFactor$.getValue();
   }
 
-  private set _zoomFactor(value: number) {
+  public set zoomFactor(value: number) {
     const isValidValue = value <= MAX_ZOOM && value >= MIN_ZOOM;
 
     isValidValue && this.zoomFactor$.next(value);
