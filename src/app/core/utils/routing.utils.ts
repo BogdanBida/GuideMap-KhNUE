@@ -24,3 +24,7 @@ export function queryParamsExtractor(
     })
     .filter((queryParam) => params.includes(queryParam.name));
 }
+
+export function screenAddress(url: string): string {
+  return url.replace(/[.?/\\]/g, '\\$&');
+}

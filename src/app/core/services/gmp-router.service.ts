@@ -3,15 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { isNil } from 'lodash';
 import { Observable, of, throwError } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { queryParamsExtractor } from '../utils/routing.utils';
+import { queryParamsExtractor, screenAddress } from '../utils/routing.utils';
 import { environment } from './../../../environments/environment.prod';
 import { GmpQueryParams } from './../models/gmp-query-params';
 import { MapDataProviderService } from './map-data-provider.service';
 import { MapService } from './map.service';
-
-function screenAddress(url: string): string {
-  return url.replace(/[.?/\\]/g, '\\$&');
-}
 
 @Injectable({
   providedIn: 'root',
