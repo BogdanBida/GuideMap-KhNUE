@@ -1,15 +1,25 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BarcodeFormat } from '@zxing/library';
+import { GMPRouterService } from 'src/app/core/services';
 
 const SCAN_AREA_SIZE_FACTOR = 0.5;
 
-// TODO: Refactored this component, add error handlers
+const ERROR_MESSAGE_TIMEOUT_MS = 5000;
+
+@UntilDestroy()
 @Component({
   selector: 'app-code-scanner-dialog',
   templateUrl: './code-scanner-dialog.component.html',
   styleUrls: ['./code-scanner-dialog.component.scss'],
 })
-export class CodeScannerDialogComponent {
+export class CodeScannerDialogComponent implements OnInit {
+  constructor(
+    private readonly _gmpRouterService: GMPRouterService,
+    private readonly _dialogRef: MatDialogRef<CodeScannerDialogComponent>
+  ) {}
+
   @ViewChild('scannerWrapper')
   public scannerWrapper: ElementRef;
 
@@ -19,8 +29,27 @@ export class CodeScannerDialogComponent {
 
   public readonly allowedFormats = [BarcodeFormat.QR_CODE];
 
-  public onCodeResult(value: string): string {
-    return value;
+  public ngOnInit(): void {
+    this._gmpRouterService.init();
+  }
+
+  public onCodeResult(value: string): void {
+    console.log('scanner: ' + value);
+
+    this._gmpRouterService
+      .setQueryParamNodeid$(value)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        complete: () => {
+          this._dialogRef.close();
+        },
+        error: (message) => {
+          this.errorMessage = message;
+          setTimeout(() => {
+            this.errorMessage = null;
+          }, ERROR_MESSAGE_TIMEOUT_MS);
+        },
+      });
   }
 
   public camerasFoundHandler(): void {
