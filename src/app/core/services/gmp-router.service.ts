@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { isNil } from 'lodash';
 import { Observable, of, throwError } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { queryParamsExtractor, screenAddress } from '../utils/routing.utils';
 import { environment } from './../../../environments/environment.prod';
 import { GmpQueryParams } from './../models/gmp-query-params';
@@ -21,16 +21,20 @@ export class GMPRouterService {
   ) {}
 
   public init(): void {
-    this._activatedRoute.queryParams
+    this._mapDataProviderService
+      .init$()
       .pipe(
-        filter((params: GmpQueryParams) => !isNil(params.nodeid)),
-        map((params: GmpQueryParams) => params.nodeid)
+        switchMap(() => {
+          return this._activatedRoute.queryParams.pipe(
+            filter((params: GmpQueryParams) => !isNil(params.nodeid)),
+            map((params: GmpQueryParams) => params.nodeid)
+          );
+        })
       )
       .subscribe((nodeid: string) => {
         const userLocation = this._mapDataProviderService.qrCodes.find(
           (node) => String(node.properties.id) === nodeid
         );
-
         this._mapService.setUserLocation(userLocation.properties);
       });
   }
