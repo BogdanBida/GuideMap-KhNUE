@@ -31,10 +31,85 @@ export class MapDotService {
   public stairsFloorSwitcher: Use;
 
   public init(): void {
-    this._subscribeOnPathCoordinatesChanges();
+    this._subscribeOnStartPointChanges();
+    this._subscribeOnFinalEndpointPointChanges();
   }
 
-  public drawPoint(
+  private _subscribeOnStartPointChanges(): void {
+    this._mapPathService.startPointFloorChanges$
+      .pipe(
+        withLatestFrom(
+          this._mapPathService.calculatedPositiveStartPoint$,
+          this._floorService.floor$,
+          this._mapPathService.fullPathProperties$
+        ),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        ([, calculatedPositiveStartPoint, floor, fullPathProperties]) => {
+          if (calculatedPositiveStartPoint.floor !== floor) {
+            this.userDot?.remove();
+            this.stairsFloorSwitcher?.remove();
+          } else {
+            this._drawStartPointDot(
+              calculatedPositiveStartPoint,
+              fullPathProperties
+            );
+          }
+        }
+      );
+  }
+
+  private _subscribeOnFinalEndpointPointChanges(): void {
+    this._mapPathService.endPointFloorChanges$
+      .pipe(
+        withLatestFrom(
+          this._mapPathService.calculatedPositiveEndPoint$,
+          this._floorService.floor$,
+          this._mapPathService.fullPathProperties$
+        ),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        ([, calculatedPositiveEndPoint, floor, fullPathProperties]) => {
+          if (calculatedPositiveEndPoint.floor !== floor) {
+            this.endpointDot?.remove();
+            this.stairsFloorSwitcher?.remove();
+          } else {
+            this._drawEndPointDot(
+              calculatedPositiveEndPoint,
+              fullPathProperties
+            );
+          }
+        }
+      );
+  }
+
+  private _drawStartPointDot(
+    startPoint: GuideMapRoomProperties,
+    fullPathProperties: GuideMapFeature[]
+  ): void {
+    this.userDot = this._drawPoint(this.userDot, startPoint, false);
+    this._drawFloorSwitcher(
+      startPoint,
+      this._mapPathService.currentUserEndpoint$.getValue(),
+      fullPathProperties
+    );
+  }
+
+  private _drawEndPointDot(
+    endPoint: GuideMapRoomProperties,
+    fullPathProperties: GuideMapFeature[]
+  ): void {
+    this.endpointDot = this._drawPoint(this.endpointDot, endPoint);
+    this._drawFloorSwitcher(
+      this._mapPathService.currentUserLocationPoint$.getValue(),
+      endPoint,
+      fullPathProperties
+    );
+  }
+
+  private _drawPoint(
     dot: Circle,
     location: GuideMapRoomProperties,
     isEndpoint = true
@@ -77,19 +152,6 @@ export class MapDotService {
     }
 
     return dot;
-  }
-
-  private _subscribeOnPathCoordinatesChanges(): void {
-    this._mapPathService.pathCoordinatesChanges$
-      .pipe(
-        withLatestFrom(this._mapPathService.fullPathProperties$),
-        untilDestroyed(this)
-      )
-      .subscribe(([[userLocation, endPoint], fullPathProperties]) => {
-        this.endpointDot = this.drawPoint(this.endpointDot, endPoint);
-        this.userDot = this.drawPoint(this.userDot, userLocation, false);
-        this._drawFloorSwitcher(userLocation, endPoint, fullPathProperties);
-      });
   }
 
   private _drawFloorSwitcher(

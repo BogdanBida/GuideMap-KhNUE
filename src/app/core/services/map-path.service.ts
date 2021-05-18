@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, merge } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { positiveValue } from 'src/app/shared/operators';
 import { GuideMapFeaturePointCategory } from '../enums';
 import { ICoordinates } from '../interfaces';
 import {
@@ -31,6 +32,12 @@ export class MapPathService {
     null
   );
 
+  public readonly currentUserLocationPoint$ =
+    new BehaviorSubject<GuideMapRoomProperties>(null);
+
+  public readonly currentUserEndpoint$ =
+    new BehaviorSubject<GuideMapRoomProperties>(null);
+
   public readonly fullPath$ = new BehaviorSubject<GuideMapSimpleRoute[]>([]);
 
   public readonly fullPathProperties$ = this.fullPath$.pipe(
@@ -45,19 +52,37 @@ export class MapPathService {
     })
   );
 
-  public readonly currentUserLocationPoint$ =
-    new BehaviorSubject<GuideMapRoomProperties>(null);
+  public readonly calculatedPositiveStartPoint$ = this.startPoint$.pipe(
+    switchMap(() => this.currentUserLocationPoint$.pipe(positiveValue()))
+  );
 
-  public readonly currentUserEndpoint$ =
-    new BehaviorSubject<GuideMapRoomProperties>(null);
+  public readonly calculatedPositiveEndPoint$ = this.finalEndpoint$.pipe(
+    switchMap(() => this.currentUserEndpoint$.pipe(positiveValue()))
+  );
 
-  public get pathCoordinatesChanges$(): Observable<
-    [GuideMapRoomProperties, GuideMapRoomProperties]
-  > {
-    return combineLatest([
-      this.currentUserLocationPoint$,
-      this.currentUserEndpoint$,
-    ]);
+  public readonly currentPointsChanges$ = merge(
+    this.calculatedPositiveStartPoint$,
+    this.calculatedPositiveEndPoint$
+  );
+
+  public readonly startPointFloorChanges$ = merge(
+    this.calculatedPositiveStartPoint$,
+    this._floorService.floor$
+  );
+
+  public readonly endPointFloorChanges$ = merge(
+    this.calculatedPositiveEndPoint$,
+    this._floorService.floor$
+  );
+
+  public setFinalEndPoint(roomProperties: GuideMapRoomProperties): void {
+    this.getPathCoordinates(this.startPoint$.getValue()?.floor);
+    this.finalEndpoint$.next(roomProperties);
+  }
+
+  public setStartPoint(roomProperties: GuideMapRoomProperties): void {
+    this.currentUserLocationPoint$.next(roomProperties);
+    this.startPoint$.next(roomProperties);
   }
 
   public get pathPointsValues(): {
@@ -90,8 +115,7 @@ export class MapPathService {
     this.fullPath$.next(path);
   }
 
-  public getPathCoordinates(): ICoordinates[] {
-    const floor = this._floorService.floor;
+  public getPathCoordinates(floor = this._floorService.floor): ICoordinates[] {
     const allPoints = this._mapDataProviderService.allPoints;
     const pathCoordinates = this._findFloorPath(
       floor,
