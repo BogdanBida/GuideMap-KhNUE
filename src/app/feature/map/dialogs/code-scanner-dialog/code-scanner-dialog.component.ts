@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BarcodeFormat } from '@zxing/library';
@@ -14,7 +14,7 @@ const ERROR_MESSAGE_TIMEOUT_MS = 5000;
   templateUrl: './code-scanner-dialog.component.html',
   styleUrls: ['./code-scanner-dialog.component.scss'],
 })
-export class CodeScannerDialogComponent implements OnInit {
+export class CodeScannerDialogComponent {
   constructor(
     private readonly _gmpRouterService: GMPRouterService,
     private readonly _dialogRef: MatDialogRef<CodeScannerDialogComponent>
@@ -28,10 +28,6 @@ export class CodeScannerDialogComponent implements OnInit {
   public errorMessage: string;
 
   public readonly allowedFormats = [BarcodeFormat.QR_CODE];
-
-  public ngOnInit(): void {
-    this._gmpRouterService.init();
-  }
 
   public onCodeResult(value: string): void {
     console.log('scanner: ' + value);
