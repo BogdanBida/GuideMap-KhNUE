@@ -6,7 +6,13 @@
   appDisableBrowserZoom
   appDisableContextmenu
 >
-  <div class="zoom-wrapper" [style.transform]="zoomTransform">
+  <div
+    class="zoom-wrapper"
+    [style.transform]="scaleTransform$ | async"
+    appMouseWheel
+    (eventUp)="zoomIn()"
+    (eventDown)="zoomOut()"
+  >
     <div class="canv" id="canv"></div>
     <div class="canv" id="bgr-canv"></div>
   </div>

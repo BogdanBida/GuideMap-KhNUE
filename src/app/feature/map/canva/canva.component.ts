@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnInit,
   Renderer2,
   ViewChild,
@@ -19,11 +18,12 @@ import {
   MapGraphService,
   MapPathService,
 } from './../../../core/services';
+import { MapZoomService } from './../../../core/services/map-zoom.service';
 
 const WIDTH = 3500;
 const HEIGHT = 2550;
 const DEFAULT_TRANSITION_SPEED = 500;
-const DEFAULT_ZOOM_FACTOR = 1;
+const WHEEL_ZOOM_STEP = 0.05;
 
 @UntilDestroy()
 @Component({
@@ -39,14 +39,15 @@ export class CanvaComponent implements OnInit, AfterViewInit {
     private readonly _mapDataProviderService: MapDataProviderService,
     private readonly _floorService: FloorService,
     private readonly renderer: Renderer2,
+    private readonly _mapZoomService: MapZoomService,
     private readonly _mapService: MapService
   ) {}
 
   @ViewChild('target') public readonly elementRef: ElementRef<HTMLElement>;
 
-  @Input() public zoomFactor = DEFAULT_ZOOM_FACTOR;
-
   public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
+
+  public readonly scaleTransform$ = this._mapZoomService.scaleTransform$;
 
   public ngOnInit(): void {
     this._mapDataProviderService.init$().subscribe(() => {
@@ -94,8 +95,16 @@ export class CanvaComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public get zoomTransform(): string {
-    return `scale(${this.zoomFactor})`;
+  public zoomIn(): void {
+    this._mapZoomService.zoomIn(WHEEL_ZOOM_STEP);
+  }
+
+  public zoomOut(): void {
+    this._mapZoomService.zoomOut(WHEEL_ZOOM_STEP);
+  }
+
+  public resetZoom(): void {
+    this._mapZoomService.resetZoomFactor();
   }
 
   private moveMapTo(
@@ -105,8 +114,10 @@ export class CanvaComponent implements OnInit, AfterViewInit {
   ): void {
     if (left && top) {
       // adapt values ​​for zoom
-      top = top * this.zoomFactor + (HEIGHT - HEIGHT * this.zoomFactor) / 2;
-      left = left * this.zoomFactor + (WIDTH - WIDTH * this.zoomFactor) / 2;
+      const zoomFactor = this._mapZoomService.zoomFactor;
+
+      top = top * zoomFactor + (HEIGHT - HEIGHT * zoomFactor) / 2;
+      left = left * zoomFactor + (WIDTH - WIDTH * zoomFactor) / 2;
       // centering
       let targetTop = top - window.innerHeight / 2;
       let targetLeft = left - window.innerWidth / 2;

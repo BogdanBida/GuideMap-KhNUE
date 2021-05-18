@@ -1,10 +1,14 @@
-import { MapStairsFloorSwitcher } from '../enums';
+import { GuideMapFeaturePointCategory, MapStairsFloorSwitcher } from '../enums';
 import { GuideMapFeature } from '../models';
 
 function getArrowDirection(isUpperFloor: boolean): MapStairsFloorSwitcher {
   return isUpperFloor
     ? MapStairsFloorSwitcher.ArrowUp
     : MapStairsFloorSwitcher.ArrowDown;
+}
+
+function checkIsStairs(category: GuideMapFeaturePointCategory): boolean {
+  return category === GuideMapFeaturePointCategory.Stairs;
 }
 
 function getPrevStairsArrowDirection(
@@ -38,4 +42,5 @@ function getNextStairsArrowDirection(
 export const MapDotUtils = {
   getNextStairsArrowDirection,
   getPrevStairsArrowDirection,
+  checkIsStairs,
 };

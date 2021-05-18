@@ -24,6 +24,7 @@ import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FloorSwitcherComponent, WhereaboutsComponent } from './ui-controllers';
 import { ManualButtonComponent } from './ui-controllers/manual-button/manual-button.component';
+import { ZoomButtonComponent } from './ui-controllers/zoom-button/zoom-button.component';
 import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     ManualDialogComponent,
     CodeScannerDialogComponent,
     ZoomControlsComponent,
+    ZoomButtonComponent,
   ],
   providers: [
     {

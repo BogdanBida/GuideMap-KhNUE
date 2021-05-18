@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Circle, Use } from '@svgdotjs/svg.js';
 import { withLatestFrom } from 'rxjs/operators';
-import { GuideMapFeaturePointCategory, MapStairsFloorSwitcher } from '../enums';
+import { MapStairsFloorSwitcher } from '../enums';
 import { GuideMapFeature, GuideMapRoomProperties } from '../models';
 import { MapDotUtils, MapPointUtils } from '../utils';
 import { FloorService } from './floor.service';
@@ -98,13 +98,10 @@ export class MapDotService {
     fullPathProperties: GuideMapFeature[]
   ): void {
     const currentFloor = this._floorService.floor;
+    const isUserOnStairs = MapDotUtils.checkIsStairs(userLocation?.category);
+    const isEndpointOnStairs = MapDotUtils.checkIsStairs(endPoint?.category);
 
     this.stairsFloorSwitcher?.remove();
-
-    const isUserOnStairs =
-      userLocation?.category === GuideMapFeaturePointCategory.Stairs;
-    const isEndpointOnStairs =
-      endPoint?.category === GuideMapFeaturePointCategory.Stairs;
 
     if (isUserOnStairs) {
       const arrowDirection = MapDotUtils.getPrevStairsArrowDirection(
