@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { combineLatest, Observable, of, throwError } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { queryParamsExtractor, screenAddress } from '../utils/routing.utils';
