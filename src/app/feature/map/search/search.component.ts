@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { isNil } from 'lodash-es';
-import { filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LabelText } from '../../../../app/core/enums';
 import {
@@ -26,16 +24,9 @@ export class SearchComponent implements OnInit {
     private readonly _translateService: TranslateService
   ) {}
 
-  public readonly selectedUserLocation$ = this._mapPathService.startPoint$.pipe(
-    filter((point) => !isNil(point)),
-    map((point) => point.name)
-  );
+  public readonly selectedUserLocationName$ = this._mapPathService.selectedUserLocationName$;
 
-  public readonly selectedDestination$ =
-    this._mapPathService.finalEndpoint$.pipe(
-      filter((point) => !isNil(point)),
-      map((point) => point.name)
-    );
+  public readonly selectedDestinationName$ = this._mapPathService.selectedDestinationName$;
 
   public readonly spriteIconsUrl = environment.spriteIconsPath;
 

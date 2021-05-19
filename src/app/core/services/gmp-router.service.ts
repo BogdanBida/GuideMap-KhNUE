@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { isNil } from 'lodash-es';
-import { combineLatest, Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import {
   DATA_NOT_FOUND,
@@ -50,10 +50,7 @@ export class GMPRouterService {
       )
       .subscribe();
 
-    const pointChanges$ = combineLatest([
-      this._mapPathService.startPoint$,
-      this._mapPathService.finalEndpoint$,
-    ]).pipe(
+    const pointChanges$ = this._mapPathService.points$.pipe(
       filter((data) => data.some((value) => !isNil(value))),
       untilDestroyed(this)
     );
