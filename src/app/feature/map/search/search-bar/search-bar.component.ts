@@ -23,15 +23,15 @@ import { IOptionGroup } from '../../interfaces';
 export class SearchBarComponent implements OnInit, OnChanges {
   constructor(private readonly _formBuilder: FormBuilder) {}
 
-  @Input() public svgIconUrl: string;
+  @Input() public readonly svgIconUrl: string;
 
-  @Input() public labelText: string;
+  @Input() public readonly labelText: string;
 
-  @Input() public optionGroups: IOptionGroup[];
+  @Input() public readonly optionGroups: IOptionGroup[];
 
-  @Input() public selectedValue: string;
+  @Input() public readonly selectedValue: string;
 
-  @Output() public selectData = new EventEmitter<string>();
+  @Output() public readonly selectData = new EventEmitter<string>();
 
   public readonly searchIconPath = environment.spriteIconsPath + 'search';
 
