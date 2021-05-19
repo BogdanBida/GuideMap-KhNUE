@@ -1,4 +1,4 @@
-import { negate } from 'lodash';
+import { negate } from 'lodash-es';
 import { MonoTypeOperatorFunction, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 

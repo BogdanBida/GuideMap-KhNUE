@@ -11,7 +11,9 @@
     },
     "FLOOR": "Этаж",
     "CANCEL": "Отменить",
-    "RESET": "Сбросить"
+    "RESET": "Сбросить",
+    "LOADING": "Загрузка",
+    "VIDEODEVICE_REQUEST": "Запрос на видеокамеру"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Выбрать язык"

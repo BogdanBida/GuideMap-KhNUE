@@ -14,7 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
-import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { CodeScannerDialogComponent } from './dialogs/code-scanner-dialog/code-scanner-dialog.component';
+import { ManualDialogComponent } from './dialogs/manual-dialog/manual-dialog.component';
 import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
@@ -22,6 +23,8 @@ import { SearchBarComponent } from './search/search-bar/search-bar.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FloorSwitcherComponent, WhereaboutsComponent } from './ui-controllers';
+import { ManualButtonComponent } from './ui-controllers/manual-button/manual-button.component';
+import { ZoomButtonComponent } from './ui-controllers/zoom-button/zoom-button.component';
 import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
 
 @NgModule({
@@ -49,8 +52,11 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     FloorSwitcherComponent,
     WhereaboutsComponent,
     SettingsDialogComponent,
-    InfoDialogComponent,
+    ManualButtonComponent,
+    ManualDialogComponent,
+    CodeScannerDialogComponent,
     ZoomControlsComponent,
+    ZoomButtonComponent,
   ],
   providers: [
     {

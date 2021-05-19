@@ -11,7 +11,9 @@
     },
     "FLOOR": "Floor",
     "CANCEL": "Cancel",
-    "RESET": "Reset"
+    "RESET": "Reset",
+    "LOADING": "Downloading",
+    "VIDEODEVICE_REQUEST": "Request for video camera"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Choose language"

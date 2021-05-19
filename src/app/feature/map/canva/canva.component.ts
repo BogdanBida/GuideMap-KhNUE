@@ -2,16 +2,13 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { withLatestFrom } from 'rxjs/operators';
 import { MapService } from 'src/app/core/services/map.service';
 import { DragNDrop } from 'src/app/core/utils';
-import { GuideMapRoomProperties } from './../../../core/models';
 import {
   FloorService,
   MapDataProviderService,
@@ -19,11 +16,12 @@ import {
   MapGraphService,
   MapPathService,
 } from './../../../core/services';
+import { MapZoomService } from './../../../core/services/map-zoom.service';
 
 const WIDTH = 3500;
 const HEIGHT = 2550;
 const DEFAULT_TRANSITION_SPEED = 500;
-const DEFAULT_ZOOM_FACTOR = 1;
+const WHEEL_ZOOM_STEP = 0.05;
 
 @UntilDestroy()
 @Component({
@@ -38,15 +36,16 @@ export class CanvaComponent implements OnInit, AfterViewInit {
     private readonly _mapDotService: MapDotService,
     private readonly _mapDataProviderService: MapDataProviderService,
     private readonly _floorService: FloorService,
-    private readonly renderer: Renderer2,
+    private readonly _renderer: Renderer2,
+    private readonly _mapZoomService: MapZoomService,
     private readonly _mapService: MapService
   ) {}
 
   @ViewChild('target') public readonly elementRef: ElementRef<HTMLElement>;
 
-  @Input() public zoomFactor = DEFAULT_ZOOM_FACTOR;
-
   public dragNDrop = DragNDrop.onDrag(WIDTH, HEIGHT);
+
+  public readonly scaleTransform$ = this._mapZoomService.scaleTransform$;
 
   public ngOnInit(): void {
     this._mapDataProviderService.init$().subscribe(() => {
@@ -61,52 +60,53 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       this._mapService.drawBackground();
     });
 
-    this._mapPathService.currentUserLocationPoint$
-      .pipe(
-        withLatestFrom(this._mapPathService.currentUserEndpoint$),
-        untilDestroyed(this)
-      )
-      .subscribe(([userLocation, endpoint]) => {
-        // TODO: refactor
+    this._mapPathService.startPoint$
+      .pipe(untilDestroyed(this))
+      .subscribe((point) => {
         this._mapService.clearPath();
-        // this._mapDotService.drawUserLocation(userLocation);
 
-        if (endpoint) {
-          this.moveMapTo(endpoint?.x, endpoint?.y);
-        } else {
-          this.moveMapTo(userLocation?.x, userLocation?.y);
+        if (point) {
+          this._moveMapTo(point?.x, point?.y);
+        }
+      });
+
+    this._mapPathService.finalEndpoint$
+      .pipe(untilDestroyed(this))
+      .subscribe((point) => {
+        this._mapService.clearPath();
+
+        if (point) {
+          this._moveMapTo(point.x, point.y);
         }
       });
 
     this._mapDotService.init();
     this._mapService.init();
-    // this._mapPathService.pathCoordinatesChanges$
-    //   .pipe(withLatestFrom(this._mapPathService.userLocation$))
-    //   .subscribe(([, userLocation]) => {
-    //     this._drawAndMove(userLocation);
-    //   });
   }
 
-  public _drawAndMove(userLocation: GuideMapRoomProperties): void {
-    if (this._mapPathService.isHasUserLocationAndEndPoint) {
-      // this._mapService.drawPath();
-      this.moveMapTo(userLocation.x, userLocation.y);
-    }
+  public zoomIn(): void {
+    this._mapZoomService.zoomIn(WHEEL_ZOOM_STEP);
   }
 
-  public get zoomTransform(): string {
-    return `scale(${this.zoomFactor})`;
+  public zoomOut(): void {
+    this._mapZoomService.zoomOut(WHEEL_ZOOM_STEP);
   }
 
-  private moveMapTo(
+  public resetZoom(): void {
+    this._mapZoomService.resetZoomFactor();
+  }
+
+  private _moveMapTo(
     left: number,
     top: number,
     transitionSpeed: number = DEFAULT_TRANSITION_SPEED
   ): void {
     if (left && top) {
       // adapt values ​​for zoom
-      top = top * this.zoomFactor + (HEIGHT - HEIGHT * this.zoomFactor) / 2;
-      left = left * this.zoomFactor + (WIDTH - WIDTH * this.zoomFactor) / 2;
+      const zoomFactor = this._mapZoomService.zoomFactor;
+
+      top = top * zoomFactor + (HEIGHT - HEIGHT * zoomFactor) / 2;
+      left = left * zoomFactor + (WIDTH - WIDTH * zoomFactor) / 2;
       // centering
       let targetTop = top - window.innerHeight / 2;
       let targetLeft = left - window.innerWidth / 2;
@@ -114,24 +114,24 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       targetTop = targetTop < 0 ? 0 : targetTop;
       targetLeft = targetLeft < 0 ? 0 : targetLeft;
 
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'transition',
         `${transitionSpeed}ms`
       );
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'top',
         -targetTop + 'px'
       );
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'left',
         -targetLeft + 'px'
       );
 
       setTimeout(() => {
-        this.renderer.setStyle(
+        this._renderer.setStyle(
           this.elementRef.nativeElement,
           'transition',
           'inherit'

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
@@ -12,6 +13,7 @@ const WIDTH = 3500;
 const HEIGHT = 2550;
 const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -34,11 +36,12 @@ export class MapService {
     this.svgBackgroundInstance = SVG().addTo('#bgr-canv').size(width, height);
     this.drawBackground();
     this._subscribeOnFloorChanges();
+    this._subscribeOnStartPointChanges();
   }
 
   public setFinalEndpoint(finalEndpoint: GuideMapRoomProperties): void {
     // TODO: refactor
-    this._mapPathService.finalEndpoint$.next(finalEndpoint);
+    this._mapPathService.setFinalEndPoint(finalEndpoint);
 
     if (isNil(this._mapPathService.startPoint$.value)) {
       return;
@@ -50,7 +53,7 @@ export class MapService {
 
   public setUserLocation(qrCodeLocation: GuideMapRoomProperties): void {
     // TODO: refactor
-    this._mapPathService.startPoint$.next(qrCodeLocation);
+    this._mapPathService.setStartPoint(qrCodeLocation);
 
     if (isNil(this._mapPathService.finalEndpoint$.value)) {
       return;
@@ -104,8 +107,20 @@ export class MapService {
     }
   }
 
+  private _subscribeOnStartPointChanges(): void {
+    this._mapPathService.currentPointsChanges$
+      .pipe(untilDestroyed(this))
+      .subscribe(({ floor }) => {
+        const isStartPointOnOtherFloor = this._floorService.floor !== floor;
+
+        if (isStartPointOnOtherFloor) {
+          this._floorService.floor = floor;
+        }
+      });
+  }
+
   private _subscribeOnFloorChanges(): void {
-    this._floorService.floor$.subscribe(() => {
+    this._floorService.floor$.pipe(untilDestroyed(this)).subscribe(() => {
       this._drawPath();
     });
   }
