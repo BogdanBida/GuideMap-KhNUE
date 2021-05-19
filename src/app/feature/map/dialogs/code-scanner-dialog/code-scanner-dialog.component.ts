@@ -33,7 +33,7 @@ export class CodeScannerDialogComponent {
     console.log('scanner: ' + value);
 
     this._gmpRouterService
-      .setQueryParamsFromUrl$(value)
+      .setPointsFromUrl$(value)
       .pipe(untilDestroyed(this))
       .subscribe({
         complete: () => {

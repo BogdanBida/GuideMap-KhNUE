@@ -18,7 +18,8 @@
   },
   "MESSAGES": {
     "DATA_NOT_FOUND": "Дані не знайдено",
-    "LINK_TO_ANOTHER_APP": "Посилання веде на сторонній застосунок або сайт"
+    "LINK_TO_ANOTHER_APP": "Посилання веде на сторонній застосунок або сайт",
+    "INVALID_DATA": "Некоректні дані"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Вибрати мову"

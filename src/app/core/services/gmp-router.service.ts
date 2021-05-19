@@ -64,7 +64,7 @@ export class GMPRouterService {
     });
   }
 
-  public setQueryParamsFromUrl$(url: string): Observable<void> {
+  public setPointsFromUrl$(url: string): Observable<void> {
     try {
       const isOurApp = new RegExp(`^${screenAddress(environment.url)}`).test(
         url
@@ -80,7 +80,23 @@ export class GMPRouterService {
         return throwError(RoutingTranslates.DataNotFound);
       }
 
-      this._setQueryParams(extractedQueryParams);
+      const { qrnodeid, roomid } = extractedQueryParams;
+
+      const newQueryParams = {} as GmpQueryParams;
+
+      if (qrnodeid && this._mapService.findAndSetLocationById(qrnodeid)) {
+        newQueryParams[GmpQueryParamName.QrNodeId] = qrnodeid;
+      }
+
+      if (roomid && this._mapService.findAndSetEndpointById(roomid)) {
+        newQueryParams[GmpQueryParamName.RoomId] = roomid;
+      }
+
+      if (!Object.keys(newQueryParams).length) {
+        return throwError(RoutingTranslates.InvalidData);
+      }
+
+      this._setQueryParams(newQueryParams);
 
       return of();
     } catch (error) {
