@@ -1,11 +1,9 @@
-import { QueryParam } from './../models/query-param';
+import { GmpQueryParams } from '../models';
+
 const URL_REGEXP =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
-export function queryParamsExtractor(
-  url: string,
-  params: string[]
-): QueryParam[] {
+export function queryParamsExtractor(url: string): GmpQueryParams {
   if (!URL_REGEXP.test(url)) {
     throw new Error('Invalid url');
   }
@@ -13,16 +11,20 @@ export function queryParamsExtractor(
   const queryParams = url.split('?')[1]?.split('&');
 
   if (!queryParams) {
-    return [];
+    return {};
   }
 
   return queryParams
     .map((queryParam) => {
       const [name, value] = queryParam.split('=');
 
-      return { name, value };
+      return [name, value];
     })
-    .filter((queryParam) => params.includes(queryParam.name));
+    .reduce((result, param) => {
+      result[param[0]] = param[1];
+
+      return result;
+    }, {} as { [key: string]: string });
 }
 
 export function screenAddress(url: string): string {
