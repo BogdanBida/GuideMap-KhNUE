@@ -27,6 +27,10 @@ export function queryParamsExtractor(url: string): GmpQueryParams {
     }, {} as { [key: string]: string });
 }
 
-export function screenAddress(url: string): string {
+function screenAddress(url: string): string {
   return url.replace(/[.?/\\]/g, '\\$&');
 }
+
+export const RoutingUtils = {
+  screenAddress,
+};
