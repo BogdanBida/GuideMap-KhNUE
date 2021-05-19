@@ -263,7 +263,7 @@
     "properties": {
       "id": 25,
       "category": "stairs",
-      "x": 396,
+      "x": 380,
       "y": 1762,
       "floor": 1,
       "corridors": [26, 97, 175, 233]
@@ -404,7 +404,7 @@
       "id": 39,
       "category": "stairs",
       "x": 1875,
-      "y": 1662,
+      "y": 1720,
       "floor": 1,
       "corridors": [38, 114, 196, 250]
     }
@@ -1027,7 +1027,7 @@
     "properties": {
       "id": 97,
       "category": "stairs",
-      "x": 390,
+      "x": 300,
       "y": 1769,
       "floor": 2,
       "corridors": [25, 96, 175, 233]
@@ -1198,7 +1198,7 @@
       "id": 114,
       "category": "stairs",
       "x": 1875,
-      "y": 1671,
+      "y": 1720,
       "floor": 2,
       "corridors": [39, 113, 196, 250]
     }
@@ -1848,7 +1848,7 @@
     "properties": {
       "id": 175,
       "category": "stairs",
-      "x": 389,
+      "x": 300,
       "y": 1767,
       "floor": 3,
       "corridors": [25, 97, 176, 233]
@@ -2059,7 +2059,7 @@
       "id": 196,
       "category": "stairs",
       "x": 1873,
-      "y": 1669,
+      "y": 1720,
       "floor": 3,
       "corridors": [39, 114, 195, 250]
     }
@@ -2454,7 +2454,7 @@
     "properties": {
       "id": 233,
       "category": "stairs",
-      "x": 388,
+      "x": 300,
       "y": 1768,
       "floor": 4,
       "corridors": [25, 97, 175, 234]
@@ -2625,7 +2625,7 @@
       "id": 250,
       "category": "stairs",
       "x": 1876,
-      "y": 1667,
+      "y": 1720,
       "floor": 4,
       "corridors": [39, 114, 196, 249]
     }
