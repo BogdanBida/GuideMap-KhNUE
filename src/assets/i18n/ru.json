@@ -16,6 +16,10 @@
     "LOADING": "Загрузка",
     "VIDEODEVICE_REQUEST": "Запрос на видеокамеру"
   },
+  "MESSAGES": {
+    "DATA_NOT_FOUND": "Данные не найдены",
+    "LINK_TO_ANOTHER_APP": "Ссылка ведёт на стороннее приложение или сайт"
+  },
   "SETTINGS": {
     "CHOOSE_LANG": "Выбрать язык"
   },

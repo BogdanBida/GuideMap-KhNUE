@@ -16,6 +16,10 @@
     "LOADING": "Downloading",
     "VIDEODEVICE_REQUEST": "Request for video camera"
   },
+  "MESSAGES": {
+    "DATA_NOT_FOUND": "Data now found",
+    "LINK_TO_ANOTHER_APP": "This link follow to another application or site"
+  },
   "SETTINGS": {
     "CHOOSE_LANG": "Choose language"
   },

@@ -16,6 +16,10 @@
     "LOADING": "Завантаження",
     "VIDEODEVICE_REQUEST": "Запит на відеокамеру"
   },
+  "MESSAGES": {
+    "DATA_NOT_FOUND": "Дані не знайдено",
+    "LINK_TO_ANOTHER_APP": "Посилання веде на сторонній застосунок або сайт"
+  },
   "SETTINGS": {
     "CHOOSE_LANG": "Вибрати мову"
   },
