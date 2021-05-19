@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
