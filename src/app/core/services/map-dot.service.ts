@@ -124,8 +124,8 @@ export class MapDotService {
     }
 
     if (this._mapService.svgInstance && location) {
-      const radius = 25;
-      const maxRadius = 500;
+      const radius = 30;
+      const maxRadius = 300;
       // eslint-disable-next-line @typescript-eslint/no-magic-numbers
       const maxRadiusHalf = maxRadius / 2;
       const dotSizeMaxAnimationRadius = 20;
@@ -138,14 +138,14 @@ export class MapDotService {
         .move(x - maxRadiusHalf, y - maxRadiusHalf);
 
       dot
-        .animate({ duration: 2500 })
+        .animate({ duration: 1250 })
         .size(radius, radius)
         .attr({ fill: pointColor, opacity: 0.75 });
 
       dot.animate({ ease: '<' });
 
       dot
-        .animate({ duration: 1000, ease: '<>' })
+        .animate({ duration: 800, ease: '<>' })
         .loop(Infinity, true)
         .size(dotSize, dotSize)
         .attr({ opacity: 0.4 });
@@ -192,13 +192,13 @@ export class MapDotService {
     stairsPoint: GuideMapRoomProperties,
     arrowDirection: MapStairsFloorSwitcher
   ): Use {
-    const xOffset = 25;
-    const yOffset = 80;
+    const arrowsSize = 72;
+    const xOffset = arrowsSize / 2;
+    const yOffset = 90;
     const arrowsOverStairsPointCoordinates = {
       x: stairsPoint.x - xOffset,
       y: stairsPoint.y - yOffset,
     };
-    const arrowsSize = 50;
     const arrowsStyles = `
       filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.5))
               drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.4))

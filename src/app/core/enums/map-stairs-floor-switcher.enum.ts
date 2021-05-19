@@ -1,4 +1,4 @@
 export enum MapStairsFloorSwitcher {
-  ArrowUp = 'arrow-up',
-  ArrowDown = 'arrow-down-switcher',
+  ArrowUp = 'arrow-up-stairs-switcher',
+  ArrowDown = 'arrow-down-stairs-switcher',
 }

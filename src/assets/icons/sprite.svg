@@ -5,11 +5,45 @@
       <polygon points="0,53 0,91.4 64,39.2 128,91.4 128,53 64,0.9" />
     </g>
   </symbol>
-  
-  <symbol id="arrow-down-switcher" viewBox="0 0 128 128">
-    <g transform="scale(1, -1) translate(0, -100)">
-      <polygon fill="#f5f5f5" points="22.7,96.3 22.7,121 64,87.4 105.3,121 105.3,96.3 64,62.6" />
-      <polygon fill="#f5f5f5" points="0,53 0,91.4 64,39.2 128,91.4 128,53 64,0.9" />
+
+
+  <symbol id="arrow-up-stairs-switcher" viewBox="0 0 128 128" xml:space="preserve">
+    <g opacity="0.01" fill="#FFFFFF">
+      <circle class="st0" cx="64" cy="64" r="64"/>
+    </g>
+    <g fill="#F5F5F5">
+      <polygon class="st1" points="35.7,86.3 35.7,103.2 64,80.2 92.3,103.2 92.3,86.3 64,63.2 	"/>
+      <polygon class="st1" points="20.1,56.6 20.1,82.9 64,47.2 107.9,82.9 107.9,56.6 64,20.9 	"/>
+    </g>
+  </symbol>
+
+  <symbol id="arrow-down-stairs-switcher" viewBox="0 0 128 128" xml:space="preserve">
+    <g opacity="0.01" fill="#FFFFFF">
+      <circle class="st0" cx="64" cy="64" r="64"/>
+    </g>
+    <g fill="#F5F5F5" transform="scale(1, -1) translate(0, -128)">
+      <polygon class="st1" points="35.7,86.3 35.7,103.2 64,80.2 92.3,103.2 92.3,86.3 64,63.2 	"/>
+      <polygon class="st1" points="20.1,56.6 20.1,82.9 64,47.2 107.9,82.9 107.9,56.6 64,20.9 	"/>
+    </g>
+  </symbol>
+
+  <symbol id="point" viewBox="0 0 24 24" enable-background="new 0 0 24 24">
+    <g>
+      <path d="m12 22c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10zm0-19c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9z"/></g>
+    <g>
+      <path d="m12 5c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4c0 .3-.2.5-.5.5z"/>
+    </g>
+    <g>
+      <path d="m12 5c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4c0 .3-.2.5-.5.5z"/>
+    </g>
+    <g>
+      <path d="m23.5 12.5h-4c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h4c.3 0 .5.2.5.5s-.2.5-.5.5z"/>
+    </g>
+    <g>
+      <path d="m12 24c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5s.5.2.5.5v4c0 .3-.2.5-.5.5z"/>
+    </g>
+    <g>
+      <path d="m4.5 12.5h-4c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h4c.3 0 .5.2.5.5s-.2.5-.5.5z"/>
     </g>
   </symbol>
 
