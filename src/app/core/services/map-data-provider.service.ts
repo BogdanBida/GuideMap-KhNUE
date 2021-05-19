@@ -19,8 +19,6 @@ import { MapUtils } from '../utils';
 export class MapDataProviderService {
   constructor(private readonly _httpClient: HttpClient) {}
 
-  public readonly dataLoaded$ = new BehaviorSubject<boolean>(false);
-
   public readonly rooms$ = new BehaviorSubject<GuideMapFeaturePoint[]>([]);
 
   public readonly qrCodes$ = new BehaviorSubject<GuideMapFeaturePoint[]>([]);
@@ -91,6 +89,5 @@ export class MapDataProviderService {
         ]
       )
     );
-    this.dataLoaded$.next(true);
   }
 }
