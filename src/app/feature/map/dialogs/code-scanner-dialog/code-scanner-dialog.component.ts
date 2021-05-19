@@ -1,12 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BarcodeFormat } from '@zxing/library';
 import { GMPRouterService } from 'src/app/core/services';
-
-const SCAN_AREA_SIZE_FACTOR = 0.5;
-
-const ERROR_MESSAGE_TIMEOUT_MS = 5000;
+import {
+  ALLOWED_SCANNER_FORMATS,
+  ERROR_MESSAGE_TIMEOUT_MS,
+  SCAN_AREA_SIZE_FACTOR,
+} from 'src/app/shared/constants';
 
 @UntilDestroy()
 @Component({
@@ -27,11 +27,9 @@ export class CodeScannerDialogComponent {
 
   public errorMessage: string;
 
-  public readonly allowedFormats = [BarcodeFormat.QR_CODE];
+  public readonly allowedFormats = ALLOWED_SCANNER_FORMATS;
 
   public onCodeResult(value: string): void {
-    console.log('scanner: ' + value);
-
     this._gmpRouterService
       .setPointsFromUrl$(value)
       .pipe(untilDestroyed(this))
