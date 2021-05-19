@@ -203,11 +203,7 @@ export class MapGraphService {
   }
 
   private _calculateGraphDistances(): void {
-    const { nextVertices, distances } = floydWarshall(this._graph);
-
-    console.log(distances);
-
-    debugger;
+    const { nextVertices } = floydWarshall(this._graph);
 
     this._nextVertices = nextVertices;
   }
