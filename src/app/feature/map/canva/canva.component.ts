@@ -7,10 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { withLatestFrom } from 'rxjs/operators';
 import { MapService } from 'src/app/core/services/map.service';
 import { DragNDrop } from 'src/app/core/utils';
-import { GuideMapRoomProperties } from './../../../core/models';
 import {
   FloorService,
   MapDataProviderService,
@@ -38,7 +36,7 @@ export class CanvaComponent implements OnInit, AfterViewInit {
     private readonly _mapDotService: MapDotService,
     private readonly _mapDataProviderService: MapDataProviderService,
     private readonly _floorService: FloorService,
-    private readonly renderer: Renderer2,
+    private readonly _renderer: Renderer2,
     private readonly _mapZoomService: MapZoomService,
     private readonly _mapService: MapService
   ) {}
@@ -62,37 +60,28 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       this._mapService.drawBackground();
     });
 
-    this._mapPathService.currentUserLocationPoint$
-      .pipe(
-        withLatestFrom(this._mapPathService.currentUserEndpoint$),
-        untilDestroyed(this)
-      )
-      .subscribe(([userLocation, endpoint]) => {
-        // TODO: refactor
+    this._mapPathService.startPoint$
+      .pipe(untilDestroyed(this))
+      .subscribe((point) => {
         this._mapService.clearPath();
-        // this._mapDotService.drawUserLocation(userLocation);
 
-        if (endpoint) {
-          this.moveMapTo(endpoint?.x, endpoint?.y);
-        } else {
-          this.moveMapTo(userLocation?.x, userLocation?.y);
+        if (point) {
+          this._moveMapTo(point?.x, point?.y);
+        }
+      });
+
+    this._mapPathService.finalEndpoint$
+      .pipe(untilDestroyed(this))
+      .subscribe((point) => {
+        this._mapService.clearPath();
+
+        if (point) {
+          this._moveMapTo(point.x, point.y);
         }
       });
 
     this._mapDotService.init();
     this._mapService.init();
-    // this._mapPathService.pathCoordinatesChanges$
-    //   .pipe(withLatestFrom(this._mapPathService.userLocation$))
-    //   .subscribe(([, userLocation]) => {
-    //     this._drawAndMove(userLocation);
-    //   });
-  }
-
-  public _drawAndMove(userLocation: GuideMapRoomProperties): void {
-    if (this._mapPathService.isHasUserLocationAndEndPoint) {
-      // this._mapService.drawPath();
-      this.moveMapTo(userLocation.x, userLocation.y);
-    }
   }
 
   public zoomIn(): void {
@@ -107,7 +96,7 @@ export class CanvaComponent implements OnInit, AfterViewInit {
     this._mapZoomService.resetZoomFactor();
   }
 
-  private moveMapTo(
+  private _moveMapTo(
     left: number,
     top: number,
     transitionSpeed: number = DEFAULT_TRANSITION_SPEED
@@ -125,24 +114,24 @@ export class CanvaComponent implements OnInit, AfterViewInit {
       targetTop = targetTop < 0 ? 0 : targetTop;
       targetLeft = targetLeft < 0 ? 0 : targetLeft;
 
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'transition',
         `${transitionSpeed}ms`
       );
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'top',
         -targetTop + 'px'
       );
-      this.renderer.setStyle(
+      this._renderer.setStyle(
         this.elementRef.nativeElement,
         'left',
         -targetLeft + 'px'
       );
 
       setTimeout(() => {
-        this.renderer.setStyle(
+        this._renderer.setStyle(
           this.elementRef.nativeElement,
           'transition',
           'inherit'

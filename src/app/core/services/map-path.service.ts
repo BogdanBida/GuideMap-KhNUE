@@ -77,6 +77,7 @@ export class MapPathService {
 
   public setFinalEndPoint(roomProperties: GuideMapRoomProperties): void {
     this.getPathCoordinates(this.startPoint$.getValue()?.floor);
+    this.currentUserEndpoint$.next(roomProperties);
     this.finalEndpoint$.next(roomProperties);
   }
 
