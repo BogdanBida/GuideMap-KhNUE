@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import {
   floydWarshall,
   Graph,
@@ -21,6 +22,8 @@ export class MapGraphService {
     private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
+  public readonly dataLoaded$ = new BehaviorSubject<boolean>(false);
+
   private readonly _graph = new Graph();
 
   private _nextVertices: GraphVertex[][] = [];
@@ -30,11 +33,8 @@ export class MapGraphService {
   }
 
   public createGraph(): void {
-    const {
-      roomsVertexes,
-      corridorsVertexes,
-      qrCodesVertexes,
-    } = this._getAllVertexes();
+    const { roomsVertexes, corridorsVertexes, qrCodesVertexes } =
+      this._getAllVertexes();
     const corridorsEdges = this._getCorridorsEdges(corridorsVertexes);
     const allRoomsVertexes = [...qrCodesVertexes, ...roomsVertexes];
     const roomToCorridorEdges = this._getRoomToCorridorEdges(
@@ -46,6 +46,7 @@ export class MapGraphService {
 
     this._initGraph(allVertexes, allEdges);
     this._calculateGraphDistances();
+    this.dataLoaded$.next(true);
   }
 
   public findPath(

@@ -8,7 +8,7 @@ import { environment } from './../../../environments/environment.prod';
 import { GmpQueryParamName } from './../enums/gmp-query-param-name.enum';
 import { RoutingTranslates } from './../enums/translate-routing.enum';
 import { GmpQueryParams } from './../models/gmp-query-params';
-import { MapDataProviderService } from './map-data-provider.service';
+import { MapGraphService } from './map-graph.service';
 import { MapPathService } from './map-path.service';
 import { MapService } from './map.service';
 
@@ -21,11 +21,11 @@ export class GMPRouterService {
     private readonly _activatedRoute: ActivatedRoute,
     private readonly _mapService: MapService,
     private readonly _mapPathService: MapPathService,
-    private readonly _mapDataProviderService: MapDataProviderService
+    private readonly _mapGraphService: MapGraphService
   ) {}
 
   public init(): void {
-    this._mapDataProviderService.dataLoaded$
+    this._mapGraphService.dataLoaded$
       .pipe(
         switchMap(() => {
           return this._activatedRoute.queryParams.pipe(
