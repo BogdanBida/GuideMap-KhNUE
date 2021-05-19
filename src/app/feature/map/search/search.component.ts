@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LabelText } from '../../../../app/core/enums';
 import {
   MapDataProviderService,
   MapPathService,
-  MapService,
+  MapService
 } from '../../../core/services';
 import { IOptionGroup } from '../interfaces';
 
