@@ -60,6 +60,22 @@ export class MapService {
     this._drawPath();
   }
 
+  public findAndSetLocationById(id: string): void {
+    const location = this._mapDataProviderService.qrCodes.find(
+      (node) => String(node.properties.id) === id
+    );
+
+    location && this.setUserLocation(location.properties);
+  }
+
+  public findAndSetEndpointById(id: string): void {
+    const destination = this._mapDataProviderService.rooms.find(
+      (node) => String(node.properties.id) === id
+    );
+
+    destination && this.setFinalEndpoint(destination.properties);
+  }
+
   public findAndSetEndpointByName(destinationName: string): void {
     const foundEndpoint = this._mapDataProviderService.rooms.find(
       (roomNode) => {

@@ -5,8 +5,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { queryParamsExtractor, screenAddress } from '../utils/routing.utils';
 import { environment } from './../../../environments/environment.prod';
+import { RoutingTranslates } from './../enums/translate-routing.enum';
 import { GmpQueryParams } from './../models/gmp-query-params';
-import { GuideMapFeaturePointRoom } from './../models/guide-map-feature-point.interface';
 import { MapDataProviderService } from './map-data-provider.service';
 import { MapService } from './map.service';
 
@@ -36,25 +36,9 @@ export class GMPRouterService {
       )
       .subscribe((params: GmpQueryParams) => {
         const { qrnodeid, roomid } = params;
-        let userLocation: GuideMapFeaturePointRoom;
-        let destination: GuideMapFeaturePointRoom;
 
-        if (!isNil(qrnodeid)) {
-          userLocation = this._mapDataProviderService.qrCodes.find(
-            (node) => String(node.properties.id) === qrnodeid
-          );
-        }
-
-        if (!isNil(roomid)) {
-          destination = this._mapDataProviderService.rooms.find(
-            (node) => String(node.properties.id) === roomid
-          );
-        }
-
-        userLocation &&
-          this._mapService.setUserLocation(userLocation.properties);
-        destination &&
-          this._mapService.setFinalEndpoint(destination.properties);
+        qrnodeid && this._mapService.findAndSetLocationById(qrnodeid);
+        roomid && this._mapService.findAndSetEndpointById(roomid);
       });
   }
 
@@ -65,13 +49,13 @@ export class GMPRouterService {
       );
 
       if (!isOurApp) {
-        return throwError('MESSAGES.LINK_TO_ANOTHER_APP');
+        return throwError(RoutingTranslates.LinkToAnotherApp);
       }
 
       const extractedQueryParams = queryParamsExtractor(url);
 
       if (!Object.keys(extractedQueryParams).length) {
-        return throwError('MESSAGES.DATA_NOT_FOUND');
+        return throwError(RoutingTranslates.DataNotFound);
       }
 
       this._setQueryParams(extractedQueryParams);
