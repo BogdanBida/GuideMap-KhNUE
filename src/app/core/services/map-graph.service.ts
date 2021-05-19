@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  distance,
   floydWarshall,
   Graph,
   GraphEdge,
@@ -30,11 +31,8 @@ export class MapGraphService {
   }
 
   public createGraph(): void {
-    const {
-      roomsVertexes,
-      corridorsVertexes,
-      qrCodesVertexes,
-    } = this._getAllVertexes();
+    const { roomsVertexes, corridorsVertexes, qrCodesVertexes } =
+      this._getAllVertexes();
     const corridorsEdges = this._getCorridorsEdges(corridorsVertexes);
     const allRoomsVertexes = [...qrCodesVertexes, ...roomsVertexes];
     const roomToCorridorEdges = this._getRoomToCorridorEdges(
@@ -123,6 +121,7 @@ export class MapGraphService {
 
     const corridorsEdges: GraphEdge[] = [];
     const qrCodesAndRooms = this._mapDataProviderService.qrCodesAndRooms; // !!!
+    const corridors = this._mapDataProviderService.corridors; // !!!
 
     roomVertexes.forEach((roomVertex) => {
       const foundedRoomItem = qrCodesAndRooms.find(
@@ -137,7 +136,21 @@ export class MapGraphService {
         );
 
         if (foundedCorridorVertex) {
-          const edge = new GraphEdge(foundedCorridorVertex, roomVertex, 1);
+          const foundedCorridorItem = corridors.find(
+            (corridor) =>
+              corridor.properties.id === foundedCorridorVertex.getKey()
+          ).properties;
+
+          const edge = new GraphEdge(
+            foundedCorridorVertex,
+            roomVertex,
+            distance(
+              foundedRoomItem.x,
+              foundedRoomItem.y,
+              foundedCorridorItem.x,
+              foundedCorridorItem.y
+            )
+          );
 
           corridorsEdges.push(edge);
         }
@@ -164,10 +177,20 @@ export class MapGraphService {
           );
 
           if (foundedRelatedCorridorVertex) {
+            const foundedRelatedCorridorItem = corridors.find(
+              ({ properties }) =>
+                properties.id === foundedRelatedCorridorVertex.getKey()
+            ).properties;
+
             const oneToOneCorridorEdge = new GraphEdge(
               corridor,
               foundedRelatedCorridorVertex,
-              1
+              distance(
+                foundedCorridorItem.x,
+                foundedCorridorItem.y,
+                foundedRelatedCorridorItem.x,
+                foundedRelatedCorridorItem.y
+              )
             );
 
             oneToManyCorridorsEdges.push(oneToOneCorridorEdge);
