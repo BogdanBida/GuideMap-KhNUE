@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { range } from 'lodash';
+import { range } from 'lodash-es';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getSlideTransform } from '../utils';

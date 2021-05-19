@@ -6,16 +6,13 @@ $negative-secondary: #262626;
 $secondary-tone: #444444;
 
 // backgrounds
+$bgr-color-first: rgb(235, 235, 235);
+$bgr-color-second: rgb(198, 198, 198);
+
 $background: radial-gradient(
   circle at center,
-  rgb(235, 235, 235),
-  rgb(198, 198, 198)
-);
-
-$search-bar-bg: linear-gradient(
-  to right,
-  mix(rgba(228, 228, 228, 0.8), $base-color, 90%),
-  mix(rgba(228, 228, 228, 0.8), #1681a5, 90%)
+  $bgr-color-first,
+  $bgr-color-second
 );
 
 // durations
@@ -24,8 +21,14 @@ $zoom-transition: 0.3s;
 $sidebar-animation-duration: 0.8s;
 
 // breakpoints
-$lowgen: 320px;
-$small: 568px;
-$middle: 768px;
-$portrait: 900px;
-$large: 1024px;
+$xs: 320px;
+$sm: 600px;
+$md: 960px;
+$lg: 1280px;
+$xl: 1920px;
+
+$xs-height: 320px;
+$sm-height: 480px;
+$md-height: 768px;
+$lg-height: 1024px;
+$xl-height: 1280px;

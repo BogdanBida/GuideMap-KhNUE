@@ -1,0 +1,24 @@
+<div class="scanner-wrapper" #scannerWrapper>
+  <div class="placeholder" *ngIf="!cameraIsFound">
+    {{ "UI.VIDEODEVICE_REQUEST" | translate }}
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  <zxing-scanner
+    class="scanner"
+    [formats]="allowedFormats"
+    (scanSuccess)="onCodeResult($event)"
+    (camerasFound)="camerasFoundHandler()"
+    (camerasNotFound)="camerasNotFoundHandler($event)"
+    (scanError)="scanErrorHandler($event)"
+  ></zxing-scanner>
+  <div
+    class="scan-area"
+    *ngIf="cameraIsFound"
+    [ngStyle]="{ width: sizeOfScanArea, height: sizeOfScanArea }"
+  ></div>
+</div>
+<button [mat-dialog-close]="true" class="btn-cancel" matRipple>
+  {{ "UI.CANCEL" | translate }}
+</button>

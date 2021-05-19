@@ -1,113 +1,123 @@
 @import "mixins";
 @import "variables";
 
-.coordinates {
-  bottom: 8px;
-  left: 5%;
-  z-index: 10;
-  filter: drop-shadow(0px 0px 1px white);
-  user-select: none;
-  pointer-events: none;
-}
-
-.coordinates,
-.search,
-.canva,
-.floor-switcher,
-.nav-button,
-.left-gui-section,
-.zoom-controls {
-  position: fixed;
-}
-
-.sidebar {
-  z-index: 5;
-}
-
-.search {
-  width: 100%;
-  top: 8px;
-  z-index: 3;
-}
-
+.gui-overlay,
 .canva {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
 }
 
-.floor-switcher {
-  bottom: 68px;
-  left: 32px;
-  z-index: 3;
-}
-
-.nav-button {
-  left: calc(50% - 32px);
-  z-index: 3;
-  bottom: 32px;
-}
-
-.zoom-controls {
-  left: 10px;
-  top: 68px;
-  z-index: 3;
-}
-
-.left-gui-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  right: 2.5%;
-  bottom: 68px;
-  z-index: 3;
-  .whereabouts,
-  .settings,
-  .info {
-    margin-top: 32px;
-    margin-left: auto;
-  }
-  .info {
-    @include shadow;
-    padding: 0;
-    background-color: $base-color;
-    border-radius: 99px;
-    padding: 0;
-    width: 44px;
-    height: 44px;
+.gui-overlay {
+  user-select: none;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: min-content auto;
+  z-index: 2;
+  .top-section,
+  .left-section,
+  .right-section {
     display: flex;
+    // outline: 1px solid red;
+    > * {
+      pointer-events: all;
+    }
+  }
+  .left-section,
+  .right-section {
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 8px;
+  }
+
+  .top-section {
     justify-content: center;
-    align-items: center;
-    padding: 10px;
-    .icon {
-      width: 100%;
-      height: 100%;
+    grid-column: 2 span;
+  }
+
+  .left-section {
+    justify-content: space-between;
+    .floor-switcher,
+    .zoom-controls {
+      display: block;
+      margin-right: auto;
+    }
+  }
+
+  .right-section {
+    justify-content: flex-end;
+    .whereabouts,
+    .settings,
+    .manual {
+      margin-left: auto;
     }
   }
 }
 
-@media (max-width: $portrait) {
-  .left-gui-section {
-    right: 5%;
+// -------------------------------- WIDTH ADAPTIVE
+@media (min-width: $lg) {
+  .gui-overlay {
+    padding-left: 44px;
+    padding-right: 44px;
   }
 }
 
-@media (max-width: $small) {
-  .search {
-    padding: 0 20px;
-  }
-  .zoom-controls {
-    top: 145px;
+@media (max-width: $lg) and (min-width: $md) {
+  .gui-overlay {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
-@media (max-height: 460px) {
-  .floor-switcher {
-    bottom: 32px;
+@media (max-width: $md) {
+  .gui-overlay {
+    padding-left: 24px;
+    padding-right: 24px;
   }
-  .zoom-controls {
-    top: 32px;
+}
+// ------------------------------- HEIGHT ADAPTIVE
+@media (min-height: $xl-height) {
+  .gui-overlay {
+    padding-top: 16px;
+    padding-bottom: 72px;
+    .left-section,
+    .right-section {
+      gap: 64px;
+    }
+  }
+}
+
+@media (max-height: $xl-height) and (min-height: $md-height) {
+  .gui-overlay {
+    padding-top: 8px;
+    padding-bottom: 52px;
+    .left-section,
+    .right-section {
+      gap: 52px;
+    }
+  }
+}
+
+@media (max-height: $md-height) and (min-height: $sm-height) {
+  .gui-overlay {
+    padding-top: 8px;
+    padding-bottom: 32px;
+    .left-section,
+    .right-section {
+      gap: 32px;
+    }
+  }
+}
+
+@media (max-height: $sm-height) {
+  .gui-overlay {
+    padding-top: 8px;
+    padding-bottom: 24px;
+    .left-section {
+      gap: 10px;
+    }
   }
 }
