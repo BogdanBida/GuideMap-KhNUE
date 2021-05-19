@@ -22,8 +22,7 @@ export class GMPRouterService {
   ) {}
 
   public init(): void {
-    this._mapDataProviderService
-      .init$()
+    this._mapDataProviderService.dataLoaded$
       .pipe(
         switchMap(() => {
           return this._activatedRoute.queryParams.pipe(
