@@ -12,6 +12,8 @@
     appMouseWheel
     (eventUp)="zoomIn()"
     (eventDown)="zoomOut()"
+    appDbclick
+    (doubleClick)="resetZoom()"
   >
     <div class="canv" id="canv"></div>
     <div class="canv" id="bgr-canv"></div>
