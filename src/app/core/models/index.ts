@@ -1,3 +1,4 @@
+export * from './gmp-query-params';
 export * from './guide-map-base-properties.interface';
 export * from './guide-map-corridor-properties.interface';
 export * from './guide-map-corridor.interface';

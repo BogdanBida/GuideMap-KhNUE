@@ -63,6 +63,32 @@ export class MapService {
     this._drawPath();
   }
 
+  /**
+   * @return (boolean) false - if point not found and not set to state
+   */
+  public findAndSetLocationById(id: string): boolean {
+    const location = this._mapDataProviderService.qrCodes.find(
+      (node) => String(node.properties.id) === id
+    );
+
+    location && this.setUserLocation(location.properties);
+
+    return !!location;
+  }
+
+  /**
+   * @return (boolean) false - if point not found and not set to state
+   */
+  public findAndSetEndpointById(id: string): boolean {
+    const destination = this._mapDataProviderService.rooms.find(
+      (node) => String(node.properties.id) === id
+    );
+
+    destination && this.setFinalEndpoint(destination.properties);
+
+    return !!destination;
+  }
+
   public findAndSetEndpointByName(destinationName: string): void {
     const foundEndpoint = this._mapDataProviderService.rooms.find(
       (roomNode) => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, merge } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { positiveValue } from 'src/app/shared/operators';
 import { GuideMapFeaturePointCategory } from '../enums';
@@ -30,6 +30,21 @@ export class MapPathService {
 
   public readonly finalEndpoint$ = new BehaviorSubject<GuideMapRoomProperties>(
     null
+  );
+
+  public readonly points$ = combineLatest([
+    this.startPoint$,
+    this.finalEndpoint$,
+  ]);
+
+  public readonly selectedUserLocationName$ = this.startPoint$.pipe(
+    positiveValue(),
+    map((point) => point.name)
+  );
+
+  public readonly selectedDestinationName$ = this.finalEndpoint$.pipe(
+    positiveValue(),
+    map((point) => point.name)
   );
 
   public readonly currentUserLocationPoint$ =

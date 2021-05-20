@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import {
   distance,
   floydWarshall,
@@ -22,6 +23,8 @@ export class MapGraphService {
     private readonly _mapDataProviderService: MapDataProviderService
   ) {}
 
+  public readonly dataLoaded$ = new BehaviorSubject<boolean>(false);
+
   private readonly _graph = new Graph();
 
   private _nextVertices: GraphVertex[][] = [];
@@ -44,6 +47,7 @@ export class MapGraphService {
 
     this._initGraph(allVertexes, allEdges);
     this._calculateGraphDistances();
+    this.dataLoaded$.next(true);
   }
 
   public findPath(
