@@ -34,7 +34,7 @@
   },
   {
     "properties": {
-      "id": "993",
+      "id": "qr-3",
       "name": "Їдальня",
       "category": "qr-code",
       "x": 445,
@@ -166,7 +166,7 @@
   },
   {
     "properties": {
-      "id": "9914",
+      "id": "qr-14",
       "name": "Чоловічий туалет - Цокольний",
       "category": "qr-code",
       "x": 1595,
@@ -625,7 +625,7 @@
   },
   {
     "properties": {
-      "id": "9957",
+      "id": "qr-57",
       "name": "212",
       "category": "qr-code",
       "x": 487,
@@ -867,7 +867,7 @@
   },
   {
     "properties": {
-      "id": "9978",
+      "id": "qr-78",
       "name": "202 - Актовий зал",
       "category": "qr-code",
       "x": 2097,
@@ -1312,7 +1312,7 @@
   },
   {
     "properties": {
-      "id": "99121",
+      "id": "qr-121",
       "name": "Ректор",
       "category": "qr-code",
       "x": 481,
@@ -1576,7 +1576,7 @@
   },
   {
     "properties": {
-      "id": "99144",
+      "id": "qr-144",
       "name": "333",
       "category": "qr-code",
       "x": 1072,
@@ -2229,7 +2229,7 @@
   },
   {
     "properties": {
-      "id": "99206",
+      "id": "qr-206",
       "name": "Спортзал",
       "category": "qr-code",
       "x": 458,
@@ -2427,7 +2427,7 @@
   },
   {
     "properties": {
-      "id": "99223",
+      "id": "qr-223",
       "name": "Деканат факультету ІТ",
       "category": "qr-code",
       "x": 1936,
