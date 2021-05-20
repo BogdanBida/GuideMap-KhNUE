@@ -6,7 +6,7 @@ import { GraphEdge } from './GraphEdge';
 import { LinkedList } from './LinkedList';
 
 export class GraphVertex {
-  constructor(value: number) {
+  constructor(value: string) {
     if (value === undefined) {
       throw new Error('Graph vertex must have a value');
     }

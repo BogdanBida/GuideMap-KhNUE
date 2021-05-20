@@ -1,5 +1,5 @@
 export interface LocationNode {
-  id: number;
+  id: string;
   x: number;
   y: number;
 }
