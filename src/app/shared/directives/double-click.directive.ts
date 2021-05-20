@@ -3,19 +3,20 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subject } from 'rxjs';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 
 const DEFAULT_DEBOUNCE_TIME = 250;
 
+@UntilDestroy()
 @Directive({
   selector: '[appDoubleClick]',
 })
-export class DoubleClickDirective implements OnInit, OnDestroy {
+export class DoubleClickDirective implements OnInit {
   @Output() public doubleClick = new EventEmitter<MouseEvent>();
 
   @Input() public debounceTime = DEFAULT_DEBOUNCE_TIME;
@@ -32,12 +33,9 @@ export class DoubleClickDirective implements OnInit, OnDestroy {
       .pipe(
         buffer(this.click$.pipe(debounceTime(this.debounceTime))),
         filter((list) => list.length === 2),
-        map((list) => list[1])
+        map((list) => list[1]),
+        untilDestroyed(this)
       )
       .subscribe(this.doubleClick);
-  }
-
-  public ngOnDestroy(): void {
-    this.click$.complete();
   }
 }
