@@ -5,6 +5,7 @@ import {
   DisableBrowserZoomDirective,
   DisableContextmenuDirective,
 } from './directives';
+import { DoubleClickDirective } from './directives/double-click.directive';
 import { MouseWheelDirective } from './directives/mouse-wheel.directive';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { MouseWheelDirective } from './directives/mouse-wheel.directive';
     DisableBrowserZoomDirective,
     DisableContextmenuDirective,
     MouseWheelDirective,
+    DoubleClickDirective,
   ],
   imports: [CommonModule],
   exports: [
@@ -20,6 +22,7 @@ import { MouseWheelDirective } from './directives/mouse-wheel.directive';
     DisableBrowserZoomDirective,
     DisableContextmenuDirective,
     MouseWheelDirective,
+    DoubleClickDirective,
   ],
 })
 export class SharedModule {}

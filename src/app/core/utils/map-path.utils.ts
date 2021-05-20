@@ -5,18 +5,18 @@ import {
   GuideMapSimpleRoute,
 } from '../models';
 
-function getUniquePathIds(fullPath: GuideMapSimpleRoute[]): number[] {
+function getUniquePathIds(fullPath: GuideMapSimpleRoute[]): string[] {
   const fullPathIds = fullPath.reduce(
     (acc, { start, end }) => [...acc, start, end],
-    [] as number[]
+    [] as string[]
   );
-  const uniqueIds = uniq(fullPathIds);
+  const uniqueIds = uniq(fullPathIds) as string[];
 
   return uniqueIds;
 }
 
 function getPathProperties(
-  uniqPathIds: number[],
+  uniqPathIds: string[],
   points: GuideMapFeaturePoint[]
 ): GuideMapFeature[] {
   return uniqPathIds.map((id) => {

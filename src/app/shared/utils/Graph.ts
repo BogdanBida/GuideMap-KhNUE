@@ -38,7 +38,7 @@ export class Graph {
    * @param vertexKey
    * @returns GraphVertex
    */
-  public getVertexByKey(vertexKey: number): GraphVertex {
+  public getVertexByKey(vertexKey: string): GraphVertex {
     return this.vertices[vertexKey];
   }
 

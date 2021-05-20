@@ -146,8 +146,8 @@ export class MapPathService {
   private _findFloorPath(
     floor: number,
     allPoints: GuideMapFeaturePoint[],
-    userLocationId: number,
-    endPointId: number
+    userLocationId: string,
+    endPointId: string
   ): ICoordinates[] {
     const path = this._mapGraphService.findPath(
       userLocationId,

@@ -5,12 +5,12 @@ import {
   floydWarshall,
   Graph,
   GraphEdge,
-  GraphVertex,
+  GraphVertex
 } from 'src/app/shared/utils';
 import {
   GuideMapCorridorProperties,
   GuideMapRoomProperties,
-  GuideMapSimpleRoute,
+  GuideMapSimpleRoute
 } from '../models';
 import { MapUtils } from '../utils';
 import { MapDataProviderService } from './map-data-provider.service';
@@ -51,8 +51,8 @@ export class MapGraphService {
   }
 
   public findPath(
-    from: number,
-    to: number,
+    from: string,
+    to: string,
     resultList: any[] = [],
     dataSet: any[] = []
   ): GuideMapSimpleRoute[] {

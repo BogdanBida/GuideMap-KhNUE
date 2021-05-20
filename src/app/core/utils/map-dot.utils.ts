@@ -13,7 +13,7 @@ function checkIsStairs(category: GuideMapFeaturePointCategory): boolean {
 
 function getPrevStairsArrowDirection(
   fullPathProperties: GuideMapFeature[],
-  userLocationId: number,
+  userLocationId: string,
   currentFloor: number
 ): MapStairsFloorSwitcher {
   const previousPointBeforeUserInPathIndex =
@@ -27,7 +27,7 @@ function getPrevStairsArrowDirection(
 
 function getNextStairsArrowDirection(
   fullPathProperties: GuideMapFeature[],
-  endPointId: number,
+  endPointId: string,
   currentFloor: number
 ): MapStairsFloorSwitcher {
   const nextPointBeforeUserInPathIndex =
