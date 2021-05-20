@@ -13,9 +13,9 @@ import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 const DEFAULT_DEBOUNCE_TIME = 250;
 
 @Directive({
-  selector: '[appDbclick]',
+  selector: '[appDoubleClick]',
 })
-export class DbClickDirective implements OnInit, OnDestroy {
+export class DoubleClickDirective implements OnInit, OnDestroy {
   @Output() public doubleClick = new EventEmitter<MouseEvent>();
 
   @Input() public debounceTime = DEFAULT_DEBOUNCE_TIME;
