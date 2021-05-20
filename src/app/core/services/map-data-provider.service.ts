@@ -9,7 +9,6 @@ import {
   GuideMapFeaturePoint,
   GuideMapFeaturePointCorridor,
   GuideMapFeaturePointRoom,
-  Path,
 } from '../models';
 import { MapUtils } from '../utils';
 
@@ -60,16 +59,12 @@ export class MapDataProviderService {
   }
 
   public getFeaturePoints(): Observable<GuideMapFeaturePoint[]> {
-    return this._getJsonDoc('mc', 1, JsonFile.Points);
+    return this._getJsonDoc(JsonFile.Points);
   }
 
-  private _getJsonDoc(
-    corpsName: string,
-    floor: number,
-    type: string
-  ): Observable<any> {
-    return this._httpClient.get<Path[]>(
-      `${environment.url}assets/json_data/${corpsName}${floor}/${type}.json`
+  private _getJsonDoc(type: JsonFile): Observable<GuideMapFeaturePoint[]> {
+    return this._httpClient.get<GuideMapFeaturePoint[]>(
+      `${environment.url}assets/json_data/${type}.json`
     );
   }
 
