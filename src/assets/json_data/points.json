@@ -46,7 +46,7 @@
   {
     "properties": {
       "id": "4",
-      "name": "ВЦ9",
+      "name": "ОЦ9",
       "category": "room",
       "x": 464,
       "y": 1790,
@@ -57,7 +57,7 @@
   {
     "properties": {
       "id": "5",
-      "name": "ВЦ10",
+      "name": "ОЦ10",
       "category": "room",
       "x": 539,
       "y": 1790,
@@ -68,7 +68,7 @@
   {
     "properties": {
       "id": "6",
-      "name": "ВЦ8",
+      "name": "ОЦ8",
       "category": "room",
       "x": 677,
       "y": 1735,
@@ -79,7 +79,7 @@
   {
     "properties": {
       "id": "7",
-      "name": "ВЦ7",
+      "name": "ОЦ7",
       "category": "room",
       "x": 859,
       "y": 1790,
@@ -90,7 +90,7 @@
   {
     "properties": {
       "id": "8",
-      "name": "ВЦ6",
+      "name": "ОЦ6",
       "category": "room",
       "x": 1054,
       "y": 1735,
@@ -101,7 +101,7 @@
   {
     "properties": {
       "id": "9",
-      "name": "ВЦ5",
+      "name": "ОЦ5",
       "category": "room",
       "x": 1150,
       "y": 1790,
@@ -112,7 +112,7 @@
   {
     "properties": {
       "id": "10",
-      "name": "ВЦ",
+      "name": "ОЦ",
       "category": "room",
       "x": 1201,
       "y": 1735,
@@ -123,7 +123,7 @@
   {
     "properties": {
       "id": "11",
-      "name": "ВЦ3",
+      "name": "ОЦ3",
       "category": "room",
       "x": 1354,
       "y": 1735,
@@ -134,7 +134,7 @@
   {
     "properties": {
       "id": "12",
-      "name": "ВЦ4",
+      "name": "ОЦ4",
       "category": "room",
       "x": 1388,
       "y": 1790,
@@ -145,7 +145,7 @@
   {
     "properties": {
       "id": "13",
-      "name": "ВЦ2",
+      "name": "ОЦ2",
       "category": "room",
       "x": 1595,
       "y": 1790,
@@ -189,7 +189,7 @@
   {
     "properties": {
       "id": "16",
-      "name": "ВЦ1 E",
+      "name": "ОЦ1 E",
       "category": "room",
       "x": 1961,
       "y": 1760,
@@ -200,7 +200,7 @@
   {
     "properties": {
       "id": "17",
-      "name": "ВЦ1 D",
+      "name": "ОЦ1 D",
       "category": "room",
       "x": 2129,
       "y": 1760,
@@ -211,7 +211,7 @@
   {
     "properties": {
       "id": "18",
-      "name": "ВЦ1 C",
+      "name": "ОЦ1 C",
       "category": "room",
       "x": 2304,
       "y": 1845,
@@ -222,7 +222,7 @@
   {
     "properties": {
       "id": "19",
-      "name": "ВЦ1 B",
+      "name": "ОЦ1 B",
       "category": "room",
       "x": 2457,
       "y": 1760,
@@ -233,7 +233,7 @@
   {
     "properties": {
       "id": "20",
-      "name": "ВЦ1 A",
+      "name": "ОЦ1 A",
       "category": "room",
       "x": 2531,
       "y": 1845,
