@@ -4,14 +4,16 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  transition: $map-drag-smoothing;
 }
 
 .container {
   position: absolute;
   transition: inherit;
-  cursor: move;
+  cursor: grab;
   z-index: 0 !important;
+  &:active {
+    cursor: grabbing;
+  }
   .zoom-wrapper {
     transition: $zoom-transition;
   }

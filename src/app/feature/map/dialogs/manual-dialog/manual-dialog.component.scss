@@ -1,0 +1,33 @@
+@import "variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 50vw;
+  max-height: 80vh;
+  section {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+    padding: 20px;
+  }
+  .dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    button {
+      padding: 10px 25px;
+      font-size: 18px;
+    }
+  }
+}
+
+.subtitle {
+  margin-bottom: -0.25em;
+}
+
+hr {
+  width: 100%;
+  margin: 0.25em 0;
+}

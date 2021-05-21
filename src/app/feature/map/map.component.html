@@ -1,21 +1,15 @@
-<app-search class="search"></app-search>
-<app-canva class="canva" [zoomFactor]="zoomFactor">
-</app-canva>
-<app-zoom-controls class="zoom-controls" (zoomChange)="zoomFactor = $event"></app-zoom-controls>
-<app-floor-switcher class="floor-switcher"></app-floor-switcher>
-<app-sidebar class="sidebar"></app-sidebar>
-<app-goto-button class="nav-button"></app-goto-button>
-<div class="left-gui-section">
-  <button class="info" (click)="openDialog()">
-    <svg class="icon">
-      <use xlink:href="assets/icons/sprite.svg#info"></use>
-    </svg>
-  </button>
-  <app-settings class="settings"></app-settings>
-  <app-whereabouts class="whereabouts"></app-whereabouts>
-</div>
-<div class="coordinates" *ngIf="isDevMode && x && y">
-  <span>
-    x: {{ x }} y: {{ y }}
-  </span>
+<app-canva class="canva" appDisableBrowserZoom></app-canva>
+<div class="gui-overlay">
+  <div class="top-section">
+    <app-search class="search"></app-search>
+  </div>
+  <div class="left-section">
+    <app-zoom-controls class="zoom-controls"></app-zoom-controls>
+    <app-floor-switcher class="floor-switcher"></app-floor-switcher>
+  </div>
+  <div class="right-section">
+    <app-manual-button class="manual"></app-manual-button>
+    <app-settings class="settings"></app-settings>
+    <app-whereabouts class="whereabouts"></app-whereabouts>
+  </div>
 </div>

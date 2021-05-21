@@ -1,12 +1,25 @@
 {
   "UI": {
-    "ENTER_ROOM": "Введіть місце призначення ",
+    "ENTER_LOCATION": "Початкове місцезнаходження",
+    "ENTER_ROOM": "Місце призначення ",
     "ROOM_GROUPS": {
       "CLASSROOMS": "Аудиторії",
       "WC": "Туалети"
     },
+    "QRCODE_GROUPS": {
+      "COMMON": "Загальне"
+    },
+    "SUCCESSFULLY": "Успішно",
     "FLOOR": "Поверх",
-    "CANCEL": "Скасувати"
+    "CANCEL": "Скасувати",
+    "RESET": "Скинути",
+    "LOADING": "Завантаження",
+    "VIDEODEVICE_REQUEST": "Запит на відеокамеру"
+  },
+  "MESSAGES": {
+    "DATA_NOT_FOUND": "Дані не знайдено",
+    "LINK_TO_ANOTHER_APP": "Посилання веде на сторонній застосунок або сайт",
+    "INVALID_DATA": "Некоректні дані"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Вибрати мову"

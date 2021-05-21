@@ -1,0 +1,30 @@
+{
+    "folders": [
+      {
+        "path": "."
+      }
+    ],
+    "settings": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "prettier.singleQuote": true,
+      "prettier.printWidth": 140,
+      "cSpell.words": ["datepicker", "focusable", "relevy"],
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+      },
+      "editor.formatOnSave": true
+    }
+  }
+  

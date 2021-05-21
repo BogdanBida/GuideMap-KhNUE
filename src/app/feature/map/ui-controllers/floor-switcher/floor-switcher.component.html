@@ -1,20 +1,36 @@
-<button class="up-btn" (click)="upFloor()" [class.disabled]="floorService.isMaxFloor()">
+<button
+  class="up-btn"
+  (click)="upFloor()"
+  [class.disabled]="isMaxFloor$ | async"
+>
   <svg class="icon">
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
   </svg>
 </button>
-<div class="floor">
+<div
+  class="floor"
+  appMouseWheel
+  (eventUp)="upFloor()"
+  (eventDown)="downFloor()"
+>
   <label for="">
     {{ "UI.FLOOR" | translate }}
   </label>
   <div class="floor-container">
-    <div class="floor-number" *ngFor="let fl of [1,2,3,4]"
-      [ngStyle]="{'transform': 'translateY(' + ((1 - floorService.floor) * 100) + '%)'}">
+    <div
+      class="floor-number"
+      *ngFor="let fl of floorList"
+      [ngStyle]="floorNumberPositionStyle$ | async"
+    >
       {{ fl }}
     </div>
   </div>
 </div>
-<button class="down-btn" (click)="downFloor()" [class.disabled]="floorService.isMinFloor()">
+<button
+  class="down-btn"
+  (click)="downFloor()"
+  [class.disabled]="isMinFloor$ | async"
+>
   <svg class="icon">
     <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
   </svg>

@@ -1,18 +1,26 @@
 <div class="container">
   <form [formGroup]="langFG">
     <mat-form-field>
-      <mat-label>{{ 'SETTINGS.CHOOSE_LANG' | translate }}</mat-label>
+      <mat-label>{{ "SETTINGS.CHOOSE_LANG" | translate }}</mat-label>
       <mat-select formControlName="lang">
-        <mat-option *ngFor="let lang of languages" [value]="lang.value">{{lang.name}}</mat-option>
+        <mat-option *ngFor="let lang of languages" [value]="lang.value">{{
+          lang.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
   </form>
 </div>
-<nav>
-  <button (click)="reset()" class="btn-cancel">
-    {{ 'UI.CANCEL' | translate }}
+<div class="dialog-footer">
+  <button (click)="reset()" class="btn-cancel" matRipple>
+    {{ "UI.RESET" | translate }}
   </button>
-  <button mat-button [mat-dialog-close]="true" class="btn-ok" type="button">
+  <button
+    mat-button
+    matRipple
+    [mat-dialog-close]="true"
+    class="btn-ok"
+    type="button"
+  >
     OK
   </button>
-</nav>
+</div>

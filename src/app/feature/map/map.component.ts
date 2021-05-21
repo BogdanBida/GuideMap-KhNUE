@@ -1,7 +1,5 @@
-import { Component, HostListener, isDevMode, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { environment } from 'src/environments/environment';
-import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { GMPRouterService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-map',
@@ -9,24 +7,9 @@ import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  public x: number;
-  public y: number;
-  public zoomFactor: number = environment.defaultZoomFactor;
-  public isDevMode = isDevMode();
+  constructor(private readonly _gmpRouterService: GMPRouterService) {}
 
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent): void {
-    this.x = event['layerX'];
-    this.y = event['layerY'];
-  }
-
-  constructor(public dialog: MatDialog) { }
-
-  ngOnInit(): void {}
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(InfoDialogComponent);
-    dialogRef.addPanelClass('fullscreen-modal');
-    dialogRef.afterClosed().subscribe();
+  public ngOnInit(): void {
+    this._gmpRouterService.init();
   }
 }

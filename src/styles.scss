@@ -46,9 +46,6 @@ body {
 button {
   border: none;
   cursor: pointer;
-  &:active {
-    @include click;
-  }
 }
 
 button,
@@ -67,7 +64,19 @@ input {
   color: whitesmoke;
 }
 
-@media (max-width: $middle) {
+.guidemap-dialog-window-glassmorphed {
+  background-color: transparent;
+  > .mat-dialog-container {
+    padding: 0;
+    background-color: rgba($bgr-color-first, 0.3);
+    @include glassmorphism(12px);
+    @supports not (backdrop-filter: blur(1px)) {
+      background-color: $bgr-color-first;
+    }
+  }
+}
+
+@media (max-width: $md) {
   .fullscreen-modal {
     width: 100vw;
     height: 100vh;

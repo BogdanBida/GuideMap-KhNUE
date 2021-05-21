@@ -1,0 +1,33 @@
+$base-color: #358dff;
+
+$positive: #f5f5f5;
+$negative: black;
+$negative-secondary: #262626;
+$secondary-tone: #444444;
+
+// backgrounds
+$bgr-color-first: rgb(235, 235, 235);
+$bgr-color-second: rgb(198, 198, 198);
+
+$background: radial-gradient(
+  circle at center,
+  $bgr-color-first,
+  $bgr-color-second
+);
+
+// durations
+$zoom-transition: 0.3s;
+$sidebar-animation-duration: 0.8s;
+
+// breakpoints
+$xs: 320px;
+$sm: 600px;
+$md: 960px;
+$lg: 1280px;
+$xl: 1920px;
+
+$xs-height: 320px;
+$sm-height: 480px;
+$md-height: 768px;
+$lg-height: 1024px;
+$xl-height: 1280px;

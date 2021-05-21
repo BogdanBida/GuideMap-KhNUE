@@ -1,4 +1,3 @@
 import { LocationNode } from './location-node';
 
-export interface QRNode extends LocationNode {
-}
+export interface QRNode extends LocationNode {}

@@ -1,26 +1,28 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { FloorService } from '../../../../core/services';
 
 @Component({
   selector: 'app-floor-switcher',
   templateUrl: './floor-switcher.component.html',
-  styleUrls: ['./floor-switcher.component.scss']
+  styleUrls: ['./floor-switcher.component.scss'],
 })
 export class FloorSwitcherComponent {
-  @HostListener('window:keyup', ['$event'])
-  private keyEvent(event: KeyboardEvent): void {
-    event.key === 'ArrowUp' && this.upFloor();
-    event.key === 'ArrowDown' && this.downFloor();
-  }
+  constructor(private readonly _floorService: FloorService) {}
 
-  constructor(public floorService: FloorService) { }
+  public readonly floorList = this._floorService.floorList;
+
+  public readonly floorNumberPositionStyle$ =
+    this._floorService.floorNumberPositionStyle$;
+
+  public readonly isMinFloor$ = this._floorService.isMinFloor$;
+
+  public readonly isMaxFloor$ = this._floorService.isMaxFloor$;
 
   public upFloor(): void {
-    this.floorService.floor++;
+    this._floorService.upFloor();
   }
 
   public downFloor(): void {
-    this.floorService.floor--;
+    this._floorService.downFloor();
   }
-
 }

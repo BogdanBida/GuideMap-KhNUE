@@ -1,93 +1,87 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { LocationNode, RoomNode } from '../../../core/models';
-import { NodeService, StateService } from './../../../core/services';
+import { environment } from 'src/environments/environment';
+import { LabelText } from '../../../../app/core/enums';
+import {
+  MapDataProviderService,
+  MapPathService,
+  MapService
+} from '../../../core/services';
+import { IOptionGroup } from '../interfaces';
 
-interface Room {
-  value: string;
-  viewValue: string;
-}
-
-export interface StateGroup {
-  groupName: string;
-  rooms: Room[];
-}
-
-export const $filter = (opt: Room[], value: string): Room[] => {
-  const filterValue = value.toLowerCase();
-  return opt.filter(item => item.viewValue.toLowerCase().indexOf(filterValue) === 0);
-};
-
+@UntilDestroy()
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  public locations: RoomNode[];
-
-  @Output() setLocation = new EventEmitter<LocationNode>();
-
-  public stateForm: FormGroup = this.fb.group({
-    stateGroup: '',
-  });
-
-  public stateGroups: StateGroup[];
-
-  stateGroupOptions: Observable<StateGroup[]>;
-
   constructor(
-    private stateService: StateService,
-    private readonly nodeService: NodeService,
-    private fb: FormBuilder,
-    private translateService: TranslateService
-  ) {
-    this.stateGroups = [];
+    private readonly _mapService: MapService,
+    private readonly _mapDataProviderService: MapDataProviderService,
+    private readonly _mapPathService: MapPathService,
+    private readonly _translateService: TranslateService
+  ) {}
+
+  public readonly selectedUserLocationName$ = this._mapPathService.selectedUserLocationName$;
+
+  public readonly selectedDestinationName$ = this._mapPathService.selectedDestinationName$;
+
+  public readonly spriteIconsUrl = environment.spriteIconsPath;
+
+  public readonly labelText = LabelText;
+
+  public destinationGroups = [] as IOptionGroup[];
+
+  public userLocationGroups = [] as IOptionGroup[];
+
+  public setLocation(value: string): void {
+    value && value.length && this.findUserLocation(value);
   }
 
-  ngOnInit(): void {
-    this.nodeService.getRoomsNodes().subscribe((data) => {
-      this.locations = data;
-      this.stateGroups.push({
-        groupName: this.translateService.instant('UI.ROOM_GROUPS.CLASSROOMS'),
-        rooms: data.map((v, i) => {
-          return {
-            value: String(v.id),
-            viewValue: v.name,
-          };
-        })
-      });
+  public setDestination(value: string): void {
+    value && value.length && this.findDestination(value);
+  }
+
+  public ngOnInit(): void {
+    const { qrCodes$, rooms$ } = this._mapDataProviderService;
+
+    // TODO: split rooms and qr codes into groups
+    qrCodes$.pipe(untilDestroyed(this)).subscribe((qrCodes) => {
+      qrCodes.length &&
+        this.userLocationGroups.push({
+          groupName: this._translateService.instant('UI.QRCODE_GROUPS.COMMON'),
+          values: qrCodes.map(({ properties }) => {
+            return {
+              value: String(properties.id),
+              viewValue: properties.name,
+            };
+          }),
+        });
     });
 
-    this.stateGroupOptions = this.stateForm.get('stateGroup').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
-  }
-
-  public clear(): void {
-    this.stateService.endpoint = null;
-  }
-
-  public findLocation(): void {
-    this.stateService.endpoint = this.locations.find((v) => {
-      return this.stateForm.get('stateGroup').value === v.name;
+    rooms$.pipe(untilDestroyed(this)).subscribe((rooms) => {
+      rooms.length &&
+        this.destinationGroups.push({
+          groupName: this._translateService.instant(
+            'UI.ROOM_GROUPS.CLASSROOMS'
+          ),
+          values: rooms.map(({ properties }) => {
+            return {
+              value: String(properties.id),
+              viewValue: properties.name,
+            };
+          }),
+        });
     });
   }
 
-  private _filterGroup(value: string): StateGroup[] {
-    if (value) {
-      return this.stateGroups
-        .map(group => ({
-          groupName: group.groupName,
-          rooms: $filter(group.rooms, value)
-        }))
-        .filter(group => group.rooms.length > 0);
-    }
-    return this.stateGroups;
+  public findUserLocation(userLocationName: string): void {
+    this._mapService.findAndSetLocationByName(userLocationName);
+  }
+
+  public findDestination(destinationName: string): void {
+    this._mapService.findAndSetEndpointByName(destinationName);
   }
 }

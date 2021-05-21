@@ -1,12 +1,25 @@
 {
   "UI": {
-    "ENTER_ROOM": "Введите место назначения",
+    "ENTER_LOCATION": "Начальное местоположение",
+    "ENTER_ROOM": "Место назначения",
     "ROOM_GROUPS": {
       "CLASSROOMS": "Аудитории",
       "WC": "Туалеті"
     },
+    "QRCODE_GROUPS": {
+      "COMMON": "Общее"
+    },
+    "SUCCESSFULLY": "Успешно",
     "FLOOR": "Этаж",
-    "CANCEL": "Отменить"
+    "CANCEL": "Отменить",
+    "RESET": "Сбросить",
+    "LOADING": "Загрузка",
+    "VIDEODEVICE_REQUEST": "Запрос на видеокамеру"
+  },
+  "MESSAGES": {
+    "DATA_NOT_FOUND": "Данные не найдены",
+    "LINK_TO_ANOTHER_APP": "Ссылка ведёт на стороннее приложение или сайт",
+    "INVALID_DATA": "Некорректные данные"
   },
   "SETTINGS": {
     "CHOOSE_LANG": "Выбрать язык"
