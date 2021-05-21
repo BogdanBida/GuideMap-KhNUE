@@ -1,8 +1,10 @@
 @import "mixins";
 @import "variables";
 
-$host-width: 4em;
+$host-width: 56px;
 $btn-bgr-color: rgba($base-color, 1);
+$roof-height: 20px;
+$roof-hat: 4px;
 $button-height: 36px;
 
 :host {
@@ -27,7 +29,7 @@ $button-height: 36px;
 
     .icon {
       width: 100%;
-      height: calc(100% + 0.5em);
+      height: calc(100% + 8px);
       z-index: 2;
     }
 
@@ -42,37 +44,40 @@ $button-height: 36px;
       position: absolute;
       left: 0;
       display: block;
-      width: 5px;
       height: 0;
       z-index: 0;
       border-color: $btn-bgr-color;
       border-width: 0;
       border-style: solid;
+      width: $roof-hat;
+      border-left: calc(#{$host-width} / 2 - #{$roof-hat} / 2) solid transparent;
+      border-right: calc(#{$host-width} / 2 - #{$roof-hat} / 2) solid
+        transparent;
     }
 
     &.up-btn {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
       &::after {
-        border-left: calc(#{$host-width} / 2) solid transparent;
-        border-bottom-width: 1.5em;
-        border-right: calc(#{$host-width} / 2) solid transparent;
-        top: 0;
+        border-bottom-width: $roof-height;
+        top: 1px;
         transform: translateY(-100%);
       }
       .icon {
-        margin-top: -1em;
+        margin-top: calc(#{$roof-height} / -1.5);
       }
     }
 
     &.down-btn {
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
       .icon {
         transform: scaleY(-1);
-        margin-bottom: -1em;
+        margin-bottom: calc(#{$roof-height} / -1.5);
       }
       &::after {
-        border-left: calc(#{$host-width} / 2) solid transparent;
-        border-top-width: 1.5em;
-        border-right: calc(#{$host-width} / 2) solid transparent;
-        bottom: 0;
+        border-top-width: $roof-height;
+        bottom: 1px;
         transform: translateY(100%);
       }
     }

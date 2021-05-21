@@ -1,14 +1,14 @@
 @import "variables";
 @import "mixins";
 
-$icon-width: 3em;
-
 :host {
   display: flex;
   justify-content: center;
-  column-gap: 16px;
-  row-gap: 8px;
+  margin-left: -16px;
+  margin-top: -8px;
   .search-bar {
+    margin-top: 8px;
+    margin-left: 16px;
     width: 100%;
   }
 }
