@@ -1,6 +1,6 @@
 <app-search-bar
   class="search-bar"
-  [svgIconUrl]="spriteIconsUrl + 'location-marker'"
+  [svgIconId]="'location-marker'"
   [labelText]="labelText.Location"
   [optionGroups]="userLocationGroups"
   (selectData)="setLocation($event)"
@@ -8,7 +8,7 @@
 ></app-search-bar>
 <app-search-bar
   class="search-bar"
-  [svgIconUrl]="spriteIconsUrl + 'destination-marker'"
+  [svgIconId]="'destination-marker'"
   [labelText]="labelText.Destination"
   [optionGroups]="destinationGroups"
   (selectData)="setDestination($event)"

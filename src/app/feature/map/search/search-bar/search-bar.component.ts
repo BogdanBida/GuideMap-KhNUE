@@ -8,8 +8,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
+import { isNil } from 'lodash-es';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { filterSearchValue } from 'src/app/core/utils';
 import { environment } from 'src/environments/environment';
 import { GuideMapFeaturePoint } from '../../../../core/models';
@@ -23,7 +24,7 @@ import { IOptionGroup } from '../../interfaces';
 export class SearchBarComponent implements OnInit, OnChanges {
   constructor(private readonly _formBuilder: FormBuilder) {}
 
-  @Input() public readonly svgIconUrl: string;
+  @Input() public readonly svgIconId: string;
 
   @Input() public readonly labelText: string;
 
@@ -33,7 +34,9 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   @Output() public readonly selectData = new EventEmitter<string>();
 
-  public readonly searchIconPath = environment.spriteIconsPath + 'search';
+  public readonly spriteIconsUrl = environment.spriteIconsPath;
+
+  public isChanged = false;
 
   public locations: GuideMapFeaturePoint[];
 
@@ -46,6 +49,10 @@ export class SearchBarComponent implements OnInit, OnChanges {
   public ngOnInit(): void {
     this.formGroupValues = this._formGroupControl.valueChanges.pipe(
       startWith(''),
+      tap((value) => {
+        this.isChanged =
+          !isNil(this.selectedValue) && this.selectedValue !== value;
+      }),
       map((value) => this._filterGroup(value))
     );
   }
@@ -57,6 +64,11 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   public findLocation(): void {
     this.selectData.emit(this._formGroupControl.value);
+  }
+
+  public resetLocation(): void {
+    this.isChanged = false;
+    this.findLocation();
   }
 
   private _filterGroup(value: string): IOptionGroup[] {

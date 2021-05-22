@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'src/environments/environment';
 import { LabelText } from '../../../../app/core/enums';
 import {
   MapDataProviderService,
   MapPathService,
-  MapService
+  MapService,
 } from '../../../core/services';
 import { IOptionGroup } from '../interfaces';
 
@@ -24,11 +23,11 @@ export class SearchComponent implements OnInit {
     private readonly _translateService: TranslateService
   ) {}
 
-  public readonly selectedUserLocationName$ = this._mapPathService.selectedUserLocationName$;
+  public readonly selectedUserLocationName$ =
+    this._mapPathService.selectedUserLocationName$;
 
-  public readonly selectedDestinationName$ = this._mapPathService.selectedDestinationName$;
-
-  public readonly spriteIconsUrl = environment.spriteIconsPath;
+  public readonly selectedDestinationName$ =
+    this._mapPathService.selectedDestinationName$;
 
   public readonly labelText = LabelText;
 
@@ -37,11 +36,11 @@ export class SearchComponent implements OnInit {
   public userLocationGroups = [] as IOptionGroup[];
 
   public setLocation(value: string): void {
-    value && value.length && this.findUserLocation(value);
+    this.findUserLocation(value);
   }
 
   public setDestination(value: string): void {
-    value && value.length && this.findDestination(value);
+    this.findDestination(value);
   }
 
   public ngOnInit(): void {

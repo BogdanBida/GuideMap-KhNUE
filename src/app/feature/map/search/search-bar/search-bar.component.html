@@ -1,7 +1,7 @@
 <form class="select" [formGroup]="formGroup">
   <div class="icon-wrapper">
     <svg class="icon">
-      <use [attr.xlink:href]="svgIconUrl"></use>
+      <use [attr.xlink:href]="spriteIconsUrl + svgIconId"></use>
     </svg>
   </div>
   <mat-form-field class="form-field" appearance="legacy">
@@ -25,9 +25,25 @@
       </mat-optgroup>
     </mat-autocomplete>
   </mat-form-field>
-  <button type="submit" class="submit-btn" (click)="findLocation()">
+  <button
+    type="submit"
+    class="submit-btn"
+    [class.isLighting]="isChanged"
+    (click)="findLocation()"
+    *ngIf="!selectedValue || isChanged"
+  >
     <svg class="icon">
-      <use [attr.xlink:href]="searchIconPath"></use>
+      <use [attr.xlink:href]="spriteIconsUrl + 'search'"></use>
+    </svg>
+  </button>
+  <button
+    type="reset"
+    class="reset-btn"
+    (click)="resetLocation()"
+    *ngIf="selectedValue && !isChanged"
+  >
+    <svg class="icon">
+      <use [attr.xlink:href]="spriteIconsUrl + 'cross'"></use>
     </svg>
   </button>
 </form>
