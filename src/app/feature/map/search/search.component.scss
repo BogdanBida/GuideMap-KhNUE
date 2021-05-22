@@ -5,16 +5,47 @@
   display: flex;
   justify-content: center;
   margin-left: -16px;
-  margin-top: -8px;
+  margin-top: -4px;
   .search-bar {
-    margin-top: 8px;
+    margin-top: 4px;
     margin-left: 16px;
     width: 100%;
   }
+
+  .mobile-toggler {
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: auto;
+    padding: 0;
+    background-color: $base-color;
+    border-radius: 32px;
+    cursor: pointer;
+    @include shadow;
+    .icon {
+      width: 75%;
+      height: 75%;
+      margin: auto;
+      transition: 0.2s;
+      transform: rotate(0);
+    }
+    &.isActive {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
 }
 
-@media (max-width: $sm) {
+@media (max-width: $md) {
   :host {
     flex-wrap: wrap;
+    .mobile-toggler {
+      display: flex;
+    }
   }
 }

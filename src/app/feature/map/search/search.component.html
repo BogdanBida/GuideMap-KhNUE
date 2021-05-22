@@ -14,3 +14,12 @@
   (selectData)="setDestination($event)"
   [selectedValue]="selectedDestinationName$ | async"
 ></app-search-bar>
+<button
+  class="mobile-toggler"
+  (click)="toogleMobileVisibility()"
+  [class.isActive]="isHidenOnMobile$ | async"
+>
+  <svg class="icon">
+    <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
+  </svg>
+</button>

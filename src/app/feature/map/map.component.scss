@@ -42,6 +42,10 @@
   .top-section {
     justify-content: center;
     grid-column: 2 span;
+    .searchbar {
+      transition: 0.2s;
+      transform: translateY(0);
+    }
   }
 
   .left-section {
@@ -80,8 +84,15 @@
 
 @media (max-width: $md) {
   .gui-overlay {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 18px;
+    padding-right: 18px;
+    .top-section {
+      .searchbar {
+        &.isHiden {
+          transform: translateY(calc(-100% + 48px));
+        }
+      }
+    }
   }
 }
 // ------------------------------- HEIGHT ADAPTIVE

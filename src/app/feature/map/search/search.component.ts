@@ -6,7 +6,8 @@ import { LabelText } from '../../../../app/core/enums';
 import {
   MapDataProviderService,
   MapPathService,
-  MapService
+  MapService,
+  SearchbarService,
 } from '../../../core/services';
 import { IOptionGroup } from '../interfaces';
 
@@ -21,12 +22,17 @@ export class SearchComponent implements OnInit {
     private readonly _mapService: MapService,
     private readonly _mapDataProviderService: MapDataProviderService,
     private readonly _mapPathService: MapPathService,
-    private readonly _translateService: TranslateService
+    private readonly _translateService: TranslateService,
+    private readonly _searchbarService: SearchbarService
   ) {}
 
-  public readonly selectedUserLocationName$ = this._mapPathService.selectedUserLocationName$;
+  public readonly selectedUserLocationName$ =
+    this._mapPathService.selectedUserLocationName$;
 
-  public readonly selectedDestinationName$ = this._mapPathService.selectedDestinationName$;
+  public readonly selectedDestinationName$ =
+    this._mapPathService.selectedDestinationName$;
+
+  public readonly isHidenOnMobile$ = this._searchbarService.isHidenOnMobile$;
 
   public readonly spriteIconsUrl = environment.spriteIconsPath;
 
@@ -83,5 +89,9 @@ export class SearchComponent implements OnInit {
 
   public findDestination(destinationName: string): void {
     this._mapService.findAndSetEndpointByName(destinationName);
+  }
+
+  public toogleMobileVisibility(): void {
+    this._searchbarService.toogleVisibilitySearchbar();
   }
 }

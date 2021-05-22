@@ -6,3 +6,4 @@ export * from './map-graph.service';
 export * from './map-path.service';
 export * from './map-zoom.service';
 export * from './map.service';
+export * from './searchbar.service';
