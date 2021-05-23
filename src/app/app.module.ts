@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
@@ -13,6 +10,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +21,7 @@ export function appInitializerFactory(
   translate: TranslateService,
   injector: Injector
 ): () => Promise<any> {
-  return () =>
+  return (): Promise<any> =>
     new Promise<any>((resolve: any) => {
       const locationInitialized = injector.get(
         LOCATION_INITIALIZED,
@@ -36,7 +34,7 @@ export function appInitializerFactory(
         translate.setDefaultLang(environment.defaultLang);
         translate.use(langToSet).subscribe(
           () => {
-            console.info(`Successfully initialized '${langToSet}' language.'`);
+            console.log(`Successfully initialized '${langToSet}' language`);
           },
           () => {
             console.error(
@@ -78,6 +76,7 @@ export function appInitializerFactory(
       deps: [TranslateService, Injector],
       multi: true,
     },
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })
