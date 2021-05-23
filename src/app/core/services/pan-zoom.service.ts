@@ -2,20 +2,10 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PanZoomAPI, PanZoomConfig, PanZoomModel } from 'ngx-panzoom';
 import { ReplaySubject } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { CENTERING_DURATION_S, PANZOOM_CONFIG } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
 import { CookieStoreService } from './cookie-store.service';
-
-const CENTERING_DURATION_S = 0.65;
-
-const PANZOOM_CONFIG = {
-  initialZoomLevel: 1,
-  neutralZoomLevel: 2,
-  zoomToFitZoomLevelFactor: 0.95,
-  zoomLevels: 3,
-  zoomStepDuration: 0.5,
-  freeMouseWheelFactor: 0.0025,
-};
 
 @UntilDestroy()
 @Injectable({
@@ -33,7 +23,7 @@ export class PanZoomService {
   public readonly api$ = new ReplaySubject<PanZoomAPI>(1);
 
   public zoomLevel$ = this.model$.pipe(
-    map((model) => Math.round(+model.zoomLevel * 100) / 100)
+    map((model) => Number(model.zoomLevel.toFixed(2)))
   );
 
   public isNaturalScale$ = this.zoomLevel$.pipe(
@@ -43,17 +33,6 @@ export class PanZoomService {
   public isMaxZoom$ = this.isNaturalScale$;
 
   public isMinZoom$ = this.zoomLevel$.pipe(map((value) => value === 0));
-
-  public getModelPosition$ = this.model$.pipe(
-    switchMap((model) => {
-      return this.api$.pipe(
-        map((api) => {
-          return api.getModelPosition(model.pan);
-        })
-      );
-    }),
-    untilDestroyed(this)
-  );
 
   public init(): PanZoomConfig {
     const storedPanzoomConfigs = this._cookieStoreService.getPanZoomConfigs();
@@ -76,7 +55,7 @@ export class PanZoomService {
   }
 
   public centerTo(x: number, y: number): void {
-    this.api$.pipe(take(1)).subscribe((api) => {
+    this._takeApi((api) => {
       api.panToPoint({ x, y }, CENTERING_DURATION_S);
     });
   }
@@ -87,21 +66,25 @@ export class PanZoomService {
       y: environment.map.mapHeight / 2,
     };
 
-    this.api$.pipe(take(1)).subscribe((api) => {
+    this._takeApi((api) => {
       api.panToPoint(centerPoint, CENTERING_DURATION_S / 2);
     });
   }
 
   public zoomIn(): void {
-    this.api$.pipe(take(1)).subscribe((api) => {
+    this._takeApi((api) => {
       api.zoomIn();
     });
   }
 
   public zoomOut(): void {
-    this.api$.pipe(take(1)).subscribe((api) => {
+    this._takeApi((api) => {
       api.zoomOut();
     });
+  }
+
+  private _takeApi(callback: (api: PanZoomAPI) => void): void {
+    this.api$.pipe(take(1)).subscribe(callback);
   }
 
   private _onModelChanges(model: PanZoomModel): void {
