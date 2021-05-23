@@ -1,0 +1,18 @@
+@import "variables";
+@import "mixins";
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 32px;
+  background-color: $base-color;
+  padding: 4px;
+  @include shadow;
+  .icon {
+    width: 75%;
+    height: 75%;
+  }
+}
