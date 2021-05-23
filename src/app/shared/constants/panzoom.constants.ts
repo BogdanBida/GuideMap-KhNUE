@@ -5,6 +5,6 @@ export const PANZOOM_CONFIG = {
   neutralZoomLevel: 2,
   zoomToFitZoomLevelFactor: 0.95,
   zoomLevels: 3,
-  zoomStepDuration: 0.5,
+  zoomStepDuration: 0,
   freeMouseWheelFactor: 0.0025,
 };
