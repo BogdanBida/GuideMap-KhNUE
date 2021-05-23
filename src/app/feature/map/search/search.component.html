@@ -1,25 +1,19 @@
-<app-search-bar
-  class="search-bar"
-  [svgIconUrl]="spriteIconsUrl + 'location-marker'"
-  [labelText]="labelText.Location"
-  [optionGroups]="userLocationGroups"
-  (selectData)="setLocation($event)"
-  [selectedValue]="selectedUserLocationName$ | async"
-></app-search-bar>
-<app-search-bar
-  class="search-bar"
-  [svgIconUrl]="spriteIconsUrl + 'destination-marker'"
-  [labelText]="labelText.Destination"
-  [optionGroups]="destinationGroups"
-  (selectData)="setDestination($event)"
-  [selectedValue]="selectedDestinationName$ | async"
-></app-search-bar>
-<button
-  class="mobile-toggler"
-  (click)="toogleMobileVisibility()"
-  [class.isActive]="isHidenOnMobile$ | async"
->
-  <svg class="icon">
-    <use xlink:href="assets/icons/sprite.svg#arrow-up"></use>
-  </svg>
-</button>
+<div class="wrapper" [class.isHiden]="isHidenOnMobile$ | async">
+  <app-search-bar
+    class="search-bar"
+    [svgIconUrl]="spriteIconsUrl + 'location-marker'"
+    [labelText]="labelText.Location"
+    [optionGroups]="userLocationGroups"
+    (selectData)="setLocation($event)"
+    [selectedValue]="selectedUserLocationName$ | async"
+  ></app-search-bar>
+  <app-search-bar
+    class="search-bar"
+    [svgIconUrl]="spriteIconsUrl + 'destination-marker'"
+    [labelText]="labelText.Destination"
+    [optionGroups]="destinationGroups"
+    (selectData)="setDestination($event)"
+    [selectedValue]="selectedDestinationName$ | async"
+  ></app-search-bar>
+  <!-- <app-search-bar-toggler class="mobile-toggler"></app-search-bar-toggler> -->
+</div>

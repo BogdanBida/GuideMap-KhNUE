@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
+import { SearchbarService } from 'src/app/core/services';
 import { environment } from 'src/environments/environment';
 import { LabelText } from '../../../../app/core/enums';
 import {
   MapDataProviderService,
   MapPathService,
   MapService,
-  SearchbarService,
 } from '../../../core/services';
 import { IOptionGroup } from '../interfaces';
 
@@ -26,13 +26,13 @@ export class SearchComponent implements OnInit {
     private readonly _searchbarService: SearchbarService
   ) {}
 
+  public readonly isHidenOnMobile$ = this._searchbarService.isHidenOnMobile$;
+
   public readonly selectedUserLocationName$ =
     this._mapPathService.selectedUserLocationName$;
 
   public readonly selectedDestinationName$ =
     this._mapPathService.selectedDestinationName$;
-
-  public readonly isHidenOnMobile$ = this._searchbarService.isHidenOnMobile$;
 
   public readonly spriteIconsUrl = environment.spriteIconsPath;
 
@@ -89,9 +89,5 @@ export class SearchComponent implements OnInit {
 
   public findDestination(destinationName: string): void {
     this._mapService.findAndSetEndpointByName(destinationName);
-  }
-
-  public toogleMobileVisibility(): void {
-    this._searchbarService.toogleVisibilitySearchbar();
   }
 }

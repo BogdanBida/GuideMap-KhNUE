@@ -4,30 +4,35 @@
       <use [attr.xlink:href]="svgIconUrl"></use>
     </svg>
   </div>
-  <mat-form-field class="form-field" appearance="legacy">
-    <mat-label class="label">{{ labelText | translate }}</mat-label>
-    <input
-      class="input"
-      type="search"
-      matInput
-      formControlName="value"
-      [matAutocomplete]="autoGroup"
-    />
-    <mat-autocomplete #autoGroup="matAutocomplete">
-      <mat-option [value]="''">{{ "UI.CANCEL" | translate }}</mat-option>
-      <mat-optgroup
-        *ngFor="let group of formGroupValues | async"
-        [label]="group.groupName"
-      >
-        <mat-option *ngFor="let room of group.values" [value]="room.viewValue">
-          {{ room.viewValue }}
-        </mat-option>
-      </mat-optgroup>
-    </mat-autocomplete>
-  </mat-form-field>
-  <button type="submit" class="submit-btn" (click)="findLocation()">
-    <svg class="icon">
-      <use [attr.xlink:href]="searchIconPath"></use>
-    </svg>
-  </button>
+  <div class="form-field-wrapper">
+    <mat-form-field class="form-field" appearance="legacy">
+      <mat-label class="label">{{ labelText | translate }}</mat-label>
+      <input
+        class="input"
+        type="search"
+        matInput
+        formControlName="value"
+        [matAutocomplete]="autoGroup"
+      />
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-option [value]="''">{{ "UI.CANCEL" | translate }}</mat-option>
+        <mat-optgroup
+          *ngFor="let group of formGroupValues | async"
+          [label]="group.groupName"
+        >
+          <mat-option
+            *ngFor="let room of group.values"
+            [value]="room.viewValue"
+          >
+            {{ room.viewValue }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" class="submit-btn" (click)="findLocation()">
+      <svg class="icon">
+        <use [attr.xlink:href]="searchIconPath"></use>
+      </svg>
+    </button>
+  </div>
 </form>

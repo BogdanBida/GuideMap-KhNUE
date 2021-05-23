@@ -2,50 +2,38 @@
 @import "mixins";
 
 :host {
-  display: flex;
-  justify-content: center;
-  margin-left: -16px;
-  margin-top: -4px;
-  .search-bar {
-    margin-top: 4px;
-    margin-left: 16px;
-    width: 100%;
-  }
-
-  .mobile-toggler {
-    position: relative;
-    display: none;
+  .wrapper {
+    display: flex;
     justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    margin-top: 10px;
-    margin-left: auto;
-    padding: 0;
-    background-color: $base-color;
-    border-radius: 32px;
-    cursor: pointer;
-    @include shadow;
-    .icon {
-      width: 75%;
-      height: 75%;
-      margin: auto;
-      transition: 0.2s;
-      transform: rotate(0);
+    margin-left: -16px;
+    margin-top: -6px;
+    transition: 0.2s;
+    transform: translateY(0);
+    .search-bar {
+      margin-top: 6px;
+      margin-left: 16px;
+      width: 100%;
+      max-width: 384px;
     }
-    &.isActive {
-      .icon {
-        transform: rotate(180deg);
-      }
-    }
+    // .mobile-toggler {
+    //   position: absolute;
+    //   bottom: -60px;
+    //   right: 0;
+    //   display: none;
+    // }
   }
 }
 
 @media (max-width: $md) {
   :host {
-    flex-wrap: wrap;
-    .mobile-toggler {
-      display: flex;
+    .wrapper {
+      flex-wrap: wrap;
+      // .mobile-toggler {
+      //   display: flex;
+      // }
+      // &.isHiden {
+      //   transform: translateY(-100%);
+      // }
     }
   }
 }

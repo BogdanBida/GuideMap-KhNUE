@@ -19,6 +19,7 @@ import { ManualDialogComponent } from './dialogs/manual-dialog/manual-dialog.com
 import { SettingsDialogComponent } from './dialogs/settings-dialog/settings-dialog.component';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
+import { SearchBarTogglerComponent } from './search/search-bar-toggler/search-bar-toggler.component';
 import { SearchBarComponent } from './search/search-bar/search-bar.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -57,6 +58,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     CodeScannerDialogComponent,
     ZoomControlsComponent,
     ZoomButtonComponent,
+    SearchBarTogglerComponent,
   ],
   providers: [
     {
