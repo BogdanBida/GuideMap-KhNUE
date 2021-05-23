@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { isNumber } from 'lodash-es';
 import { CookieService } from 'ngx-cookie-service';
+import { ICoordinates } from './../interfaces/coordinates.interface';
 
 const PAN_POSITION_KEY = 'panpos';
 const ZOOM_LEVEL_KEY = 'zoomlevel';
@@ -21,9 +22,9 @@ export class CookieStoreService {
     };
   }
 
-  public savePanPosition({ x, y }: { x: number; y: number }): void {
-    if (isNumber(x) && isNumber(y)) {
-      this._cookieService.set(PAN_POSITION_KEY, JSON.stringify({ x, y }));
+  public savePanPosition(point: ICoordinates): void {
+    if (Object.values(point).every((item) => isNumber(item))) {
+      this._cookieService.set(PAN_POSITION_KEY, JSON.stringify(point));
     }
   }
 
@@ -38,6 +39,6 @@ export class CookieStoreService {
   }
 
   public getZoomLevel(): number | null {
-    return +this._cookieService.get(ZOOM_LEVEL_KEY) || null;
+    return Number(this._cookieService.get(ZOOM_LEVEL_KEY)) || null;
   }
 }

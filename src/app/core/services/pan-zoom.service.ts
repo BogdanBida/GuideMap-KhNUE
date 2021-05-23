@@ -5,6 +5,7 @@ import { ReplaySubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { CENTERING_DURATION_S, PANZOOM_CONFIG } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
+import { ICoordinates } from '../interfaces';
 import { CookieStoreService } from './cookie-store.service';
 
 @UntilDestroy()
@@ -54,9 +55,9 @@ export class PanZoomService {
     return this.panzoomConfig;
   }
 
-  public centerTo(x: number, y: number): void {
+  public centerTo(point: ICoordinates): void {
     this._takeApi((api) => {
-      api.panToPoint({ x, y }, CENTERING_DURATION_S);
+      api.panToPoint(point, CENTERING_DURATION_S);
     });
   }
 

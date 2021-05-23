@@ -53,7 +53,7 @@ export class CanvaComponent implements OnInit, AfterViewInit {
         this._mapService.clearPath();
 
         if (point) {
-          this._panZoomService.centerTo(point?.x, point?.y);
+          this._panZoomService.centerTo(point);
         }
       });
 
@@ -63,7 +63,7 @@ export class CanvaComponent implements OnInit, AfterViewInit {
         this._mapService.clearPath();
 
         if (point) {
-          this._panZoomService.centerTo(point?.x, point?.y);
+          this._panZoomService.centerTo(point);
         }
       });
 
