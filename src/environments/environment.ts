@@ -4,7 +4,6 @@ export const environment = {
   production: false,
   defaultFloor: 2,
   defaultLang: Lang.UA,
-  defaultZoomFactor: 1,
   spriteIconsPath: 'assets/icons/sprite.svg#',
   url: 'http://localhost:4200/',
   map: {
