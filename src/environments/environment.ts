@@ -7,4 +7,8 @@ export const environment = {
   defaultZoomFactor: 1,
   spriteIconsPath: 'assets/icons/sprite.svg#',
   url: 'http://localhost:4200/',
+  map: {
+    mapWidth: 3500,
+    mapHeight: 2550,
+  },
 };

@@ -7,4 +7,8 @@ export const environment = {
   defaultZoomFactor: 1,
   spriteIconsPath: 'assets/icons/sprite.svg#',
   url: 'https://guidemap-test.web.app/',
+  map: {
+    mapWidth: 3500,
+    mapHeight: 2550,
+  },
 };
