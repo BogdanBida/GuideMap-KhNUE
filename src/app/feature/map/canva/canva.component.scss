@@ -1,25 +1,16 @@
 @import "variables";
 
 :host {
-  position: relative;
-  display: flex;
-  overflow: hidden;
-}
-
-.container {
   position: absolute;
-  transition: inherit;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   cursor: grab;
-  z-index: 0 !important;
-  &:active {
-    cursor: grabbing;
-  }
-  .zoom-wrapper {
-    transition: $zoom-transition;
-  }
-  .main-cursor {
-    display: none;
-    transition: 0.5s;
+  .pan-zoom-container {
+    .container {
+      position: relative;
+    }
   }
 }
 
