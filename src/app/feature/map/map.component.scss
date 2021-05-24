@@ -21,7 +21,6 @@
   .left-section,
   .right-section {
     display: flex;
-    // outline: 1px solid red;
     > * {
       pointer-events: all;
     }
@@ -81,8 +80,8 @@
 
 @media (max-width: $md) {
   .gui-overlay {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 }
 // ------------------------------- HEIGHT ADAPTIVE

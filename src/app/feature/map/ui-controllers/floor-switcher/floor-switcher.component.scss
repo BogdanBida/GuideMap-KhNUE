@@ -1,7 +1,7 @@
 @import "mixins";
 @import "variables";
 
-$host-width: 56px;
+$host-width: 52px;
 $btn-bgr-color: rgba($base-color, 1);
 $roof-height: 20px;
 $roof-hat: 4px;
@@ -104,7 +104,7 @@ $button-height: 36px;
   }
   label {
     background-color: $base-color;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 16px;
     width: 100%;
     text-align: center;

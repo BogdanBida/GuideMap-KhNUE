@@ -1,0 +1,16 @@
+<button
+  matRipple
+  class="mobile-toggler"
+  (click)="toogleMobileVisibility()"
+  [class.isActive]="isHidenOnMobile$ | async"
+>
+  <svg class="icon">
+    <use
+      *ngIf="isHidenOnMobile$ | async; else arrowUp"
+      [attr.xlink:href]="spriteIconsUrl + 'search'"
+    ></use>
+    <ng-template #arrowUp>
+      <use [attr.xlink:href]="spriteIconsUrl + 'arrow-up'"></use>
+    </ng-template>
+  </svg>
+</button>
