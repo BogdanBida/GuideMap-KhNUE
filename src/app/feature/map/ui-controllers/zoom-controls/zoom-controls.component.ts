@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MapZoomService } from 'src/app/core/services/map-zoom.service';
+import { PanZoomService } from './../../../../core/services/pan-zoom.service';
 
 @Component({
   selector: 'app-zoom-controls',
@@ -7,21 +7,21 @@ import { MapZoomService } from 'src/app/core/services/map-zoom.service';
   styleUrls: ['./zoom-controls.component.scss'],
 })
 export class ZoomControlsComponent {
-  constructor(private readonly _mapZoomService: MapZoomService) {}
+  constructor(private readonly _panzoomService: PanZoomService) {}
 
-  public readonly isMax$ = this._mapZoomService.isMaxZoom$;
+  public readonly isMax$ = this._panzoomService.isMaxZoom$;
 
-  public readonly isMin$ = this._mapZoomService.isMinZoom$;
+  public readonly isMin$ = this._panzoomService.isMinZoom$;
 
-  public isNaturalScale$ = this._mapZoomService.isNaturalScale;
+  public readonly isNaturalScale$ = this._panzoomService.isNaturalScale$;
 
-  public scale$ = this._mapZoomService.scale$;
+  public readonly scale$ = this._panzoomService.zoomLevel$;
 
   public zoomIn(): void {
-    this._mapZoomService.zoomIn();
+    this._panzoomService.zoomIn();
   }
 
   public zoomOut(): void {
-    this._mapZoomService.zoomOut();
+    this._panzoomService.zoomOut();
   }
 }

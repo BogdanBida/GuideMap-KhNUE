@@ -192,7 +192,7 @@ export class MapDotService {
     stairsPoint: GuideMapRoomProperties,
     arrowDirection: MapStairsFloorSwitcher
   ): Use {
-    const arrowsSize = 72;
+    const arrowsSize = 92;
     const xOffset = arrowsSize / 2;
     const yOffset = 90;
     const arrowsOverStairsPointCoordinates = {
@@ -207,7 +207,7 @@ export class MapDotService {
       cursor: pointer;
     `;
 
-    return this._mapService.svgInstance
+    const arrow = this._mapService.svgInstance
       .use(arrowDirection, 'assets/icons/sprite.svg')
       .attr('style', arrowsStyles)
       .size(arrowsSize, arrowsSize)
@@ -217,6 +217,16 @@ export class MapDotService {
         arrowsOverStairsPointCoordinates.y
       )
       .click(() => this._onFloorSwitcherClick(arrowDirection));
+
+    arrow
+      .animate({ duration: 1000, ease: '<>' })
+      .loop(Infinity, true)
+      .move(
+        arrowsOverStairsPointCoordinates.x,
+        arrowsOverStairsPointCoordinates.y - 10
+      );
+
+    return arrow;
   }
 
   private _onFloorSwitcherClick(arrowDirection: MapStairsFloorSwitcher): void {

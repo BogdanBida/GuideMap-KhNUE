@@ -1,23 +1,29 @@
 @import "variables";
 @import "mixins";
 
-$icon-width: 3em;
+$icon-width: 48px;
 
 .select {
   position: relative;
   display: flex;
-  border: 4px solid $base-color;
-  background-color: rgba($base-color, 0.15);
-  @include glassmorphism(12px);
-  @supports not (backdrop-filter: blur(12px)) {
-    background-color: #c5d2e3;
-  }
-  border-radius: 4em;
-  padding: 0.5em 0 0.25em;
-  padding-left: calc(#{$icon-width} + 1em);
   user-select: none;
   overflow: hidden;
+  .form-field-wrapper {
+    z-index: 0;
+    display: flex;
+    width: 100%;
+    border: 3px solid $base-color;
+    border-radius: 28px;
+    padding: 0.25em 0 0.1em;
+    padding-left: calc(#{$icon-width} + 1em);
+    background-color: rgba($base-color, 0.2);
+    @include glassmorphism(10px);
+    @supports not (backdrop-filter: blur(10px)) {
+      background-color: #c5d2e3;
+    }
+  }
   .icon-wrapper {
+    z-index: 1;
     position: absolute;
     left: 0;
     top: 0;
@@ -25,6 +31,8 @@ $icon-width: 3em;
     height: 100%;
     width: $icon-width;
     background-color: $base-color;
+    border-bottom-left-radius: 28px;
+    border-top-left-radius: 28px;
     &::after {
       position: absolute;
       content: "";
@@ -36,8 +44,8 @@ $icon-width: 3em;
       transform: rotate(10deg);
     }
     .icon {
-      width: 66%;
-      height: 66%;
+      width: 60%;
+      height: 100%;
       margin: auto;
       transform: translateX(0.25em);
     }
