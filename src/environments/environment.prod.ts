@@ -8,7 +8,7 @@ export const environment = {
   spriteIconsPath: 'assets/icons/sprite.svg#',
   url: 'https://guidemap-test.web.app/',
   map: {
-    mapWidth: 3500,
-    mapHeight: 2550,
+    mapWidth: 2975,
+    mapHeight: 2220,
   },
 };

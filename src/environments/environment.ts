@@ -7,7 +7,7 @@ export const environment = {
   spriteIconsPath: 'assets/icons/sprite.svg#',
   url: 'http://localhost:4200/',
   map: {
-    mapWidth: 3500,
-    mapHeight: 2550,
+    mapWidth: 2975,
+    mapHeight: 2220,
   },
 };
