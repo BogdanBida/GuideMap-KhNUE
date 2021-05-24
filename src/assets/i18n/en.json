@@ -24,10 +24,28 @@
   "SETTINGS": {
     "CHOOSE_LANG": "Choose language"
   },
-  "INFO": {
-    "MANUAL": "Manual",
+  "INFO":
+  {
+    "MANUAL": {
+      "TITLE": "Manual",
+      "DESCRIPTION": "Project description"
+    },
     "INTERFACE": {
-      "TITLE": "Interface"
+      "TITLE": "Интерфейс",
+      "MAIN_MAP": "Building map",
+      "MAIN_MAP_DESCRIPTION": "This application element will display the shortest path between the audiences you selected.",
+      "START_POINT": "Starting location",
+      "START_POINT_DESCRIPTION": "This element of the application allows you to select the starting point for finding a route.",
+      "FINISH_POINT": "Destination",
+      "FINISH_POINT_DESCRIPTION": "This element of the application allows you to select the point to which you plan to go.",
+      "FLOOR_SWITCH": "Floor switch",
+      "FLOOR_SWITCH_DESCRIPTION": "This element of the application allows you to switch the building map to another floor.",
+      "ZOOM_EDIT": "Zoom switch",
+      "ZOOM_EDIT_DESCRIPTION": "This element of the application allows you to change the scale of the building map.",
+      "SETTINGS": "Settings",
+      "SETTINGS_DESCRIPTION": "This application element opens the personal settings panel.",
+      "MANUAL": "Manual",
+      "MANUAL_DESCRIPTION": "This element of the application opens the panel of the quick guide for using the application."
     },
     "AUTHORS": {
       "TITLE": "Authors"

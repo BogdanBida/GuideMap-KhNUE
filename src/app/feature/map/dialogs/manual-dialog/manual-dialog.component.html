@@ -1,32 +1,141 @@
 <section>
   <h1>{{ mainTitle | translate }}</h1>
-  <p>Описание приложения, что оно делает и вкратце какой функционал содержит</p>
+  <p>{{ mainDescription | translate }}</p>
   <h2 class="subtitle">{{ interfaceTitle | translate }}</h2>
-  <hr />
-  <p>
-    Далее следует описание элементов интерфейса и их функционала по следующему
-    шаблону:
-  </p>
-  <p>- Подзаголовок из названия</p>
-  <p>- Скриншот элемента</p>
-  <p>- Описание местоположения на экране, как он работает и для чего нужен</p>
-  <p>- (Опционально) дополнительные скриншоты меньшего размера</p>
+  <hr/>
+  <div class="interface-container">
+    <ng-container *ngFor="let item of interfaceItems">
+      <div class="interface-item">
+        <p class="interface-item__title">{{ item.tittle | translate }}</p>
+        <img class="interface-item__img" src="{{ item.url }}" alt="">
+        <p class="interface-item__description">{{ item.description | translate }}</p>
+      </div>
+    </ng-container>
+  </div>
+
   <h2 class="subtitle">{{ authorsTitle | translate }}</h2>
-  <hr />
-  <ul>
-    <li>Бида Богдан</li>
-    <li>Котелевец Егор</li>
-    <li>Поляков Денис</li>
-    <li>Тягло Евгений</li>
-  </ul>
+  <hr/>
+  <div class="authors">
+    <div class="author">
+      <div class="author__circle">
+        <svg x="0px" y="0px" viewBox="0 0 101 101" xml:space="preserve">
+        <path id="XMLID_17_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M62.2,76.3H38.8c-1,0-1.9-0.8-1.9-1.9v-1.8c0-1,0.8-1.9,1.9-1.9h23.3c1,0,1.9,0.8,1.9,1.9v1.8C64,75.5,63.2,76.3,62.2,76.3z"/>
+          <path id="XMLID_16_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M79.6,39.9c0-16.1-13-29.1-29.1-29.1s-29.1,13-29.1,29.1c0,11.2,6.3,20.9,15.6,25.8c0,0.1,0,0.1,0,0.2V68c0,1.5,1.2,2.8,2.8,2.8
+          h21.5c1.5,0,2.8-1.2,2.8-2.8v-2.1c0-0.1,0-0.1,0-0.2C73.3,60.9,79.6,51.1,79.6,39.9z"/>
+          <path id="XMLID_15_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M62.2,81.9H38.8c-1,0-1.9-0.8-1.9-1.9v-1.8c0-1,0.8-1.9,1.9-1.9h23.3c1,0,1.9,0.8,1.9,1.9V80C64,81.1,63.2,81.9,62.2,81.9z"/>
+          <path id="XMLID_14_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M62.2,87.4H38.8c-1,0-1.9-0.8-1.9-1.9v-1.8c0-1,0.8-1.9,1.9-1.9h23.3c1,0,1.9,0.8,1.9,1.9v1.8C64,86.6,63.2,87.4,62.2,87.4z"/>
+          <path id="XMLID_13_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M42.9,87.4c0,1.5,1.2,2.8,2.8,2.8s2.8-1.2,2.8-2.8"/>
+          <path id="XMLID_10_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+          M52.6,87.4c0,1.5,1.2,2.8,2.8,2.8s2.8-1.2,2.8-2.8"/>
+          <line id="XMLID_19_" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="37.5" y1="40.8" x2="47.5" y2="70.8"/>
+          <line id="XMLID_18_" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="63.5" y1="40.8" x2="53.5" y2="70.8"/>
+      </svg>
+      </div>
+      <div class="author__name">
+        Бида Богдан
+      </div>
+    </div>
+    <div class="author">
+      <div class="author__circle">
+        <svg x="0px" y="0px" viewBox="0 0 101 101" xml:space="preserve">
+        <g id="XMLID_56_">
+          <path id="XMLID_22_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+            M78.2-8.2C55.8,14.1,46.2,19.1,46.2,19.1L65,38l18.9,18.9c0,0,4.9-9.7,27.3-32.1"/>
+          <polygon id="XMLID_54_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" points="
+            65,38 46.2,19.1 22.5,69.4 28.1,74.9 33.6,80.4 83.9,56.8 	"/>
+          <path id="XMLID_52_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+            M23.3,70.2c-2.6,2.6-2.6,6.8,0,9.4c2.6,2.6,6.8,2.6,9.4,0L23.3,70.2z"/>
+        </g>
+    </svg>
+      </div>
+      <div class="author__name">
+        Тягло Евгений
+      </div>
+    </div>
+    <div class="author">
+      <div class="author__circle">
+        <svg x="0px" y="0px" viewBox="0 0 101 101" xml:space="preserve">
+        <g id="XMLID_121_">
+
+        <line id="XMLID_139_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" x1="-25.9" y1="36.1" x2="27.8" y2="5.1"/>
+
+          <line id="XMLID_138_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" x1="82.1" y1="36.1" x2="28.3" y2="67.1"/>
+
+          <polyline id="XMLID_137_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" points="
+        28.3,5.1 82.1,36.1 82.1,74.1 28.3,105.1 	"/>
+
+          <polygon id="XMLID_136_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" points="
+        27.8,105.1 -25.9,74.1 -25.9,36.1 27.8,67.1 	"/>
+
+          <ellipse id="XMLID_135_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="28.7" cy="42.9" rx="11.1" ry="5.1"/>
+          <path id="XMLID_134_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M17.6,42.9v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+
+          <ellipse id="XMLID_133_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="28.7" cy="18.4" rx="11.1" ry="5.1"/>
+          <path id="XMLID_132_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M17.6,18.4v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+
+          <ellipse id="XMLID_131_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="3" cy="30.8" rx="11.1" ry="5.1"/>
+          <path id="XMLID_130_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M-8.1,30.8v7c0,2.8,5,5.1,11.1,5.1S14,40.6,14,37.8v-7"/>
+
+          <ellipse id="XMLID_129_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="54" cy="30.8" rx="11.1" ry="5.1"/>
+          <path id="XMLID_123_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M42.9,30.8v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+    </g>
+      </svg>
+      </div>
+      <div class="author__name">
+        Котелевец Егор
+      </div>
+    </div>
+    <div class="author">
+      <div class="author__circle">
+        <svg x="0px" y="0px" viewBox="0 0 101 101" xml:space="preserve">
+        <g id="XMLID_121_">
+
+        <line id="XMLID_139_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" x1="-25.9" y1="36.1" x2="27.8" y2="5.1"/>
+
+          <line id="XMLID_138_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" x1="82.1" y1="36.1" x2="28.3" y2="67.1"/>
+
+          <polyline id="XMLID_137_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" points="
+        28.3,5.1 82.1,36.1 82.1,74.1 28.3,105.1 	"/>
+
+          <polygon id="XMLID_136_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" points="
+        27.8,105.1 -25.9,74.1 -25.9,36.1 27.8,67.1 	"/>
+
+          <ellipse id="XMLID_135_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="28.7" cy="42.9" rx="11.1" ry="5.1"/>
+          <path id="XMLID_134_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M17.6,42.9v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+
+          <ellipse id="XMLID_133_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="28.7" cy="18.4" rx="11.1" ry="5.1"/>
+          <path id="XMLID_132_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M17.6,18.4v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+
+          <ellipse id="XMLID_131_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="3" cy="30.8" rx="11.1" ry="5.1"/>
+          <path id="XMLID_130_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M-8.1,30.8v7c0,2.8,5,5.1,11.1,5.1S14,40.6,14,37.8v-7"/>
+
+          <ellipse id="XMLID_129_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" cx="54" cy="30.8" rx="11.1" ry="5.1"/>
+          <path id="XMLID_123_" fill="none" stroke="#FFFFFF" stroke-linecap="square" stroke-linejoin="round" stroke-miterlimit="10" d="
+        M42.9,30.8v7c0,2.8,5,5.1,11.1,5.1s11.1-2.3,11.1-5.1v-7"/>
+    </g>
+      </svg>
+      </div>
+      <div class="author__name">
+        Поляков Денис
+      </div>
+    </div>
+  </div>
 
   <h2 class="subtitle">{{ supportTitle | translate }}</h2>
-  <hr />
-  <ul>
-    <li>
-      <a href="">guidemap.support@gmail.com</a>
-    </li>
-  </ul>
+  <hr/>
+  <a class="underline" href="">guidemap.support@gmail.com</a>
 </section>
 <div class="dialog-footer">
   <strong>{{ footerTitle | translate }}</strong>
