@@ -3,14 +3,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
 import { isNil } from 'lodash-es';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
+import { environment } from 'src/environments/environment';
 import { GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
 import { MapDataProviderService } from './map-data-provider.service';
 import { MapPathService } from './map-path.service';
 
-const WIDTH = 3500;
-const HEIGHT = 2550;
+const WIDTH = environment.map.mapWidth;
+const HEIGHT = environment.map.mapHeight;
 const [width, height] = [WIDTH + 'px', HEIGHT + 'px'];
 
 @UntilDestroy()

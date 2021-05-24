@@ -1,13 +1,12 @@
 <div class="zoom-controls">
   <gmp-zoom-button
+    class="button"
     (click)="zoomIn()"
     [iconName]="'zoom-in'"
     [isDisabled]="isMax$ | async"
   ></gmp-zoom-button>
-  <div class="zoom-value" [class.hidden]="isNaturalScale$ | async">
-    {{ scale$ | async }}
-  </div>
   <gmp-zoom-button
+    class="button"
     (click)="zoomOut()"
     [iconName]="'zoom-out'"
     [isDisabled]="isMin$ | async"
