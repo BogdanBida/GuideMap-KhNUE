@@ -12,6 +12,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { NgxPanZoomModule } from 'ngx-panzoom';
 import { SharedModule } from './../../shared/shared.module';
 import { CanvaComponent } from './canva/canva.component';
 import { CodeScannerDialogComponent } from './dialogs/code-scanner-dialog/code-scanner-dialog.component';
@@ -24,6 +25,7 @@ import { SearchBarComponent } from './search/search-bar/search-bar.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FloorSwitcherComponent, WhereaboutsComponent } from './ui-controllers';
+import { CenteredButtonComponent } from './ui-controllers/centered-button/centered-button.component';
 import { ManualButtonComponent } from './ui-controllers/manual-button/manual-button.component';
 import { ZoomButtonComponent } from './ui-controllers/zoom-button/zoom-button.component';
 import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-controls.component';
@@ -43,6 +45,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     MatInputModule,
     MatFormFieldModule,
     MatRippleModule,
+    NgxPanZoomModule,
   ],
   declarations: [
     MapComponent,
@@ -59,6 +62,7 @@ import { ZoomControlsComponent } from './ui-controllers/zoom-controls/zoom-contr
     ZoomControlsComponent,
     ZoomButtonComponent,
     SearchBarTogglerComponent,
+    CenteredButtonComponent,
   ],
   providers: [
     {
