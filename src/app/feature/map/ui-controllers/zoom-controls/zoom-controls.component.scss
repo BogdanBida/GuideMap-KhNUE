@@ -1,7 +1,17 @@
+@import "variables";
+
 :host {
   width: min-content;
   .button {
     display: block;
-    margin-top: 8px;
+    margin-top: 4px;
+  }
+}
+
+@media (max-height: $sm-height) {
+  :host {
+    .zoom-controls {
+      display: flex;
+    }
   }
 }

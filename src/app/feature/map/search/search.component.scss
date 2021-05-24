@@ -13,7 +13,6 @@
       margin-top: 6px;
       margin-left: 16px;
       width: 100%;
-      max-width: 384px;
     }
     // .mobile-toggler {
     //   position: absolute;
@@ -24,7 +23,17 @@
   }
 }
 
-@media (max-width: $md) {
+@media (orientation: landscape) {
+  :host {
+    .wrapper {
+      .search-bar {
+        // max-width: 284px;
+      }
+    }
+  }
+}
+
+@media (max-width: $sm) {
   :host {
     .wrapper {
       flex-wrap: wrap;
