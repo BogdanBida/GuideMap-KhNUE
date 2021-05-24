@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { isFinite } from 'lodash-es';
 import { PanZoomAPI, PanZoomConfig, PanZoomModel } from 'ngx-panzoom';
 import { ReplaySubject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { CENTERING_DURATION_S, PANZOOM_CONFIG } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
 import { ICoordinates } from '../interfaces';
@@ -24,6 +25,7 @@ export class PanZoomService {
   public readonly api$ = new ReplaySubject<PanZoomAPI>(1);
 
   public zoomLevel$ = this.model$.pipe(
+    filter((model) => isFinite(model.zoomLevel)),
     map((model) => Number(model.zoomLevel.toFixed(2)))
   );
 

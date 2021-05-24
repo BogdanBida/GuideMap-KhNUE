@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { isNumber } from 'lodash-es';
+import { isFinite } from 'lodash-es';
 import { CookieService } from 'ngx-cookie-service';
-import { ICoordinates } from './../interfaces/coordinates.interface';
+import { PanZoomConfigOptions } from 'ngx-panzoom';
+import { ICoordinates } from '../interfaces';
 
 const PAN_POSITION_KEY = 'panpos';
 const ZOOM_LEVEL_KEY = 'zoomlevel';
@@ -12,18 +13,26 @@ const ZOOM_LEVEL_KEY = 'zoomlevel';
 export class CookieStoreService {
   constructor(private readonly _cookieService: CookieService) {}
 
-  public getPanZoomConfigs(): any {
-    const panPos = this.getPanPosition();
+  public getPanZoomConfigs(): PanZoomConfigOptions {
+    const config = {} as PanZoomConfigOptions;
 
-    return {
-      initialPanX: panPos?.x,
-      initialPanY: panPos?.y,
-      initialZoomLevel: this.getZoomLevel(),
-    };
+    const panPos = this.getPanPosition();
+    const zoomLevel = this.getZoomLevel();
+
+    if (panPos) {
+      config.initialPanX = panPos.x;
+      config.initialPanY = panPos.y;
+    }
+
+    if (isFinite(zoomLevel)) {
+      config.initialZoomLevel = zoomLevel;
+    }
+
+    return config;
   }
 
   public savePanPosition(point: ICoordinates): void {
-    if (Object.values(point).every((item) => isNumber(item))) {
+    if (Object.values(point).every((item) => isFinite(item))) {
       this._cookieService.set(PAN_POSITION_KEY, JSON.stringify(point));
     }
   }
@@ -39,6 +48,6 @@ export class CookieStoreService {
   }
 
   public getZoomLevel(): number | null {
-    return Number(this._cookieService.get(ZOOM_LEVEL_KEY)) || null;
+    return Number(this._cookieService.get(ZOOM_LEVEL_KEY));
   }
 }
