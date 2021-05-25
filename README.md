@@ -9,11 +9,27 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [https://guidemap-test.web.app](https://guidemap-test.web.app)
 
+# Development environment
+
+[Official Documentation - Getting Started - Setup](https://angular.io/guide/setup-local)
+
+Project environment:
+NodeJS - v14.15.1
+NPM - 6.14.11
+Angular CLI - 11.1.4 or above (Run 'npm install -g @angular/cli' after npm and nodejs install)
+
 ## Development server
 
 Run `npm install` to install all dependencies
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
+
+You should be changed an environment property in environment.ts (environments.prod.ts if it's production build) as bellow
+
+`export const environment = { ... url: '&lt;URL where application will be hosted&gt;', ... };`
+
+Run `npm install` if dependencies are not installed or are out of date
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
