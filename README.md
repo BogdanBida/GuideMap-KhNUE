@@ -9,14 +9,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 [https://guidemap-test.web.app](https://guidemap-test.web.app)
 
-# Development environment
+## Development environment
 
-[Official Documentation - Getting Started - Setup](https://angular.io/guide/setup-local)
+**Official Documentation** -> Getting Started -> [Setup](https://angular.io/guide/setup-local)
 
 Project environment:
-NodeJS - v14.15.1
-NPM - 6.14.11
-Angular CLI - 11.1.4 or above (Run 'npm install -g @angular/cli' after npm and nodejs install)
+
+- NodeJS - v14.15.1
+- NPM - 6.14.11
+- Angular CLI - 11.1.4 or above (Run 'npm install -g @angular/cli' after npm and nodejs install)
 
 ## Development server
 
@@ -28,7 +29,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 You should be changed an environment property in environment.ts (environments.prod.ts if it's production build) as bellow
 
-`export const environment = { ... url: '&lt;URL where application will be hosted&gt;', ... };`
+```ts
+export const environment = {
+  url: "<URL where application will be hosted>",
+};
+```
 
 Run `npm install` if dependencies are not installed or are out of date
 
