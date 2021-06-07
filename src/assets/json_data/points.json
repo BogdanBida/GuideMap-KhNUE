@@ -625,17 +625,6 @@
   },
   {
     "properties": {
-      "id": "qr-57",
-      "name": "212",
-      "category": "qr-code",
-      "x": 487,
-      "y": 1594,
-      "floor": 2,
-      "corridor": "95"
-    }
-  },
-  {
-    "properties": {
       "id": "58",
       "name": "223",
       "category": "room",
