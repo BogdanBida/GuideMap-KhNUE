@@ -3,11 +3,11 @@
     "ENTER_LOCATION": "Початкове місцезнаходження",
     "ENTER_ROOM": "Місце призначення ",
     "ROOM_GROUPS": {
-      "CLASSROOMS": "Аудиторії",
+      "CLASSROOMS": "Приміщення",
       "WC": "Туалети"
     },
     "QRCODE_GROUPS": {
-      "COMMON": "Загальне"
+      "COMMON": "Місця QR-кодів"
     },
     "SUCCESSFULLY": "Успішно",
     "FLOOR": "Поверх",

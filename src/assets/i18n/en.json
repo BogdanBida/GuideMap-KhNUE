@@ -3,11 +3,11 @@
     "ENTER_LOCATION": "The start location",
     "ENTER_ROOM": "The destination",
     "ROOM_GROUPS": {
-      "CLASSROOMS": "Audiences",
+      "CLASSROOMS": "Rooms",
       "WC": "WC"
     },
     "QRCODE_GROUPS": {
-      "COMMON": "Common"
+      "COMMON": "QR code places"
     },
     "SUCCESSFULLY": "Successfully",
     "FLOOR": "Floor",
