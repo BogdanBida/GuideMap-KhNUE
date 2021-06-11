@@ -1,6 +1,5 @@
 export * from './animation.utils';
 export * from './common.utils';
-export * from './dragndrop.utils';
 export * from './filter-search-value.utils';
 export * from './map-dot.utils';
 export * from './map-path.utils';

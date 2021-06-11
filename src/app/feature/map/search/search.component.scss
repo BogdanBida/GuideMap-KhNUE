@@ -1,20 +1,48 @@
 @import "variables";
 @import "mixins";
 
-$icon-width: 3em;
-
 :host {
-  display: flex;
-  justify-content: center;
-  column-gap: 16px;
-  row-gap: 8px;
-  .search-bar {
-    width: 100%;
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    margin-left: -16px;
+    margin-top: -6px;
+    transition: 0.2s;
+    transform: translateY(0);
+    .search-bar {
+      margin-top: 6px;
+      margin-left: 16px;
+      width: 100%;
+    }
+    // .mobile-toggler {
+    //   position: absolute;
+    //   bottom: -60px;
+    //   right: 0;
+    //   display: none;
+    // }
+  }
+}
+
+@media (orientation: landscape) {
+  :host {
+    .wrapper {
+      .search-bar {
+        // max-width: 284px;
+      }
+    }
   }
 }
 
 @media (max-width: $sm) {
   :host {
-    flex-wrap: wrap;
+    .wrapper {
+      flex-wrap: wrap;
+      // .mobile-toggler {
+      //   display: flex;
+      // }
+      // &.isHiden {
+      //   transform: translateY(-100%);
+      // }
+    }
   }
 }

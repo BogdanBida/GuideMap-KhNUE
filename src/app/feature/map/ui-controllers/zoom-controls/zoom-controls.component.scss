@@ -1,43 +1,17 @@
 @import "variables";
-@import "mixins";
-
-$zoom-value-height: 1.2em;
 
 :host {
   width: min-content;
+  .button {
+    display: block;
+    margin-top: 4px;
+  }
 }
 
-.zoom-controls {
-  .zoom-value {
-    width: 100%;
-    height: $zoom-value-height;
-    line-height: $zoom-value-height;
-    letter-spacing: -0.05em;
-    text-align: center;
-    color: $positive;
-    padding: 0.1em 0;
-    margin: 0 0 0.25em 0;
-    $bgr-color: change-color(
-      $color: $base-color,
-      $alpha: 0.75,
-    );
-    background-image: linear-gradient(
-      to right,
-      transparent,
-      $bgr-color 20%,
-      $bgr-color 80%,
-      transparent
-    );
-    opacity: 1;
-    pointer-events: none;
-    user-select: none;
-    transition-delay: 150ms;
-    transition-duration: 350ms;
-    &.hidden {
-      opacity: 0;
-    }
-    &::after {
-      content: "%";
+@media (max-height: $sm-height) {
+  :host {
+    .zoom-controls {
+      display: flex;
     }
   }
 }

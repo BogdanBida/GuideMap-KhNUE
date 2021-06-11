@@ -1,25 +1,19 @@
 @import "variables";
 
 :host {
-  position: relative;
-  display: flex;
-  overflow: hidden;
-}
-
-.container {
   position: absolute;
-  transition: inherit;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   cursor: grab;
-  z-index: 0 !important;
-  &:active {
-    cursor: grabbing;
-  }
-  .zoom-wrapper {
-    transition: $zoom-transition;
-  }
-  .main-cursor {
-    display: none;
-    transition: 0.5s;
+  user-select: none;
+  .pan-zoom-container {
+    user-select: none;
+    .container {
+      position: relative;
+      user-select: none;
+    }
   }
 }
 
@@ -28,7 +22,7 @@
   width: max-content;
   height: max-content;
   flex-shrink: 0;
-
+  user-select: none;
   $dot-color: mix($secondary-tone, transparent, 20%);
   background-image: radial-gradient($dot-color 1px, transparent 1px);
   background-position: 20px 24px;
