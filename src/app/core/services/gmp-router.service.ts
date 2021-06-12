@@ -4,8 +4,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { isNil } from 'lodash-es';
 import { Observable, of, throwError } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
-import { DATA_NOT_FOUND, INVALI_DDATA } from 'src/app/shared/constants';
-import { queryParamsExtractor } from '../utils/routing.utils';
+import {
+  DATA_NOT_FOUND,
+  INVALI_DDATA,
+  LINK_TO_ANOTHER_APP,
+} from 'src/app/shared/constants';
+import { environment as devEnvironment } from 'src/environments/environment';
+import { environment as prodEnvironment } from 'src/environments/environment.prod';
+import { queryParamsExtractor, RoutingUtils } from '../utils/routing.utils';
 import { GmpQueryParamName } from './../enums/gmp-query-param-name.enum';
 import { GmpQueryParams } from './../models/gmp-query-params';
 import { MapGraphService } from './map-graph.service';
@@ -66,13 +72,18 @@ export class GMPRouterService {
   }
 
   public setPointsFromUrl$(url: string): Observable<void> {
-    // const isOurApp = new RegExp(
-    //   `^${RoutingUtils.screenAddress(environment.url)}`
-    // ).test(url);
+    const isOurApp = new RegExp(
+      `^${RoutingUtils.screenAddress(
+        prodEnvironment.url
+      )}|${RoutingUtils.screenAddress(devEnvironment.url)}`
+    ).test(url);
 
-    // if (!isOurApp) {
-    //   return throwError(LINK_TO_ANOTHER_APP);
-    // }
+    if (!isOurApp) {
+      // eslint-disable-next-line no-console
+      console.debug(`URL from qr code: ${url}`);
+
+      return throwError(LINK_TO_ANOTHER_APP);
+    }
 
     let extractedQueryParams = {} as GmpQueryParams;
 
