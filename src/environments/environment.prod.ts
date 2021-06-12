@@ -6,7 +6,7 @@ export const environment = {
   defaultLang: Lang.UA,
   defaultZoomFactor: 1,
   spriteIconsPath: 'assets/icons/sprite.svg#',
-  url: 'https://guidemap-test.web.app',
+  url: 'https://guidemap-test.web.app/',
   map: {
     mapWidth: 2975,
     mapHeight: 2220,
