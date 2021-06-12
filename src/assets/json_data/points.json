@@ -2671,5 +2671,16 @@
       "floor": 1,
       "corridors": ["21"]
     }
+  },
+  {
+    "properties": {
+      "id": "254",
+      "name": "Головний вхід вихід",
+      "category": "room",
+      "x": 200,
+      "y": 270,
+      "floor": 1,
+      "corridor": "252"
+    }
   }
 ]
