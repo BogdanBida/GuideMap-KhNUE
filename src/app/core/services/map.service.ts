@@ -73,8 +73,6 @@ export class MapService {
       this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
     ).find((node) => String(node.properties.id) === id);
 
-    console.log(location);
-
     location && this.setUserLocation(location.properties);
 
     return !!location;
