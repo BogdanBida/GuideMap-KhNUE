@@ -9,6 +9,13 @@
     "QRCODE_GROUPS": {
       "COMMON": "Місця QR-кодів"
     },
+    "LOCATION_GROUPS": {
+      "OTHER": "Інше",
+      "COMMON": "Приміщення",
+      "CLASSROOMS": "Аудиторії",
+      "WC": "Туалети",
+      "QR": "Місця QR-кодів"
+    },
     "SUCCESSFULLY": "Успішно",
     "FLOOR": "Поверх",
     "CANCEL": "Скасувати",

@@ -9,6 +9,13 @@
     "QRCODE_GROUPS": {
       "COMMON": "QR code places"
     },
+    "LOCATION_GROUPS": {
+      "OTHER": "Other",
+      "COMMON": "Common",
+      "CLASSROOMS": "Classrooms",
+      "WC": "WC",
+      "QR": "QR code places"
+    },
     "SUCCESSFULLY": "Successfully",
     "FLOOR": "Floor",
     "CANCEL": "Cancel",

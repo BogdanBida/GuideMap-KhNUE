@@ -35,9 +35,9 @@
   {
     "properties": {
       "id": "qr-3",
-      "name": "Їдальня",
+      "name": "QR Їдальня",
       "category": "qr-code",
-      "x": 445,
+      "x": 415,
       "y": 1735,
       "floor": 1,
       "corridor": "26"
@@ -158,17 +158,6 @@
       "id": "14",
       "name": "Туалет Ч. 1п",
       "category": "room",
-      "x": 1595,
-      "y": 1735,
-      "floor": 1,
-      "corridor": "36"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-14",
-      "name": "Туалет Ч. 1п",
-      "category": "qr-code",
       "x": 1595,
       "y": 1735,
       "floor": 1,
@@ -857,7 +846,7 @@
   {
     "properties": {
       "id": "qr-78",
-      "name": "Актова зала",
+      "name": "QR Актова зала",
       "category": "qr-code",
       "x": 2097,
       "y": 1776,
@@ -1291,7 +1280,7 @@
   {
     "properties": {
       "id": "qr-121",
-      "name": "Ректор",
+      "name": "QR Ректор",
       "category": "qr-code",
       "x": 481,
       "y": 342,
@@ -1546,17 +1535,6 @@
       "id": "144",
       "name": "333",
       "category": "room",
-      "x": 1072,
-      "y": 1806,
-      "floor": 3,
-      "corridor": "185"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-144",
-      "name": "333",
-      "category": "qr-code",
       "x": 1072,
       "y": 1806,
       "floor": 3,
@@ -2207,17 +2185,6 @@
   },
   {
     "properties": {
-      "id": "qr-206",
-      "name": "Спортзал",
-      "category": "qr-code",
-      "x": 458,
-      "y": 911,
-      "floor": 4,
-      "corridor": "232"
-    }
-  },
-  {
-    "properties": {
       "id": "207",
       "name": "411",
       "category": "room",
@@ -2395,7 +2362,7 @@
   {
     "properties": {
       "id": "223",
-      "name": "Деканат факультету ІТ - 420",
+      "name": "Деканат ф-т ІТ - 420",
       "category": "room",
       "x": 1936,
       "y": 1754,
@@ -2406,19 +2373,8 @@
   {
     "properties": {
       "id": "qr-223",
-      "name": "Деканат факультету ІТ",
+      "name": "QR Деканат ф-т ІТ",
       "category": "qr-code",
-      "x": 1936,
-      "y": 1754,
-      "floor": 4,
-      "corridor": "249"
-    }
-  },
-  {
-    "properties": {
-      "id": "224",
-      "name": "Декан факультету ...",
-      "category": "room",
       "x": 1936,
       "y": 1754,
       "floor": 4,

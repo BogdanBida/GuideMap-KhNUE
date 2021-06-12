@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
     qrCodes$.pipe(untilDestroyed(this)).subscribe((qrCodes) => {
       qrCodes.length &&
         this.userLocationGroups.push({
-          groupName: this._translateService.instant('UI.QRCODE_GROUPS.COMMON'),
+          groupName: this._translateService.instant('UI.LOCATION_GROUPS.QR'),
           values: qrCodes.map(({ properties }) => {
             return {
               value: String(properties.id),
@@ -68,10 +68,10 @@ export class SearchComponent implements OnInit {
     });
 
     rooms$.pipe(untilDestroyed(this)).subscribe((rooms) => {
-      rooms.length &&
+      if (rooms.length) {
         this.destinationGroups.push({
           groupName: this._translateService.instant(
-            'UI.ROOM_GROUPS.CLASSROOMS'
+            'UI.LOCATION_GROUPS.COMMON'
           ),
           values: rooms.map(({ properties }) => {
             return {
@@ -80,6 +80,16 @@ export class SearchComponent implements OnInit {
             };
           }),
         });
+        this.userLocationGroups.push({
+          groupName: this._translateService.instant('UI.LOCATION_GROUPS.OTHER'),
+          values: rooms.map(({ properties }) => {
+            return {
+              value: String(properties.id),
+              viewValue: properties.name,
+            };
+          }),
+        });
+      }
     });
   }
 

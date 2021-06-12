@@ -9,6 +9,13 @@
     "QRCODE_GROUPS": {
       "COMMON": "Места QR-кодов"
     },
+    "LOCATION_GROUPS": {
+      "OTHER": "Другое",
+      "COMMON": "Общее",
+      "CLASSROOMS": "Аудитории",
+      "WC": "Туалеты",
+      "QR": "Места QR-кодов"
+    },
     "SUCCESSFULLY": "Успешно",
     "FLOOR": "Этаж",
     "CANCEL": "Отменить",
