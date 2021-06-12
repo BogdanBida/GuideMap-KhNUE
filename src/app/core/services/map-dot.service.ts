@@ -170,12 +170,10 @@ export class MapDotService {
         MapDotUtils.checkIsStairs(item.category) && item.floor === currentFloor
     );
 
-    debugger;
-
     stairsInPath.forEach((item, index) => {
       this.stairsFloorSwitchers[index] = this._drawArrow(
         item as GuideMapRoomProperties,
-        MapStairsFloorSwitcher.ArrowDown
+        MapDotUtils.getFloorSwitcherDirection(fullPathProperties, item.id)
       );
 
       this.stairsPoints.push(
