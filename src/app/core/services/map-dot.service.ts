@@ -184,7 +184,10 @@ export class MapDotService {
 
   private _drawArrow(
     stairsPoint: GuideMapRoomProperties,
-    arrowDirection: MapStairsFloorSwitcher
+    arrowSettings: {
+      arrowDirection: MapStairsFloorSwitcher;
+      directFloor: number;
+    }
   ): Use {
     const arrowsSize = 92;
     const xOffset = arrowsSize / 2;
@@ -202,15 +205,15 @@ export class MapDotService {
     `;
 
     const arrow = this._mapService.svgInstance
-      .use(arrowDirection, 'assets/icons/sprite.svg')
+      .use(arrowSettings.arrowDirection, 'assets/icons/sprite.svg')
       .attr('style', arrowsStyles)
       .size(arrowsSize, arrowsSize)
-      .id(arrowDirection)
+      .id(arrowSettings.arrowDirection)
       .move(
         arrowsOverStairsPointCoordinates.x,
         arrowsOverStairsPointCoordinates.y
       )
-      .click(() => this._onFloorSwitcherClick(arrowDirection));
+      .click(() => this._onFloorSwitcherClick(arrowSettings.directFloor));
 
     arrow
       .animate({ duration: 1000, ease: '<>' })
@@ -223,18 +226,18 @@ export class MapDotService {
     return arrow;
   }
 
-  private _onFloorSwitcherClick(arrowDirection: MapStairsFloorSwitcher): void {
-    const finalEndpoint = this._mapPathService.finalEndpoint$.getValue();
-    const startPoint = this._mapPathService.startPoint$.getValue();
-    const minFloor = Math.min(startPoint.floor, finalEndpoint.floor);
-    const maxFloor = Math.max(startPoint.floor, finalEndpoint.floor);
+  private _onFloorSwitcherClick(directFloor: number): void {
+    // const finalEndpoint = this._mapPathService.finalEndpoint$.getValue();
+    // const startPoint = this._mapPathService.startPoint$.getValue();
+    // const minFloor = Math.min(startPoint.floor, finalEndpoint.floor);
+    // const maxFloor = Math.max(startPoint.floor, finalEndpoint.floor);
 
-    if (arrowDirection === MapStairsFloorSwitcher.ArrowUp) {
-      this._floorService.floor = maxFloor;
-    }
+    // if (arrowSettings.arrowDirection === MapStairsFloorSwitcher.ArrowUp) {
+    this._floorService.floor = directFloor;
+    // }
 
-    if (arrowDirection === MapStairsFloorSwitcher.ArrowDown) {
-      this._floorService.floor = minFloor;
-    }
+    // if (.arrowDirection === MapStairsFloorSwitcher.ArrowDown) {
+    //   this._floorService.floor = minFloor;
+    // }
   }
 }

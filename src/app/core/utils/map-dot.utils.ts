@@ -42,32 +42,37 @@ function getNextStairsArrowDirection(
 function getFloorSwitcherDirection(
   fullPathProperties: GuideMapFeature[],
   stairFloorSwitcherId: string
-): MapStairsFloorSwitcher {
+): {
+  arrowDirection: MapStairsFloorSwitcher;
+  directFloor: number;
+} {
   const stairFloorSwitcherIndex = fullPathProperties.findIndex(
     (stairs) => stairFloorSwitcherId === stairs.id
   );
 
-  const isPrevNeighborStairs = checkIsStairs(
-    fullPathProperties[stairFloorSwitcherIndex - 1]?.category
-  );
-  const isNextNeighborStairs = checkIsStairs(
-    fullPathProperties[stairFloorSwitcherIndex + 1]?.category
-  );
+  const prevNeighbor = fullPathProperties[stairFloorSwitcherIndex - 1];
+  const nextNeighbor = fullPathProperties[stairFloorSwitcherIndex + 1];
+  const prevNeighborFloor = prevNeighbor?.floor;
+  const nextNeighborFloor = nextNeighbor?.floor;
+  const isPrevNeighborStairs = checkIsStairs(prevNeighbor?.category);
+  const isNextNeighborStairs = checkIsStairs(nextNeighbor?.category);
 
   if (isPrevNeighborStairs) {
-    const isUpperFloor =
-      fullPathProperties[stairFloorSwitcherIndex - 1]?.floor >
-      fullPathProperties[stairFloorSwitcherIndex + 1]?.floor;
+    const isUpperFloor = prevNeighborFloor > nextNeighborFloor;
 
-    return getArrowDirection(isUpperFloor);
+    return {
+      arrowDirection: getArrowDirection(isUpperFloor),
+      directFloor: prevNeighborFloor,
+    };
   }
 
   if (isNextNeighborStairs) {
-    const isDownFloor =
-      fullPathProperties[stairFloorSwitcherIndex - 1]?.floor <
-      fullPathProperties[stairFloorSwitcherIndex + 1]?.floor;
+    const isDownFloor = prevNeighborFloor < nextNeighborFloor;
 
-    return getArrowDirection(isDownFloor);
+    return {
+      arrowDirection: getArrowDirection(isDownFloor),
+      directFloor: nextNeighborFloor,
+    };
   }
 
   return null;
