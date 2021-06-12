@@ -1,4 +1,4 @@
-const SMOOTHING = 0.03;
+const SMOOTHING = 0.05;
 
 export class SvgPathUtils {
   public static bezierCommand(
