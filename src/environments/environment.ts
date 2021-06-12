@@ -8,6 +8,6 @@ export const environment = {
   url: 'http://localhost:4200',
   map: {
     mapWidth: 2975,
-    mapHeight: 2220,
+    mapHeight: 2350,
   },
 };

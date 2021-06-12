@@ -9,6 +9,6 @@ export const environment = {
   url: 'https://guidemap-test.web.app',
   map: {
     mapWidth: 2975,
-    mapHeight: 2220,
+    mapHeight: 2350,
   },
 };
