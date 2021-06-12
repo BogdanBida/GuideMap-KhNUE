@@ -1,4 +1,4 @@
 export enum GmpQueryParamName {
-  QrNodeId = 'qrnodeid',
-  RoomId = 'roomid',
+  From = 'from',
+  To = 'to',
 }

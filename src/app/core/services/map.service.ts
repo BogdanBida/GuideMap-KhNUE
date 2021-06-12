@@ -4,7 +4,7 @@ import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
 import { isNil } from 'lodash-es';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
-import { GuideMapRoomProperties } from '../models';
+import { GuideMapFeaturePointRoom, GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
 import { MapDataProviderService } from './map-data-provider.service';
@@ -68,9 +68,12 @@ export class MapService {
    * @return (boolean) false - if point not found and not set to state
    */
   public findAndSetLocationById(id: string): boolean {
-    const location = this._mapDataProviderService.qrCodes.find(
-      (node) => String(node.properties.id) === id
-    );
+    // ! HOTFIX (add all points as start points)
+    const location = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((node) => String(node.properties.id) === id);
+
+    console.log(location);
 
     location && this.setUserLocation(location.properties);
 
@@ -81,9 +84,9 @@ export class MapService {
    * @return (boolean) false - if point not found and not set to state
    */
   public findAndSetEndpointById(id: string): boolean {
-    const destination = this._mapDataProviderService.rooms.find(
-      (node) => String(node.properties.id) === id
-    );
+    const destination = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((node) => String(node.properties.id) === id);
 
     destination && this.setFinalEndpoint(destination.properties);
 
@@ -91,11 +94,12 @@ export class MapService {
   }
 
   public findAndSetEndpointByName(destinationName: string): void {
-    const foundEndpoint = this._mapDataProviderService.rooms.find(
-      (roomNode) => {
-        return destinationName === roomNode.properties.name;
-      }
-    );
+    // ! HOTFIX (add all points as start points)
+    const foundEndpoint = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((roomNode) => {
+      return destinationName === roomNode.properties.name;
+    });
 
     foundEndpoint &&
       this.setFinalEndpoint(
@@ -104,11 +108,12 @@ export class MapService {
   }
 
   public findAndSetLocationByName(userLocation: string): void {
-    const foundLocation = this._mapDataProviderService.qrCodes.find(
-      (roomNode) => {
-        return userLocation === roomNode.properties.name;
-      }
-    );
+    // ! HOTFIX (add all points as start points)
+    const foundLocation = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((roomNode) => {
+      return userLocation === roomNode.properties.name;
+    });
 
     foundLocation &&
       this.setUserLocation(

@@ -37,12 +37,11 @@ export class GMPRouterService {
         switchMap(() => {
           return this._activatedRoute.queryParams.pipe(
             filter(
-              ({ qrnodeid, roomid }: GmpQueryParams) =>
-                !isNil(qrnodeid) || !isNil(roomid)
+              ({ from, to }: GmpQueryParams) => !isNil(from) || !isNil(to)
             ),
-            tap(({ qrnodeid, roomid }) => {
-              qrnodeid && this._mapService.findAndSetLocationById(qrnodeid);
-              roomid && this._mapService.findAndSetEndpointById(roomid);
+            tap(({ from, to }) => {
+              from && this._mapService.findAndSetLocationById(from);
+              to && this._mapService.findAndSetEndpointById(to);
             }),
             take(1)
           );
@@ -60,11 +59,11 @@ export class GMPRouterService {
       const params = {} as GmpQueryParams;
 
       if (qrPoint) {
-        params[GmpQueryParamName.QrNodeId] = String(qrPoint.id);
+        params[GmpQueryParamName.From] = String(qrPoint.id);
       }
 
       if (roomPoint) {
-        params[GmpQueryParamName.RoomId] = String(roomPoint.id);
+        params[GmpQueryParamName.To] = String(roomPoint.id);
       }
 
       this._setQueryParams(params);
@@ -97,16 +96,16 @@ export class GMPRouterService {
       return throwError(DATA_NOT_FOUND);
     }
 
-    const { qrnodeid, roomid } = extractedQueryParams;
+    const { from, to } = extractedQueryParams;
 
     const newQueryParams = {} as GmpQueryParams;
 
-    if (qrnodeid && this._mapService.findAndSetLocationById(qrnodeid)) {
-      newQueryParams[GmpQueryParamName.QrNodeId] = qrnodeid;
+    if (from && this._mapService.findAndSetLocationById(from)) {
+      newQueryParams[GmpQueryParamName.From] = from;
     }
 
-    if (roomid && this._mapService.findAndSetEndpointById(roomid)) {
-      newQueryParams[GmpQueryParamName.RoomId] = roomid;
+    if (to && this._mapService.findAndSetEndpointById(to)) {
+      newQueryParams[GmpQueryParamName.To] = to;
     }
 
     if (!Object.keys(newQueryParams).length) {
