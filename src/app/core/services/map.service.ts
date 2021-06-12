@@ -29,7 +29,7 @@ export class MapService {
 
   public svgBackgroundInstance: Svg;
 
-  public svgPathInstance: SvgPath;
+  public svgPathInstance: SvgPath[] = [];
 
   public init(): void {
     // TODO: refactor
@@ -129,8 +129,8 @@ export class MapService {
   }
 
   public clearPath(): void {
-    if (this.svgPathInstance) {
-      this.svgPathInstance.remove();
+    if (this.svgPathInstance.length) {
+      this.svgPathInstance.forEach((item) => item.remove());
     }
   }
 
@@ -155,7 +155,10 @@ export class MapService {
   private _drawPath(): void {
     // TODO: refactor
     this.clearPath();
+    // console.log(123);
+
     const currentPathCoordinates = this._mapPathService.getPathCoordinates();
+
     const { currentUserLocationPoint, currentUserEndpoint } =
       this._mapPathService.pathPointsValues;
 
@@ -165,16 +168,30 @@ export class MapService {
       return;
     }
 
-    const points: number[][] = [
-      [properties.x, properties.y],
-      ...currentPathCoordinates.map(({ x, y }) => [x, y]),
-      [currentUserEndpoint.x, currentUserEndpoint.y],
-    ];
+    if (currentPathCoordinates.length === 1) {
+      const points: number[][] = [
+        [properties.x, properties.y],
+        ...currentPathCoordinates[0].map(({ x, y }) => [x, y]),
+        [currentUserEndpoint.x, currentUserEndpoint.y],
+      ];
 
-    this._animatePath(points);
+      this._animatePath(points, 0);
+    }
+
+    if (currentPathCoordinates.length > 1) {
+      currentPathCoordinates.forEach((path, index) => {
+        const points: number[][] = [
+          // [properties.x, properties.y],
+          ...path.map(({ x, y }) => [x, y]),
+          // [currentUserEndpoint.x, currentUserEndpoint.y],
+        ];
+
+        this._animatePath(points, index);
+      });
+    }
   }
 
-  private _animatePath(points: number[][]): void {
+  private _animatePath(points: number[][], index: number): void {
     // TODO: refactor
     const pathString = points.reduce((acc, point, i, a) => {
       return i === 0
@@ -182,7 +199,7 @@ export class MapService {
         : `${acc} ${SvgPathUtils.bezierCommand(point, i, a)}`;
     }, '');
 
-    this.svgPathInstance = this.svgInstance
+    this.svgPathInstance[index] = this.svgInstance
       .path(pathString)
       .stroke(STROKE_CONFIG)
       .fill({
@@ -191,7 +208,7 @@ export class MapService {
       .attr({
         'stroke-dashoffset': '0',
       });
-    this.svgPathInstance
+    this.svgPathInstance[index]
       .animate({ duration: 4000, ease: '>' })
       .loop(1, false)
       .attr({

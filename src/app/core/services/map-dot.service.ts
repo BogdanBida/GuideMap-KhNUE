@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Circle, Use } from '@svgdotjs/svg.js';
 import { withLatestFrom } from 'rxjs/operators';
-import { MapStairsFloorSwitcher } from '../enums';
+import { GuideMapFeaturePointCategory, MapStairsFloorSwitcher } from '../enums';
 import { GuideMapFeature, GuideMapRoomProperties } from '../models';
 import { MapDotUtils, MapPointUtils } from '../utils';
 import { FloorService } from './floor.service';
@@ -28,7 +28,9 @@ export class MapDotService {
 
   public endpointDot: Circle;
 
-  public stairsFloorSwitcher: Use;
+  public stairsPoints: Circle[] = [];
+
+  public stairsFloorSwitchers: Use[] = [];
 
   public init(): void {
     this._subscribeOnStartPointChanges();
@@ -47,10 +49,13 @@ export class MapDotService {
       )
       .subscribe(
         ([, calculatedPositiveStartPoint, floor, fullPathProperties]) => {
-          if (calculatedPositiveStartPoint.floor !== floor) {
-            this.userDot?.remove();
-            this.stairsFloorSwitcher?.remove();
-          } else {
+          this.userDot?.remove();
+          this.stairsFloorSwitchers.forEach((item) => item.remove());
+          this.stairsPoints.forEach((item) => item.remove());
+          this.stairsFloorSwitchers = [];
+          this.stairsPoints = [];
+
+          if (calculatedPositiveStartPoint.floor === floor) {
             this._drawStartPointDot(
               calculatedPositiveStartPoint,
               fullPathProperties
@@ -72,10 +77,14 @@ export class MapDotService {
       )
       .subscribe(
         ([, calculatedPositiveEndPoint, floor, fullPathProperties]) => {
-          if (calculatedPositiveEndPoint.floor !== floor) {
-            this.endpointDot?.remove();
-            this.stairsFloorSwitcher?.remove();
-          } else {
+          this.endpointDot?.remove();
+
+          this.stairsFloorSwitchers.forEach((item) => item.remove());
+          this.stairsPoints.forEach((item) => item.remove());
+          this.stairsFloorSwitchers = [];
+          this.stairsPoints = [];
+
+          if (calculatedPositiveEndPoint.floor === floor) {
             this._drawEndPointDot(
               calculatedPositiveEndPoint,
               fullPathProperties
@@ -89,24 +98,22 @@ export class MapDotService {
     startPoint: GuideMapRoomProperties,
     fullPathProperties: GuideMapFeature[]
   ): void {
-    this.userDot = this._drawPoint(this.userDot, startPoint, false);
-    this._drawFloorSwitcher(
-      startPoint,
-      this._mapPathService.currentUserEndpoint$.getValue(),
-      fullPathProperties
-    );
+    if (startPoint.category !== GuideMapFeaturePointCategory.Stairs) {
+      this.userDot = this._drawPoint(this.userDot, startPoint, false);
+    }
+
+    this._drawFloorSwitcher(fullPathProperties);
   }
 
   private _drawEndPointDot(
     endPoint: GuideMapRoomProperties,
     fullPathProperties: GuideMapFeature[]
   ): void {
-    this.endpointDot = this._drawPoint(this.endpointDot, endPoint);
-    this._drawFloorSwitcher(
-      this._mapPathService.currentUserLocationPoint$.getValue(),
-      endPoint,
-      fullPathProperties
-    );
+    if (endPoint.category !== GuideMapFeaturePointCategory.Stairs) {
+      this.endpointDot = this._drawPoint(this.endpointDot, endPoint);
+    }
+
+    this._drawFloorSwitcher(fullPathProperties);
   }
 
   private _drawPoint(
@@ -114,6 +121,7 @@ export class MapDotService {
     location: GuideMapRoomProperties,
     isEndpoint = true
   ): Circle {
+    console.log(location);
     const pointColor = MapPointUtils.getPointColor(
       location?.category,
       isEndpoint
@@ -154,38 +162,26 @@ export class MapDotService {
     return dot;
   }
 
-  private _drawFloorSwitcher(
-    userLocation: GuideMapRoomProperties,
-    endPoint: GuideMapRoomProperties,
-    fullPathProperties: GuideMapFeature[]
-  ): void {
+  private _drawFloorSwitcher(fullPathProperties: GuideMapFeature[]): void {
     const currentFloor = this._floorService.floor;
-    const isUserOnStairs = MapDotUtils.checkIsStairs(userLocation?.category);
-    const isEndpointOnStairs = MapDotUtils.checkIsStairs(endPoint?.category);
 
-    this.stairsFloorSwitcher?.remove();
+    const stairsInPath = fullPathProperties.filter(
+      (item) =>
+        MapDotUtils.checkIsStairs(item.category) && item.floor === currentFloor
+    );
 
-    if (isUserOnStairs) {
-      const arrowDirection = MapDotUtils.getPrevStairsArrowDirection(
-        fullPathProperties,
-        userLocation.id,
-        currentFloor
+    debugger;
+
+    stairsInPath.forEach((item, index) => {
+      this.stairsFloorSwitchers[index] = this._drawArrow(
+        item as GuideMapRoomProperties,
+        MapStairsFloorSwitcher.ArrowDown
       );
 
-      this.stairsFloorSwitcher = this._drawArrow(userLocation, arrowDirection);
-
-      return;
-    }
-
-    if (isEndpointOnStairs) {
-      const arrowDirection = MapDotUtils.getNextStairsArrowDirection(
-        fullPathProperties,
-        endPoint.id,
-        currentFloor
+      this.stairsPoints.push(
+        this._drawPoint(undefined, item as GuideMapRoomProperties, false)
       );
-
-      this.stairsFloorSwitcher = this._drawArrow(endPoint, arrowDirection);
-    }
+    });
   }
 
   private _drawArrow(

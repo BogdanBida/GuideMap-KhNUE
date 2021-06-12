@@ -5,12 +5,12 @@ import {
   floydWarshall,
   Graph,
   GraphEdge,
-  GraphVertex
+  GraphVertex,
 } from 'src/app/shared/utils';
 import {
   GuideMapCorridorProperties,
   GuideMapRoomProperties,
-  GuideMapSimpleRoute
+  GuideMapSimpleRoute,
 } from '../models';
 import { MapUtils } from '../utils';
 import { MapDataProviderService } from './map-data-provider.service';
@@ -53,8 +53,7 @@ export class MapGraphService {
   public findPath(
     from: string,
     to: string,
-    resultList: any[] = [],
-    dataSet: any[] = []
+    resultList: GuideMapSimpleRoute[] = []
   ): GuideMapSimpleRoute[] {
     // TODO: refactor add new methods
 
@@ -88,7 +87,7 @@ export class MapGraphService {
 
     const foundedPathFromToMid = this.findPath(from, midNodeId, resultList);
 
-    return this.findPath(midNodeId, to, foundedPathFromToMid, dataSet);
+    return this.findPath(midNodeId, to, foundedPathFromToMid);
   }
 
   private _getAllVertexes(): {

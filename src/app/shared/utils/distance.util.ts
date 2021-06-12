@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
 export function distance(
   lat1: number,
   lon1: number,
   lat2: number,
   lon2: number
-  //   unit = 'k'
 ): number {
   if (lat1 === lat2 && lon1 === lon2) {
     return 0;
@@ -25,12 +23,6 @@ export function distance(
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
 
-    // if (unit == 'K') {
-    //   dist = dist * 1.609344;
-    // }
-    // if (unit == 'N') {
-    //   dist = dist * 0.8684;
-    // }
     return dist;
   }
 }
