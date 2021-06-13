@@ -28,10 +28,10 @@
   {
     "MANUAL": {
       "TITLE": "Manual",
-      "DESCRIPTION": "Project description"
+      "DESCRIPTION": "This project is a PWA (Progressive Web Application) created as diploma project to KhNUE (Kharkiv) for indoor navigation Unlike most similar solutions uses QR codes as reference points for positioning instead of radio waves (GPS, WIFI, Bluetooth)."
     },
     "INTERFACE": {
-      "TITLE": "Интерфейс",
+      "TITLE": "Interface",
       "MAIN_MAP": "Building map",
       "MAIN_MAP_DESCRIPTION": "This application element will display the shortest path between the audiences you selected.",
       "START_POINT": "Starting location",
