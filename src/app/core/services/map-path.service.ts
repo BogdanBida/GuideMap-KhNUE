@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 import { BehaviorSubject, combineLatest, merge } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { positiveValue } from 'src/app/shared/operators';
