@@ -46,7 +46,7 @@
   {
     "properties": {
       "id": "4",
-      "name": "ОЦ9",
+      "name": "ОЦ 9",
       "category": "room",
       "x": 464,
       "y": 2140,
@@ -57,7 +57,7 @@
   {
     "properties": {
       "id": "5",
-      "name": "ОЦ10",
+      "name": "ОЦ 10",
       "category": "room",
       "x": 539,
       "y": 2140,
@@ -68,7 +68,7 @@
   {
     "properties": {
       "id": "6",
-      "name": "ОЦ8",
+      "name": "ОЦ 8",
       "category": "room",
       "x": 677,
       "y": 2085,
@@ -79,7 +79,7 @@
   {
     "properties": {
       "id": "7",
-      "name": "ОЦ7",
+      "name": "ОЦ 7",
       "category": "room",
       "x": 859,
       "y": 2140,
@@ -90,7 +90,7 @@
   {
     "properties": {
       "id": "8",
-      "name": "ОЦ6",
+      "name": "ОЦ 6",
       "category": "room",
       "x": 1054,
       "y": 2085,
@@ -101,7 +101,7 @@
   {
     "properties": {
       "id": "9",
-      "name": "ОЦ5",
+      "name": "ОЦ 5",
       "category": "room",
       "x": 1150,
       "y": 2140,
@@ -123,7 +123,7 @@
   {
     "properties": {
       "id": "11",
-      "name": "ОЦ3",
+      "name": "ОЦ 3",
       "category": "room",
       "x": 1354,
       "y": 2085,
@@ -134,7 +134,7 @@
   {
     "properties": {
       "id": "12",
-      "name": "ОЦ4",
+      "name": "ОЦ 4",
       "category": "room",
       "x": 1388,
       "y": 2140,
@@ -145,7 +145,7 @@
   {
     "properties": {
       "id": "13",
-      "name": "ОЦ2",
+      "name": "ОЦ 2",
       "category": "room",
       "x": 1595,
       "y": 2140,
@@ -156,7 +156,7 @@
   {
     "properties": {
       "id": "14",
-      "name": "Туалет Ч. 1п",
+      "name": "Туалет Ч. 1п.",
       "category": "room",
       "x": 1595,
       "y": 2085,
@@ -167,7 +167,7 @@
   {
     "properties": {
       "id": "15",
-      "name": "Туалет Ж. - 1п",
+      "name": "Туалет Ж. - 1п.",
       "category": "room",
       "x": 1755,
       "y": 2085,
@@ -178,7 +178,7 @@
   {
     "properties": {
       "id": "16",
-      "name": "ОЦ1 E",
+      "name": "ОЦ 1E",
       "category": "room",
       "x": 1961,
       "y": 2110,
@@ -189,7 +189,7 @@
   {
     "properties": {
       "id": "17",
-      "name": "ОЦ1 D",
+      "name": "ОЦ 1D",
       "category": "room",
       "x": 2129,
       "y": 2110,
@@ -200,7 +200,7 @@
   {
     "properties": {
       "id": "18",
-      "name": "ОЦ1 C",
+      "name": "ОЦ 1C",
       "category": "room",
       "x": 2304,
       "y": 2195,
@@ -211,7 +211,7 @@
   {
     "properties": {
       "id": "19",
-      "name": "ОЦ1 B",
+      "name": "ОЦ 1B",
       "category": "room",
       "x": 2457,
       "y": 2110,
@@ -222,7 +222,7 @@
   {
     "properties": {
       "id": "20",
-      "name": "ОЦ1 A",
+      "name": "ОЦ 1A",
       "category": "room",
       "x": 2531,
       "y": 2195,
@@ -769,7 +769,7 @@
   {
     "properties": {
       "id": "72",
-      "name": "Туалет Ч. - 2п",
+      "name": "Туалет Ч. - 2п.",
       "category": "room",
       "x": 1597,
       "y": 2083,
@@ -791,7 +791,7 @@
   {
     "properties": {
       "id": "74",
-      "name": "Туалет Ж- 2п",
+      "name": "Туалет Ж- 2п.",
       "category": "room",
       "x": 1757,
       "y": 2083,
