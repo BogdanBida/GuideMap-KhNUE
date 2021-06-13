@@ -121,7 +121,6 @@ export class MapDotService {
     location: GuideMapRoomProperties,
     isEndpoint = true
   ): Circle {
-    console.log(location);
     const pointColor = MapPointUtils.getPointColor(
       location?.category,
       isEndpoint
