@@ -1,4 +1,5 @@
 export const CENTERING_DURATION_S = 0.65;
+export const VIEW_BOUNDING_RECT_INDENT = 250;
 
 export const PANZOOM_CONFIG = {
   initialZoomLevel: 1,
