@@ -39,8 +39,48 @@ function getNextStairsArrowDirection(
   return getArrowDirection(isNextPointOnUpperFloor);
 }
 
+function getFloorSwitcherDirection(
+  fullPathProperties: GuideMapFeature[],
+  stairFloorSwitcherId: string
+): {
+  arrowDirection: MapStairsFloorSwitcher;
+  directFloor: number;
+} {
+  const stairFloorSwitcherIndex = fullPathProperties.findIndex(
+    (stairs) => stairFloorSwitcherId === stairs.id
+  );
+
+  const prevNeighbor = fullPathProperties[stairFloorSwitcherIndex - 1];
+  const nextNeighbor = fullPathProperties[stairFloorSwitcherIndex + 1];
+  const prevNeighborFloor = prevNeighbor?.floor;
+  const nextNeighborFloor = nextNeighbor?.floor;
+  const isPrevNeighborStairs = checkIsStairs(prevNeighbor?.category);
+  const isNextNeighborStairs = checkIsStairs(nextNeighbor?.category);
+
+  if (isPrevNeighborStairs) {
+    const isUpperFloor = prevNeighborFloor > nextNeighborFloor;
+
+    return {
+      arrowDirection: getArrowDirection(isUpperFloor),
+      directFloor: prevNeighborFloor,
+    };
+  }
+
+  if (isNextNeighborStairs) {
+    const isDownFloor = prevNeighborFloor < nextNeighborFloor;
+
+    return {
+      arrowDirection: getArrowDirection(isDownFloor),
+      directFloor: nextNeighborFloor,
+    };
+  }
+
+  return null;
+}
+
 export const MapDotUtils = {
   getNextStairsArrowDirection,
   getPrevStairsArrowDirection,
   checkIsStairs,
+  getFloorSwitcherDirection,
 };
