@@ -213,7 +213,7 @@ export class MapService {
       });
     this.svgPathInstance[index]
       .animate({ duration: 4000, ease: '>' })
-      .loop(1, false)
+      .loop(Infinity, false)
       .attr({
         'stroke-dashoffset': '-70',
       });
