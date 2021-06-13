@@ -1,4 +1,4 @@
 export interface GuideMapSimpleRoute {
-  readonly start: number;
-  readonly end: number;
+  readonly start: string;
+  readonly end: string;
 }

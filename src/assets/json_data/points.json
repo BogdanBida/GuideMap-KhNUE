@@ -5,7 +5,7 @@
       "name": "117",
       "category": "room",
       "x": 525,
-      "y": 260,
+      "y": 610,
       "floor": 1,
       "corridor": "21"
     }
@@ -16,7 +16,7 @@
       "name": "118",
       "category": "room",
       "x": 525,
-      "y": 585,
+      "y": 935,
       "floor": 1,
       "corridor": "22"
     }
@@ -27,7 +27,7 @@
       "name": "Їдальня",
       "category": "room",
       "x": 445,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "26"
     }
@@ -35,10 +35,10 @@
   {
     "properties": {
       "id": "qr-3",
-      "name": "Їдальня",
+      "name": "QR Їдальня",
       "category": "qr-code",
-      "x": 445,
-      "y": 1735,
+      "x": 415,
+      "y": 2085,
       "floor": 1,
       "corridor": "26"
     }
@@ -46,10 +46,10 @@
   {
     "properties": {
       "id": "4",
-      "name": "ОЦ9",
+      "name": "ОЦ 9",
       "category": "room",
       "x": 464,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "27"
     }
@@ -57,10 +57,10 @@
   {
     "properties": {
       "id": "5",
-      "name": "ОЦ10",
+      "name": "ОЦ 10",
       "category": "room",
       "x": 539,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "28"
     }
@@ -68,10 +68,10 @@
   {
     "properties": {
       "id": "6",
-      "name": "ОЦ8",
+      "name": "ОЦ 8",
       "category": "room",
       "x": 677,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "29"
     }
@@ -79,10 +79,10 @@
   {
     "properties": {
       "id": "7",
-      "name": "ОЦ7",
+      "name": "ОЦ 7",
       "category": "room",
       "x": 859,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "30"
     }
@@ -90,10 +90,10 @@
   {
     "properties": {
       "id": "8",
-      "name": "ОЦ6",
+      "name": "ОЦ 6",
       "category": "room",
       "x": 1054,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "31"
     }
@@ -101,10 +101,10 @@
   {
     "properties": {
       "id": "9",
-      "name": "ОЦ5",
+      "name": "ОЦ 5",
       "category": "room",
       "x": 1150,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "32"
     }
@@ -115,7 +115,7 @@
       "name": "ОЦ",
       "category": "room",
       "x": 1201,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "33"
     }
@@ -123,10 +123,10 @@
   {
     "properties": {
       "id": "11",
-      "name": "ОЦ3",
+      "name": "ОЦ 3",
       "category": "room",
       "x": 1354,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "34"
     }
@@ -134,10 +134,10 @@
   {
     "properties": {
       "id": "12",
-      "name": "ОЦ4",
+      "name": "ОЦ 4",
       "category": "room",
       "x": 1388,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "35"
     }
@@ -145,10 +145,10 @@
   {
     "properties": {
       "id": "13",
-      "name": "ОЦ2",
+      "name": "ОЦ 2",
       "category": "room",
       "x": 1595,
-      "y": 1790,
+      "y": 2140,
       "floor": 1,
       "corridor": "36"
     }
@@ -156,21 +156,10 @@
   {
     "properties": {
       "id": "14",
-      "name": "Чоловічий туалет - Цокольний",
+      "name": "Туалет Ч. 1п.",
       "category": "room",
       "x": 1595,
-      "y": 1735,
-      "floor": 1,
-      "corridor": "36"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-14",
-      "name": "Чоловічий туалет - Цокольний",
-      "category": "qr-code",
-      "x": 1595,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "36"
     }
@@ -178,10 +167,10 @@
   {
     "properties": {
       "id": "15",
-      "name": "Жіночий туалет - Цокольний",
+      "name": "Туалет Ж. - 1п.",
       "category": "room",
       "x": 1755,
-      "y": 1735,
+      "y": 2085,
       "floor": 1,
       "corridor": "37"
     }
@@ -189,10 +178,10 @@
   {
     "properties": {
       "id": "16",
-      "name": "ОЦ1 E",
+      "name": "ОЦ 1E",
       "category": "room",
       "x": 1961,
-      "y": 1760,
+      "y": 2110,
       "floor": 1,
       "corridor": "40"
     }
@@ -200,10 +189,10 @@
   {
     "properties": {
       "id": "17",
-      "name": "ОЦ1 D",
+      "name": "ОЦ 1D",
       "category": "room",
       "x": 2129,
-      "y": 1760,
+      "y": 2110,
       "floor": 1,
       "corridor": "42"
     }
@@ -211,10 +200,10 @@
   {
     "properties": {
       "id": "18",
-      "name": "ОЦ1 C",
+      "name": "ОЦ 1C",
       "category": "room",
       "x": 2304,
-      "y": 1845,
+      "y": 2195,
       "floor": 1,
       "corridor": "43"
     }
@@ -222,10 +211,10 @@
   {
     "properties": {
       "id": "19",
-      "name": "ОЦ1 B",
+      "name": "ОЦ 1B",
       "category": "room",
       "x": 2457,
-      "y": 1760,
+      "y": 2110,
       "floor": 1,
       "corridor": "44"
     }
@@ -233,10 +222,10 @@
   {
     "properties": {
       "id": "20",
-      "name": "ОЦ1 A",
+      "name": "ОЦ 1A",
       "category": "room",
       "x": 2531,
-      "y": 1845,
+      "y": 2195,
       "floor": 1,
       "corridor": "45"
     }
@@ -246,7 +235,7 @@
       "id": "21",
       "category": "corridor",
       "x": 480,
-      "y": 335,
+      "y": 685,
       "floor": 1,
       "corridors": ["23"]
     }
@@ -256,7 +245,7 @@
       "id": "22",
       "category": "corridor",
       "x": 480,
-      "y": 509,
+      "y": 859,
       "floor": 1,
       "corridors": ["23"]
     }
@@ -266,7 +255,7 @@
       "id": "23",
       "category": "corridor",
       "x": 480,
-      "y": 420,
+      "y": 770,
       "floor": 1,
       "corridors": ["21", "22", "24"]
     }
@@ -276,7 +265,7 @@
       "id": "24",
       "category": "stairs",
       "x": 545,
-      "y": 420,
+      "y": 770,
       "floor": 1,
       "corridors": ["23", "83"]
     }
@@ -286,7 +275,7 @@
       "id": "25",
       "category": "stairs",
       "x": 380,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["26", "97", "175", "233"]
     }
@@ -296,7 +285,7 @@
       "id": "26",
       "category": "corridor",
       "x": 445,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["25", "27"]
     }
@@ -306,7 +295,7 @@
       "id": "27",
       "category": "corridor",
       "x": 464,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["26", "28"]
     }
@@ -316,7 +305,7 @@
       "id": "28",
       "category": "corridor",
       "x": 539,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["27", "29"]
     }
@@ -326,7 +315,7 @@
       "id": "29",
       "category": "corridor",
       "x": 677,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["28", "30"]
     }
@@ -336,7 +325,7 @@
       "id": "30",
       "category": "corridor",
       "x": 859,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["29", "31"]
     }
@@ -346,7 +335,7 @@
       "id": "31",
       "category": "corridor",
       "x": 1054,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["30", "32"]
     }
@@ -356,7 +345,7 @@
       "id": "32",
       "category": "corridor",
       "x": 1150,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["31", "33"]
     }
@@ -366,7 +355,7 @@
       "id": "33",
       "category": "corridor",
       "x": 1201,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["32", "34"]
     }
@@ -376,7 +365,7 @@
       "id": "34",
       "category": "corridor",
       "x": 1354,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["33", "35"]
     }
@@ -386,7 +375,7 @@
       "id": "35",
       "category": "corridor",
       "x": 1388,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["34", "36"]
     }
@@ -396,7 +385,7 @@
       "id": "36",
       "category": "corridor",
       "x": 1595,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["35", "37"]
     }
@@ -406,7 +395,7 @@
       "id": "37",
       "category": "corridor",
       "x": 1755,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["36", "38"]
     }
@@ -416,7 +405,7 @@
       "id": "38",
       "category": "corridor",
       "x": 1875,
-      "y": 1762,
+      "y": 2112,
       "floor": 1,
       "corridors": ["37", "39", "40"]
     }
@@ -426,7 +415,7 @@
       "id": "39",
       "category": "stairs",
       "x": 1875,
-      "y": 1720,
+      "y": 2070,
       "floor": 1,
       "corridors": ["38", "114", "196", "250"]
     }
@@ -436,7 +425,7 @@
       "id": "40",
       "category": "corridor",
       "x": 1961,
-      "y": 1780,
+      "y": 2130,
       "floor": 1,
       "corridors": ["38", "41"]
     }
@@ -446,7 +435,7 @@
       "id": "41",
       "category": "corridor",
       "x": 1988,
-      "y": 1800,
+      "y": 2150,
       "floor": 1,
       "corridors": ["40", "52"]
     }
@@ -456,7 +445,7 @@
       "id": "42",
       "category": "corridor",
       "x": 2129,
-      "y": 1800,
+      "y": 2150,
       "floor": 1,
       "corridors": ["41", "43"]
     }
@@ -466,7 +455,7 @@
       "id": "43",
       "category": "corridor",
       "x": 2304,
-      "y": 1800,
+      "y": 2150,
       "floor": 1,
       "corridors": ["42", "44"]
     }
@@ -476,7 +465,7 @@
       "id": "44",
       "category": "corridor",
       "x": 2457,
-      "y": 1800,
+      "y": 2150,
       "floor": 1,
       "corridors": ["43", "45"]
     }
@@ -486,7 +475,7 @@
       "id": "45",
       "category": "corridor",
       "x": 2531,
-      "y": 1800,
+      "y": 2150,
       "floor": 1,
       "corridors": ["44"]
     }
@@ -497,7 +486,7 @@
       "name": "217-A",
       "category": "room",
       "x": 421,
-      "y": 271,
+      "y": 621,
       "floor": 2,
       "corridor": "79"
     }
@@ -508,7 +497,7 @@
       "name": "216",
       "category": "room",
       "x": 482,
-      "y": 313,
+      "y": 663,
       "floor": 2,
       "corridor": "80"
     }
@@ -519,7 +508,7 @@
       "name": "217",
       "category": "room",
       "x": 421,
-      "y": 368,
+      "y": 718,
       "floor": 2,
       "corridor": "81"
     }
@@ -530,7 +519,7 @@
       "name": "218",
       "category": "room",
       "x": 421,
-      "y": 554,
+      "y": 904,
       "floor": 2,
       "corridor": "84"
     }
@@ -541,7 +530,7 @@
       "name": "215",
       "category": "room",
       "x": 482,
-      "y": 565,
+      "y": 915,
       "floor": 2,
       "corridor": "85"
     }
@@ -552,7 +541,7 @@
       "name": "214",
       "category": "room",
       "x": 482,
-      "y": 704,
+      "y": 1054,
       "floor": 2,
       "corridor": "86"
     }
@@ -563,7 +552,7 @@
       "name": "219",
       "category": "room",
       "x": 421,
-      "y": 727,
+      "y": 1077,
       "floor": 2,
       "corridor": "87"
     }
@@ -574,7 +563,7 @@
       "name": "220",
       "category": "room",
       "x": 421,
-      "y": 1057,
+      "y": 1407,
       "floor": 2,
       "corridor": "90"
     }
@@ -585,7 +574,7 @@
       "name": "213",
       "category": "room",
       "x": 482,
-      "y": 1117,
+      "y": 1467,
       "floor": 2,
       "corridor": "91"
     }
@@ -596,7 +585,7 @@
       "name": "221",
       "category": "room",
       "x": 417,
-      "y": 1219,
+      "y": 1569,
       "floor": 2,
       "corridor": "92"
     }
@@ -607,7 +596,7 @@
       "name": "222",
       "category": "room",
       "x": 421,
-      "y": 1294,
+      "y": 1644,
       "floor": 2,
       "corridor": "93"
     }
@@ -618,20 +607,9 @@
       "name": "212",
       "category": "room",
       "x": 482,
-      "y": 1362,
+      "y": 1712,
       "floor": 2,
       "corridor": "94"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-57",
-      "name": "212",
-      "category": "qr-code",
-      "x": 487,
-      "y": 1594,
-      "floor": 2,
-      "corridor": "95"
     }
   },
   {
@@ -640,7 +618,7 @@
       "name": "223",
       "category": "room",
       "x": 421,
-      "y": 1604,
+      "y": 1954,
       "floor": 2,
       "corridor": "95"
     }
@@ -651,7 +629,7 @@
       "name": "224",
       "category": "room",
       "x": 458,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "98"
     }
@@ -662,7 +640,7 @@
       "name": "211",
       "category": "room",
       "x": 589,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "99"
     }
@@ -673,7 +651,7 @@
       "name": "225",
       "category": "room",
       "x": 626,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "100"
     }
@@ -684,7 +662,7 @@
       "name": "210",
       "category": "room",
       "x": 741,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "101"
     }
@@ -695,7 +673,7 @@
       "name": "226",
       "category": "room",
       "x": 759,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "102"
     }
@@ -706,7 +684,7 @@
       "name": "209",
       "category": "room",
       "x": 905,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "103"
     }
@@ -717,7 +695,7 @@
       "name": "208",
       "category": "room",
       "x": 967,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "104"
     }
@@ -728,7 +706,7 @@
       "name": "227",
       "category": "room",
       "x": 976,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "104"
     }
@@ -739,7 +717,7 @@
       "name": "228",
       "category": "room",
       "x": 1071,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "105"
     }
@@ -750,7 +728,7 @@
       "name": "207",
       "category": "room",
       "x": 1173,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "106"
     }
@@ -761,7 +739,7 @@
       "name": "229",
       "category": "room",
       "x": 1227,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "107"
     }
@@ -772,7 +750,7 @@
       "name": "206",
       "category": "room",
       "x": 1360,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "108"
     }
@@ -783,7 +761,7 @@
       "name": "230",
       "category": "room",
       "x": 1390,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "109"
     }
@@ -791,10 +769,10 @@
   {
     "properties": {
       "id": "72",
-      "name": "Чоловічий туалет - 1-й",
+      "name": "Туалет Ч. - 2п.",
       "category": "room",
       "x": 1597,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "110"
     }
@@ -805,7 +783,7 @@
       "name": "232",
       "category": "room",
       "x": 1611,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "111"
     }
@@ -813,10 +791,10 @@
   {
     "properties": {
       "id": "74",
-      "name": "Жіночий туалет - 1-й",
+      "name": "Туалет Ж- 2п.",
       "category": "room",
       "x": 1757,
-      "y": 1733,
+      "y": 2083,
       "floor": 2,
       "corridor": "112"
     }
@@ -827,7 +805,7 @@
       "name": "233",
       "category": "room",
       "x": 1882,
-      "y": 1802,
+      "y": 2152,
       "floor": 2,
       "corridor": "113"
     }
@@ -838,7 +816,7 @@
       "name": "203",
       "category": "room",
       "x": 2051,
-      "y": 1746,
+      "y": 2096,
       "floor": 2,
       "corridor": "116"
     }
@@ -849,7 +827,7 @@
       "name": "201",
       "category": "room",
       "x": 2074,
-      "y": 1827,
+      "y": 2177,
       "floor": 2,
       "corridor": "117"
     }
@@ -857,10 +835,10 @@
   {
     "properties": {
       "id": "78",
-      "name": "202 - Актовий зал",
+      "name": "Актова зала",
       "category": "room",
       "x": 2097,
-      "y": 1776,
+      "y": 2126,
       "floor": 2,
       "corridor": "117"
     }
@@ -868,10 +846,10 @@
   {
     "properties": {
       "id": "qr-78",
-      "name": "202 - Актовий зал",
+      "name": "QR Актова зала",
       "category": "qr-code",
       "x": 2097,
-      "y": 1776,
+      "y": 2126,
       "floor": 2,
       "corridor": "117"
     }
@@ -881,7 +859,7 @@
       "id": "79",
       "category": "corridor",
       "x": 452,
-      "y": 271,
+      "y": 621,
       "floor": 2,
       "corridors": ["80"]
     }
@@ -891,7 +869,7 @@
       "id": "80",
       "category": "corridor",
       "x": 452,
-      "y": 313,
+      "y": 663,
       "floor": 2,
       "corridors": ["79", "81"]
     }
@@ -901,7 +879,7 @@
       "id": "81",
       "category": "corridor",
       "x": 452,
-      "y": 368,
+      "y": 718,
       "floor": 2,
       "corridors": ["80", "82"]
     }
@@ -911,7 +889,7 @@
       "id": "82",
       "category": "corridor",
       "x": 452,
-      "y": 420,
+      "y": 770,
       "floor": 2,
       "corridors": ["81", "83", "84"]
     }
@@ -921,7 +899,7 @@
       "id": "83",
       "category": "stairs",
       "x": 493,
-      "y": 420,
+      "y": 770,
       "floor": 2,
       "corridors": ["24", "82"]
     }
@@ -931,7 +909,7 @@
       "id": "84",
       "category": "corridor",
       "x": 452,
-      "y": 554,
+      "y": 904,
       "floor": 2,
       "corridors": ["82", "85"]
     }
@@ -941,7 +919,7 @@
       "id": "85",
       "category": "corridor",
       "x": 452,
-      "y": 565,
+      "y": 915,
       "floor": 2,
       "corridors": ["84", "86"]
     }
@@ -951,7 +929,7 @@
       "id": "86",
       "category": "corridor",
       "x": 452,
-      "y": 704,
+      "y": 1054,
       "floor": 2,
       "corridors": ["85", "87"]
     }
@@ -961,7 +939,7 @@
       "id": "87",
       "category": "corridor",
       "x": 452,
-      "y": 727,
+      "y": 1077,
       "floor": 2,
       "corridors": ["86", "88"]
     }
@@ -971,7 +949,7 @@
       "id": "88",
       "category": "corridor",
       "x": 452,
-      "y": 795,
+      "y": 1145,
       "floor": 2,
       "corridors": ["87", "89", "90"]
     }
@@ -981,7 +959,7 @@
       "id": "89",
       "category": "stairs",
       "x": 553,
-      "y": 795,
+      "y": 1145,
       "floor": 2,
       "corridors": ["88", "163", "231"]
     }
@@ -991,7 +969,7 @@
       "id": "90",
       "category": "corridor",
       "x": 452,
-      "y": 1057,
+      "y": 1407,
       "floor": 2,
       "corridors": ["88", "91"]
     }
@@ -1001,7 +979,7 @@
       "id": "91",
       "category": "corridor",
       "x": 452,
-      "y": 1117,
+      "y": 1467,
       "floor": 2,
       "corridors": ["90", "92"]
     }
@@ -1011,7 +989,7 @@
       "id": "92",
       "category": "corridor",
       "x": 452,
-      "y": 1219,
+      "y": 1569,
       "floor": 2,
       "corridors": ["91", "93"]
     }
@@ -1021,7 +999,7 @@
       "id": "93",
       "category": "corridor",
       "x": 452,
-      "y": 1294,
+      "y": 1644,
       "floor": 2,
       "corridors": ["92", "94"]
     }
@@ -1031,7 +1009,7 @@
       "id": "94",
       "category": "corridor",
       "x": 452,
-      "y": 1362,
+      "y": 1712,
       "floor": 2,
       "corridors": ["93", "95"]
     }
@@ -1041,7 +1019,7 @@
       "id": "95",
       "category": "corridor",
       "x": 452,
-      "y": 1604,
+      "y": 1954,
       "floor": 2,
       "corridors": ["94", "96"]
     }
@@ -1051,7 +1029,7 @@
       "id": "96",
       "category": "corridor",
       "x": 452,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["95", "97", "98"]
     }
@@ -1061,7 +1039,7 @@
       "id": "97",
       "category": "stairs",
       "x": 300,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["25", "96", "175", "233"]
     }
@@ -1071,7 +1049,7 @@
       "id": "98",
       "category": "corridor",
       "x": 458,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["97", "99"]
     }
@@ -1081,7 +1059,7 @@
       "id": "99",
       "category": "corridor",
       "x": 589,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["98", "100"]
     }
@@ -1091,7 +1069,7 @@
       "id": "100",
       "category": "corridor",
       "x": 626,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["99", "101"]
     }
@@ -1101,7 +1079,7 @@
       "id": "101",
       "category": "corridor",
       "x": 741,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["100", "102"]
     }
@@ -1111,7 +1089,7 @@
       "id": "102",
       "category": "corridor",
       "x": 759,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["101", "103"]
     }
@@ -1121,7 +1099,7 @@
       "id": "103",
       "category": "corridor",
       "x": 905,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["102", "104"]
     }
@@ -1131,7 +1109,7 @@
       "id": "104",
       "category": "corridor",
       "x": 967,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["103", "105"]
     }
@@ -1141,7 +1119,7 @@
       "id": "105",
       "category": "corridor",
       "x": 1071,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["104", "106"]
     }
@@ -1151,7 +1129,7 @@
       "id": "106",
       "category": "corridor",
       "x": 1173,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["105", "107"]
     }
@@ -1161,7 +1139,7 @@
       "id": "107",
       "category": "corridor",
       "x": 1227,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["106", "108"]
     }
@@ -1171,7 +1149,7 @@
       "id": "108",
       "category": "corridor",
       "x": 1360,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["107", "109"]
     }
@@ -1181,7 +1159,7 @@
       "id": "109",
       "category": "corridor",
       "x": 1390,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["108", "110"]
     }
@@ -1191,7 +1169,7 @@
       "id": "110",
       "category": "corridor",
       "x": 1597,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["109", "111"]
     }
@@ -1201,7 +1179,7 @@
       "id": "111",
       "category": "corridor",
       "x": 1611,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["110", "112"]
     }
@@ -1211,7 +1189,7 @@
       "id": "112",
       "category": "corridor",
       "x": 1757,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["111", "113"]
     }
@@ -1221,7 +1199,7 @@
       "id": "113",
       "category": "corridor",
       "x": 1875,
-      "y": 1769,
+      "y": 2119,
       "floor": 2,
       "corridors": ["112", "114", "115"]
     }
@@ -1231,7 +1209,7 @@
       "id": "114",
       "category": "stairs",
       "x": 1875,
-      "y": 1720,
+      "y": 2070,
       "floor": 2,
       "corridors": ["39", "113", "196", "250"]
     }
@@ -1241,7 +1219,7 @@
       "id": "115",
       "category": "corridor",
       "x": 1997,
-      "y": 1787,
+      "y": 2137,
       "floor": 2,
       "corridors": ["113", "116"]
     }
@@ -1251,7 +1229,7 @@
       "id": "116",
       "category": "corridor",
       "x": 2051,
-      "y": 1787,
+      "y": 2137,
       "floor": 2,
       "corridors": ["115", "117"]
     }
@@ -1261,7 +1239,7 @@
       "id": "117",
       "category": "corridor",
       "x": 2074,
-      "y": 1787,
+      "y": 2137,
       "floor": 2,
       "corridors": ["116"]
     }
@@ -1272,7 +1250,7 @@
       "name": "317",
       "category": "room",
       "x": 418,
-      "y": 342,
+      "y": 692,
       "floor": 3,
       "corridor": "159"
     }
@@ -1283,18 +1261,7 @@
       "name": "318",
       "category": "room",
       "x": 418,
-      "y": 342,
-      "floor": 3,
-      "corridor": "159"
-    }
-  },
-  {
-    "properties": {
-      "id": "120",
-      "name": "Кімната відпочинку",
-      "category": "room",
-      "x": 481,
-      "y": 342,
+      "y": 692,
       "floor": 3,
       "corridor": "159"
     }
@@ -1305,7 +1272,7 @@
       "name": "Ректор",
       "category": "room",
       "x": 481,
-      "y": 342,
+      "y": 692,
       "floor": 3,
       "corridor": "159"
     }
@@ -1313,10 +1280,10 @@
   {
     "properties": {
       "id": "qr-121",
-      "name": "Ректор",
+      "name": "QR Ректор",
       "category": "qr-code",
       "x": 481,
-      "y": 342,
+      "y": 692,
       "floor": 3,
       "corridor": "159"
     }
@@ -1327,7 +1294,7 @@
       "name": "319",
       "category": "room",
       "x": 418,
-      "y": 556,
+      "y": 906,
       "floor": 3,
       "corridor": "160"
     }
@@ -1338,7 +1305,7 @@
       "name": "316",
       "category": "room",
       "x": 481,
-      "y": 708,
+      "y": 1058,
       "floor": 3,
       "corridor": "161"
     }
@@ -1349,7 +1316,7 @@
       "name": "320",
       "category": "room",
       "x": 418,
-      "y": 729,
+      "y": 1079,
       "floor": 3,
       "corridor": "162"
     }
@@ -1360,7 +1327,7 @@
       "name": "322",
       "category": "room",
       "x": 418,
-      "y": 800,
+      "y": 1150,
       "floor": 3,
       "corridor": "165"
     }
@@ -1371,7 +1338,7 @@
       "name": "323",
       "category": "room",
       "x": 418,
-      "y": 963,
+      "y": 1313,
       "floor": 3,
       "corridor": "166"
     }
@@ -1382,7 +1349,7 @@
       "name": "315",
       "category": "room",
       "x": 481,
-      "y": 1031,
+      "y": 1381,
       "floor": 3,
       "corridor": "167"
     }
@@ -1393,7 +1360,7 @@
       "name": "324",
       "category": "room",
       "x": 418,
-      "y": 1061,
+      "y": 1411,
       "floor": 3,
       "corridor": "168"
     }
@@ -1404,7 +1371,7 @@
       "name": "314",
       "category": "room",
       "x": 481,
-      "y": 1121,
+      "y": 1471,
       "floor": 3,
       "corridor": "169"
     }
@@ -1415,7 +1382,7 @@
       "name": "313",
       "category": "room",
       "x": 481,
-      "y": 1206,
+      "y": 1556,
       "floor": 3,
       "corridor": "170"
     }
@@ -1426,7 +1393,7 @@
       "name": "324-А",
       "category": "room",
       "x": 418,
-      "y": 1220,
+      "y": 1570,
       "floor": 3,
       "corridor": "171"
     }
@@ -1437,7 +1404,7 @@
       "name": "325",
       "category": "room",
       "x": 418,
-      "y": 1295,
+      "y": 1645,
       "floor": 3,
       "corridor": "172"
     }
@@ -1448,7 +1415,7 @@
       "name": "326",
       "category": "room",
       "x": 418,
-      "y": 1608,
+      "y": 1958,
       "floor": 3,
       "corridor": "173"
     }
@@ -1459,7 +1426,7 @@
       "name": "327",
       "category": "room",
       "x": 418,
-      "y": 1693,
+      "y": 2043,
       "floor": 3,
       "corridor": "174"
     }
@@ -1470,7 +1437,7 @@
       "name": "328",
       "category": "room",
       "x": 459,
-      "y": 1805,
+      "y": 2155,
       "floor": 3,
       "corridor": "177"
     }
@@ -1481,7 +1448,7 @@
       "name": "312",
       "category": "room",
       "x": 585,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "178"
     }
@@ -1492,7 +1459,7 @@
       "name": "329",
       "category": "room",
       "x": 630,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "179"
     }
@@ -1503,7 +1470,7 @@
       "name": "311",
       "category": "room",
       "x": 677,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "180"
     }
@@ -1514,7 +1481,7 @@
       "name": "330",
       "category": "room",
       "x": 696,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "181"
     }
@@ -1525,7 +1492,7 @@
       "name": "331",
       "category": "room",
       "x": 767,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "182"
     }
@@ -1536,7 +1503,7 @@
       "name": "309",
       "category": "room",
       "x": 905,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "183"
     }
@@ -1547,7 +1514,7 @@
       "name": "309-А",
       "category": "room",
       "x": 905,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "183"
     }
@@ -1558,7 +1525,7 @@
       "name": "332",
       "category": "room",
       "x": 974,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "184"
     }
@@ -1569,18 +1536,7 @@
       "name": "333",
       "category": "room",
       "x": 1072,
-      "y": 1806,
-      "floor": 3,
-      "corridor": "185"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-144",
-      "name": "333",
-      "category": "qr-code",
-      "x": 1072,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "185"
     }
@@ -1591,7 +1547,7 @@
       "name": "334",
       "category": "room",
       "x": 1160,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "186"
     }
@@ -1602,7 +1558,7 @@
       "name": "307",
       "category": "room",
       "x": 1160,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "186"
     }
@@ -1613,7 +1569,7 @@
       "name": "306",
       "category": "room",
       "x": 1300,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "187"
     }
@@ -1624,7 +1580,7 @@
       "name": "334-А",
       "category": "room",
       "x": 1317,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "188"
     }
@@ -1635,7 +1591,7 @@
       "name": "305",
       "category": "room",
       "x": 1360,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "189"
     }
@@ -1646,7 +1602,7 @@
       "name": "335",
       "category": "room",
       "x": 1379,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "190"
     }
@@ -1657,7 +1613,7 @@
       "name": "304",
       "category": "room",
       "x": 1433,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "191"
     }
@@ -1668,7 +1624,7 @@
       "name": "304-А",
       "category": "room",
       "x": 1433,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "191"
     }
@@ -1679,7 +1635,7 @@
       "name": "336",
       "category": "room",
       "x": 1461,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "192"
     }
@@ -1690,7 +1646,7 @@
       "name": "303",
       "category": "room",
       "x": 1597,
-      "y": 1730,
+      "y": 2080,
       "floor": 3,
       "corridor": "193"
     }
@@ -1701,7 +1657,7 @@
       "name": "337",
       "category": "room",
       "x": 1649,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "194"
     }
@@ -1712,7 +1668,7 @@
       "name": "338",
       "category": "room",
       "x": 1886,
-      "y": 1806,
+      "y": 2156,
       "floor": 3,
       "corridor": "197"
     }
@@ -1723,7 +1679,7 @@
       "name": "301",
       "category": "room",
       "x": 1983,
-      "y": 1782,
+      "y": 2132,
       "floor": 3,
       "corridor": "198"
     }
@@ -1734,7 +1690,7 @@
       "name": "301-А",
       "category": "room",
       "x": 1983,
-      "y": 1782,
+      "y": 2132,
       "floor": 3,
       "corridor": "198"
     }
@@ -1744,7 +1700,7 @@
       "id": "159",
       "category": "corridor",
       "x": 450,
-      "y": 342,
+      "y": 692,
       "floor": 3,
       "corridors": ["160"]
     }
@@ -1754,7 +1710,7 @@
       "id": "160",
       "category": "corridor",
       "x": 450,
-      "y": 556,
+      "y": 906,
       "floor": 3,
       "corridors": ["159", "161"]
     }
@@ -1764,7 +1720,7 @@
       "id": "161",
       "category": "corridor",
       "x": 450,
-      "y": 708,
+      "y": 1058,
       "floor": 3,
       "corridors": ["160", "162"]
     }
@@ -1774,7 +1730,7 @@
       "id": "162",
       "category": "corridor",
       "x": 450,
-      "y": 729,
+      "y": 1079,
       "floor": 3,
       "corridors": ["161", "164"]
     }
@@ -1784,7 +1740,7 @@
       "id": "163",
       "category": "stairs",
       "x": 552,
-      "y": 792,
+      "y": 1142,
       "floor": 3,
       "corridors": ["89", "164", "231"]
     }
@@ -1794,7 +1750,7 @@
       "id": "164",
       "category": "corridor",
       "x": 450,
-      "y": 792,
+      "y": 1142,
       "floor": 3,
       "corridors": ["162", "163", "165"]
     }
@@ -1804,7 +1760,7 @@
       "id": "165",
       "category": "corridor",
       "x": 450,
-      "y": 800,
+      "y": 1150,
       "floor": 3,
       "corridors": ["164", "166"]
     }
@@ -1814,7 +1770,7 @@
       "id": "166",
       "category": "corridor",
       "x": 450,
-      "y": 963,
+      "y": 1313,
       "floor": 3,
       "corridors": ["165", "167"]
     }
@@ -1824,7 +1780,7 @@
       "id": "167",
       "category": "corridor",
       "x": 450,
-      "y": 1031,
+      "y": 1381,
       "floor": 3,
       "corridors": ["166", "168"]
     }
@@ -1834,7 +1790,7 @@
       "id": "168",
       "category": "corridor",
       "x": 450,
-      "y": 1061,
+      "y": 1411,
       "floor": 3,
       "corridors": ["167", "169"]
     }
@@ -1844,7 +1800,7 @@
       "id": "169",
       "category": "corridor",
       "x": 450,
-      "y": 1121,
+      "y": 1471,
       "floor": 3,
       "corridors": ["168", "170"]
     }
@@ -1854,7 +1810,7 @@
       "id": "170",
       "category": "corridor",
       "x": 450,
-      "y": 1206,
+      "y": 1556,
       "floor": 3,
       "corridors": ["169", "171"]
     }
@@ -1864,7 +1820,7 @@
       "id": "171",
       "category": "corridor",
       "x": 450,
-      "y": 1220,
+      "y": 1570,
       "floor": 3,
       "corridors": ["170", "172"]
     }
@@ -1874,7 +1830,7 @@
       "id": "172",
       "category": "corridor",
       "x": 450,
-      "y": 1295,
+      "y": 1645,
       "floor": 3,
       "corridors": ["171", "173"]
     }
@@ -1884,7 +1840,7 @@
       "id": "173",
       "category": "corridor",
       "x": 450,
-      "y": 1608,
+      "y": 1958,
       "floor": 3,
       "corridors": ["172", "174"]
     }
@@ -1894,7 +1850,7 @@
       "id": "174",
       "category": "corridor",
       "x": 450,
-      "y": 1693,
+      "y": 2043,
       "floor": 3,
       "corridors": ["173", "176"]
     }
@@ -1904,7 +1860,7 @@
       "id": "175",
       "category": "stairs",
       "x": 300,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["25", "97", "176", "233"]
     }
@@ -1914,7 +1870,7 @@
       "id": "176",
       "category": "corridor",
       "x": 450,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["174", "175", "177"]
     }
@@ -1924,7 +1880,7 @@
       "id": "177",
       "category": "corridor",
       "x": 459,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["176", "178"]
     }
@@ -1934,7 +1890,7 @@
       "id": "178",
       "category": "corridor",
       "x": 585,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["177", "179"]
     }
@@ -1944,7 +1900,7 @@
       "id": "179",
       "category": "corridor",
       "x": 630,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["178", "180"]
     }
@@ -1954,7 +1910,7 @@
       "id": "180",
       "category": "corridor",
       "x": 677,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["179", "181"]
     }
@@ -1964,7 +1920,7 @@
       "id": "181",
       "category": "corridor",
       "x": 698,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["180", "182"]
     }
@@ -1974,7 +1930,7 @@
       "id": "182",
       "category": "corridor",
       "x": 769,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["181", "183"]
     }
@@ -1984,7 +1940,7 @@
       "id": "183",
       "category": "corridor",
       "x": 905,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["182", "184"]
     }
@@ -1994,7 +1950,7 @@
       "id": "184",
       "category": "corridor",
       "x": 974,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["183", "185"]
     }
@@ -2004,7 +1960,7 @@
       "id": "185",
       "category": "corridor",
       "x": 1072,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["184", "186"]
     }
@@ -2014,7 +1970,7 @@
       "id": "186",
       "category": "corridor",
       "x": 1160,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["185", "187"]
     }
@@ -2024,7 +1980,7 @@
       "id": "187",
       "category": "corridor",
       "x": 1300,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["186", "188"]
     }
@@ -2034,7 +1990,7 @@
       "id": "188",
       "category": "corridor",
       "x": 1317,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["187", "189"]
     }
@@ -2044,7 +2000,7 @@
       "id": "189",
       "category": "corridor",
       "x": 1360,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["188", "190"]
     }
@@ -2054,7 +2010,7 @@
       "id": "190",
       "category": "corridor",
       "x": 1379,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["189", "191"]
     }
@@ -2064,7 +2020,7 @@
       "id": "191",
       "category": "corridor",
       "x": 1433,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["190", "192"]
     }
@@ -2074,7 +2030,7 @@
       "id": "192",
       "category": "corridor",
       "x": 1461,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["191", "193"]
     }
@@ -2084,7 +2040,7 @@
       "id": "193",
       "category": "corridor",
       "x": 1597,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["192", "194"]
     }
@@ -2094,7 +2050,7 @@
       "id": "194",
       "category": "corridor",
       "x": 1649,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["193", "195"]
     }
@@ -2104,7 +2060,7 @@
       "id": "195",
       "category": "corridor",
       "x": 1873,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["194", "196", "197"]
     }
@@ -2114,7 +2070,7 @@
       "id": "196",
       "category": "stairs",
       "x": 1873,
-      "y": 1720,
+      "y": 2070,
       "floor": 3,
       "corridors": ["39", "114", "195", "250"]
     }
@@ -2124,7 +2080,7 @@
       "id": "197",
       "category": "corridor",
       "x": 1886,
-      "y": 1767,
+      "y": 2117,
       "floor": 3,
       "corridors": ["195", "198"]
     }
@@ -2134,7 +2090,7 @@
       "id": "198",
       "category": "corridor",
       "x": 1930,
-      "y": 1781,
+      "y": 2131,
       "floor": 3,
       "corridors": ["197"]
     }
@@ -2145,7 +2101,7 @@
       "name": "423",
       "category": "room",
       "x": 481,
-      "y": 395,
+      "y": 745,
       "floor": 4,
       "corridor": "225"
     }
@@ -2156,7 +2112,7 @@
       "name": "424",
       "category": "room",
       "x": 422,
-      "y": 440,
+      "y": 790,
       "floor": 4,
       "corridor": "226"
     }
@@ -2167,7 +2123,7 @@
       "name": "425",
       "category": "room",
       "x": 422,
-      "y": 559,
+      "y": 909,
       "floor": 4,
       "corridor": "227"
     }
@@ -2178,7 +2134,7 @@
       "name": "422",
       "category": "room",
       "x": 481,
-      "y": 586,
+      "y": 936,
       "floor": 4,
       "corridor": "228"
     }
@@ -2189,7 +2145,7 @@
       "name": "426",
       "category": "room",
       "x": 422,
-      "y": 727,
+      "y": 1077,
       "floor": 4,
       "corridor": "229"
     }
@@ -2200,7 +2156,7 @@
       "name": "421",
       "category": "room",
       "x": 481,
-      "y": 727,
+      "y": 1077,
       "floor": 4,
       "corridor": "229"
     }
@@ -2211,7 +2167,7 @@
       "name": "427",
       "category": "room",
       "x": 422,
-      "y": 783,
+      "y": 1133,
       "floor": 4,
       "corridor": "230"
     }
@@ -2222,18 +2178,7 @@
       "name": "Спортзал",
       "category": "room",
       "x": 458,
-      "y": 911,
-      "floor": 4,
-      "corridor": "232"
-    }
-  },
-  {
-    "properties": {
-      "id": "qr-206",
-      "name": "Спортзал",
-      "category": "qr-code",
-      "x": 458,
-      "y": 911,
+      "y": 1261,
       "floor": 4,
       "corridor": "232"
     }
@@ -2244,7 +2189,7 @@
       "name": "411",
       "category": "room",
       "x": 457,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "234"
     }
@@ -2255,7 +2200,7 @@
       "name": "407",
       "category": "room",
       "x": 588,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "235"
     }
@@ -2263,10 +2208,10 @@
   {
     "properties": {
       "id": "209",
-      "name": "412",
+      "name": "Кафедра ІС - 412",
       "category": "room",
       "x": 604,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "236"
     }
@@ -2277,7 +2222,7 @@
       "name": "406",
       "category": "room",
       "x": 678,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "237"
     }
@@ -2288,7 +2233,7 @@
       "name": "413",
       "category": "room",
       "x": 748,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "238"
     }
@@ -2299,7 +2244,7 @@
       "name": "405",
       "category": "room",
       "x": 988,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "239"
     }
@@ -2310,7 +2255,7 @@
       "name": "414",
       "category": "room",
       "x": 1047,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "240"
     }
@@ -2321,7 +2266,7 @@
       "name": "404",
       "category": "room",
       "x": 1076,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "241"
     }
@@ -2332,7 +2277,7 @@
       "name": "415",
       "category": "room",
       "x": 1134,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "242"
     }
@@ -2343,7 +2288,7 @@
       "name": "403",
       "category": "room",
       "x": 1157,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "243"
     }
@@ -2354,7 +2299,7 @@
       "name": "402",
       "category": "room",
       "x": 1232,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "244"
     }
@@ -2365,7 +2310,7 @@
       "name": "401",
       "category": "room",
       "x": 1384,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "245"
     }
@@ -2376,7 +2321,7 @@
       "name": "417",
       "category": "room",
       "x": 1462,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "246"
     }
@@ -2387,7 +2332,7 @@
       "name": "400",
       "category": "room",
       "x": 1620,
-      "y": 1734,
+      "y": 2084,
       "floor": 4,
       "corridor": "247"
     }
@@ -2398,7 +2343,7 @@
       "name": "418",
       "category": "room",
       "x": 1652,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "248"
     }
@@ -2409,7 +2354,7 @@
       "name": "419",
       "category": "room",
       "x": 1882,
-      "y": 1803,
+      "y": 2153,
       "floor": 4,
       "corridor": "249"
     }
@@ -2417,10 +2362,10 @@
   {
     "properties": {
       "id": "223",
-      "name": "Деканат факультету ІТ - 420",
+      "name": "Деканат ф-т ІТ - 420",
       "category": "room",
       "x": 1936,
-      "y": 1754,
+      "y": 2104,
       "floor": 4,
       "corridor": "249"
     }
@@ -2428,21 +2373,10 @@
   {
     "properties": {
       "id": "qr-223",
-      "name": "Деканат факультету ІТ",
+      "name": "QR Деканат ф-т ІТ",
       "category": "qr-code",
       "x": 1936,
-      "y": 1754,
-      "floor": 4,
-      "corridor": "249"
-    }
-  },
-  {
-    "properties": {
-      "id": "224",
-      "name": "Декан факультету ...",
-      "category": "room",
-      "x": 1936,
-      "y": 1754,
+      "y": 2104,
       "floor": 4,
       "corridor": "249"
     }
@@ -2452,7 +2386,7 @@
       "id": "225",
       "category": "corridor",
       "x": 449,
-      "y": 395,
+      "y": 745,
       "floor": 4,
       "corridors": ["226"]
     }
@@ -2462,7 +2396,7 @@
       "id": "226",
       "category": "corridor",
       "x": 449,
-      "y": 440,
+      "y": 790,
       "floor": 4,
       "corridors": ["225", "227"]
     }
@@ -2472,7 +2406,7 @@
       "id": "227",
       "category": "corridor",
       "x": 449,
-      "y": 559,
+      "y": 909,
       "floor": 4,
       "corridors": ["226", "228"]
     }
@@ -2482,7 +2416,7 @@
       "id": "228",
       "category": "corridor",
       "x": 449,
-      "y": 586,
+      "y": 936,
       "floor": 4,
       "corridors": ["227", "229"]
     }
@@ -2492,7 +2426,7 @@
       "id": "229",
       "category": "corridor",
       "x": 449,
-      "y": 727,
+      "y": 1077,
       "floor": 4,
       "corridors": ["228", "230"]
     }
@@ -2502,7 +2436,7 @@
       "id": "230",
       "category": "corridor",
       "x": 449,
-      "y": 783,
+      "y": 1133,
       "floor": 4,
       "corridors": ["229", "232"]
     }
@@ -2512,7 +2446,7 @@
       "id": "231",
       "category": "stairs",
       "x": 553,
-      "y": 794,
+      "y": 1144,
       "floor": 4,
       "corridors": ["89", "163", "232"]
     }
@@ -2522,7 +2456,7 @@
       "id": "232",
       "category": "corridor",
       "x": 449,
-      "y": 794,
+      "y": 1144,
       "floor": 4,
       "corridors": ["230", "231"]
     }
@@ -2532,7 +2466,7 @@
       "id": "233",
       "category": "stairs",
       "x": 300,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["25", "97", "175", "234"]
     }
@@ -2542,7 +2476,7 @@
       "id": "234",
       "category": "corridor",
       "x": 457,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["233", "235"]
     }
@@ -2552,7 +2486,7 @@
       "id": "235",
       "category": "corridor",
       "x": 588,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["234", "236"]
     }
@@ -2562,7 +2496,7 @@
       "id": "236",
       "category": "corridor",
       "x": 604,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["235", "237"]
     }
@@ -2572,7 +2506,7 @@
       "id": "237",
       "category": "corridor",
       "x": 678,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["236", "238"]
     }
@@ -2582,7 +2516,7 @@
       "id": "238",
       "category": "corridor",
       "x": 748,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["237", "239"]
     }
@@ -2592,7 +2526,7 @@
       "id": "239",
       "category": "corridor",
       "x": 988,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["238", "240"]
     }
@@ -2602,7 +2536,7 @@
       "id": "240",
       "category": "corridor",
       "x": 1047,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["239", "241"]
     }
@@ -2612,7 +2546,7 @@
       "id": "241",
       "category": "corridor",
       "x": 1076,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["240", "242"]
     }
@@ -2622,7 +2556,7 @@
       "id": "242",
       "category": "corridor",
       "x": 1134,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["241", "243"]
     }
@@ -2632,7 +2566,7 @@
       "id": "243",
       "category": "corridor",
       "x": 1157,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["242", "244"]
     }
@@ -2642,7 +2576,7 @@
       "id": "244",
       "category": "corridor",
       "x": 1232,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["243", "245"]
     }
@@ -2652,7 +2586,7 @@
       "id": "245",
       "category": "corridor",
       "x": 1384,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["244", "246"]
     }
@@ -2662,7 +2596,7 @@
       "id": "246",
       "category": "corridor",
       "x": 1462,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["245", "247"]
     }
@@ -2672,7 +2606,7 @@
       "id": "247",
       "category": "corridor",
       "x": 1620,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["246", "248"]
     }
@@ -2682,7 +2616,7 @@
       "id": "248",
       "category": "corridor",
       "x": 1652,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["247", "249"]
     }
@@ -2692,7 +2626,7 @@
       "id": "249",
       "category": "corridor",
       "x": 1876,
-      "y": 1768,
+      "y": 2118,
       "floor": 4,
       "corridors": ["248", "250"]
     }
@@ -2702,9 +2636,51 @@
       "id": "250",
       "category": "stairs",
       "x": 1876,
-      "y": 1720,
+      "y": 2070,
       "floor": 4,
       "corridors": ["39", "114", "196", "249"]
+    }
+  },
+  {
+    "properties": {
+      "id": "qr-0",
+      "name": "QR Вхід головний",
+      "category": "qr-code",
+      "x": 240,
+      "y": 480,
+      "floor": 1,
+      "corridor": "252"
+    }
+  },
+  {
+    "properties": {
+      "id": "252",
+      "category": "corridor",
+      "x": 380,
+      "y": 480,
+      "floor": 1,
+      "corridors": ["253"]
+    }
+  },
+  {
+    "properties": {
+      "id": "253",
+      "category": "corridor",
+      "x": 470,
+      "y": 590,
+      "floor": 1,
+      "corridors": ["21"]
+    }
+  },
+  {
+    "properties": {
+      "id": "254",
+      "name": "Головний вхід вихід",
+      "category": "room",
+      "x": 200,
+      "y": 270,
+      "floor": 1,
+      "corridor": "252"
     }
   }
 ]

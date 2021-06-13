@@ -64,7 +64,7 @@ export class MapDataProviderService {
 
   private _getJsonDoc(type: JsonFile): Observable<GuideMapFeaturePoint[]> {
     return this._httpClient.get<GuideMapFeaturePoint[]>(
-      `${environment.url}assets/json_data/${type}.json`
+      `${environment.url}/assets/json_data/${type}.json`
     );
   }
 

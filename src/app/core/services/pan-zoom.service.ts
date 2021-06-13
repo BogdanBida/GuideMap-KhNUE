@@ -4,7 +4,11 @@ import { isFinite } from 'lodash-es';
 import { PanZoomAPI, PanZoomConfig, PanZoomModel } from 'ngx-panzoom';
 import { ReplaySubject } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { CENTERING_DURATION_S, PANZOOM_CONFIG } from 'src/app/shared/constants';
+import {
+  CENTERING_DURATION_S,
+  PANZOOM_CONFIG,
+  VIEW_BOUNDING_RECT_INDENT,
+} from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
 import { ICoordinates } from '../interfaces';
 import { CookieStoreService } from './cookie-store.service';
@@ -57,9 +61,12 @@ export class PanZoomService {
     return this.panzoomConfig;
   }
 
-  public centerTo(point: ICoordinates): void {
+  public centerTo(
+    point: ICoordinates,
+    duration: number = CENTERING_DURATION_S
+  ): void {
     this._takeApi((api) => {
-      api.panToPoint(point, CENTERING_DURATION_S);
+      api.panToPoint(point, duration);
     });
   }
 
@@ -69,8 +76,23 @@ export class PanZoomService {
       y: environment.map.mapHeight / 2,
     };
 
+    this.centerTo(centerPoint, CENTERING_DURATION_S / 2);
+  }
+
+  public fitViewToBounds(dot1: ICoordinates, dot2: ICoordinates): void {
+    const width = Math.abs(dot1.x - dot2.x);
+    const height = Math.abs(dot1.y - dot2.y);
+
     this._takeApi((api) => {
-      api.panToPoint(centerPoint, CENTERING_DURATION_S / 2);
+      api.zoomToFit(
+        {
+          x: Math.min(dot1.x, dot2.x) - VIEW_BOUNDING_RECT_INDENT,
+          y: Math.min(dot1.y, dot2.y) - VIEW_BOUNDING_RECT_INDENT,
+          width: width + VIEW_BOUNDING_RECT_INDENT * 2,
+          height: height + VIEW_BOUNDING_RECT_INDENT * 2,
+        },
+        CENTERING_DURATION_S
+      );
     });
   }
 

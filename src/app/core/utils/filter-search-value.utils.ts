@@ -1,12 +1,12 @@
 import { IOption } from '../../feature/map/interfaces';
 
 export const filterSearchValue = (
-  option: IOption[],
+  options: IOption[],
   value: string
 ): IOption[] => {
   const filterValue = value.toLowerCase();
 
-  return option.filter(
-    (item) => item.viewValue.toLowerCase().indexOf(filterValue) === 0
-  );
+  const regEx = new RegExp(`(^|\\s)${filterValue}`, 'ig');
+
+  return options.filter((item) => regEx.test(item.viewValue));
 };

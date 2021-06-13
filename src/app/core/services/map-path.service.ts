@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { isArray } from 'lodash-es';
 import { BehaviorSubject, combineLatest, merge } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { positiveValue } from 'src/app/shared/operators';
@@ -117,21 +118,17 @@ export class MapPathService {
 
   public calculateFullPath(): void {
     // TODO: refactor
-    const allPoints = this._mapDataProviderService.allPoints;
     const startPoint = this.startPoint$.value.id;
     const finalEndpoint = this.finalEndpoint$.value.id;
 
-    const path = this._mapGraphService.findPath(
-      startPoint,
-      finalEndpoint,
-      [],
-      allPoints
-    );
+    const path = this._mapGraphService.findPath(startPoint, finalEndpoint, []);
 
     this.fullPath$.next(path);
   }
 
-  public getPathCoordinates(floor = this._floorService.floor): ICoordinates[] {
+  public getPathCoordinates(
+    floor = this._floorService.floor
+  ): ICoordinates[][] {
     const allPoints = this._mapDataProviderService.allPoints;
     const pathCoordinates = this._findFloorPath(
       floor,
@@ -139,6 +136,8 @@ export class MapPathService {
       this.startPoint$.value?.id,
       this.finalEndpoint$.value?.id
     );
+
+    // console.log(pathCoordinates);
 
     return pathCoordinates;
   }
@@ -148,13 +147,10 @@ export class MapPathService {
     allPoints: GuideMapFeaturePoint[],
     userLocationId: string,
     endPointId: string
-  ): ICoordinates[] {
-    const path = this._mapGraphService.findPath(
-      userLocationId,
-      endPointId,
-      [],
-      allPoints
-    );
+  ): ICoordinates[][] {
+    const path = this._mapGraphService.findPath(userLocationId, endPointId, []);
+
+    // console.log(path);
     const pathCoordinates = this._fillDataOfPath(path, floor, allPoints);
 
     return pathCoordinates;
@@ -164,7 +160,7 @@ export class MapPathService {
     path: GuideMapSimpleRoute[],
     floor: number,
     points: GuideMapFeaturePoint[]
-  ): ICoordinates[] {
+  ): ICoordinates[][] {
     const uniqPathIds = MapPathUtils.getUniquePathIds(path);
 
     const fullPathWithCorridors = Array.from(uniqPathIds).map((pointId) => {
@@ -189,11 +185,46 @@ export class MapPathService {
       this.currentUserEndpoint$.next(null);
     }
 
+    const isShouldBeMoreThanOnePath =
+      fullFloorPath.filter(
+        (item) =>
+          item.properties.category === GuideMapFeaturePointCategory.Stairs
+      ).length > 1;
+
+    const isTwoStairsOnFloorWithout = [
+      fullFloorPath[0]?.properties.category,
+      fullFloorPath[fullFloorPath.length]?.properties.category,
+    ].every((item) => item !== GuideMapFeaturePointCategory.Stairs);
+
+    if (isShouldBeMoreThanOnePath && isTwoStairsOnFloorWithout) {
+      const paths: ICoordinates[][] = [];
+      let pathIndex = 0;
+      let stairsCounter = 0;
+
+      fullFloorPath.forEach((item) => {
+        if (item.properties.category === GuideMapFeaturePointCategory.Stairs) {
+          stairsCounter++;
+        }
+
+        if (stairsCounter === 2) {
+          pathIndex++;
+          stairsCounter = 0;
+        }
+
+        paths[pathIndex] = [
+          ...(isArray(paths[pathIndex]) ? paths[pathIndex] : []),
+          { x: item.properties.x, y: item.properties.y },
+        ];
+      });
+
+      return paths;
+    }
+
     const corridors = fullFloorPath.filter(
       (item) =>
         item.properties.category === GuideMapFeaturePointCategory.Сorridor
     );
 
-    return corridors.map(({ properties: { x, y } }) => ({ x, y }));
+    return [corridors.map(({ properties: { x, y } }) => ({ x, y }))];
   }
 }

@@ -4,7 +4,7 @@ import { Path as SvgPath, Svg, SVG } from '@svgdotjs/svg.js';
 import { isNil } from 'lodash-es';
 import { STROKE_CONFIG } from 'src/app/shared/constants';
 import { environment } from 'src/environments/environment';
-import { GuideMapRoomProperties } from '../models';
+import { GuideMapFeaturePointRoom, GuideMapRoomProperties } from '../models';
 import { SvgPathUtils } from '../utils';
 import { FloorService } from './floor.service';
 import { MapDataProviderService } from './map-data-provider.service';
@@ -29,7 +29,7 @@ export class MapService {
 
   public svgBackgroundInstance: Svg;
 
-  public svgPathInstance: SvgPath;
+  public svgPathInstance: SvgPath[] = [];
 
   public init(): void {
     // TODO: refactor
@@ -68,9 +68,10 @@ export class MapService {
    * @return (boolean) false - if point not found and not set to state
    */
   public findAndSetLocationById(id: string): boolean {
-    const location = this._mapDataProviderService.qrCodes.find(
-      (node) => String(node.properties.id) === id
-    );
+    // ! HOTFIX (add all points as start points)
+    const location = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((node) => String(node.properties.id) === id);
 
     location && this.setUserLocation(location.properties);
 
@@ -81,9 +82,9 @@ export class MapService {
    * @return (boolean) false - if point not found and not set to state
    */
   public findAndSetEndpointById(id: string): boolean {
-    const destination = this._mapDataProviderService.rooms.find(
-      (node) => String(node.properties.id) === id
-    );
+    const destination = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((node) => String(node.properties.id) === id);
 
     destination && this.setFinalEndpoint(destination.properties);
 
@@ -91,11 +92,12 @@ export class MapService {
   }
 
   public findAndSetEndpointByName(destinationName: string): void {
-    const foundEndpoint = this._mapDataProviderService.rooms.find(
-      (roomNode) => {
-        return destinationName === roomNode.properties.name;
-      }
-    );
+    // ! HOTFIX (add all points as start points)
+    const foundEndpoint = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((roomNode) => {
+      return destinationName === roomNode.properties.name;
+    });
 
     foundEndpoint &&
       this.setFinalEndpoint(
@@ -104,11 +106,12 @@ export class MapService {
   }
 
   public findAndSetLocationByName(userLocation: string): void {
-    const foundLocation = this._mapDataProviderService.qrCodes.find(
-      (roomNode) => {
-        return userLocation === roomNode.properties.name;
-      }
-    );
+    // ! HOTFIX (add all points as start points)
+    const foundLocation = (
+      this._mapDataProviderService.qrCodesAndRooms as GuideMapFeaturePointRoom[]
+    ).find((roomNode) => {
+      return userLocation === roomNode.properties.name;
+    });
 
     foundLocation &&
       this.setUserLocation(
@@ -129,8 +132,8 @@ export class MapService {
   }
 
   public clearPath(): void {
-    if (this.svgPathInstance) {
-      this.svgPathInstance.remove();
+    if (this.svgPathInstance.length) {
+      this.svgPathInstance.forEach((item) => item.remove());
     }
   }
 
@@ -155,7 +158,10 @@ export class MapService {
   private _drawPath(): void {
     // TODO: refactor
     this.clearPath();
+    // console.log(123);
+
     const currentPathCoordinates = this._mapPathService.getPathCoordinates();
+
     const { currentUserLocationPoint, currentUserEndpoint } =
       this._mapPathService.pathPointsValues;
 
@@ -165,16 +171,30 @@ export class MapService {
       return;
     }
 
-    const points: number[][] = [
-      [properties.x, properties.y],
-      ...currentPathCoordinates.map(({ x, y }) => [x, y]),
-      [currentUserEndpoint.x, currentUserEndpoint.y],
-    ];
+    if (currentPathCoordinates.length === 1) {
+      const points: number[][] = [
+        [properties.x, properties.y],
+        ...currentPathCoordinates[0].map(({ x, y }) => [x, y]),
+        [currentUserEndpoint.x, currentUserEndpoint.y],
+      ];
 
-    this._animatePath(points);
+      this._animatePath(points, 0);
+    }
+
+    if (currentPathCoordinates.length > 1) {
+      currentPathCoordinates.forEach((path, index) => {
+        const points: number[][] = [
+          // [properties.x, properties.y],
+          ...path.map(({ x, y }) => [x, y]),
+          // [currentUserEndpoint.x, currentUserEndpoint.y],
+        ];
+
+        this._animatePath(points, index);
+      });
+    }
   }
 
-  private _animatePath(points: number[][]): void {
+  private _animatePath(points: number[][], index: number): void {
     // TODO: refactor
     const pathString = points.reduce((acc, point, i, a) => {
       return i === 0
@@ -182,7 +202,7 @@ export class MapService {
         : `${acc} ${SvgPathUtils.bezierCommand(point, i, a)}`;
     }, '');
 
-    this.svgPathInstance = this.svgInstance
+    this.svgPathInstance[index] = this.svgInstance
       .path(pathString)
       .stroke(STROKE_CONFIG)
       .fill({
@@ -191,9 +211,9 @@ export class MapService {
       .attr({
         'stroke-dashoffset': '0',
       });
-    this.svgPathInstance
+    this.svgPathInstance[index]
       .animate({ duration: 4000, ease: '>' })
-      .loop(1, false)
+      .loop(Infinity, false)
       .attr({
         'stroke-dashoffset': '-70',
       });
