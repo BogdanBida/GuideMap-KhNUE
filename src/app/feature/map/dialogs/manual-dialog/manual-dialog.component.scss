@@ -31,3 +31,77 @@ hr {
   width: 100%;
   margin: 0.25em 0;
 }
+
+.interface-container {
+  .interface-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .interface-item__title {
+      font-size: 18px;
+      font-weight: 400;
+    }
+    .interface-item__img {
+      border-radius: 15px;
+      max-width: 700px;
+    }
+    .interface-item__description {
+      margin: 20px 0 30px 0;
+      font-size: 15px;
+      font-weight: 300;
+    }
+  }
+}
+
+.authors {
+  .author {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    .author__circle {
+      background: #358dff;
+      border-radius: 100px;
+      height: 45px;
+      width: 45px;
+      overflow: hidden;
+    }
+    .author__name {
+      margin-left: 5px;
+    }
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #358dff;
+  width: 190px;
+  margin-top: 20px;
+}
+
+.underline {
+  position: relative;
+}
+
+.underline::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: #358dff;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .underline:hover::before{
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+}
+
+
